@@ -1,0 +1,8 @@
+.env
+.env.*
+*.local
+node_modules/
+tests/visual/actual/
+tests/visual/reports/
+docs/
+.DS_Store

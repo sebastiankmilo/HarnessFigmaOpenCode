@@ -1,0 +1,105 @@
+/* site/styles/tokens.css — fuente: página components + página 1448-lg (ver specs/tokens.md)
+ * Extraído de Figma con TalkToFigma el 2026-10-03.
+ * Valores reales del diseño; nada está hardcodeado a priori.
+ */
+
+:root {
+  /* ── Color: nombres por ROL, no por apariencia ───────────────── */
+  --color-surface: #ffffff;            /* Bright — fondo principal */
+  --color-surface-alt: #fafafa;        /* Neutral 0 — nav, cards, fondos alternos */
+  --color-surface-muted: #ebebeb;      /* Neutral 10 — bloques destacados (encabezado-contenido, media) */
+  --color-surface-strong: #d6d6d6;     /* Neutral 20 — fondo de la sección «La Materia Prima» */
+  --color-surface-dark: #333333;       /* Text — fondo del footer (texto encima en --color-on-dark) */
+  --color-text-primary: #000000;       /* Dark — titulares y botón primario */
+  --color-text-secondary: #333333;     /* Text — cuerpo de texto y estados outline */
+  --color-on-dark: #ffffff;            /* texto sobre Dark / sobre botón primario */
+  --color-border-input: #c2c2c2;       /* Neutral 30 — borde de inputs del form */
+  --color-border-soft: #d6d6d6;        /* Neutral 20 — bordes de muestras/divisores */
+  --color-brand: #fc6b38;              /* Main Orange — acento de marca */
+  --color-accent-blue: #83cfdb;        /* Main Blue */
+  --color-accent-purple: #995edd;      /* Secondary Purple */
+  --color-accent-mint: #6de4da;        /* Secondary Mint */
+  --color-media-placeholder: #ebebeb;  /* relleno de components/images en el wireframe */
+  --color-media-video: #c2c2c2;        /* Neutral 30 — relleno de las medias de vídeo (inicio 3 y 6, Únete) */
+  --color-video-band: #adadad;         /* Neutral 40 — banda a sangre de la sección de vídeo */
+  --color-avatar-placeholder: #d9d9d9; /* relleno del avatar de goal-card */
+  --color-dot-inactive: #858585;       /* Neutral 60 — punto activo del dotnav */
+
+  /* Escala neutral observada en la paleta de Figma (página components) */
+  --neutral-0: #fafafa;
+  --neutral-10: #ebebeb;
+  --neutral-20: #d6d6d6;
+  --neutral-30: #c2c2c2;
+  --neutral-40: #adadad;
+  --neutral-50: #999999;
+  --neutral-60: #858585;
+  --neutral-70: #707070;
+  --neutral-80: #5c5c5c;
+  --neutral-90: #474747;
+
+  /* ── Tipografía ──────────────────────────────────────────────── */
+  --font-family-base: "DM Sans", sans-serif;
+
+  /* Escala desktop (estilos Figma `l/headings/*`) */
+  --font-size-l-h1-xxl: 52px;
+  --font-size-l-h1-xl: 46.1px;
+  --font-size-l-h1-l: 41px;
+  --font-size-l-h1: 36.49px;
+  --font-size-l-h2: 32.4px;
+  --font-size-l-h3: 28.8px;
+  --font-size-l-h4: 22.7px;
+  --font-size-l-h5: 20.2px;
+  --font-size-l-h6: 18px;
+
+  /* Escala móvil (estilos Figma `xs/headings/*`) */
+  --font-size-xs-h1-xxl: 46.1px;
+  --font-size-xs-h1-xl: 41px;
+  --font-size-xs-h1-l: 36.5px;
+  --font-size-xs-h1: 32.4px;
+  --font-size-xs-h2: 28.8px;
+  --font-size-xs-h3: 25.6px;
+  --font-size-xs-h4: 22.7px;
+  --font-size-xs-h5: 20.2px;
+  --font-size-xs-h6: 18px;
+
+  /* Párrafos (estilos Figma `paragraphs/*` y `paragraphs/bold/*`) */
+  --font-size-body-xs: 14.2px;
+  --font-size-body-s: 16px;
+  --font-size-body-base: 18px;
+  --font-size-body-m: 20.2px;
+  --font-size-body-l: 22px;
+  --font-size-body-xl: 25.6px;
+
+  --font-weight-bold: 700;   /* DM Sans Bold  — headings, links, labels, botones */
+  --font-weight-medium: 500; /* DM Sans Medium — párrafos de cuerpo */
+
+  --line-height-heading: 1.12; /* observado: todos los headings ×1.12 */
+  --line-height-body: 1.5;     /* observado: todos los párrafos ×1.5 */
+
+  /* ── Espaciado (escala observada en auto-layouts) ────────────── */
+  --space-1: 8px;   /* label↔input, gap de botones del nav */
+  --space-2: 12px;  /* padding horizontal del botón size=xs */
+  --space-3: 16px;  /* padding de nav móvil y form, margen lateral móvil */
+  --space-4: 24px;  /* padding de goal-card, gap de columnas del nav, margen tablet */
+  --space-5: 32px;  /* gap de grillas, margen lateral desktop, gap de columnas del hero */
+  --space-6: 48px;  /* padding inferior de goal-card, margen lateral tablet de secciones */
+  --space-7: 64px;  /* botones de flecha (prev/next) del carrusel, padding vertical del footer */
+  --space-8: 96px;  /* padding vertical de las secciones de contenido */
+
+  --space-header: 162px;      /* padding vertical del encabezado de inicio */
+  --space-header-cta: 36px;   /* gap entre el texto y los botones del encabezado */
+  --nav-gap-blocks: 28px;     /* gap entre bloques del right-nav (nav lg) */
+  --nav-link-top: 47px;       /* offset superior del texto de un enlace (nav lg) */
+  --nav-underline-lg: 4px;    /* grosor del subrayado del enlace activo (nav lg) */
+  --nav-underline-menu: 1px;  /* grosor del subrayado del enlace activo (menú móvil) */
+  --btn-padding-x-m: 22px;    /* padding horizontal del botón size=m */
+  --btn-padding-y-m: 11px;    /* padding vertical del botón size=m */
+  --media-label-top: 66px;    /* offset superior de la etiqueta 16:9 dentro del media */
+  --media-label-left: 120px;  /* offset izquierdo de la etiqueta 16:9 dentro del media */
+
+  /* ── Radios ──────────────────────────────────────────────────── */
+  /* get_node_info no reporta cornerRadius en nav, goal-card, form,
+     buttons ni header-two-columns: el diseño usa esquinas rectas. */
+  --radius-none: 0;
+  --radius-circle: 50%; /* avatar de goal-card y puntos del dotnav (Ellipse) */
+}
