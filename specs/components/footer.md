@@ -1,8 +1,9 @@
 # Componente: `footer`
 
 ---
-fuente: Figma — página `1448-lg`, frames `footer` `2328:4305` (en `inicio`) y
-`2338:2746` (en `Únete`)
+fuente: Figma — página `1448-lg`, frames `footer` `2328:4305` (en `inicio`),
+`2338:2746` (en `Únete`), `2338:2640` (en `Programa`), `2338:2693` (en `Decálogo`) y
+`2338:2799` (en `Política de privacidad`)
 extraido: 2026-10-03
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_node_info`, `get_reactions`, `export_node_as_image`)
@@ -31,8 +32,12 @@ Frame 1448×405, relleno `--color-surface-dark` (`#333333`), padding vertical **
 ## Variantes y estados
 
 Un único aspecto (no hay variantes ni estados en Figma): el mismo footer aparece en
-`inicio` y `Únete` con textos y destinos idénticos. **No hay enlace activo ni
-subrayado** en el footer de ninguna pantalla.
+las cinco pantallas de `1448-lg` (`inicio`, `Únete`, `Programa`, `Decálogo`,
+`Política de privacidad`) con textos idénticos. **No hay enlace activo ni
+subrayado** en el footer de ninguna pantalla. Destinos: el enlace de la pantalla
+actual apunta a **`destinationId: null`** en su propio footer (`Únete` en el footer
+de `Únete`, `Programa` en el de `Programa`, `Decálogo` en el de `Decálogo`,
+`Pólitica de privacidad` en el de `Política de privacidad`).
 
 Baseline: `tests/visual/baseline/footer-1448.png` — PENDIENTE (`tests/` fuera de
 alcance).

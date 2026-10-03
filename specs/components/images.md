@@ -42,6 +42,9 @@ alcance).
 | --- | --- | --- |
 | `container-and-card` (sección «La Materia Prima») | `--color-media-placeholder` (`#ebebeb`) | centrada en la instancia (322×257.2 → 125.5 / 102.6) |
 | Bloques de vídeo (`inicio` secciones 3 y 6, página `Únete`) | **`--color-media-video` (`#c2c2c2`)** | **offset fijo (120, 66)**, no se recoloca al redimensionar (media de 1124 y de 792 conservan el mismo offset) |
+| `header` de `Programa` (`2328:4501`, 438×328) y de `Decálogo` (`2335:1222`, 438×328) | `--color-surface-strong` (`#d6d6d6`) | «4:3», centrada |
+| `sección-ejes` de `Programa` (`2329:4515`, 439×439) | `--color-surface-muted` (`#ebebeb`) | «1:1», centrada |
+| `sección-materialismo` de `Programa` (`2329:4519`, 320×320) | `--color-surface-muted` (`#ebebeb`) | «1:1», centrada |
 
 La etiqueta `16:9` / `5:4` es una **anotación de placeholder del wireframe**, no texto
 de interfaz ([typography.md](../typography.md)).

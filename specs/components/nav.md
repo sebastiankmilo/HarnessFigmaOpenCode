@@ -39,7 +39,9 @@ Propiedades del set: `size` (xs | sm | lg) y `status` (open-modal, solo en xs).
   sin ella, el agente no construye esos estados.
 - Estado operativo observado: en `inicio` el enlace 1 muestra el subrayado
   `--color-text-primary` y los demás `--color-surface` (subrayado oculto sobre el
-  fondo), es decir, un "enlace activo" implícito.
+  fondo), es decir, un "enlace activo" implícito. En `Programa` el enlace 1 y en
+  `Decálogo` el enlace 2 apuntan a **`destinationId: null`** (la pantalla actual);
+  `Política de privacidad` no está en el nav, así que sus 4 enlaces tienen destino.
 - Baseline: `tests/visual/baseline/nav-default.png` — PENDIENTE
   (`tests/` fuera de alcance del plan).
 

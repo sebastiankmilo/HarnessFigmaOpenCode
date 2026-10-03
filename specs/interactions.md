@@ -70,12 +70,78 @@ funcional de que el diálogo desaparece.
 
 **Sin reacción**: el enlace `Aporta` del footer y el cuerpo de la pantalla.
 
-### Pantallas restantes (fuera de este lote de specs)
+### `Programa` (`2328:4307`)
 
-Conteo de reacciones únicas por página: `Programa` 23, `Decálogo` 23,
-`Política de privacidad` 22 (`Únete` 22 — ya especificada arriba). Sus specs se
-extraen al abrir cada ticket de sección
-([especificaciones-diseño §6](../docs/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md)).
+23 reacciones: `nav` (10), `footer` (12) y el CTA de `sección-puntos`.
+
+| Origen | Trigger | Destino | Verificación |
+| --- | --- | --- | --- |
+| `sección-puntos` > `components/buttons` `2334:998` | click | `Únete` (`2335:1229`) — NAVIGATE, sin transición | URL + visión |
+| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
+| nav > enlace 1 «Programa» | click | **sin `destinationId`** (página actual) | — |
+| nav > enlace 2 | click | `Decálogo` (`2334:1005`) | URL + visión |
+| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
+| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
+| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
+| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
+| footer > enlace `Inicio` | click | `inicio` | URL + visión |
+| footer > enlace `Programa` | click | **sin `destinationId`** (página actual) | — |
+| footer > enlace `Decálogo` | click | `Decálogo` | URL + visión |
+| footer > enlace `Únete` | click | `Únete` | URL + visión |
+| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
+| footer > enlace `Pólitica de privacidad` | click | `Política de privacidad` (`2335:1533`) | URL + visión |
+| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
+
+**Sin reacción**: el enlace `Aporta` del footer y el cuerpo de la pantalla.
+
+### `Decálogo` (`2334:1005`)
+
+23 reacciones: mismo mapa que `Programa`, con la variante del enlace activo.
+
+| Origen | Trigger | Destino | Verificación |
+| --- | --- | --- | --- |
+| `sección-puntos` > `components/buttons` `2334:1059` | click | `Únete` (`2335:1229`) — NAVIGATE, sin transición | URL + visión |
+| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
+| nav > enlace 1 | click | `Programa` (`2328:4307`) | URL + visión |
+| nav > enlace 2 «Decálogo» | click | **sin `destinationId`** (página actual) | — |
+| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
+| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
+| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
+| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
+| footer > enlace `Inicio` | click | `inicio` | URL + visión |
+| footer > enlace `Programa` | click | `Programa` | URL + visión |
+| footer > enlace `Decálogo` | click | **sin `destinationId`** (página actual) | — |
+| footer > enlace `Únete` | click | `Únete` | URL + visión |
+| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
+| footer > enlace `Pólitica de privacidad` | click | `Política de privacidad` (`2335:1533`) | URL + visión |
+| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
+
+**Sin reacción**: el enlace `Aporta` del footer y el cuerpo de la pantalla.
+
+### `Política de privacidad` (`2335:1533`)
+
+22 reacciones: `nav` (10) y `footer` (12). El cuerpo no tiene ninguna.
+
+| Origen | Trigger | Destino | Verificación |
+| --- | --- | --- | --- |
+| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
+| nav > enlace 1 | click | `Programa` (`2328:4307`) | URL + visión |
+| nav > enlace 2 | click | `Decálogo` (`2334:1005`) | URL + visión |
+| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
+| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
+| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
+| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
+| footer > enlace `Inicio` | click | `inicio` | URL + visión |
+| footer > enlace `Programa` | click | `Programa` | URL + visión |
+| footer > enlace `Decálogo` | click | `Decálogo` | URL + visión |
+| footer > enlace `Únete` | click | `Únete` | URL + visión |
+| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
+| footer > enlace `Pólitica de privacidad` | click | **sin `destinationId`** (página actual) | — |
+| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
+
+**Sin reacción**: el enlace `Aporta` del footer, el cuerpo de la pantalla y el botón
+`components/buttons` «Volver al inicio» (`2335:1574`) — **`PENDIENTE-FIGMA`**:
+`get_reactions` sobre `sección-puntos` (`2335:1540`) devuelve 0.
 
 ### Elementos de `inicio` sin comportamiento
 
@@ -103,7 +169,7 @@ se les asigna comportamiento.
 
 ## Inconsistencias observadas (registradas, no corregidas)
 
-- En `inicio`, el icono `youtube` del footer apunta a
+- En **las cinco pantallas**, el icono `youtube` del footer apunta a
   `https://www.instagram.com/vanguardiacol` (mismo destino que el de Instagram);
   en el nav, `youtube` sí apunta a `https://www.youtube.com/@VanguardiaColombiana`.
 - 6 reacciones `NAVIGATE` sin `destinationId`: en todas, el origen es el enlace de la

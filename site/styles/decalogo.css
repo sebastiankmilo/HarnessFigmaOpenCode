@@ -1,0 +1,101 @@
+/* site/styles/decalogo.css — página Decálogo (frame `2334:1005` de `1448-lg`)
+ * Spec: specs/pages/decalogo.md · valores: solo styles/tokens.css
+ * Base 1448 (no hay variante móvil/tablet en el diseño → sin media queries).
+ */
+
+/* ── 2 — header (`2335:1221`) ──────────────────────────────────── */
+.decal-hero {
+  background: var(--color-surface-muted);
+}
+
+.decal-hero__grid {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-8);
+}
+
+.decal-hero .media {
+  flex: 0 1 438px;
+}
+
+.decal-hero__text {
+  flex: 0 1 788px;
+}
+
+.decal-hero h1 {
+  font-size: var(--font-size-l-h1-xxl);
+}
+
+.decal-hero p {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+}
+
+/* ── 3 — sección-puntos (`2334:1027`) ──────────────────────────── */
+.decal-points {
+  padding-block: var(--space-8);
+  background: var(--color-surface);
+}
+
+.decal-points__inner {
+  display: flex;
+  gap: var(--space-5);
+  max-width: 1148px;
+  margin-inline: auto;
+}
+
+.decal-points__body {
+  flex: 1 1 794px;
+}
+
+.page-index {
+  flex: 0 1 322px;
+  font-size: var(--font-size-l-h6);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-body);
+  white-space: pre-line;
+}
+
+/* ── Contenido de los puntos ───────────────────────────────────── */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.point h3 {
+  font-size: var(--font-size-l-h3);
+}
+
+.point p {
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+  white-space: pre-line;
+}
+
+.cta {
+  margin-top: var(--space-5);
+}
+
+/* ── Medias del wireframe (rellenos y etiqueta centrada) ───────── */
+.media--4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.media--strong {
+  background: var(--color-surface-strong);
+}
+
+.media--center .media__label {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

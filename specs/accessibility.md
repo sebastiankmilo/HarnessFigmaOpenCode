@@ -1,9 +1,9 @@
 # Accesibilidad derivada del diseño
 
 ---
-fuente: Figma — pares texto/fondo medidos en `1448-lg > inicio`, `Únete` y
-`Objetivo-modal` y en los componentes de `components`, contrastados contra
-`site/styles/tokens.css`
+fuente: Figma — pares texto/fondo medidos en `1448-lg > inicio`, `Únete`,
+`Objetivo-modal`, `Programa`, `Decálogo` y `Política de privacidad` y en los
+componentes de `components`, contrastados contra `site/styles/tokens.css`
 extraido: 2026-10-03
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_node_info`, `get_nodes_info`) + cálculo de ratio WCAG 2.1
@@ -55,8 +55,8 @@ variantes `focus` ni anillo de foco.
 (`:focus-visible`) y quedar documentado aquí cuando el diseño lo especifique.
 **PENDIENTE de especificación de diseño.**
 
-Obligaciones que ya aplican a las vistas `inicio`, `Únete` y `Objetivo-modal` aunque
-Figma no las especifique:
+Obligaciones que ya aplican a las vistas `inicio`, `Únete`, `Objetivo-modal`,
+`Programa`, `Decálogo` y `Política de privacidad` aunque Figma no las especifique:
 
 - Foco visible en enlaces, botones, `goal-card` y `container-and-card` (controles
   completos).

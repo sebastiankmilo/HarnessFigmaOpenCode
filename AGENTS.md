@@ -22,15 +22,22 @@ El diseño vive en Figma (archivo GP23gIdp6DOtURfMNM0PzX). **Nunca modificar el 
   get_node_info / read_my_design). Si no responde (plugin o socket caídos),
   detente y avisa: no hay plan B ni valores de respaldo.
 - PROHIBIDO usar herramientas de escritura de cualquier MCP de Figma.
-- Assets: exportar desde Figma a `site/assets/img|icons` (SVG para iconos,
-  PNG @2x para imágenes). Sin placeholders ni URLs externas.
+- Assets: exportar desde Figma a `site/assets/img|icons` (PNG @2x — el plugin
+  de comunidad solo exporta PNG; la regla "SVG para iconos" queda pendiente del
+  parche del plugin, ver `docs/.../entregables/especificaciones-diseño.md` §4.9).
+  Sin placeholders ni URLs externas.
 - Tipografía: DM Sans **vendorizada** en `site/assets/fonts/` (`@font-face` en
   `main.css`). Sin CDN ni URLs externas de fuentes.
 
 ## Cómo usar las especificaciones
 - **Antes de codificar** una sección: leer `specs/pages/<pagina>.md` (secciones en
-  orden) y las `specs/components/<nombre>.md` que usa. Anatomía, medidas, variantes y
-  tokens salen de ahí — nunca de una captura ni de la memoria del modelo.
+  orden, con IDs de nodo) y las `specs/components/<nombre>.md` que usa. De ahí salen
+  **anatomía, variantes/estados, comportamiento y mapeo a tokens** — nunca de una
+  captura ni de la memoria del modelo.
+- **Las medidas de instancia NO están en las specs**: se consultan en vivo con
+  `get_node_info` sobre el nodo que la spec referencia (regla de dos niveles, ver
+  `especificaciones-diseño.md` §4.11). Lo que devuelva se mapea a tokens; si falta
+  un token, primero se extrae (skill `figma-extraction`), nunca se hardcodea.
 - Cruzar siempre con `specs/tokens.md` (qué token para qué rol), `specs/breakpoints.md`
   (dirección de las media queries por sección), `specs/interactions.md` (qué hace cada
   control) y `specs/accessibility.md` (contraste, foco, motion).
@@ -52,7 +59,7 @@ El diseño vive en Figma (archivo GP23gIdp6DOtURfMNM0PzX). **Nunca modificar el 
 - Orden de arranque de cada sesión:
   1. Terminal 1: `cd ~/tools/talk-to-figma && bun socket` (dejar abierta).
   2. Figma: abrir la copia → *Resources (⇧I) → Plugins → Talk to Figma MCP*
-     → dejar la ventana del plugin abierta → *Connect* → copiar el canal
+     → dejar la ventana del plugin abierto → *Connect* → copiar el canal
      aleatorio que asigna el plugin.
   3. Pegar el canal en `Pagina_web_vanguardia/.env`:
      `chanel_name = "<copiado>"` (archivo local, ignorado por git; si el

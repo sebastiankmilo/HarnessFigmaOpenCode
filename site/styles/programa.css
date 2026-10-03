@@ -1,0 +1,188 @@
+/* site/styles/programa.css — página Programa (frame `2328:4307` de `1448-lg`)
+ * Spec: specs/pages/programa.md · valores: solo styles/tokens.css
+ * Base 1448 (no hay variante móvil/tablet en el diseño → sin media queries).
+ */
+
+/* ── 2 — header (`2328:4508`) ──────────────────────────────────── */
+.prog-hero {
+  background: var(--color-surface-muted);
+}
+
+.prog-hero__grid {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-8);
+}
+
+.prog-hero .media {
+  flex: 0 1 438px;
+}
+
+.prog-hero__text {
+  flex: 1 1 auto;
+}
+
+.prog-hero h1 {
+  font-size: var(--font-size-l-h1-xxl);
+}
+
+.prog-hero p {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-body-l);
+  color: var(--color-text-secondary);
+}
+
+/* ── 3 — sección-ejes (`2328:4509`) ────────────────────────────── */
+.prog-ejes {
+  background: var(--color-surface-alt);
+}
+
+.prog-ejes__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  max-width: 1145px;
+  margin-inline: auto;
+  padding-block: var(--space-8);
+}
+
+.prog-ejes__text {
+  flex: 1 1 674px;
+}
+
+.prog-ejes .media {
+  flex: 0 1 439px;
+}
+
+.prog-ejes h2 {
+  font-size: var(--font-size-l-h1);
+}
+
+.prog-ejes p {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+}
+
+/* ── 4 — sección-materialismo (`2330:4593`) ────────────────────── */
+.prog-mat {
+  padding-block: var(--space-8);
+}
+
+.prog-mat__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  max-width: 1150px;
+  margin-inline: auto;
+}
+
+.prog-mat .media {
+  flex: 0 1 320px;
+}
+
+.prog-mat__lead {
+  flex: 1 1 798px;
+}
+
+.prog-mat__lead h2 {
+  font-size: var(--font-size-l-h1);
+}
+
+.prog-mat__lead p {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+}
+
+.prog-mat__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 912px;
+  margin: var(--space-6) auto 0;
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+}
+
+/* ── 5 — sección-puntos (`2330:4683`) ──────────────────────────── */
+.prog-points {
+  padding-block: var(--space-8);
+  background: var(--color-surface-alt);
+}
+
+.prog-points__inner {
+  display: flex;
+  gap: var(--space-5);
+  max-width: 1148px;
+  margin-inline: auto;
+}
+
+.prog-points__body {
+  flex: 1 1 794px;
+}
+
+.prog-points h2 {
+  font-size: var(--font-size-l-h1);
+}
+
+.page-index {
+  flex: 0 1 322px;
+  font-size: var(--font-size-l-h6);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-body);
+  white-space: pre-line;
+}
+
+/* ── Contenido compartido de las pantallas de puntos ───────────── */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.point h3 {
+  font-size: var(--font-size-l-h3);
+}
+
+.point p {
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+  white-space: pre-line;
+}
+
+.cta {
+  margin-top: var(--space-5);
+}
+
+/* ── Medias del wireframe (rellenos y etiqueta centrada) ───────── */
+.media--4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.media--square,
+.media--square-sm {
+  aspect-ratio: 1 / 1;
+}
+
+.media--strong {
+  background: var(--color-surface-strong);
+}
+
+.media--muted {
+  background: var(--color-surface-muted);
+}
+
+.media--center .media__label {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

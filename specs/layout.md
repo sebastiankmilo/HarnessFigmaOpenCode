@@ -64,11 +64,36 @@ Fila de paginación bajo `objetivos` (`2326:4032`, 1384×64):
 | Logo del footer | `2328:4286` | 128×128 | Centrado |
 | `footer-nav` | `2328:4304` | 1384×117 | Contenedor completo |
 
+## Secciones de `Programa`, `Decálogo` y `Política de privacidad`
+
+Mismo criterio que `inicio`: **gap 0 entre secciones**, ritmo vertical por paddings.
+
+| Pantalla | Sección | Nodo | Alto | Padding vertical |
+| --- | --- | --- | --- | --- |
+| `Programa` | `header` | `2328:4508` | 520 | 96 / 96 (columna de texto; la media también arranca en 96) |
+| `Programa` | `sección-ejes` | `2328:4509` | 737 | 96 / 96 |
+| `Programa` | `sección-materialismo` | `2330:4593` | 938 | 96 / 96 |
+| `Programa` | `sección-puntos` | `2330:4683` | 6745 | 96 / 96 |
+| `Decálogo` | `header` | `2335:1221` | 600 | 96 / 96 |
+| `Decálogo` | `sección-puntos` | `2334:1027` | 7764 | 96 / 96 |
+| `Política de privacidad` | `sección-puntos` | `2335:1540` | 1304 | 96 / 96 |
+| las tres | `footer` | `2338:2640` / `2338:2693` / `2338:2799` | 405 | 64 / 64 (igual que `inicio`) |
+
+Rasgos horizontales (medidos sobre los frames, derivados de `absoluteBoundingBox`):
+
+| Rasgo | Pantallas | Medida |
+| --- | --- | --- |
+| Header de dos columnas (media + texto) | `Programa`, `Decálogo` | media 438 de ancho con **padding lateral 32** y **gap 32** con la columna de texto |
+| Bloque centrado estrecho | `sección-materialismo` (Frame 8, 912), `Política de privacidad` (910) | centrado en 1448: **padding lateral ≈ 269** |
+| Dos columnas con índice lateral | `sección-puntos` de `Programa` y `Decálogo` | **padding lateral 150** · índice **322** · gap **32** · columna de contenido **794** (150+322+32+794+150 = 1448) |
+| Imagen 1:1 + texto (`sección-materialismo` `Frame 7`) | `Programa` | padding lateral 149, imagen 320, gap 32, texto 798 |
+
 ## Diferencias por breakpoint
 
-No existen las versiones móvil/tablet de `inicio` en el archivo (confirmado por el
-equipo): `375-xs` y `1024-sm` solo traen guías de estilos y pantallas de plantilla.
+No existen las versiones móvil/tablet de `inicio` ni de `Programa`, `Decálogo` y
+`Política de privacidad` en el archivo (confirmado por el equipo): `375-xs` y
+`1024-sm` solo traen guías de estilos y pantallas de plantilla.
 Lo único medible por breakpoint son las **variantes de componente** (`xs`/`sm`/`lg`),
 documentadas en [breakpoints.md](./breakpoints.md) y en
-[components/](./components/). La disposición de las secciones de `inicio` a 375 y 1024
-queda **PENDIENTE de confirmación con el diseño**.
+[components/](./components/). La disposición de las secciones de estas pantallas a
+375 y 1024 queda **PENDIENTE de confirmación con el diseño**.

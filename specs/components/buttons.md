@@ -43,6 +43,17 @@ alcance).
 | primario oscuro | `--color-text-secondary` (`#333333`) | — | `--color-on-dark` | encabezado, `goal-card`, secciones, `Objetivo-modal` |
 | outline | **sin relleno** (transparente) | 1 px `--color-text-secondary` | `--color-text-secondary` | botón secundario del encabezado y del `nav` |
 
+**Instancias CTA de las pantallas de texto (extraídas 2026-10-03):**
+
+| Instancia | Pantalla | Medida | Etiqueta | Reacción |
+| --- | --- | --- | --- | --- |
+| `2334:998` | `Programa` | 361×52 (`size=m`) | «Únete a Vanguardia Colombiana» | → `Únete` (`2335:1229`) |
+| `2334:1059` | `Decálogo` | 361×52 (`size=m`) | «Únete a Vanguardia Colombiana» | → `Únete` (`2335:1229`) |
+| `2335:1574` | `Política de privacidad` | 187×52 (`size=m`) | «Volver al inicio» | **`PENDIENTE-FIGMA`**: `get_reactions` devuelve 0 |
+
+El ancho de estas instancias es *hug* de la etiqueta (relleno
+`--color-text-secondary`, estilo «primario oscuro»).
+
 ## Medidas y tokens
 
 - Tipografía de la etiqueta: `--font-weight-bold`; los tamaños caen en la escala

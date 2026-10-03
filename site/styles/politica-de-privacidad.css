@@ -1,0 +1,39 @@
+/* site/styles/politica-de-privacidad.css — página Política de privacidad
+ * (frame `2335:1533` de `1448-lg`)
+ * Spec: specs/pages/politica-de-privacidad.md · valores: solo styles/tokens.css
+ * Base 1448 (no hay variante móvil/tablet en el diseño → sin media queries).
+ */
+
+/* ── 2 — sección-puntos (`2335:1540`) ──────────────────────────── */
+.privac {
+  padding-block: var(--space-8);
+  background: var(--color-surface);
+}
+
+.privac__inner {
+  max-width: 910px;
+  margin-inline: auto;
+}
+
+.privac h1 {
+  font-size: var(--font-size-l-h2);
+}
+
+.privac__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.privac__legal {
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
+  white-space: pre-line;
+}
+
+/* «Volver al inicio»: el prototipo no le define destino
+   (PENDIENTE-FIGMA en specs/pages/politica-de-privacidad.md) → sin enlace. */
+.cta {
+  align-self: flex-start;
+}
