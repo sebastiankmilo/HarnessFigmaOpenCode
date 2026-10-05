@@ -112,3 +112,28 @@ Los pares de color no cambian (mismos tokens); lo nuevo es el contexto móvil:
   [components/nav.md](./components/nav.md)).
 - Las tarjetas ocultas por el carrusel a 375 usan `display:none`: quedan fuera del
   árbol de accesibilidad y no pueden recibir foco.
+
+## `1024-sm` (2026-10-05)
+
+Los pares de color no cambian (mismos tokens que en `xs` y `lg`); lo nuevo es el
+contexto tablet:
+
+| Par | Ratio | Veredicto |
+| --- | --- | --- |
+| Enlaces del menú tablet `#000000` sobre `--color-surface-alt` (`#fafafa`) | 20.12 | AA |
+| Etiqueta del botón «Aporta» `#ffffff` sobre `#000000` (overlay `2424:446`) | 21.00 | AA |
+| Cuerpo y títulos `#333333` / `#000000` sobre `#fafafa` y `#ebebeb` | 12.10 / 20.12 | AA |
+| Enlaces y copyright del footer `#ffffff` sobre `--color-surface-dark` (`#333333`) | 12.63 | AA |
+| Punto activo del `dotnav` `#5c5c5c` sobre `#fafafa` | 6.41 | AA |
+| Puntos inactivos del `dotnav` `#d6d6d6` sobre `#fafafa` | **1.39** | **No cumple** (mismo caso que en `lg` y `xs`) |
+
+- **Elementos ocultos a tablet** (barra: `links` de texto e `icons/search`; overlay:
+  botón outline y `icons/wechat`; `sección-ejes` y `sección-materialismo`: sus
+  `components/images`): al ir con `display:none` **no entran en el árbol de
+  accesibilidad ni pueden recibir foco** — comportamiento deseado.
+- **Menú tablet**: el overlay `2424:446` es un modal a pantalla completa → foco
+  atrapado y devolución al cerrar (`icons/close` → `CLOSE`), y nombre accesible en
+  la hamburguesa y en el cierre.
+- **Carrusel de objetivos** (2 tarjetas visibles): controles `<button>` con nombre
+  accesible, `:focus-visible` y teclado `←`/`→`; las 2 tarjetas fuera de ventana
+  usan `display:none` (ver [interactions.md](./interactions.md)).

@@ -3,10 +3,11 @@
 ---
 fuente: Figma — página `1448-lg`, frame `inicio` (`110:2277`) y sus secciones;
 guías de `375-xs` (`1:2`, `9:142`) y `1024-sm` (`98:1549`) para los márgenes;
-los 7 frames de `375-xs` leídos el 2026-10-04
-extraido: 2026-10-03 (actualizado 2026-10-04)
+los 7 frames de `375-xs` leídos el 2026-10-04 y los 6 frames de `1024-sm`
+leídos el 2026-10-05
+extraido: 2026-10-03 (actualizado 2026-10-04; `sm` el 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_node_info`, `get_nodes_info`, `scan_nodes_by_types`)
+herramienta: TalkToFigma (`get_node_info`, `get_nodes_info`, `scan_nodes_by_types`, `export_node_as_image`)
 ---
 
 ## Ancho de contenedor
@@ -129,7 +130,52 @@ Fila de paginación a 375 (`2392:4005`, 343×64): `icons/prev` 64×64 a la izqui
 derecha (`justify-content: space-between`). La misma fila aparece en
 `sección-La-Materia-Prima` (`2392:4101`), que en 1448 no la tiene.
 
-### `sm` (tablet)
+### `sm` (768) — medido en `1024-sm` el 2026-10-05 (`get_node_info` de los 6 frames)
 
-Sigue **PENDIENTE**: `1024-sm` no tiene pantallas construidas y el ancho real del
-breakpoint (1024 vs 768) no está resuelto (ver [breakpoints.md](./breakpoints.md)).
+Contenedor: **720px** con padding lateral **24** (misma regla que la tabla de
+§Ancho de contenedor). Gap 0 entre secciones, igual que en los otros dos
+breakpoints. Barra `components/nav` **768×75**.
+
+| Pantalla | Sección | Nodo | Alto | Padding vertical | Ritmo interno |
+| --- | --- | --- | --- | --- | --- |
+| las 6 | `components/nav` | (instancia por pantalla) | **75** | — | logo 48, padding lateral 16 |
+| `inicio` | `encabezado-contenido` | `2408:1567` | 660 | **128 / 128** | texto→botones **36**; padding h **24** |
+| `inicio` | `sección-video` | `2408:1585` | 403 | 0 / 0 | media a sangre (rectángulo 768, vídeo 713×402 centrado) |
+| `inicio` | `seccion-objetivos` | `2408:1650` | 1002 | 64 / 64 | texto→tarjetas **53**; tarjetas→controles **32**; controles→CTA **64** |
+| `inicio` | `sección-La-Materia-Prima` | `2408:1708` | 902 | 64 / 64 | texto→artículos **32**; artículos→CTA **32** |
+| `inicio`, `Únete` | `sección-únete` | `2408:1756` / `2408:2478` | 786.12 | 64 / 64 | media→texto **32** |
+| las 6 | `footer` | `2408:1765` y equivalentes | 405 | 64 / 64 | padding h **32**; logo→footer-nav **32** |
+| `Programa` | `header` | `2408:1986` | 1031 | 64 / 64 | imagen 720×539→texto **24** |
+| `Programa` | `sección-ejes` | `2408:1993` | 668 | 64 / 64 | **solo texto** (la imagen 350×350 no se ve en el export) |
+| `Programa` | `sección-materialismo` | `2408:2000` | 808 | 64 / 64 | **solo texto** (la imagen 341×341 no se ve en el export); bloque→bloque **32** |
+| `Programa` | `sección-puntos` | `2408:2012` | 7147 | 64 / 64 | **1 columna de 723**, 9 puntos + CTA 361×52, **sin índice lateral** |
+| `Decálogo` | `header` | `2408:2118` | 1168 | 64 / 64 | imagen 720×539→texto **24** |
+| `Decálogo` | `sección-puntos` | `2408:2274` | 8354 | 64 / 64 | **1 columna de 720**, 10 puntos + CTA 361×52, sin índice |
+| `Política de privacidad` | `sección-puntos` | `2421:1346` | 1360 | 64 / 64 | padding h **16**; título→cuerpo **32**; cuerpo→CTA **32** |
+
+Resumen del ritmo tablet: **padding 64** en secciones de contenido y footer,
+**128** en el encabezado de `inicio`, gaps **24–36** dentro de los bloques de
+texto y **32** entre media y texto; contenedor 720 con padding 24.
+
+### Grillas a 768
+
+| Grilla | Nodo | Columnas | Ancho | Gap | Total |
+| --- | --- | --- | --- | --- | --- |
+| `objetivos` (goal-card) | `2408:1655` | **2** | 346 | 24 | 2×346 + 24 = 716 (frame medido 714) |
+| `artículos` (container-and-card) | `2408:1712` | **2** | 346 y 350 | 24 | 346 + 24 + 350 = 720 |
+
+Fila de paginación bajo `objetivos` (`2408:1660`, 714×64): `icons/prev` 64×64 a la
+izquierda (offset 27 del frame), `components/dotnav` 80×8 (4 puntos) centrado,
+`icons/next` 64×64 a la derecha; verticalmente centrados (prev y next en `y`,
+dotnav +28).
+
+### Hallazgos de render a 768 (export PNG, 2026-10-05)
+
+- En `sección-ejes` y `sección-materialismo` las imágenes **no aparecen en el
+  render exportado**: los nodos `components/images` están ocultos en `1024-sm`
+  (`filterFigmaNode` no expone `visible`, así que la evidencia es el PNG
+  exportado con `export_node_as_image`).
+- La barra de nav muestra logo + 5 plataformas + hamburguesa: los `links` de
+  texto y el icono de búsqueda están ocultos.
+- El overlay `2424:446` muestra 5 enlaces, **1 botón** (`Aporta`; el segundo
+  `Botón` está oculto) y **5 plataformas** (WeChat oculto).

@@ -3,10 +3,10 @@
 ---
 fuente: Figma — estilos locales (`get_styles`) + muestras nodo `8:19` (`375-xs`) y
 `98:1630` (`1024-sm`) + uso real en `1448-lg > inicio` (`110:2277`) + uso real en
-los frames de `375-xs` (2026-10-04)
-extraido: 2026-10-03 (actualizado 2026-10-04)
+los frames de `375-xs` (2026-10-04) y de `1024-sm` (2026-10-05)
+extraido: 2026-10-03 (actualizado 2026-10-04; `1024-sm` el 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_styles`, `get_node_info`)
+herramienta: TalkToFigma (`get_styles`, `get_node_info`, `scan_text_nodes`)
 ---
 
 Familia única en el archivo: **DM Sans** (`--font-family-base`). Pesos: **Bold** (700)
@@ -94,8 +94,9 @@ Regla de uso: párrafo → `--font-weight-medium`; label, link, título y texto 
 - Confirmado por el equipo (2026-10-03): `375-xs` y `1024-sm` solo tenían guías de
   estilos y pantallas de plantilla. **Actualizado el 2026-10-04**: `375-xs` ya tiene
   los 7 frames de las vistas móviles (ver [breakpoints.md](./breakpoints.md)) y de
-  ellos se midió el uso real de la escala (tabla siguiente); `1024-sm` sigue sin
-  pantallas y su escala queda **PENDIENTE**.
+  ellos se midió el uso real de la escala (tabla siguiente).
+- **Actualizado el 2026-10-05**: `1024-sm` ya tiene los 6 frames de las vistas
+  tablet y de ellos se midió el uso real (§Uso observado en `1024-sm`).
 
 ## Uso observado en `375-xs` (2026-10-04, `get_node_info`)
 
@@ -115,4 +116,30 @@ Regla de uso: párrafo → `--font-weight-medium`; label, link, título y texto 
 
 Conclusión: a 375 se usa la escala **`xs/`** para titulares (una talla por debajo de
 `l/`), **excepto** el título de `Decálogo` (52) y todos los párrafos, que mantienen su
-tamaño de escritorio. La escala `sm/` sigue **PENDIENTE** (no hay pantallas `1024-sm`).
+tamaño de escritorio.
+
+## Uso observado en `1024-sm` (2026-10-05, `scan_text_nodes`)
+
+Los 6 frames tablet usan la **escala `xs/`** en titulares — la misma que a 375 — y
+mantienen los párrafos de escritorio. Escala `sm/`: **no se usa en ninguna pantalla**.
+
+| Rol en la página | Medida leída | Estilo Figma equivalente | Token |
+| --- | --- | --- | --- |
+| Título `inicio` / `Programa` / `Decálogo` (`Vanguardia Colombiana`, `Nuestro Programa`, `Decálogo Político…`) | Bold 46.1 / 51.63 | `xs/headings/h1/xxl` | `--font-size-xs-h1-xxl` |
+| Títulos de sección (objetivos, Materia Prima, Únete, ejes, Puntos programáticos, Política de privacidad) | Bold 32.4 / 36.29 | `xs/headings/h1` | `--font-size-xs-h1` |
+| Título de `goal-card` y de cada punto | Bold 25.6 / 28.67 | `xs/headings/h3` | `--font-size-xs-h3` |
+| Párrafo del header de `Programa` y `Decálogo` | Medium 22 / 33 | `paragraphs/l` | `--font-size-body-l` |
+| Párrafo de sección y de `goal-card` | Medium 20.2 / 30.3 | `paragraphs/m` | `--font-size-body-m` |
+| Entradilla de sección | Medium 18 / 27 | `paragraphs/base` | `--font-size-body-base` |
+| Texto dentro de `goal-card` (2.º párrafo) | Medium 16 / 24 | `paragraphs/s` | `--font-size-body-s` |
+| Enlaces del menú tablet (overlay `2424:446`) | Bold 18 / 27 | `links/base` | `--font-size-body-base` |
+| Texto de botón (`size=s`, h40, overlay) y enlaces del footer | Bold 16 / 24 | `links/s` | `--font-size-body-s` |
+| Texto de botón (`size=m`, h52, secciones) | Bold 20.2 / 30.3 | `paragraphs/bold/m` | `--font-size-body-m` |
+| Copyright del footer | Medium 14.2 / 21.3 | `paragraphs/xs` | `--font-size-body-xs` |
+| Etiquetas `4:3` / `1:1` / `5:4` de los placeholders de imagen | Bold 46.1 / 51.63 | anotación de wireframe | — |
+
+Diferencia con 375: el título de `Decálogo` **sí baja a 46.1** (la excepción de 52
+que existe en `375-xs` no se repite en tablet).
+
+Conclusión: a 768 se usa la escala **`xs/`** para titulares y se conservan los
+tamaños de párrafo de escritorio, igual que a 375; la escala `sm/` **no se usa**.

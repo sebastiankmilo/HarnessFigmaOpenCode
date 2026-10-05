@@ -1,8 +1,8 @@
 # Página: inicio
 
 ---
-fuente: Figma — página `1448-lg`, frame `inicio` (`110:2277`)
-extraido: 2026-10-03
+fuente: Figma — página `1448-lg`, frame `inicio` (`110:2277`); página `1024-sm`, frame `268:3128` (leído el 2026-10-05)
+extraido: 2026-10-03 (sm: 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_document_info`, `get_node_info`, `get_nodes_info`, `get_reactions`, `export_node_as_image`)
 ---
@@ -147,10 +147,12 @@ Registradas para no perder lo observado al implementar:
    el export de la instancia `2392:2395` renderiza **solo logo + hamburguesa**
    (`platforms`/`search` quedan ocultas o fuera del frame) → la implementación
    sigue **ese render**, no la variante (ver
-   [components/nav.md](../components/nav.md)), y deja el tramo tablet
-   **PENDIENTE**, igual que el propio [breakpoints.md](../../specs/breakpoints.md)
-   (1024 vs 768 sin confirmar). En `lg` se usan las instancias reales (5
-   plataformas, 4 enlaces).
+   [components/nav.md](../components/nav.md)). El tramo tablet **ya no está
+   pendiente**: se leyó el 2026-10-05 (barra 768×75 = logo + 5 plataformas +
+   hamburguesa; overlay `2424:446`) y está documentado en la sección `sm` de
+   este archivo, en [components/nav.md](../components/nav.md) y en
+   [breakpoints.md](../../specs/breakpoints.md) (umbral **768px**). En `lg` se
+   usan las instancias reales (5 plataformas, 4 enlaces).
 7. **Enlaces sin destino en el prototipo**: los botones `Aporta` y `Botón` del nav y
    el enlace `Aporta` del footer **no tienen reacción**; se dibujan como elementos
    no interactivos hasta que el diseño los defina.
@@ -212,7 +214,31 @@ padding 16, título 25.6, entradilla 16, gap **8** entre título y entradilla.
 El comportamiento de `prev`/`next`/`dotnav` está definido en
 [interactions.md](../../specs/interactions.md) y se implementa en `site/scripts/inicio.js`.
 
-### `sm` (tablet)
+### `sm` (768) — frame `268:3128`, 768×4233 (leído el 2026-10-05)
 
-**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
-[breakpoints.md](../../specs/breakpoints.md)).
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2424:1959` | **75** | 125 → 75; logo 96 → 48; padding 32 → 16; **sin enlaces de texto** (ocultos): logo + 5 plataformas 24×24 + hamburguesa |
+| 1 | `encabezado-contenido` | `2408:1567` | 660 | padding **128** (162); `encabezado-texto` **720** con padding 24; h1 **46.1** (52); párrafo 20.2 igual; gap texto→botones **36** (igual); botones 224×52 + 103×52 con gap 16 |
+| 2 | `sección-video` | `2408:1585` | 403 | media **713×402** centrada sobre `Rectangle 1` 768 a sangre (en lg: 1124 sin padding; en xs: 343 con padding 48) |
+| 3 | `seccion-objetivos` | `2408:1650` | 1002 | padding **64** (96); **2 columnas** de **346** con gap **24** (frame de tarjetas 714); h2 **32.4**; gaps texto→tarjetas **53**, tarjetas→controles **32**, controles→CTA **64** |
+| 4 | `sección-La-Materia-Prima` | `2408:1708` | 902 | padding **64** (96); **2 columnas** (**346** y **350**, gap **24**, total 720); **sin fila de paginación** (igual que 1448) |
+| 5 | `sección-únete` | `2408:1756` | 786.12 | padding **64** (96); **apilado**: media 720×406.12 arriba, texto 720×220 debajo (gap **32**); h2 **32.4**; gap título→párrafo **16** |
+| 6 | `footer` | `2408:1765` | **405** | padding **64**; logo 128 centrado; `footer-nav` 704×117 (padding h **32**) con plataformas 184×24 centradas, **fila de 7 enlaces** (Bold 16, gap **16**) y copyright Medium 14.2 (gap **24**) |
+
+Detalles de `goal-card` a 768 (instancia `2408:1656`, **346×522**): padding
+**24** laterales/superior y **48** inferior; gap avatar→texto **16**; avatar
+137×137; título **25.6**, párrafo 16/20.2. El `components/buttons` de la
+instancia (104×40) se solapa con el párrafo — mismo defecto que en `1448-lg`
+y `375-xs`: se mantiene la decisión de **no renderizar el botón**.
+
+`container-and-card` a 768 (`2408:1713`, 346×571): imagen **5:4** de 346×276.38,
+gap imagen→texto **16**, texto con padding **24**, título **25.6**, entradilla
+16, gap **8** entre título y entradilla.
+
+**Carrusel**: a 768 se ven **2 tarjetas** de los 4 objetivos (controles
+`2408:1661` prev 64×64, `2408:1662` dotnav 80×8 con 4 puntos, `2408:1663` next
+64×64, en `2408:1660`, 714×64). El comportamiento está definido en
+[interactions.md](../../specs/interactions.md) y se implementa en
+`site/scripts/inicio.js`. El modal `Objetivo-modal` **no existe** en `1024-sm`
+(Caso 19) y no se implementa a tablet.

@@ -98,3 +98,21 @@ padding vertical **64**.
      entre líneas de 24 px), Bold 16/24, mismo orden y destinos que en `lg`.
    - gap **24** → copyright **343×42** centrado, Medium 14.2/21.3.
 3. Padding inferior **64**.
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+Footer **768×405** idéntico en las cinco pantallas (`2408:1765`, `2408:2051`,
+`2408:2170`, `2408:2316`, `2421:1247`): relleno `--color-surface-dark`,
+padding vertical **64**. **Mismo alto que en `lg`** (a `xs` era 714).
+
+1. `icons/logo-02` **128×128** centrado, `padding-top` **64**.
+2. `footer-nav` **704×117** (padding lateral **32**), gap **32** bajo el logo:
+   - `platforms` **184×24** centrada: 5 × icono 24×24 con gap **16**.
+   - gap **24** → **fila de 7 enlaces** (`Frame 5`, 704×24): Bold 16/24,
+     gap **16** entre enlaces, mismo orden y destinos que en `lg`.
+   - gap **24** → copyright **704×21**, Medium 14.2/21.3.
+3. Padding inferior **64**.
+
+`programa` y `decálogo` declaran **dos** footers en Figma (`2408:1858`,
+`2408:2100` solapados con `sección-puntos`); solo se implementa el final
+(`2408:2051`, `2408:2170`) — decisión 10 del plan.

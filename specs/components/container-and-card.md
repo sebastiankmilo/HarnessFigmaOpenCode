@@ -94,3 +94,15 @@ Instancia `2392:4058` de `sección-La-Materia-Prima`: **343×513** (la variante
 - `text` **311** de ancho: padding lateral **16** (la variante usa 24) y padding
   inferior **32**.
 - Título **25.6** (`--font-size-xs-h3`) → gap **8** → entradilla 16.
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+Instancias `2408:1713` (**346×571**) y `2408:1714` (**350×571**) de
+`sección-La-Materia-Prima`, en grilla de **2 columnas** con gap **24**
+(346 + 24 + 350 = 720).
+
+- Imagen 5:4 **346×276.38** → gap **16** → `text-container` 346×223.
+- `text` **298** de ancho: padding lateral **24** (igual que la variante base; a
+  `xs` era 16).
+- Título **25.6** (`--font-size-xs-h3`) → gap **8** → entradilla 16.
+- Sin fila de paginación (a diferencia de `xs`): la sección no tiene controles.

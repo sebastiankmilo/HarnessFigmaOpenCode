@@ -1,8 +1,9 @@
 # Página: Objetivo-modal
 
 ---
-fuente: Figma — página `1448-lg`, frame `Objetivo-modal` (`2358:932`)
-extraido: 2026-10-03
+fuente: Figma — página `1448-lg`, frame `Objetivo-modal` (`2358:932`); el
+frame `375-xs` (`2404:3499`); `1024-sm` **no tiene** frame `Objetivo-modal` (2026-10-05)
+extraido: 2026-10-03 (verificación `1024-sm`: 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_node_info`, `get_reactions`, `export_node_as_image`)
 ---
@@ -88,7 +89,15 @@ Baseline: `tests/visual/baseline/objetivo-modal-1448.png` — PENDIENTE
 - **Disparador**: `objetivos` (`2392:4000`) → `ON_CLICK` → OVERLAY `2404:3499`,
   `DISSOLVE` 0.3s `EASE_OUT` (mismo disparador que en `1448-lg`).
 
-### `sm` (tablet)
+### `sm` (tablet) — **no existe frame** (Caso 19, leído el 2026-10-05)
 
-**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
-[breakpoints.md](../../specs/breakpoints.md)).
+La página `1024-sm` (`10:214`) **no tiene frame `Objetivo-modal`** entre sus 6
+pantallas (ver [breakpoints.md](../../specs/breakpoints.md)) y `get_reactions`
+sobre las `goal-card` de `inicio` a 768 (`2408:1656`, `2408:1657`) devuelve
+**0 reacciones**: no hay `ON_CLICK` que abra un overlay.
+
+En consecuencia el modal **no se implementa ni se estiliza para tablet**: el
+diálogo existente (heredado de `lg`/`xs`) mantiene sus estilos y reacciones
+actuales sin variación en el rango 768–1447. Cualquier decisión de llevarlo a
+tablet debe venir como instrucción explícita del equipo y actualizar este
+documento y el ticket 3.

@@ -85,3 +85,20 @@ Instancia `2392:4001` de `seccion-objetivos`: **343×498** (columna única).
   botón** (nota 2 de [inicio](../pages/inicio.md)).
 - La reacción `ON_CLICK` → OVERLAY `2404:3499` (`DISSOLVE` 0.3s) vive en el frame
   contenedor `objetivos` (`2392:4000`), no en la tarjeta.
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+Instancias `2408:1656` y `2408:1657` de `seccion-objetivos`: **346×522** cada una,
+con gap **24** entre ellas (**2 tarjetas visibles de 4**; el carrusel está definido
+en [interactions.md](../interactions.md)).
+
+- Padding **24** superior y lateral, **48** inferior (la variante base usa 24/24/48:
+  aquí solo cambia el inferior respecto al padding lateral).
+- Avatar **137×137**, gap avatar→texto **16** (mismo valor que en `xs`).
+- Título **Bold 25.6/28.67** (`--font-size-xs-h3`); párrafo Medium 16/24, gap **8**.
+- El `components/buttons` de la instancia (104×40) **se solapa con el párrafo**
+  (mismo defecto que en `1448-lg` y `375-xs`): se mantiene **no renderizar el
+  botón**.
+- `get_reactions` sobre `2408:1656` devuelve **0 reacciones**: no hay `ON_CLICK`
+  hacia `Objetivo-modal` a tablet (Caso 19, ver
+  [objetivo-modal.md](../pages/objetivo-modal.md)).

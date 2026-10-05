@@ -1,8 +1,12 @@
 /* site/styles/unete.css — página Únete
  * Spec: specs/pages/unete.md · valores: solo styles/tokens.css
- * Frames: `2335:1229` (1448) y `2396:2676` (375, leído 2026-10-04).
- * El bloque `.join-block` (sección `2396:2712`), el nav y el footer son
- * compartidos y viven en main.css, con base = 375 y `min-width: 1448px` = lg.
+ * Frames: `2335:1229` (1448), `2396:2676` (375, 2026-10-04) y `2408:2315` (768,
+ * leído 2026-10-05).
+ * El bloque `.join-block` (sección `2396:2712` / `2408:2478`), el nav y el footer
+ * son compartidos y viven en main.css: base = 375, `min-width: 768px` = tablet,
+ * `min-width: 1448px` = lg.
+ * Sin bloque `768px` propio: lo medido a tablet (padding 64, gap media→texto 32,
+ * título 32.4, título→párrafo 16) **coincide con la base** — specs/pages/unete.md §sm.
  */
 
 .join-block--surface {

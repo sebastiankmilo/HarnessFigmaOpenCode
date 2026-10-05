@@ -1,8 +1,8 @@
 # Página: Decálogo
 
 ---
-fuente: Figma — página `1448-lg`, frame `Decálogo` (`2334:1005`)
-extraido: 2026-10-03
+fuente: Figma — página `1448-lg`, frame `Decálogo` (`2334:1005`); página `1024-sm`, frame `2408:2098` (leído el 2026-10-05)
+extraido: 2026-10-03 (sm: 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_document_info`, `get_nodes_info`, `get_reactions`)
 ---
@@ -94,7 +94,14 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 
 Contenedor: 343 (padding 16). El índice lateral de 1448 (322px) **se oculta** en `xs`.
 
-### `sm` (tablet)
+### `sm` (768) — frame `2408:2098`, 768×10002 (leído el 2026-10-05)
 
-**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
-[breakpoints.md](../../specs/breakpoints.md)).
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2424:2007` | **75** | 125 → 75; logo 48; sin enlaces de texto (solo plataformas + hamburguesa) |
+| 1 | `header` | `2408:2118` | 1168 | padding **64** (96); **apilado**: `components/images` **720×539** (4:3) arriba, `header-texto` **720×477** debajo (gap **24**); h1 **46.1** — **baja de 52** (a 375 se mantiene 52); párrafo **22/33**; gap h1→párrafo **24** |
+| 2 | `sección-puntos` | `2408:2274` | 8354 | padding **64** (96); `puntos` **720 de ancho** (1 columna); **sin índice lateral** y **sin título de sección** (igual que en lg y xs); **10 puntos** con h3 **25.6** y párrafos 20.2; CTA «Únete a Vanguardia Colombiana» **361×52** (`2408:2307`) |
+| 3 | `footer` | `2408:2170` | **405** | igual que el de [inicio](./inicio.md) a 768. **Se ignora `2408:2100`**: segundo `footer` residuo solapado (decisión 10 del plan) |
+
+Contenedor: **720** (padding lateral 24). El índice lateral de 1448 (322px) **no
+aparece** en `sm`, igual que en `xs`.

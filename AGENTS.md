@@ -77,8 +77,10 @@ El diseño vive en Figma (archivo GP23gIdp6DOtURfMNM0PzX). **Nunca modificar el 
   `docs/tickets/1-flujo-desarrollo-con-figma/entregables/flujo-figma-opencode.md`.
 
 ## CSS
-- Responsive con los 3 breakpoints del diseño: 375px (móvil), 1024px (tablet)
-  y 1448px (desktop). **No se asume mobile-first**: la dirección de las media
+- Responsive con los 3 breakpoints del diseño: 375px (móvil), 768px (tablet)
+  y 1448px (desktop). El tablet mide **768** (ancho de los frames de la página
+  Figma `1024-sm`; ese «1024» es solo el nombre de la página — confirmado por el
+  equipo el 2026-10-05). **No se asume mobile-first**: la dirección de las media
   queries (mobile-first o desktop-first) se decide según lo que exija cada
   sección del diseño.
 - Verificación visual obligatoria a 1448 y 375 (mismo ancho que los frames de

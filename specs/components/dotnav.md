@@ -65,3 +65,19 @@ Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
 Ambos forman parte de los **carruseles funcionales** (v1.2/v1.4 del ticket): los
 puntos son botones con nombre accesible y el punto activo refleja la posición; ver
 [interactions.md](../interactions.md).
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+| Instancia | Pantalla | Fondo | Activo | Inactivos |
+| --- | --- | --- | --- | --- |
+| `2408:1662` | `inicio` · «Nuestros objetivos» | `--color-surface` | `#5c5c5c` (`--neutral-80`) | `#d6d6d6` (`--color-border-soft`) ×3 |
+
+- `dotnav` **80×8**: 4 puntos de **8×8**, gap **16** (paso 24).
+- Fila de controles `Frame 1` `2408:1660` (**714×64**): `icons/prev` **64×64**
+  (`2408:1661`) a la izquierda con offset **27**, `icons/next` **64×64**
+  (`2408:1663`) a la derecha con offset **27**, `dotnav` **centrado**
+  (verticalmente, prev/next en `y` y dotnav +28).
+- **Solo existe en «Nuestros objetivos»**: `sección-La-Materia-Prima` a 768 **no
+  tiene fila de paginación** (igual que en `lg`; en `xs` sí la tiene).
+- Los controles son parte del carrusel definido en
+  [interactions.md](../interactions.md).

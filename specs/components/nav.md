@@ -117,3 +117,39 @@ La Materia Prima · Política de privacidad.
 El overlay con **5 enlaces centrados, botón «Aporta» único y 5 plataformas en 2
 filas** es el que implementan los 5 HTML (relectura del render `2026-10-04`,
 decisión 8 del plan — el diseño renderizado es la fuente de verdad).
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+Las 5 pantallas usan una instancia de `components/nav` de **768×75** (la variante
+`size=sm` mide 768×64): otra vez la medida de la instancia manda.
+
+- Relleno `--color-surface-alt` (`#fafafa`), padding lateral **16**, `icons/logo`
+  **48×48** a `y=11.5`.
+- Bloque derecho `right-nav` **236×57** (offset `x=516`, padding derecho **16**):
+  `platforms` **184×24** (5 iconos 24×24 con gap **16**) + `search and toggle`
+  **24×24** en el que **solo se renderiza `icons/hamburger-two`** (el `icons/search`
+  está oculto, misma evidencia que en `xs`: `export_node_as_image` sobre
+  `2424:1959` pinta logo + 5 plataformas + hamburguesa).
+- El frame `links` (284×36, 3 «Enlace» de relleno) **existe en el árbol pero no
+  aparece en el render** → oculto, no se implementa.
+- Reacción: `search and toggle` → `OVERLAY 2424:446`; el padre `platforms, search
+  and toggle` apunta además a `OVERLAY 2396:2902` (nav de `375-xs`) — hallazgo
+  registrado en [interactions.md](../interactions.md); la implementación sigue
+  `2424:446`.
+
+### Overlay del menú abierto — frame `2424:446` (768×1024)
+
+Relleno `--color-surface-alt`; `components/nav` `2424:973` ocupa todo el frame.
+
+| Elemento | Nodo | Medida / valor |
+| --- | --- | --- |
+| `icons/close` | `2424:1003` | **32×32**, esquina superior derecha (`x=715` → padding **21**, `y=18`), reacción `CLOSE` con devolución de foco |
+| `nav-content` | `2424:974` | **736×591**, centrado en los dos ejes (padding h **16**, 216.5 arriba y abajo) |
+| `icons/logo` | `2424:975` | **64×64**, centrado en el frame de 768; reacción `NAVIGATE 268:3128` |
+| `links` | `2424:977` | **5 `link-nav`**, alto 35 (texto 27), gap **24** (paso 59), Bold **18/27**, centrados uno a uno (frame 191 de ancho). Destinos: `2408:1816`, `2408:2098`, `2408:2315`, URL `https://lamateriaprima.org/`, `2421:1246` |
+| `buttons` | `2424:993` | **Solo «Aporta» 87×40** visible (relleno `#000000`, etiqueta Bold 16/24 blanca). El segundo nodo `2424:995` (outline 103×40) **no aparece en el render** → no se implementa |
+| `platforms` | `2424:996` | **5 iconos 32×32 visibles** (facebook, instagram, youtube / x, tik-tok), caja **145×88**, gap **24**; `icons/wechat` existe pero está **oculto** en el render → no se implementa |
+
+Gaps dentro de `nav-content`: logo→links **64** · links→buttons **32** ·
+buttons→platforms **32**. Enlaces, en orden: Programa · Decálogo · Únete ·
+La Materia Prima · Política de privacidad.

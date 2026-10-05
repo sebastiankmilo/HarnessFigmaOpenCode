@@ -67,3 +67,16 @@ sólidos de `components/images` (`--color-media-placeholder` `#ebebeb`), el avat
 3. Assets de imagen cuando el diseño los incluya (`PENDIENTE-FIGMA`).
 4. Baselines de `tests/visual/baseline/…` — **fuera de alcance** del plan
    (`tests/` requiere autorización explícita).
+
+## Uso en `1024-sm` (verificado el 2026-10-05)
+
+Los 6 frames tablet **no requieren exportar ningún asset nuevo**: usan los iconos
+ya versionados — `logo` (48 px en la barra, 64 px en el overlay), `logo-02`
+(128 px en el footer), `play` (bloques de vídeo), `prev`/`next` (64 px),
+`hamburger-two` (24 px), `close` (32 px en el overlay) y las 5 plataformas
+(`facebook`, `instagram`, `youtube`, `x`, `tik-tok`: 24 px en la barra, 32 px en
+el overlay). `search` y `wechat` existen como archivo pero **no se usan** a tablet
+(ocultos en el render).
+
+Las medias de `sección-ejes` y `sección-materialismo` **no se renderizan** a
+tablet (nodos ocultos), así que tampoco aportan slots de imagen nuevos.

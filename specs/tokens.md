@@ -78,7 +78,7 @@ calculados sobre `absoluteBoundingBox`, porque el plugin no expone `padding`/
 - Dentro de tarjetas: padding `--space-4` (24px) en `goal-card`, con
   `--space-6` (48px) inferior.
 - Márgenes laterales del contenido: `--space-3` (16px) en 375, `--space-4` (24px) en
-  1024, `--space-5` (32px) en 1448.
+  768 (tablet), `--space-5` (32px) en 1448.
 - Grillas de 4 columnas: gap `--space-5` (32px).
 - Botón `components/buttons`: padding propio por tamaño (h 12/16/18/22/24/28 ·
   v 6/8/9/11/12/14 para size xs→xl). Son medidas del componente, no de la escala.
@@ -94,6 +94,9 @@ para no hardcodearlas en el CSS:
 | `--space-header` | 162px | padding vertical del `encabezado-contenido` |
 | `--space-header-cta` | 36px | gap entre `encabezado-texto` y `botones` |
 | `--nav-gap-blocks` | 28px | gap entre bloques del `right-nav` del `nav` (lg); fuera de la escala, registrado tal cual |
+| `--nav-height-xs` / `--nav-height-sm` / `--nav-height-lg` | 80 / **75** / 125px | alto de la barra del `nav` en las instancias de `375-xs`, `1024-sm` (**medido el 2026-10-05**: instancias 768×75) y `1448-lg` |
+| `--nav-logo-xs` / `--nav-logo-sm` / `--nav-logo-lg` | 48 / **48** / 96px | `icons/logo` dentro de la barra del `nav` en los tres breakpoints |
+| `--menu-close-top-sm` / `--menu-close-right-sm` | 18 / 21px | offset del `icons/close` en el overlay de `1024-sm` (`2424:1003`); en `xs` es 16/16 (`--space-3`) |
 | `--btn-padding-x-m` / `--btn-padding-y-m` | 22 / 11px | padding del `components/buttons` `size=m` (la escala no cubre ese tamaño) |
 | `--media-label-top` / `--media-label-left` | 66 / 120px | offset de la etiqueta `16:9` dentro de `components/images` |
 

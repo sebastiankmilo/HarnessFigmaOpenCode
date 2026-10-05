@@ -81,3 +81,11 @@ es una instancia de este componente**: es un `FRAME` propio (`encabezado-texto` 
 `botones`). Este componente sigue sin estar instanciado en ninguna pantalla; la
 disposición apilada de su variante `size=xs` (media arriba, texto debajo) sirve
 solo como referencia de dirección `mobile-first`.
+
+## Relación con `1024-sm` (2026-10-05)
+
+Tampoco se instancia en tablet: `header` de `Programa` (`2408:1986`) y `Decálogo`
+(`2408:2118`) son `FRAME` propios **apilados** (media `components/images` 4:3 de
+**720×539** arriba, `header-texto` debajo con gap **24**), igual que en `xs`. Este
+componente sigue sin estar instanciado en ninguna pantalla de las tres vistas
+(`1448-lg`, `375-xs`, `1024-sm`); sirve de referencia de dirección `mobile-first`.

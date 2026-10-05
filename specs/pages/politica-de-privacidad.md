@@ -1,8 +1,8 @@
 # Página: Política de privacidad
 
 ---
-fuente: Figma — página `1448-lg`, frame `Política de privacidad` (`2335:1533`)
-extraido: 2026-10-03
+fuente: Figma — página `1448-lg`, frame `Política de privacidad` (`2335:1533`); página `1024-sm`, frame `2421:1246` (leído el 2026-10-05)
+extraido: 2026-10-03 (sm: 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_document_info`, `get_nodes_info`, `get_reactions`)
 ---
@@ -79,7 +79,17 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 El `PENDIENTE-FIGMA` del destino de «Volver al inicio» se mantiene: `get_reactions`
 sobre `2396:2891` **no registra reacción** en `375-xs` tampoco.
 
-### `sm` (tablet)
+### `sm` (768) — frame `2421:1246`, 768×1840 (leído el 2026-10-05)
 
-**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
-[breakpoints.md](../../specs/breakpoints.md)).
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2424:2103` | **75** | 125 → 75; logo 48; sin enlaces de texto (solo plataformas + hamburguesa) |
+| 1 | `sección-puntos` | `2421:1346` | 1360 | padding **64** vertical (96) y **16** lateral; título `2421:1347` **344×36** (Bold **32.4**); gap título→cuerpo **32**; `puntos` **736** (`Frame 9` 736×1080) con cuerpo 20.2 (en lg va centrado a 910); gap cuerpo→CTA **32**; botón «Volver al inicio» **187×52** (`2421:1352`) |
+| 2 | `footer` | `2421:1247` | **405** | igual que el de [inicio](./inicio.md) a 768 |
+
+**`PENDIENTE-FIGMA` parcialmente resuelto:** en `sm` el botón «Volver al inicio»
+(`2421:1352`) **sí tiene reacción** → `NAVIGATE 268:3128` (`inicio` tablet), leída el
+2026-10-05; en `lg` (`2335:1574`) y `xs` (`2396:2891`) Figma **no le asigna
+destino** y ahí se mantiene el `PENDIENTE`. Como el HTML es único, el botón se
+implementa como enlace a `index.html` (el propio texto del botón declara el
+destino); registrado también en [interactions.md](../../specs/interactions.md).

@@ -3,10 +3,11 @@
 ---
 fuente: Figma — documento completo, nodos `0:0` (páginas) y variantes de
 `components/nav` (`36:720`) / `components/header-two-columns` (`70:1341`);
-página `375-xs` (`0:1`) leída el 2026-10-04
-extraido: 2026-10-03 (actualizado 2026-10-04)
+página `375-xs` (`0:1`) leída el 2026-10-04; página `1024-sm` (`10:214`) leída
+el 2026-10-05
+extraido: 2026-10-03 (actualizado 2026-10-04; `1024-sm` el 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`scan_nodes_by_types`, `get_node_info`)
+herramienta: TalkToFigma (`scan_nodes_by_types`, `get_node_info`, `get_document_info`)
 ---
 
 ## Páginas del archivo (anchos declarados)
@@ -17,13 +18,13 @@ Obtenidas con `scan_nodes_by_types` sobre el documento (`0:0`, tipo `PAGE`):
 | --- | --- | --- |
 | `components` | `10:215` | Biblioteca de componentes y fuente de tokens |
 | `1448-lg` | `110:1162` | Pantallas desktop: inicio, Objetivo-modal, Programa, Decálogo, Únete, Política de privacidad, encabezado-decálogo |
-| `1024-sm` | `10:214` | Guía de estilos del breakpoint intermedio — **sin pantallas construidas** |
+| `1024-sm` | `10:214` | **Pantallas tablet** (desde 2026-10-05): 6 frames de 768 de ancho + guías de estilos |
 | `375-xs` | `0:1` | **Pantallas móviles** (desde 2026-10-04): las 7 vistas de este ticket + guías de estilos |
 | `thumbnail` | `334:2014` | Portada — ignorar |
 
 **Leído en vivo el 2026-10-04** (`get_document_info` sobre `0:1`): `375-xs` **sí tiene
 las pantallas construidas** — 7 frames (la afirmación de 2026-10-03 quedó
-superada). `1024-sm` sigue sin pantallas (ver §Hallazgo más abajo).
+superada).
 
 | Frame de `375-xs` | Nodo | Tamaño |
 | --- | --- | --- |
@@ -35,17 +36,30 @@ superada). `1024-sm` sigue sin pantallas (ver §Hallazgo más abajo).
 | `nav` (menú abierto) | `2396:2902` | 375×812 |
 | `Objetivo-modal` | `2404:3499` | 343×976 |
 
+**Leído en vivo el 2026-10-05** (`get_document_info` + `get_node_info` sobre `10:214`):
+`1024-sm` **también tiene pantallas construidas** — 6 frames de 768 de ancho (la
+afirmación anterior de «sin pantallas» quedó superada):
+
+| Frame de `1024-sm` | Nodo | Tamaño |
+| --- | --- | --- |
+| `inicio` | `268:3128` | 768×4233 |
+| `programa` | `2408:1816` | 768×10143 |
+| `decálogo` | `2408:2098` | 768×10002 |
+| `Únete` | `2408:2315` | 768×1266 |
+| `política-de-privacidad` | `2421:1246` | 768×1840 |
+| `nav` (menú abierto) | `2424:446` | 768×1024 |
+
+No existe frame `Objetivo-modal` en `1024-sm` (Caso 19).
 Detalle por sección y nodo en [layout.md](./layout.md) y en
 [pages/](./pages/).
-
 
 | Nombre | Ancho frame | Página Figma | Rol |
 | --- | --- | --- | --- |
 | `xs` | 375px | `375-xs` | Base móvil — captura de verificación |
-| `sm` | 1024px | `1024-sm` | Tablet — media query |
+| `sm` | 768px | `1024-sm` | Tablet — media query |
 | `lg` | 1448px | `1448-lg` | Desktop — captura de verificación |
 
-## Hallazgo: el ancho de las variantes `sm` no coincide con la página
+## Umbral del breakpoint `sm`: **768px** (confirmado 2026-10-05)
 
 Las variantes `size=sm` de los componentes miden **768px**, no 1024:
 
@@ -58,10 +72,13 @@ Lo mismo en las guías de la página `1024-sm`: todos sus frames miden **768** d
 (`typography-styles` 768, `components-01` 768, `index`/`post` 768). No existe ningún
 frame de 1024 en el archivo.
 
-- Ancho de página declarado: **1024**.
-- Ancho real de las variantes `sm`: **768**.
-- **`PENDIENTE-FIGMA` (tablet, fuera de alcance)**: cuál de los dos rige el breakpoint
-  tablet. Este documento registra lo observado; no se elige uno por cuenta propia.
+- Ancho de página declarado: **1024** (solo es el **nombre** de la página `1024-sm`).
+- Ancho real de las variantes `sm` y de los frames: **768**.
+- **Confirmado por el equipo (2026-10-05): rige 768px** como umbral de la media query
+  tablet («nos vamos a guiar por los tamaños de los elementos en Figma»). Registrado en
+  el ticket 3 (Caso 20 de
+  [1-tarea-descripcion.md](../docs/tickets/3-vistas-tablet-1024-sm/1-tarea-descripcion.md)).
+  Este documento registra la evidencia; la decisión es del equipo.
 
 ## Dirección de las media queries
 
@@ -98,5 +115,8 @@ dirección es **`mobile-first`** en las cinco páginas — base = 375, `@media (
 | `Política de privacidad` — `sección-puntos` | título + cuerpo a ancho 343 | cuerpo centrado 910 | mobile-first |
 | `Objetivo-modal` | panel 343 | panel hasta 1024 | mobile-first |
 
-El tramo intermedio (376–1447) no tiene diseño (§Hallazgo `sm`): queda con el layout
-móvil hasta que exista un `1024-sm` real.
+El tramo intermedio (376–1447) **ya tiene diseño y ya está documentado**: la página
+`1024-sm` contiene los 6 frames de las vistas tablet (leídos el 2026-10-05; umbral
+**768px** — §Umbral del breakpoint `sm`), y su registro sección por sección está en
+[layout.md](./layout.md) (§`sm`) y en la sección `sm` de cada archivo de
+[pages/](./pages/). El CSS de tablet se añade con `@media (min-width: 768px)`.

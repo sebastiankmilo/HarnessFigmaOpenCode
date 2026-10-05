@@ -39,7 +39,9 @@ description: Implementar secciones de la web a partir de specs/ + site/styles/to
    `site/assets/img|icons` (PNG @2x; SVG de iconos pendiente del parche del plugin).
    Sin placeholders ni URLs externas de imágenes.
 5. Estructura de archivos en inglés kebab-case; documentación y comentarios en español.
-6. Responsive con los 3 breakpoints: 375, 1024 y 1448. La dirección de las media
+6. Responsive con los 3 breakpoints: 375, 768 y 1448 (el tablet mide **768**;
+   `1024-sm` es solo el nombre de la página de Figma — confirmado 2026-10-05).
+   La dirección de las media
    queries (mobile-first o desktop-first) se toma de `specs/breakpoints.md` **por
    sección**; si la sección no lo tiene documentado, se consulta Figma antes de escribir.
 7. No se modifica ningún archivo fuera de los que pide la tarea; si aparece uno

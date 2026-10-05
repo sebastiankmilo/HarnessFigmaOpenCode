@@ -98,3 +98,21 @@ La instancia `2358:1158` pinta la etiqueta `#ff8000` al 30 % sobre `#333333`
 la misma `x` que el icono), igual que en `1448-lg` donde devolvían 1×1. Se mantiene
 el renderizado **solo con la etiqueta** por coherencia con escritorio; registrado
 como observación, sin cambiar el HTML.
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+| Instancia | Nodo | Medida | Estilo |
+| --- | --- | --- | --- |
+| «Nuestro programa» (encabezado `inicio`) | `2408:1572` | 224×52 | filled `--color-text-secondary`, size=m |
+| «Únete» (encabezado `inicio`) | `2408:1573` | 103×52 | outline, size=m |
+| «Nuestro programa» (CTA de objetivos) | `2408:1664` | 224×52 | filled |
+| «lamateriaprima.org» | `2408:1717` | 234×52 | filled |
+| CTA de `sección-puntos` (`Programa` / `Decálogo`) | `2408:2043` / `2408:2307` | **361×52** | filled, size=m |
+| «Volver al inicio» (`Política de privacidad`) | `2421:1352` | **187×52** | filled, size=m |
+| «Aporta» del menú tablet | `2424:994` | **87×40** | filled `#000000`, size=s, etiqueta Bold 16/24 |
+| Outline del menú tablet | `2424:995` | 103×40 | **oculto en el render** → no se implementa |
+| Botón de `goal-card` | `I2408:1656;2325:3908` | 104×40 | solapado con el párrafo → **no se renderiza** |
+
+Los CTA de `sección-puntos` miden **361×52** a 768 (a `xs` el interior era 317×30).
+Se mantiene el renderizado **solo con la etiqueta** (iconos `icons/heart-fill`
+solapados), por coherencia con `xs` y `lg`.

@@ -1,8 +1,8 @@
 # Página: Únete
 
 ---
-fuente: Figma — página `1448-lg`, frame `Únete` (`2335:1229`)
-extraido: 2026-10-03
+fuente: Figma — página `1448-lg`, frame `Únete` (`2335:1229`); página `1024-sm`, frame `2408:2315` (leído el 2026-10-05)
+extraido: 2026-10-03 (sm: 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_document_info`, `get_node_info`, `get_reactions`, `export_node_as_image`)
 ---
@@ -73,7 +73,13 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 Contenedor: 343 (padding 16). La sección es idéntica a la sección 5 de `inicio`
 (`2392:4114`), mismas medidas.
 
-### `sm` (tablet)
+### `sm` (768) — frame `2408:2315`, 768×1266 (leído el 2026-10-05)
 
-**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
-[breakpoints.md](../../specs/breakpoints.md)).
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2424:2055` | **75** | 125 → 75; logo 48; sin enlaces de texto (solo plataformas + hamburguesa) |
+| 1 | `sección-únete` | `2408:2478` | 786.12 | padding **64** (96); **apilado**: media 16:9 **720×406.12** arriba (`video`, con `Polygon 1` 81.99×62.78 centrado), bloque `Frame 3` **720×220** debajo (gap **32**); título **32.4** (36.49); gap título→párrafo **16**; párrafo 20.2 igual |
+| 2 | `footer` | `2408:2316` | **405** | igual que el de [inicio](./inicio.md) a 768 (padding 64, fila de 7 enlaces) |
+
+Contenedor: **720** (padding lateral 24). La sección es idéntica a la sección 5
+de `inicio` a 768 (`2408:1756`), mismas medidas.

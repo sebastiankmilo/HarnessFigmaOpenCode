@@ -1,8 +1,8 @@
 # Página: Programa
 
 ---
-fuente: Figma — página `1448-lg`, frame `Programa` (`2328:4307`)
-extraido: 2026-10-03
+fuente: Figma — página `1448-lg`, frame `Programa` (`2328:4307`); página `1024-sm`, frame `2408:1816` (leído el 2026-10-05)
+extraido: 2026-10-03 (sm: 2026-10-05)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_document_info`, `get_nodes_info`, `get_reactions`)
 ---
@@ -117,7 +117,16 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 
 Contenedor: 343 (padding 16). El índice lateral de 1448 (322px) **se oculta** en `xs`.
 
-### `sm` (tablet)
+### `sm` (768) — frame `2408:1816`, 768×10143 (leído el 2026-10-05)
 
-**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
-[breakpoints.md](../../specs/breakpoints.md)).
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2408:1817` | **75** | 125 → 75; logo 48; sin enlaces de texto (solo plataformas + hamburguesa) |
+| 1 | `header` | `2408:1986` | 1031 | padding **64** (96); **apilado**: `components/images` **720×539** (4:3) arriba, `header-texto` **720×340** debajo (gap **24**); h1 **46.1** (52); párrafo **22/33** igual; gap h1→párrafo **24** |
+| 2 | `sección-ejes` | `2408:1993` | 668 | padding **64** (96); **solo texto**: `header-texto` 720×540 (la `components/images` 1:1 de 350×350 **no aparece en el render exportado**, nodo oculto); h2 **32.4**; párrafo 20.2 |
+| 3 | `sección-materialismo` | `2408:2000` | 808 | padding **64** (96); `Frame 7` (768×150) = h2 «Materialismo político» **32.4** + entradilla 720×90, con la imagen 1:1 **341×341 oculta en el render**; gap `Frame 7`→`Frame 8` **32**; `Frame 8` 720×498 con 3 párrafos **20.2** con viñeta (gap **24** entre ellos) |
+| 4 | `sección-puntos` | `2408:2012` | 771×7147 | padding **64** (96); `puntos` **723 de ancho** (1 columna); título «Puntos programáticos» **32.4**; **sin índice lateral**; **9 puntos** con h3 **25.6** y párrafo 20.2; CTA «Únete a Vanguardia Colombiana» **361×52** (`2408:2043`) |
+| 5 | `footer` | `2408:2051` | **405** | igual que el de [inicio](./inicio.md) a 768. **Se ignora `2408:1858`**: es el segundo `footer` que Figma declara solapado con `sección-puntos` (residuo de diseño, decisión 10 del plan) |
+
+Contenedor: **720** (padding lateral 24). El índice lateral de 1448 (322px) **no
+aparece** en `sm`, igual que en `xs`.

@@ -86,3 +86,21 @@ Medidas reales de las instancias de las vistas móviles (todas con la etiqueta
 | `Programa` · `sección-ejes` | `2396:2420` | 1:1 | 337×337 |
 | `Programa` · `sección-materialismo` | `2396:2425` | 1:1 | 341×341 |
 | `Decálogo` · header | `2396:2524` | 4:3 | 343×257 |
+
+## Instancias en `1024-sm` (leídas el 2026-10-05)
+
+Medidas reales de las instancias de las vistas tablet (etiqueta **centrada**):
+
+| Pantalla | Instancia | Ratio | Medida | Render |
+| --- | --- | --- | --- | --- |
+| `inicio` · bloque de vídeo | `2408:1588` | 16:9 | 713.32×402.35 | visible |
+| `inicio` · «La Materia Prima» | `I2408:1713;93:130` / `I2408:1714;93:130` | 5:4 | 346×276.38 / 350×279.57 | visible |
+| `inicio` y `Únete` · `sección-únete` | `2408:1758` / `2408:2480` | 16:9 | 720×406.12 | visible |
+| `Programa` · header | `2408:1987` | 4:3 | **720×539** | visible |
+| `Programa` · `sección-ejes` | `2408:1997` | 1:1 | 350×350 | **oculto** (no aparece en el export) |
+| `Programa` · `sección-materialismo` | `2408:2002` | 1:1 | 341×341 | **oculto** (no aparece en el export) |
+| `Decálogo` · header | `2408:2119` | 4:3 | **720×539** | visible |
+
+Los dos nodos ocultos se verificaron con `export_node_as_image` sobre
+`2408:1993` y `2408:2000`: el PNG no los pinta, así que **no se implementan a
+tablet** (mismo criterio de «el render manda» que en el `nav`).

@@ -1,7 +1,8 @@
 /* site/styles/programa.css — página Programa
  * Spec: specs/pages/programa.md · valores: solo styles/tokens.css
- * Frames: `2328:4307` (1448) y `2396:104` (375, leído 2026-10-04).
- * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
+ * Frames: `2328:4307` (1448), `2396:104` (375, 2026-10-04) y `2408:1816` (768,
+ * leído 2026-10-05).
+ * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = escritorio.
  */
 
 /* ── 2 — header (`2396:2399`) ───────────────────────────────────── */
@@ -185,6 +186,22 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* ── `sm` (768) — tablet ───────────────────────────────────────── *
+ * Frame `2408:1816` (leído 2026-10-05): paddings 64 y tipografías ya coinciden
+ * con la base; cambia el gap del header (32 → 24) y desaparecen las dos
+ * imágenes de `sección-ejes` y `sección-materialismo` (ocultas en el render
+ * exportado, specs/pages/programa.md §sm). */
+@media (min-width: 768px) {
+  .prog-hero__grid {
+    gap: var(--space-4);
+  }
+
+  .prog-ejes .media,
+  .prog-mat .media {
+    display: none;
+  }
 }
 
 /* ── `lg` (1448) — escritorio ──────────────────────────────────── */

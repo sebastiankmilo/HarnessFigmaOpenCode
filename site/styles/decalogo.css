@@ -1,7 +1,8 @@
 /* site/styles/decalogo.css — página Decálogo
  * Spec: specs/pages/decalogo.md · valores: solo styles/tokens.css
- * Frames: `2334:1005` (1448) y `2396:2521` (375, leído 2026-10-04).
- * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
+ * Frames: `2334:1005` (1448), `2396:2521` (375, 2026-10-04) y `2408:2098` (768,
+ * leído 2026-10-05).
+ * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = escritorio.
  */
 
 /* ── 2 — header (`2396:2523`) ───────────────────────────────────── */
@@ -99,6 +100,20 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* ── `sm` (768) — tablet ───────────────────────────────────────── *
+ * Frame `2408:2098` (leído 2026-10-05): imagen 720×539 arriba con gap 24 y
+ * título que **baja a 46.1** (la excepción de 52 es solo de `375-xs` —
+ * specs/pages/decalogo.md §sm, `scan_text_nodes` 2026-10-05). */
+@media (min-width: 768px) {
+  .decal-hero__grid {
+    gap: var(--space-4);
+  }
+
+  .decal-hero h1 {
+    font-size: var(--font-size-xs-h1-xxl);
+  }
 }
 
 /* ── `lg` (1448) — escritorio ──────────────────────────────────── */
