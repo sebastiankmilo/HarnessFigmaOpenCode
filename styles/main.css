@@ -121,6 +121,13 @@ button {
   padding-inline: var(--space-3);
 }
 
+/* `sm` (768): contenedor de 720 con padding 24 — specs/layout.md §sm */
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--space-4);
+  }
+}
+
 @media (min-width: 1448px) {
   .container {
     padding-inline: var(--space-5);
@@ -403,6 +410,42 @@ button {
   margin-top: var(--space-5);
 }
 
+/* `sm` (768): barra 768×75 — logo 48 + 5 plataformas `is-desktop` + hamburguesa,
+   sin enlaces de texto ni búsqueda (specs/components/nav.md §1024-sm, export
+   `2424:1959`). El overlay pasa a 736 de ancho con el close a 18/21 (`2424:446`). */
+@media (min-width: 768px) {
+  .site-nav__inner {
+    height: var(--nav-height-sm);
+  }
+
+  .site-nav__logo,
+  .site-nav__logo img {
+    width: var(--nav-logo-sm);
+    height: var(--nav-logo-sm);
+  }
+
+  .site-nav__platforms {
+    display: flex;
+  }
+
+  .site-nav__platform.is-desktop {
+    display: block;
+  }
+
+  .site-nav__platform.is-mobile {
+    display: none;
+  }
+
+  .site-nav__menu-close {
+    top: var(--menu-close-top-sm);
+    right: var(--menu-close-right-sm);
+  }
+
+  .site-nav__menu-content {
+    max-width: 736px;
+  }
+}
+
 @media (min-width: 1448px) {
   .site-nav__inner {
     height: var(--nav-height-lg);
@@ -485,6 +528,21 @@ button {
 .site-footer__copyright {
   margin-top: var(--space-4);
   font-size: var(--font-size-body-xs);
+}
+
+/* `sm` (768): footer 768×405 — la fila de 7 enlaces pasa a horizontal con gap 16
+   (specs/components/footer.md §1024-sm, `2408:1765`) */
+@media (min-width: 768px) {
+  .site-footer__nav {
+    padding-inline: var(--space-5);
+  }
+
+  .site-footer__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
 }
 
 @media (min-width: 1448px) {

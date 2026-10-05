@@ -28,10 +28,21 @@
   white-space: pre-line;
 }
 
-/* «Volver al inicio»: el prototipo no le define destino
-   (PENDIENTE-FIGMA en specs/pages/politica-de-privacidad.md) → sin enlace. */
+/* «Volver al inicio»: en `lg` y `xs` Figma no le asigna reacción
+   (PENDIENTE-FIGMA), pero en `sm` sí — `2421:1352` → NAVIGATE `268:3128`
+   (specs/pages/politica-de-privacidad.md §sm) → se implementa como enlace. */
 .cta {
   align-self: flex-start;
+}
+
+/* ── `sm` (768) — tablet ───────────────────────────────────────── *
+ * Frame `2421:1246` (leído 2026-10-05): padding vertical 64 (igual que la base),
+ * contenido a **736 con padding lateral 16** (el `.container` da 24/720, así que
+ * esta sección lo ajusta) y título 32.4 (igual que la base). */
+@media (min-width: 768px) {
+  .privac .container {
+    padding-inline: var(--space-3);
+  }
 }
 
 /* ── `lg` (1448) — escritorio ──────────────────────────────────── */

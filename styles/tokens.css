@@ -89,12 +89,18 @@
   --space-8: 96px;  /* padding vertical de las secciones de contenido */
 
   --space-header: 162px;      /* padding vertical del encabezado de inicio (lg) */
+  --space-header-sm: 128px;   /* padding vertical del encabezado de inicio (sm, `2408:1567`) */
+  --space-intro-gap-sm: 53px; /* gap entre `section-intro` y la grilla de objetivos (sm, `2408:1650`) */
   --space-header-cta: 36px;   /* gap entre el texto y los botones del encabezado */
   --nav-height-xs: 80px;      /* alto de la barra del nav en las instancias de 375-xs */
+  --nav-height-sm: 75px;      /* alto de la barra del nav en las instancias de 1024-sm */
   --nav-height-lg: 125px;     /* alto de la barra del nav en 1448-lg */
   --nav-logo-xs: 48px;        /* logo del nav en 375-xs */
+  --nav-logo-sm: 48px;        /* logo del nav en 1024-sm */
   --nav-logo-lg: 96px;        /* logo del nav en 1448-lg */
   --nav-gap-blocks: 28px;     /* gap entre bloques del right-nav (nav lg) */
+  --menu-close-top-sm: 18px;  /* offset superior del icons/close en el overlay de 1024-sm (`2424:1003`) */
+  --menu-close-right-sm: 21px;/* offset derecho del icons/close en el overlay de 1024-sm */
   --nav-link-top: 47px;       /* offset superior del texto de un enlace (nav lg) */
   --nav-underline-lg: 4px;    /* grosor del subrayado del enlace activo (nav lg) */
   --nav-underline-menu: 1px;  /* grosor del subrayado del enlace activo (menú móvil) */

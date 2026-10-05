@@ -1,7 +1,8 @@
 /* site/styles/inicio.css — página inicio
  * Spec: specs/pages/inicio.md · valores: solo styles/tokens.css
- * Frames: `110:2277` (1448) y `322:6042` (375, leído 2026-10-04).
- * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
+ * Frames: `110:2277` (1448), `322:6042` (375, 2026-10-04) y `268:3128` (768,
+ * leído 2026-10-05).
+ * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = escritorio.
  */
 
 /* ── 2 — encabezado-contenido (`2392:3972`) ─────────────────────── */
@@ -251,6 +252,74 @@
 
 .dialog__cta {
   margin-top: var(--space-4);
+}
+
+/* ── `sm` (768) — tablet ────────────────────────────────────────── *
+ * Frame `268:3128` (leído 2026-10-05): hero con padding 128, vídeo a sangre,
+ * grillas de 2 columnas (gap 24) y ventana de 2 tarjetas del carrusel. */
+@media (min-width: 768px) {
+  .hero {
+    padding-block: var(--space-header-sm);
+  }
+
+  /* Medido: media 713.32×402.35 a 27.87 del borde — se implementa al ancho del
+     contenedor (720) por no existir token para ese ancho (desviación ~7 px). */
+  .video {
+    padding-block: 0;
+  }
+
+  .goals {
+    padding-block: var(--space-7);
+  }
+
+  .goals__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    align-items: stretch;
+    margin-top: var(--space-intro-gap-sm);
+  }
+
+  /* Ventana de 2 tarjetas: la activa (`.is-active`) y la siguiente (`.is-next`,
+     la marca `inicio.js`) — las otras dos siguen `display:none` de la base. */
+  .goals__grid .goal-card.is-next {
+    display: block;
+  }
+
+  .goal-card {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  .goals__cta {
+    margin-top: var(--space-7);
+  }
+
+  .articles {
+    padding-block: var(--space-7);
+  }
+
+  .articles__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  /* El diseño `sm` dibuja 2 tarjetas y no dibuja controles (interactions.md):
+     se muestran solo las dos primeras, sea cual sea el índice. */
+  .articles__grid .article-card.is-active {
+    display: none;
+  }
+
+  .articles__grid .article-card:nth-child(-n + 2) {
+    display: block;
+  }
+
+  .articles__pagination {
+    display: none;
+  }
+
+  .article-card__text {
+    padding: 0 var(--space-4) var(--space-5);
+  }
 }
 
 /* ── `lg` (1448) — escritorio ───────────────────────────────────── */

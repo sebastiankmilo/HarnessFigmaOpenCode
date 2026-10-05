@@ -73,6 +73,7 @@
  * Contrato: specs/interactions.md — «Carruseles de `inicio`». */
 (function () {
   var isDesktop = window.matchMedia("(min-width: 1448px)");
+  var isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1447px)");
 
   function initCarousel(grid) {
     var name = grid.getAttribute("data-carousel");
@@ -88,8 +89,11 @@
     var index = 0;
 
     function render() {
+      var nextIndex = (index + 1) % items.length;
       items.forEach(function (item, i) {
         item.classList.toggle("is-active", i === index);
+        // `is-next` alimenta la ventana de 2 tarjetas de `sm` (inicio.css)
+        item.classList.toggle("is-next", i === nextIndex);
       });
       dots.forEach(function (dot, i) {
         var active = i === index;
@@ -114,9 +118,16 @@
       if (isDesktop.matches) {
         // `lg`: las 4 tarjetas siguen visibles; el foco pasa a la del índice.
         items[index].focus();
-      } else if (focusedItem && focusedItem !== items[index]) {
-        // `xs`: si el foco quedó en una tarjeta oculta, va a la visible.
-        items[index].focus();
+      } else if (focusedItem) {
+        // `xs`: foco en la única visible; `sm`: si salió de la ventana de 2,
+        // el foco pasa a la del nuevo índice (interactions.md §Comportamiento).
+        var pos = items.indexOf(focusedItem);
+        var inWindow = isTablet.matches
+          ? pos === index || pos === (index + 1) % items.length
+          : pos === index;
+        if (!inWindow) {
+          items[index].focus();
+        }
       }
     }
 
