@@ -83,4 +83,18 @@ Instagram); en el `nav` sí apunta a `https://www.youtube.com/@VanguardiaColombi
   nombre accesible** (`aria-label="Facebook"`, etc.), no como botones mudos
   ([accessibility.md](../accessibility.md)).
 - Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-  [AGENTS.md](../../../../AGENTS.md)).
+  [AGENTS.md](../../AGENTS.md)).
+
+## Instancias en `375-xs` (leídas el 2026-10-04)
+
+Footer **375×714** idéntico en las cinco pantallas (`2395:4123`, `2396:2719`,
+`2396:2474`, `2396:2575`, `2396:2829`): relleno `--color-surface-dark`,
+padding vertical **64**.
+
+1. `icons/logo-02` **128×128** centrado, `padding-top` **64**.
+2. `footer-nav` **343×426** (padding lateral **16**), gap **32** bajo el logo:
+   - `platforms` **184×24** centrada: 5 × icono 24×24 con gap **16**.
+   - gap **24** → **7 enlaces apilados y centrados** (paso **48** = gap **24**
+     entre líneas de 24 px), Bold 16/24, mismo orden y destinos que en `lg`.
+   - gap **24** → copyright **343×42** centrado, Medium 14.2/21.3.
+3. Padding inferior **64**.

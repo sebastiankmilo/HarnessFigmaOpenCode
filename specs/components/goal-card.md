@@ -71,3 +71,17 @@ Detalle del overlay: [interactions.md](../interactions.md).
 - La tarjeta es **clickeable en su totalidad** (la reacción vive en la instancia):
   requiere foco visible y nombre accesible. **No especificado en Figma** — PENDIENTE.
 - El avatar es un placeholder `#d9d9d9` sin texto alternativo definido.
+
+## Instancia en `375-xs` (leída el 2026-10-04)
+
+Instancia `2392:4001` de `seccion-objetivos`: **343×498** (columna única).
+
+- Padding **16** superior y lateral, **32** inferior (la variante base usa 24/24/48).
+- Avatar **137×137**, gap avatar→texto **16**.
+- Título **Bold 25.6/28.67** (`--font-size-xs-h3`; en `lg` 28.8); párrafo Medium
+  16/24; gap **8**.
+- El `components/buttons` de la instancia (104×40) **se solapa con el párrafo**
+  (mismo defecto que en `1448-lg`): se mantiene la decisión de **no renderizar el
+  botón** (nota 2 de [inicio](../pages/inicio.md)).
+- La reacción `ON_CLICK` → OVERLAY `2404:3499` (`DISSOLVE` 0.3s) vive en el frame
+  contenedor `objetivos` (`2392:4000`), no en la tarjeta.

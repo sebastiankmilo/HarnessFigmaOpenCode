@@ -2,8 +2,9 @@
 
 ---
 fuente: Figma — página `1448-lg`, frame `inicio` (`110:2277`) y sus secciones;
-guías de `375-xs` (`1:2`, `9:142`) y `1024-sm` (`98:1549`) para los márgenes
-extraido: 2026-10-03
+guías de `375-xs` (`1:2`, `9:142`) y `1024-sm` (`98:1549`) para los márgenes;
+los 7 frames de `375-xs` leídos el 2026-10-04
+extraido: 2026-10-03 (actualizado 2026-10-04)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_node_info`, `get_nodes_info`, `scan_nodes_by_types`)
 ---
@@ -90,10 +91,45 @@ Rasgos horizontales (medidos sobre los frames, derivados de `absoluteBoundingBox
 
 ## Diferencias por breakpoint
 
-No existen las versiones móvil/tablet de `inicio` ni de `Programa`, `Decálogo` y
-`Política de privacidad` en el archivo (confirmado por el equipo): `375-xs` y
-`1024-sm` solo traen guías de estilos y pantallas de plantilla.
-Lo único medible por breakpoint son las **variantes de componente** (`xs`/`sm`/`lg`),
-documentadas en [breakpoints.md](./breakpoints.md) y en
-[components/](./components/). La disposición de las secciones de estas pantallas a
-375 y 1024 queda **PENDIENTE de confirmación con el diseño**.
+### `xs` (375) — medido en `375-xs` el 2026-10-04 (`get_node_info` de los 7 frames)
+
+Contenedor: **343px** con padding lateral **16** (misma regla que la tabla de
+§Ancho de contenedor). Gap 0 entre secciones, igual que en escritorio.
+
+| Pantalla | Sección | Nodo | Alto | Padding vertical | Ritmo interno |
+| --- | --- | --- | --- | --- | --- |
+| las 7 | `components/nav` | (instancia por pantalla) | **80** | — | logo 48, padding 16 |
+| `inicio` | `encabezado-contenido` | `2392:3972` | 854 | 64 / 64 | título→párrafo **24**; texto→botones **36**; entre botones **16** |
+| `inicio` | `Frame 1` (video) | `2396:2407` | 289.47 | 48 / 48 | media 343×193.47 |
+| `inicio` | `seccion-objetivos` | `2392:3995` | 920 | 48 / 48 | texto→tarjetas **32**; tarjetas→controles **32**; controles→CTA **32** |
+| `inicio` | `sección-La-Materia-Prima` | `2392:4053` | 935 | 48 / 48 | mismo ritmo que la anterior; controles `2392:4101` |
+| `inicio`, `Únete` | `sección-únete` | `2392:4114` / `2396:2712` | 788.39 | **64 / 64** | media→texto **32**; título→párrafo **16** |
+| las 5 | `footer` | `2395:4123` y equivalentes | 714 | 64 / 64 | logo→nav **32**; plataformas→enlaces **24**; entre enlaces **24**; enlaces→copyright **24** |
+| `Programa` | `header` | `2396:2399` | 1106 | 64 / 64 | media→texto **32**; h1→párrafo **24** |
+| `Programa` | `sección-ejes` | `2396:2416` | 1583 | 64 / 64 | media→texto **32**; h2→párrafo **24** |
+| `Programa` | `sección-materialismo` | `2396:2423` | 1811 | 64 / 64 | media→bloque **32**; h2→párrafo **24**; entre párrafos **24** |
+| `Programa` | `sección-puntos` | `2396:2435` | 14941 | 64 / 64 | título→puntos **32**; entre puntos **32**; puntos→CTA **32**; **sin índice lateral** |
+| `Decálogo` | `header` | `2396:2523` | 1358 | 64 / 64 | media→texto **32**; h1→párrafo **24** |
+| `Decálogo` | `sección-puntos` | `2396:2543` | 17225 | 64 / 64 | entre puntos **32**; puntos→CTA **32**; **sin índice ni título de sección** |
+| `Política de privacidad` | `sección-puntos` | `2396:2885` | 2326 | 64 / 64 | título→cuerpo **32**; cuerpo→CTA **32** |
+
+Resumen del ritmo móvil: **padding 64** en secciones de contenido y footer, **48** en
+`inicio` (objetivos, Materia Prima) y en la banda de vídeo, gaps **32** entre bloques y
+**24** entre título y párrafo (16 en `sección-únete`).
+
+### Grillas a 375
+
+| Grilla | Columnas | Ancho | Gap |
+| --- | --- | --- | --- |
+| `objetivos` (goal-card) | **1** (carrusel: 1 tarjeta visible) | 343 | 32 entre tarjetas |
+| `artículos` (container-and-card) | **1** (carrusel: 1 tarjeta visible) | 343 | 32 |
+
+Fila de paginación a 375 (`2392:4005`, 343×64): `icons/prev` 64×64 a la izquierda,
+`components/dotnav` 80×8 (4 puntos de 8, gap 16) centrado, `icons/next` 64×64 a la
+derecha (`justify-content: space-between`). La misma fila aparece en
+`sección-La-Materia-Prima` (`2392:4101`), que en 1448 no la tiene.
+
+### `sm` (tablet)
+
+Sigue **PENDIENTE**: `1024-sm` no tiene pantallas construidas y el ancho real del
+breakpoint (1024 vs 768) no está resuelto (ver [breakpoints.md](./breakpoints.md)).

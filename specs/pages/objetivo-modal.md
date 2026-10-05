@@ -34,14 +34,14 @@ Figma la pinta `#ff8000` al 30 % sobre `#333333`, es decir **`#704a24` → ratio
 `components/buttons` define la etiqueta en `--color-on-dark`.
 
 **Se implementa con `--color-on-dark` (12.63:1)**, por la regla de contraste AA
-obligatoria de [AGENTS.md](../../../../AGENTS.md). **PENDIENTE de confirmación con
+obligatoria de [AGENTS.md](../../AGENTS.md). **PENDIENTE de confirmación con
 el diseño**: si se decide respetar el valor de Figma, hay que cambiarlo aquí y en la
 tabla de accesibilidad.
 
 ## Variantes y estados
 
 No hay variantes: un único frame. Estados del diálogo, obligatorios por
-[AGENTS.md](../../../../AGENTS.md) y **no especificados en Figma**: foco visible
+[AGENTS.md](../../AGENTS.md) y **no especificados en Figma**: foco visible
 (`:focus-visible`), foco atrapado dentro del diálogo con restauración al cerrar, y
 cierre con `Escape`.
 
@@ -70,3 +70,25 @@ cierre con `Escape`.
 
 Baseline: `tests/visual/baseline/objetivo-modal-1448.png` — PENDIENTE
 (`tests/` fuera de alcance).
+
+## Diferencias por breakpoint
+
+### `xs` (375) — frame `2404:3499`, 343×976 (leído el 2026-10-04)
+
+- **Panel** `modal` (`2404:3500`) **343×976** (fondo `--color-surface`), con márgenes
+  de 16 en un viewport de 375; **más alto que la pantalla** → el diálogo hace scroll
+  (`max-height: 100%` + `overflow: auto`).
+- Padding del panel: **96** arriba, **16** laterales, **64** abajo (en `1448-lg` es
+  96/64 con panel hasta 1024 de ancho).
+- Título `2404:3501` — Bold **28.8**/32.26 (`--font-size-xs-h2`; en lg 32.4).
+- Cuerpo `2404:3502` — Medium **18**/27, gap **24** bajo el título (igual que en lg).
+- `components/buttons` `2404:3503` — **224×52**, relleno `--color-text-secondary`,
+  etiqueta `--color-on-dark`, gap **24** bajo el cuerpo.
+- `icons/close` `2404:3504` — **32×32** arriba-derecha (padding **16**, en lg 32).
+- **Disparador**: `objetivos` (`2392:4000`) → `ON_CLICK` → OVERLAY `2404:3499`,
+  `DISSOLVE` 0.3s `EASE_OUT` (mismo disparador que en `1448-lg`).
+
+### `sm` (tablet)
+
+**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
+[breakpoints.md](../../specs/breakpoints.md)).

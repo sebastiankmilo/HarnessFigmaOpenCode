@@ -83,4 +83,14 @@ Transición/estados hover: **no especificados en Figma** — PENDIENTE.
 
 La tarjeta es **clickeable en su totalidad**: requiere foco visible y nombre
 accesible. **No especificado en Figma** — PENDIENTE; el foco visible es obligatorio
-por [AGENTS.md](../../../../AGENTS.md).
+por [AGENTS.md](../../AGENTS.md).
+
+## Instancia en `375-xs` (leída el 2026-10-04)
+
+Instancia `2392:4058` de `sección-La-Materia-Prima`: **343×513** (la variante
+`type=card, size=xs` mide 343×460; el alto extra viene del texto real).
+
+- Imagen 5:4 **343×274** → gap **16** → `text-container` 343×223.
+- `text` **311** de ancho: padding lateral **16** (la variante usa 24) y padding
+  inferior **32**.
+- Título **25.6** (`--font-size-xs-h3`) → gap **8** → entradilla 16.

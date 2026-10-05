@@ -83,6 +83,18 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 
 ## Diferencias por breakpoint
 
-**PENDIENTE de confirmación con el diseño**: el archivo no tiene la versión
-móvil/tablet de `Decálogo`; `375-xs` y `1024-sm` solo contienen guías de estilos
-([breakpoints.md](../../specs/breakpoints.md)).
+### `xs` (375) — frame `2396:2521`, 375×19377 (leído el 2026-10-04)
+
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2396:2522` | **80** | 125 → 80; logo 96 → 48; padding 32 → 16 |
+| 1 | `header` | `2396:2523` | 1358 | padding **64** (96); **apilado**: `components/images` 343×257 (4:3) arriba, `header-texto` debajo (gap **32**); h1 **52/58.24 sin cambio** (excepción: no baja a 46.1); párrafo **22/33** (en 1448 está a 20.2 → **sube**); gap h1→párrafo **24** |
+| 2 | `sección-puntos` | `2396:2543` | 17225 | padding **64** (96); **sin índice lateral** y **sin título de sección** (igual que en lg); **10 puntos** con h3 **25.6** (28.8) y párrafos 20.2 (gap interno **24**), gap entre puntos **32**; CTA con gap **32** |
+| 3 | `footer` | `2396:2575` | 714 | igual que el de [inicio](./inicio.md) |
+
+Contenedor: 343 (padding 16). El índice lateral de 1448 (322px) **se oculta** en `xs`.
+
+### `sm` (tablet)
+
+**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
+[breakpoints.md](../../specs/breakpoints.md)).

@@ -2,8 +2,9 @@
 
 ---
 fuente: Figma — estilos locales (`get_styles`) + muestras nodo `8:19` (`375-xs`) y
-`98:1630` (`1024-sm`) + uso real en `1448-lg > inicio` (`110:2277`)
-extraido: 2026-10-03
+`98:1630` (`1024-sm`) + uso real en `1448-lg > inicio` (`110:2277`) + uso real en
+los frames de `375-xs` (2026-10-04)
+extraido: 2026-10-03 (actualizado 2026-10-04)
 file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
 herramienta: TalkToFigma (`get_styles`, `get_node_info`)
 ---
@@ -90,8 +91,28 @@ Regla de uso: párrafo → `--font-weight-medium`; label, link, título y texto 
   artículo (25.6 = `xs/headings/h3`), que mezclan escalas en el propio diseño.
 - Las etiquetas `16:9` / `5:4` sobre los bloques de imagen son anotaciones de
   placeholder del wireframe (Bold 46.1 / 51.63), no texto de interfaz.
-- Confirmado por el equipo (2026-10-03): `375-xs` y `1024-sm` solo tienen guías de
-  estilos y pantallas de plantilla; **las pantallas reales están únicamente en
-  `1448-lg`** (ver [breakpoints.md](./breakpoints.md)). Por eso la escala tipográfica
-  que rige cada media query para las pantallas móviles/tablet queda
-  **PENDIENTE de confirmación con el diseño**.
+- Confirmado por el equipo (2026-10-03): `375-xs` y `1024-sm` solo tenían guías de
+  estilos y pantallas de plantilla. **Actualizado el 2026-10-04**: `375-xs` ya tiene
+  los 7 frames de las vistas móviles (ver [breakpoints.md](./breakpoints.md)) y de
+  ellos se midió el uso real de la escala (tabla siguiente); `1024-sm` sigue sin
+  pantallas y su escala queda **PENDIENTE**.
+
+## Uso observado en `375-xs` (2026-10-04, `get_node_info`)
+
+| Rol en la página | Medida leída | Estilo Figma equivalente | Token | Cambio vs. 1448 |
+| --- | --- | --- | --- | --- |
+| Título `inicio` / `Programa` (`Vanguardia Colombiana`, `Nuestro Programa`) | Bold 46.1 / 51.63 | `xs/headings/h1/xxl` | `--font-size-xs-h1-xxl` | 52 → 46.1 |
+| Título `Decálogo` (`2396:2526`) | Bold **52** / 58.24 | `l/headings/h1/xxl` | `--font-size-l-h1-xxl` | **sin cambio** (excepción del diseño) |
+| Títulos de sección (objetivos, Materia Prima, Únete, ejes, Materialismo político, Puntos programáticos, Política de privacidad) | Bold 32.4 / 36.29 | `xs/headings/h1` | `--font-size-xs-h1` | 36.49 → 32.4 |
+| Título de `goal-card`, de artículo y de cada punto | Bold 25.6 / 28.67 | `xs/headings/h3` | `--font-size-xs-h3` | 28.8 → 25.6 |
+| Párrafo del header de `Programa` y `Decálogo` | Medium 22 / 33 | `paragraphs/l` | `--font-size-body-l` | 22 en Programa (igual); **20.2 → 22 en Decálogo** |
+| Entradilla de sección | Medium 18 / 27 | `paragraphs/base` | `--font-size-body-base` | igual |
+| Cuerpo dentro de tarjeta y de punto | Medium 16 / 24 · Medium 20.2 / 30.3 | `paragraphs/s` · `paragraphs/m` | `--font-size-body-s` / `--font-size-body-m` | igual |
+| Título de `Objetivo-modal` (`2404:3501`) | Bold 28.8 / 32.26 | `xs/headings/h2` | `--font-size-xs-h2` | 32.4 → 28.8 |
+| Cuerpo de `Objetivo-modal` (`2404:3502`) | Medium 18 / 27 | `paragraphs/base` | `--font-size-body-base` | igual |
+| Enlaces del menú móvil (overlay `2396:2902`) | Bold 18 / 27 | `links/base` | `--font-size-body-base` | igual |
+| Enlaces del footer, texto de botón, copyright | Bold 16 / 24 · Bold 20.2 / 30.3 · Medium 14.2 / 21.3 | `links/s` · `paragraphs/bold/m` · `paragraphs/xs` | `--font-size-body-s` / `--font-size-body-m` / `--font-size-body-xs` | igual |
+
+Conclusión: a 375 se usa la escala **`xs/`** para titulares (una talla por debajo de
+`l/`), **excepto** el título de `Decálogo` (52) y todos los párrafos, que mantienen su
+tamaño de escritorio. La escala `sm/` sigue **PENDIENTE** (no hay pantallas `1024-sm`).

@@ -129,21 +129,28 @@ Registradas para no perder lo observado al implementar:
    `y=345` y se solapaba con el párrafo. Las tarjetas se renderizan con avatar,
    título y párrafo, **sin botón**. El componente por sí mismo sí lo muestra
    (ver [components/goal-card](../../specs/components/goal-card.md)).
-3. **Paginación sin comportamiento**: `icons/prev` (`2326:4023`),
+3. **Paginación sin comportamiento en el prototipo**: `icons/prev` (`2326:4023`),
    `components/dotnav` (`2326:4033`) e `icons/next` (`2326:4026`) **no tienen
-   reacciones** registradas. **PENDIENTE de especificación de diseño**: se dibujan,
-   no se les asigna comportamiento.
+   reacciones** registradas (verificado también en `375-xs`: `2392:4005` y
+   `2392:4101`). **Actualización v1.2 del ticket (2026-10-04)**: pese a eso, los
+   controles **sí deben ser funcionales**; el comportamiento se definió en
+   [interactions.md](../../specs/interactions.md) y se implementa en
+   `site/scripts/inicio.js`.
 4. **Iconos de los botones ocultos**: los dos `icons/heart-fill` de cada
    `components/buttons` están ocultos en todas las instancias de la pantalla.
 5. **Colores sin token de rol**: la media de vídeo (`#c2c2c2`), la banda del vídeo
    (`#adadad`), el fondo de «La Materia Prima» (`#d6d6d6`) y el footer (`#333333`)
    — se añadieron como tokens de rol en [tokens.md](../../specs/tokens.md).
-6. **Nav en `xs`/`sm`**: las variantes del componente muestran los 3 iconos por
+6. **Nav en `xs`/`sm`**: las variantes del componente traen los 3 iconos por
    defecto (`weibo`, `xiao-hong-shu`, `wechat`), no los 5 reales del `lg`, y en `sm`
-   solo 3 enlaces con texto de relleno (`Enlace 01`). La implementación sigue la
-   variante en `xs` (menú y plataformas) y deja el tramo tablet **PENDIENTE**, igual
-   que el propio [breakpoints.md](../../specs/breakpoints.md) (1024 vs 768 sin
-   confirmar). En `lg` se usan las instancias reales (5 plataformas, 4 enlaces).
+   solo 3 enlaces con texto de relleno (`Enlace 01`). **Relectura `2026-10-04`**:
+   el export de la instancia `2392:2395` renderiza **solo logo + hamburguesa**
+   (`platforms`/`search` quedan ocultas o fuera del frame) → la implementación
+   sigue **ese render**, no la variante (ver
+   [components/nav.md](../components/nav.md)), y deja el tramo tablet
+   **PENDIENTE**, igual que el propio [breakpoints.md](../../specs/breakpoints.md)
+   (1024 vs 768 sin confirmar). En `lg` se usan las instancias reales (5
+   plataformas, 4 enlaces).
 7. **Enlaces sin destino en el prototipo**: los botones `Aporta` y `Botón` del nav y
    el enlace `Aporta` del footer **no tienen reacción**; se dibujan como elementos
    no interactivos hasta que el diseño los defina.
@@ -179,8 +186,33 @@ Registradas para no perder lo observado al implementar:
 
 ## Diferencias por breakpoint
 
-**PENDIENTE de confirmación con el diseño.** El archivo no tiene la versión móvil ni
-tablet de `inicio`: `375-xs` y `1024-sm` solo contienen guías de estilos y pantallas de
-plantilla (`index`, `post`, `404`) — confirmado por el equipo el 2026-10-03. Lo único
-comparable entre breakpoints son las variantes `xs`/`sm`/`lg` de los componentes (ver
+### `xs` (375) — frame `322:6042`, 375×4545 (leído el 2026-10-04)
+
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2392:2395` | **80** | 125 → 80; logo 96 → 48; padding 32 → 16 |
+| 1 | `encabezado-contenido` | `2392:3972` | 854 | padding **64** (162); `encabezado-texto` 343 con `pL=16`; h1 **46.1** (52); párrafo 20.2 igual; gap texto→botones **36** (igual); botones 224×52 + 103×52 con gap 16 |
+| 2 | `Frame 1` (video) | `2396:2407` | 289.47 | media **343×193.47** con padding **48** arriba/abajo (en lg la media va a sangre sin padding) |
+| 3 | `seccion-objetivos` | `2392:3995` | 920 | padding **48** (96); **1 columna** (343); h2 **32.4** (36.49); gaps texto→tarjetas **32** (48), tarjetas→controles **32**, controles→CTA **32** (48) |
+| 4 | `sección-La-Materia-Prima` | `2392:4053` | 935 | padding **48** (96); **1 columna**; **añade fila de paginación** `2392:4101` que en 1448 no existe |
+| 5 | `sección-únete` | `2392:4114` | 788.39 | padding **64** (96); **apilado**: media 341×192.39 arriba, texto debajo (gap **32**); h2 **32.4**; gap título→párrafo **16** |
+| 6 | `footer` | `2395:4123` | 714 | padding **64**; logo 128 centrado; 7 enlaces **apilados y centrados** (Bold 16, gap **24**); copyright Medium 14.2 centrado |
+
+Detalles de `goal-card` a 375 (instancia `2392:4001`, **343×498**): padding **16**
+laterales/superior e **32** inferior (24/24/48 en lg), avatar 137×137, título **25.6**
+(28.8), párrafo 16. El `components/buttons` de la instancia (104×40) se solapa con el
+párrafo — mismo defecto que en `1448-lg`, donde se decidió **no renderizar el botón**
+(nota 2): se mantiene esa decisión en `xs`.
+
+`container-and-card` a 375 (`2392:4058`, 343×513): imagen 343×274 (5:4), texto con
+padding 16, título 25.6, entradilla 16, gap **8** entre título y entradilla.
+
+**Carrusel** (v1.2/v1.4 del ticket): a 375 se ve **1 tarjeta** por sección (`objetivos`
+`2392:4000`; artículos `2392:4057` con controles `2392:4101`), a 1448 se ven las 4.
+El comportamiento de `prev`/`next`/`dotnav` está definido en
+[interactions.md](../../specs/interactions.md) y se implementa en `site/scripts/inicio.js`.
+
+### `sm` (tablet)
+
+**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
 [breakpoints.md](../../specs/breakpoints.md)).

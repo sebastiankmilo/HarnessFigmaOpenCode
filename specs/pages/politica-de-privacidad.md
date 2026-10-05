@@ -68,6 +68,18 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 
 ## Diferencias por breakpoint
 
-**PENDIENTE de confirmación con el diseño**: el archivo no tiene la versión
-móvil/tablet de `Política de privacidad`; `375-xs` y `1024-sm` solo contienen guías
-de estilos ([breakpoints.md](../../specs/breakpoints.md)).
+### `xs` (375) — frame `2396:2820`, 375×3120 (leído el 2026-10-04)
+
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2396:2821` | **80** | 125 → 80; logo 96 → 48; padding 32 → 16 |
+| 1 | `sección-puntos` | `2396:2885` | 2326 | padding **64** (96); título **32.4** (igual); gap título→cuerpo **32**; cuerpo 20.2 a ancho **343** (en lg el bloque va centrado a 910); gap cuerpo→CTA **32**; botón «Volver al inicio» **187×52** |
+| 2 | `footer` | `2396:2829` | 714 | igual que el de [inicio](./inicio.md) |
+
+El `PENDIENTE-FIGMA` del destino de «Volver al inicio» se mantiene: `get_reactions`
+sobre `2396:2891` **no registra reacción** en `375-xs` tampoco.
+
+### `sm` (tablet)
+
+**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
+[breakpoints.md](../../specs/breakpoints.md)).

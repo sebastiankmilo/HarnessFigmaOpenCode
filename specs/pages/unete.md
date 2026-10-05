@@ -62,7 +62,18 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 
 ## Diferencias por breakpoint
 
-**PENDIENTE de confirmación con el diseño** (mismo caso que [inicio](./inicio.md)):
-el archivo no tiene la versión móvil/tablet de `Únete`; `375-xs` y `1024-sm` solo
-contienen guías de estilos y pantallas de plantilla
-([breakpoints.md](../../specs/breakpoints.md)).
+### `xs` (375) — frame `2396:2676`, 375×1592 (leído el 2026-10-04)
+
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2396:2677` | **80** | 125 → 80; logo 96 → 48; padding 32 → 16 |
+| 1 | `sección-únete` | `2396:2712` | 788.39 | padding **64** (96); **apilado**: media 16:9 **341.08×192.39** arriba (padding superior 64), bloque de texto debajo (gap **32**); título **32.4** (36.49); gap título→párrafo **16**; párrafo 20.2 igual |
+| 2 | `footer` | `2396:2719` | 714 | igual que el de [inicio](./inicio.md) (padding 64, enlaces apilados y centrados) |
+
+Contenedor: 343 (padding 16). La sección es idéntica a la sección 5 de `inicio`
+(`2392:4114`), mismas medidas.
+
+### `sm` (tablet)
+
+**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
+[breakpoints.md](../../specs/breakpoints.md)).

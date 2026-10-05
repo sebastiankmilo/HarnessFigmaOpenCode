@@ -104,6 +104,20 @@ el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
 
 ## Diferencias por breakpoint
 
-**PENDIENTE de confirmación con el diseño**: el archivo no tiene la versión
-móvil/tablet de `Programa`; `375-xs` y `1024-sm` solo contienen guías de estilos
-([breakpoints.md](../../specs/breakpoints.md)).
+### `xs` (375) — frame `2396:104`, 375×20213 (leído el 2026-10-04)
+
+| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
+| --- | --- | --- | --- | --- |
+| 0 | `components/nav` | `2396:105` | **80** | 125 → 80; logo 96 → 48; padding 32 → 16 |
+| 1 | `header` | `2396:2399` | 1106 | padding **64** (96); **apilado**: `components/images` 343×257 (4:3) arriba, `header-texto` debajo (gap **32**); h1 **46.1** (52); párrafo **22/33** (igual, `--font-size-body-l`); gap h1→párrafo **24** |
+| 2 | `sección-ejes` | `2396:2416` | 1583 | padding **64** (96); **apilado**: imagen 1:1 **337×337** arriba, texto debajo (gap **32**); h2 **32.4** (36.49); párrafo 20.2 |
+| 3 | `sección-materialismo` | `2396:2423` | 1811 | padding **64** (96); **apilado**: imagen 1:1 **341×341** → (`Frame 6` con h2 + entradilla, gap **24**) → (`Frame 8` con 3 párrafos, gap **24**); gaps entre bloques **32** |
+| 4 | `sección-puntos` | `2396:2435` | 14941 | padding **64** (96); título «Puntos programáticos» **32.4** (36.49); **sin índice lateral** (`.page-index` no existe en `xs`); gap título→puntos **32**; **9 puntos** con h3 **25.6** (28.8) y párrafo 20.2 (gap interno **24**), gap entre puntos **32**; CTA «Únete a Vanguardia Colombiana» con gap **32** |
+| 5 | `footer` | `2396:2474` | 714 | igual que el de [inicio](./inicio.md) (padding 64, enlaces apilados) |
+
+Contenedor: 343 (padding 16). El índice lateral de 1448 (322px) **se oculta** en `xs`.
+
+### `sm` (tablet)
+
+**PENDIENTE**: `1024-sm` no tiene pantallas construidas (ver
+[breakpoints.md](../../specs/breakpoints.md)).

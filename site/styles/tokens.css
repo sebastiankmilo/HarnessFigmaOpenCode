@@ -1,5 +1,7 @@
-/* site/styles/tokens.css — fuente: página components + página 1448-lg (ver specs/tokens.md)
- * Extraído de Figma con TalkToFigma el 2026-10-03.
+/* site/styles/tokens.css — fuente: página components + páginas 1448-lg y 375-xs
+ * (ver specs/tokens.md)
+ * Extraído de Figma con TalkToFigma el 2026-10-03; medidas del nav móvil
+ * (375×80, logo 48) leídas en `375-xs` el 2026-10-04.
  * Valores reales del diseño; nada está hardcodeado a priori.
  */
 
@@ -86,8 +88,12 @@
   --space-7: 64px;  /* botones de flecha (prev/next) del carrusel, padding vertical del footer */
   --space-8: 96px;  /* padding vertical de las secciones de contenido */
 
-  --space-header: 162px;      /* padding vertical del encabezado de inicio */
+  --space-header: 162px;      /* padding vertical del encabezado de inicio (lg) */
   --space-header-cta: 36px;   /* gap entre el texto y los botones del encabezado */
+  --nav-height-xs: 80px;      /* alto de la barra del nav en las instancias de 375-xs */
+  --nav-height-lg: 125px;     /* alto de la barra del nav en 1448-lg */
+  --nav-logo-xs: 48px;        /* logo del nav en 375-xs */
+  --nav-logo-lg: 96px;        /* logo del nav en 1448-lg */
   --nav-gap-blocks: 28px;     /* gap entre bloques del right-nav (nav lg) */
   --nav-link-top: 47px;       /* offset superior del texto de un enlace (nav lg) */
   --nav-underline-lg: 4px;    /* grosor del subrayado del enlace activo (nav lg) */

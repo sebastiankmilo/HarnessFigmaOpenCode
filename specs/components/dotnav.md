@@ -53,4 +53,15 @@ pero no se les asigna comportamiento (punto 0.1.5 del plan).
 
 Detalle y gravedad en [accessibility.md](../accessibility.md).
 Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-[AGENTS.md](../../../../AGENTS.md)).
+[AGENTS.md](../../AGENTS.md)).
+
+## Instancias en `375-xs` (leídas el 2026-10-04)
+
+| Instancia | Pantalla | Fondo | Activo | Inactivos |
+| --- | --- | --- | --- | --- |
+| `2392:4007` | `inicio` · «Nuestros objetivos» | `--color-surface` | `#5c5c5c` (`--neutral-80`) | `#d6d6d6` (`--color-border-soft`) ×3 |
+| `2392:4103` | `inicio` · «La Materia Prima» (**solo existe en `xs`**) | `--color-surface-strong` (`#d6d6d6`) | `#5c5c5c` (`--neutral-80`) | `#fafafa` ×3 |
+
+Ambos forman parte de los **carruseles funcionales** (v1.2/v1.4 del ticket): los
+puntos son botones con nombre accesible y el punto activo refleja la posición; ver
+[interactions.md](../interactions.md).

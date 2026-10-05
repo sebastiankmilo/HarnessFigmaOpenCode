@@ -77,4 +77,24 @@ La instancia `2358:1158` pinta la etiqueta `#ff8000` al 30 % sobre `#333333`
 - Etiqueta `--color-on-dark` sobre `--color-text-primary`: 21.00:1 — AA.
 - Etiqueta `--color-on-dark` sobre `--color-text-secondary`: 12.63:1 — AA.
 - Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-  [AGENTS.md](../../../../AGENTS.md)).
+  [AGENTS.md](../../AGENTS.md)).
+
+## Instancias en `375-xs` (leídas el 2026-10-04)
+
+| Instancia | Nodo | Medida | Estilo |
+| --- | --- | --- | --- |
+| «Nuestro programa» (encabezado `inicio`) | `2392:3977` | 224×52 | filled `--color-text-secondary`, size=m |
+| «Únete» (encabezado `inicio`) | `2392:3978` | 103×52 | outline, size=m |
+| «Nuestro programa» (CTA de objetivos) | `2392:4009` | 224×52 | filled |
+| «lamateriaprima.org» | `2392:4062` | 234×52 | filled |
+| «Volver al inicio» (`Política de privacidad`) | `2396:2891` | 187×52 | filled |
+| CTA de `sección-puntos` (`Programa`, `Decálogo`) | (interior 317×30) | size=m | filled |
+| «Aporta» / outline del menú móvil | `I2396:3288;38:1066` / `38:1067` | 87×40 / 103×40 | filled `#000000` / outline, size=s |
+| Botón del `Objetivo-modal` | `2404:3503` | 224×52 | filled `--color-text-secondary` |
+| Botón de `goal-card` | `I2392:4001;2325:3908` | 104×40 | solapado con el párrafo → **no se renderiza** |
+
+**Iconos `icons/heart-fill`**: en `375-xs` los nodos devuelven bbox real
+(24×24 / 16×16) pero **se solapan con la etiqueta** (el `icons-and-text` arranca en
+la misma `x` que el icono), igual que en `1448-lg` donde devolvían 1×1. Se mantiene
+el renderizado **solo con la etiqueta** por coherencia con escritorio; registrado
+como observación, sin cambiar el HTML.

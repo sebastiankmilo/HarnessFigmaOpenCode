@@ -71,3 +71,18 @@ La etiqueta es una anotación de placeholder del wireframe, no texto de interfaz
 reproduce tal cual está en el diseño. **Texto alternativo de la imagen: PENDIENTE de
 especificación de diseño** (hoy el bloque es un relleno sólido sin contenido real;
 ver [accessibility.md](../accessibility.md)).
+
+## Instancias en `375-xs` (leídas el 2026-10-04)
+
+Medidas reales de las instancias de las vistas móviles (todas con la etiqueta
+**centrada**, `top/left: 50%`):
+
+| Pantalla | Instancia | Ratio | Medida |
+| --- | --- | --- | --- |
+| `inicio` · bloque de vídeo | `2392:3991` | 16:9 | 343×193.47 |
+| `inicio` · «La Materia Prima» | `I2392:4058;93:130` | 5:4 | 343×274 |
+| `inicio` y `Únete` · `sección-únete` | `2392:4116` / `2396:2714` | 16:9 | 341.08×192.39 |
+| `Programa` · header | `2396:2400` | 4:3 | 343×257 |
+| `Programa` · `sección-ejes` | `2396:2420` | 1:1 | 337×337 |
+| `Programa` · `sección-materialismo` | `2396:2425` | 1:1 | 341×341 |
+| `Decálogo` · header | `2396:2524` | 4:3 | 343×257 |

@@ -73,3 +73,11 @@ Sin reacciones registradas en el prototipo para este componente
 - Puntos del `dotnav` sobre `#ebebeb`: activo 3.10:1 (solo alcanza UI ≥3:1),
   inactivo 1.19:1 — **no cumple**; ver [accessibility.md](../accessibility.md).
 - Foco visible de slideshow, puntos y botones: no especificado en Figma.
+
+## Relación con `375-xs` (2026-10-04)
+
+La sección `encabezado-contenido` de `inicio` en móvil (`2392:3972`, 375×854) **no
+es una instancia de este componente**: es un `FRAME` propio (`encabezado-texto` +
+`botones`). Este componente sigue sin estar instanciado en ninguna pantalla; la
+disposición apilada de su variante `size=xs` (media arriba, texto debajo) sirve
+solo como referencia de dirección `mobile-first`.

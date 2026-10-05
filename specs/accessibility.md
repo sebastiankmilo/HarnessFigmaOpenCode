@@ -91,3 +91,24 @@ misma navegación.
   (`aria-label="Cerrar"`). **No especificado en Figma** — obligatorio por `AGENTS.md`.
 - El avatar de `goal-card` y las medias de `components/images` son placeholders
   sólidos sin contenido real: texto alternativo **PENDIENTE de especificación**.
+
+## `375-xs` (2026-10-04)
+
+Los pares de color no cambian (mismos tokens); lo nuevo es el contexto móvil:
+
+| Par | Ratio | Veredicto |
+| --- | --- | --- |
+| Etiquetas del menú móvil `#000000` sobre `--color-surface-alt` (`#fafafa`) | 20.12 | AA |
+| Etiqueta del botón «Aporta» `#ffffff` sobre `#000000` (overlay) | 21.00 | AA |
+| Enlaces y copyright del footer `#ffffff` sobre `--color-surface-dark` (`#333333`) | 12.63 | AA |
+| Punto activo del `dotnav` de «La Materia Prima» `#5c5c5c` sobre `--color-surface-strong` (`#d6d6d6`) | 4.60 | AA |
+| Puntos inactivos del `dotnav` de «La Materia Prima» `#fafafa` sobre `#d6d6d6` | 1.39 | **No cumple** (mismo caso que los inactivos sobre `#ebebeb`) |
+
+- **Carruseles**: los controles son `<button>` con nombre accesible, foco visible
+  por `:focus-visible` global y teclado `←`/`→`; el cambio de tarjeta es
+  instantáneo, así que `prefers-reduced-motion` no exige nada adicional (ver
+  [interactions.md](./interactions.md)).
+- **Menú móvil**: foco atrapado y devolución al cerrar (ya en
+  [components/nav.md](./components/nav.md)).
+- Las tarjetas ocultas por el carrusel a 375 usan `display:none`: quedan fuera del
+  árbol de accesibilidad y no pueden recibir foco.

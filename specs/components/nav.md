@@ -78,3 +78,42 @@ Ver [interactions.md](../interactions.md). Registrado con `get_reactions`:
 - El menú móvil es un modal a pantalla completa (`status=open-modal`): requiere
   cierre por `icons/close` y, al abrir, foco atrapado y restauración al cerrar —
   comportamiento no documentado en el prototipo.
+
+## Instancias en `375-xs` (leídas el 2026-10-04)
+
+Las 7 pantallas usan una instancia de `components/nav` de **375×80** (la variante
+`size=xs` mide 64): la medida de la instancia manda sobre la de la variante.
+
+- Relleno `--color-surface-alt`, padding lateral **16**, `icons/logo` **48×48**
+  centrado verticalmente ((80−48)/2 = 16).
+- Bloque derecho a `xs`: **solo se renderiza `icons/hamburger-two` (24×24)**, a
+  **16** del borde derecho y centrado verticalmente ((80−24)/2 = 28).
+  **Relectura `2026-10-04` con `export_node_as_image` sobre `2392:2395` (PNG @2x)**:
+  en la instancia, `platforms` (104×24), `icons/search` y la hamburguesa comparten
+  la misma coordenada (`x=335` relativa al frame) y `xiao-hong-shu`/`wechat` caen
+  **fuera** del frame de 375; el export devuelve **únicamente la hamburguesa** (las
+  capas debajo no se ven). **Decisión**: la barra `xs` implementa **logo +
+  hamburguesa**; las plataformas viven en el overlay del menú (6) y en `lg` siguen
+  siendo las 5 de escritorio. La nota anterior («se mantiene el contenido de la
+  variante `xs`») queda **superada por esta relectura**.
+
+### Overlay del menú abierto — frame `2396:2902` (375×812)
+
+Instancia `2396:3288`, relleno `--color-surface-alt`:
+
+| Elemento | Nodo | Medida / valor |
+| --- | --- | --- |
+| `icons/close` | `I2396:3288;38:1068` | **32×32**, esquina superior derecha (padding **16**) |
+| `nav-content` | `I2396:3288;38:1048` | **343×591**, centrado (110.5 libres arriba y abajo) |
+| `icons/logo` | `I2396:3288;38:1049` | **64×64**, centrado |
+| `links` | `I2396:3288;38:1051` | **5 enlaces**, `link-nav` de alto **35** (texto 27 + subrayado 1 px a 8), gap **24** (paso 59), Bold 18/27. **Centrados uno a uno**: el frame mide 191 de ancho (el de «Política de privacidad») y cada `link-nav` arranca en una `x` distinta con el mismo centro (1449.5) |
+| `buttons` | `I2396:3288;38:1065` | **Solo «Aporta» 87×40** (relleno `#000000`, etiqueta Bold 16/24 blanca, centrado en el frame de 343). El segundo nodo (`38:1067`, outline 103×40 con `strokes #000000` y **sin contenido visible**) **no aparece en el export** → no se implementa, mismo criterio que el outline de la barra `lg` |
+| `platforms` | `I2396:3288;38:1061` | **5 iconos 32×32 visibles**: fila 1 (facebook, instagram, youtube) e fila 2 (**x, tik-tok**, como par de 88 centrado en la caja de 145), gap **24**, caja **145×88**. El nodo `icons/wechat` existe (x 1489) pero está **oculto**: `scan_nodes_by_types` no lo devuelve y el export no lo pinta (misma evidencia que la barra, cuyos `platforms`/`search` tampoco se devuelven) → **no se implementa** |
+
+Gaps dentro de `nav-content`: logo→links **64** · links→buttons **32** ·
+buttons→platforms **32**. Enlaces, en orden: Programa · Decálogo · Únete ·
+La Materia Prima · Política de privacidad.
+
+El overlay con **5 enlaces centrados, botón «Aporta» único y 5 plataformas en 2
+filas** es el que implementan los 5 HTML (relectura del render `2026-10-04`,
+decisión 8 del plan — el diseño renderizado es la fuente de verdad).
