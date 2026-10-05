@@ -1,3 +1,10 @@
+/* site/styles/unete.css — página Únete
+ * Spec: specs/pages/unete.md · valores: solo styles/tokens.css
+ * Frames: `2335:1229` (1448) y `2396:2676` (375, leído 2026-10-04).
+ * El bloque `.join-block` (sección `2396:2712`), el nav y el footer son
+ * compartidos y viven en main.css, con base = 375 y `min-width: 1448px` = lg.
+ */
+
 .join-block--surface {
   background: var(--color-surface);
 }

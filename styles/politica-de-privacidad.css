@@ -1,18 +1,14 @@
 /* site/styles/politica-de-privacidad.css — página Política de privacidad
- * (frame `2335:1533` de `1448-lg`)
  * Spec: specs/pages/politica-de-privacidad.md · valores: solo styles/tokens.css
- * Base 1448 (no hay variante móvil/tablet en el diseño → sin media queries).
+ * Frames: `2335:1533` (1448) y `2396:2820` (375, leído 2026-10-04).
+ * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
+ * El bloque `.join-block` (no usado aquí) y el nav/footer viven en main.css.
  */
 
-/* ── 2 — sección-puntos (`2335:1540`) ──────────────────────────── */
+/* ── 2 — sección-puntos (`2396:2885`) ──────────────────────────── */
 .privac {
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
   background: var(--color-surface);
-}
-
-.privac__inner {
-  max-width: 910px;
-  margin-inline: auto;
 }
 
 .privac h1 {
@@ -36,4 +32,16 @@
    (PENDIENTE-FIGMA en specs/pages/politica-de-privacidad.md) → sin enlace. */
 .cta {
   align-self: flex-start;
+}
+
+/* ── `lg` (1448) — escritorio ──────────────────────────────────── */
+@media (min-width: 1448px) {
+  .privac {
+    padding-block: var(--space-8);
+  }
+
+  .privac__inner {
+    max-width: 910px;
+    margin-inline: auto;
+  }
 }

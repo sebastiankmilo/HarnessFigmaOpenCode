@@ -200,30 +200,30 @@ button {
 }
 
 .join-block {
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
 }
 
 .join-block__grid {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-5);
 }
 
-.join-block__media {
-  flex: 0 1 792px;
-}
-
+.join-block__media,
 .join-block__text {
-  flex: 0 1 560px;
+  flex: none;
+  width: 100%;
 }
 
 .join-block__text h1,
 .join-block__text h2 {
-  font-size: var(--font-size-l-h1);
+  font-size: var(--font-size-xs-h1);
 }
 
 .join-block__text p {
   margin-top: var(--space-3);
+  font-size: var(--font-size-body-m);
+  color: var(--color-text-secondary);
 }
 
 .site-nav {
@@ -235,15 +235,15 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-5);
-  height: 64px;
+  height: var(--nav-height-xs);
   padding-inline: var(--space-3);
 }
 
 .site-nav__logo,
 .site-nav__logo img {
   flex: none;
-  width: 32px;
-  height: 32px;
+  width: var(--nav-logo-xs);
+  height: var(--nav-logo-xs);
 }
 
 .site-nav__right {
@@ -287,11 +287,21 @@ button {
   gap: var(--space-1);
 }
 
-.site-nav__platforms,
+/* `xs`: la barra renderiza logo + hamburguesa — el export de la instancia
+   `2392:2395` (2026-10-04) no muestra ni plataformas ni búsqueda
+   (specs/components/nav.md). Las plataformas vuelven en `lg`. */
+.site-nav__platforms {
+  display: none;
+}
+
 .site-nav__toggle {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+}
+
+.site-nav__toggle > img {
+  display: none;
 }
 
 .site-nav__platforms img,
@@ -341,6 +351,7 @@ button {
 }
 
 .site-nav__menu-logo {
+  display: block;
   width: 64px;
   height: 64px;
 }
@@ -348,6 +359,7 @@ button {
 .site-nav__menu-links {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-4);
   margin-top: var(--space-7);
   font-size: var(--font-size-body-base);
@@ -371,7 +383,10 @@ button {
 
 .site-nav__menu-platforms {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-4);
+  width: calc(32px * 3 + var(--space-4) * 2);
   margin-top: var(--space-5);
 }
 
@@ -390,14 +405,14 @@ button {
 
 @media (min-width: 1448px) {
   .site-nav__inner {
-    height: 125px;
+    height: var(--nav-height-lg);
     padding-inline: var(--space-5);
   }
 
   .site-nav__logo,
   .site-nav__logo img {
-    width: 96px;
-    height: 96px;
+    width: var(--nav-logo-lg);
+    height: var(--nav-logo-lg);
   }
 
   .site-nav__right {
@@ -409,6 +424,10 @@ button {
   }
 
   .site-nav__buttons {
+    display: flex;
+  }
+
+  .site-nav__platforms {
     display: flex;
   }
 
@@ -455,8 +474,8 @@ button {
 
 .site-footer__links {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-4);
   margin-top: var(--space-4);
   font-size: var(--font-size-body-s);
@@ -466,4 +485,36 @@ button {
 .site-footer__copyright {
   margin-top: var(--space-4);
   font-size: var(--font-size-body-xs);
+}
+
+@media (min-width: 1448px) {
+  .join-block {
+    padding-block: var(--space-8);
+  }
+
+  .join-block__grid {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .join-block__media {
+    flex: 0 1 792px;
+    width: auto;
+  }
+
+  .join-block__text {
+    flex: 0 1 560px;
+    width: auto;
+  }
+
+  .join-block__text h1,
+  .join-block__text h2 {
+    font-size: var(--font-size-l-h1);
+  }
+
+  .site-footer__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

@@ -1,61 +1,62 @@
-/* site/styles/decalogo.css — página Decálogo (frame `2334:1005` de `1448-lg`)
+/* site/styles/decalogo.css — página Decálogo
  * Spec: specs/pages/decalogo.md · valores: solo styles/tokens.css
- * Base 1448 (no hay variante móvil/tablet en el diseño → sin media queries).
+ * Frames: `2334:1005` (1448) y `2396:2521` (375, leído 2026-10-04).
+ * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
  */
 
-/* ── 2 — header (`2335:1221`) ──────────────────────────────────── */
+/* ── 2 — header (`2396:2523`) ───────────────────────────────────── */
 .decal-hero {
   background: var(--color-surface-muted);
 }
 
 .decal-hero__grid {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-5);
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
 }
 
 .decal-hero .media {
-  flex: 0 1 438px;
+  flex: none;
+  width: 100%;
 }
 
 .decal-hero__text {
-  flex: 0 1 788px;
+  flex: none;
+  width: 100%;
 }
 
+/* El título de Decálogo mantiene 52 en `xs` (decisión del diseño) */
 .decal-hero h1 {
   font-size: var(--font-size-l-h1-xxl);
 }
 
 .decal-hero p {
   margin-top: var(--space-4);
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-body-l);
   color: var(--color-text-secondary);
 }
 
-/* ── 3 — sección-puntos (`2334:1027`) ──────────────────────────── */
+/* ── 3 — sección-puntos (`2396:2543`) ───────────────────────────── */
 .decal-points {
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
   background: var(--color-surface);
 }
 
 .decal-points__inner {
   display: flex;
+  flex-direction: column;
   gap: var(--space-5);
-  max-width: 1148px;
-  margin-inline: auto;
 }
 
 .decal-points__body {
-  flex: 1 1 794px;
+  flex: none;
+  width: 100%;
 }
 
+/* El índice lateral no existe en `xs` */
 .page-index {
-  flex: 0 1 322px;
-  font-size: var(--font-size-l-h6);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-body);
-  white-space: pre-line;
+  display: none;
 }
 
 /* ── Contenido de los puntos ───────────────────────────────────── */
@@ -72,7 +73,7 @@
 }
 
 .point h3 {
-  font-size: var(--font-size-l-h3);
+  font-size: var(--font-size-xs-h3);
 }
 
 .point p {
@@ -98,4 +99,55 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* ── `lg` (1448) — escritorio ──────────────────────────────────── */
+@media (min-width: 1448px) {
+  .decal-hero__grid {
+    flex-direction: row;
+    align-items: center;
+    padding-block: var(--space-8);
+  }
+
+  .decal-hero .media {
+    flex: 0 1 438px;
+    width: auto;
+  }
+
+  .decal-hero__text {
+    flex: 0 1 788px;
+    width: auto;
+  }
+
+  .decal-hero p {
+    font-size: var(--font-size-body-m);
+  }
+
+  .decal-points {
+    padding-block: var(--space-8);
+  }
+
+  .decal-points__inner {
+    flex-direction: row;
+    max-width: 1148px;
+    margin-inline: auto;
+  }
+
+  .decal-points__body {
+    flex: 1 1 794px;
+    width: auto;
+  }
+
+  .page-index {
+    display: block;
+    flex: 0 1 322px;
+    font-size: var(--font-size-l-h6);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-body);
+    white-space: pre-line;
+  }
+
+  .point h3 {
+    font-size: var(--font-size-l-h3);
+  }
 }

@@ -47,20 +47,23 @@
         <img src="assets/icons/close.png" alt="">
       </button>
       <div class="site-nav__menu-content">
-        <img class="site-nav__menu-logo" src="assets/icons/logo.png" alt="">
+        <a href="index.html"><img class="site-nav__menu-logo" src="assets/icons/logo.png" alt="Vanguardia Colombiana"></a>
         <nav class="site-nav__menu-links" aria-label="Menú">
           <a href="programa.html">Programa</a>
           <a href="decalogo.html">Decálogo</a>
           <a href="unete.html">Únete</a>
+          <a href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer">La Materia Prima</a>
+          <a href="politica-de-privacidad.html">Política de privacidad</a>
         </nav>
-        <div class="site-nav__menu-platforms">
-          <a href="https://weibo.com/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/weibo.png" alt="Weibo"></a>
-          <a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/xiao-hong-shu.png" alt="Xiaohongshu"></a>
-          <a href="https://www.wechat.com/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/wechat.png" alt="WeChat"></a>
-        </div>
         <div class="site-nav__menu-buttons">
           <span class="btn btn--dark btn--s">Aporta</span>
-          <span class="btn btn--outline-dark btn--s">Botón<img src="assets/icons/heart-fill.png" alt=""></span>
+        </div>
+        <div class="site-nav__menu-platforms">
+          <a href="https://www.facebook.com/people/Vanguardia-Colombiana/100092503032769/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/facebook.png" alt="Facebook"></a>
+          <a href="https://www.instagram.com/vanguardiacol/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/instagram.png" alt="Instagram"></a>
+          <a href="https://www.youtube.com/@VanguardiaColombiana" target="_blank" rel="noopener noreferrer"><img src="assets/icons/youtube.png" alt="YouTube"></a>
+          <a href="https://x.com/VanguardiaColo" target="_blank" rel="noopener noreferrer"><img src="assets/icons/x.png" alt="X"></a>
+          <a href="https://www.tiktok.com/@lavanguardiacolombiana" target="_blank" rel="noopener noreferrer"><img src="assets/icons/tik-tok.png" alt="TikTok"></a>
         </div>
       </div>
     </div>
@@ -97,8 +100,8 @@
           <h2>Nuestros objetivos</h2>
           <p>Los puntos básicos que guían nuestras ideas y nuestro proyecto político son:</p>
         </div>
-        <ul class="goals__grid">
-          <li class="goal-card" role="button" tabindex="0" aria-label="Ver objetivo: Elevación de los trabajadores colombianos a la condición de clase nacional">
+        <ul class="goals__grid" data-carousel="goals">
+          <li class="goal-card is-active" role="button" tabindex="0" aria-label="Ver objetivo: Elevación de los trabajadores colombianos a la condición de clase nacional">
             <span class="goal-card__avatar"></span>
             <div class="goal-card__text">
               <h3>Elevación de los trabajadores colombianos a la condición de clase nacional</h3>
@@ -127,15 +130,19 @@
             </div>
           </li>
         </ul>
-        <div class="goals__pagination">
-          <span class="goals__arrow"><img src="assets/icons/prev.png" alt=""></span>
-          <span class="goals__dots">
-            <span class="goals__dot is-active"></span>
-            <span class="goals__dot"></span>
-            <span class="goals__dot"></span>
-            <span class="goals__dot"></span>
-          </span>
-          <span class="goals__arrow"><img src="assets/icons/next.png" alt=""></span>
+        <div class="carousel__pagination" data-carousel-controls="goals">
+          <button class="carousel__arrow" type="button" data-carousel-prev aria-label="Objetivo anterior">
+            <img src="assets/icons/prev.png" alt="">
+          </button>
+          <div class="carousel__dots">
+            <button class="carousel__dot is-active" type="button" data-carousel-dot="0" aria-label="Ir al objetivo 1" aria-current="true"></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="1" aria-label="Ir al objetivo 2"></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="2" aria-label="Ir al objetivo 3"></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="3" aria-label="Ir al objetivo 4"></button>
+          </div>
+          <button class="carousel__arrow" type="button" data-carousel-next aria-label="Objetivo siguiente">
+            <img src="assets/icons/next.png" alt="">
+          </button>
         </div>
         <a class="btn btn--primary btn--m goals__cta" href="programa.html">Nuestro programa</a>
       </div>
@@ -147,8 +154,8 @@
           <h2>La Materia Prima</h2>
           <p>Revista dedicada al análisis de temas actuales desde el materialismo político.</p>
         </div>
-        <ul class="articles__grid">
-          <li class="article-card">
+        <ul class="articles__grid" data-carousel="articles">
+          <li class="article-card is-active">
             <div class="article-card__media">
               <span class="media__label">5:4</span>
             </div>
@@ -185,6 +192,20 @@
             </div>
           </li>
         </ul>
+        <div class="carousel__pagination articles__pagination" data-carousel-controls="articles">
+          <button class="carousel__arrow" type="button" data-carousel-prev aria-label="Artículo anterior">
+            <img src="assets/icons/prev.png" alt="">
+          </button>
+          <div class="carousel__dots">
+            <button class="carousel__dot is-active" type="button" data-carousel-dot="0" aria-label="Ir al artículo 1" aria-current="true"></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="1" aria-label="Ir al artículo 2"></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="2" aria-label="Ir al artículo 3"></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="3" aria-label="Ir al artículo 4"></button>
+          </div>
+          <button class="carousel__arrow" type="button" data-carousel-next aria-label="Artículo siguiente">
+            <img src="assets/icons/next.png" alt="">
+          </button>
+        </div>
         <a class="btn btn--primary btn--m articles__cta" href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer">lamateriaprima.org</a>
       </div>
     </section>

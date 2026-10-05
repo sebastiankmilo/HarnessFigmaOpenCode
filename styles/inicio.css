@@ -1,14 +1,17 @@
+/* site/styles/inicio.css — página inicio
+ * Spec: specs/pages/inicio.md · valores: solo styles/tokens.css
+ * Frames: `110:2277` (1448) y `322:6042` (375, leído 2026-10-04).
+ * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
+ */
+
+/* ── 2 — encabezado-contenido (`2392:3972`) ─────────────────────── */
 .hero {
-  padding-block: var(--space-header);
+  padding-block: var(--space-7);
   background: var(--color-surface-muted);
 }
 
-.hero__text {
-  max-width: 914px;
-}
-
 .hero h1 {
-  font-size: var(--font-size-l-h1-xxl);
+  font-size: var(--font-size-xs-h1-xxl);
 }
 
 .hero p {
@@ -23,21 +26,15 @@
   margin-top: var(--space-header-cta);
 }
 
+/* ── 3 — bloque de vídeo (`2396:2407`) ──────────────────────────── */
 .video {
+  padding-block: var(--space-6);
   background: var(--color-video-band);
 }
 
-.video__media {
-  max-width: 1124px;
-  margin-inline: auto;
-}
-
-.section-intro {
-  max-width: 912px;
-}
-
+/* ── 4 — seccion-objetivos (`2392:3995`) ────────────────────────── */
 .section-intro h2 {
-  font-size: var(--font-size-l-h1);
+  font-size: var(--font-size-xs-h1);
 }
 
 .section-intro p {
@@ -47,19 +44,28 @@
 }
 
 .goals {
-  padding-block: var(--space-8);
+  padding-block: var(--space-6);
 }
 
 .goals__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-5);
   align-items: start;
-  margin-top: var(--space-6);
+  margin-top: var(--space-5);
+}
+
+/* Carrusel (xs): solo la tarjeta activa es visible */
+.goals__grid .goal-card {
+  display: none;
+}
+
+.goals__grid .goal-card.is-active {
+  display: block;
 }
 
 .goal-card {
-  padding: var(--space-4) var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-3) var(--space-5);
   background: var(--color-surface-alt);
   cursor: pointer;
 }
@@ -77,7 +83,7 @@
 }
 
 .goal-card h3 {
-  font-size: var(--font-size-l-h3);
+  font-size: var(--font-size-xs-h3);
 }
 
 .goal-card p {
@@ -86,48 +92,30 @@
   color: var(--color-text-secondary);
 }
 
-.goals__pagination {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.goals__cta {
   margin-top: var(--space-5);
 }
 
-.goals__arrow img {
-  width: 64px;
-  height: 64px;
-}
-
-.goals__dots {
-  display: flex;
-  gap: var(--space-3);
-}
-
-.goals__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-circle);
-  background: var(--neutral-20);
-}
-
-.goals__dot.is-active {
-  background: var(--neutral-80);
-}
-
-.goals__cta {
-  margin-top: var(--space-6);
-}
-
+/* ── 5 — sección-La-Materia-Prima (`2392:4053`) ─────────────────── */
 .articles {
-  padding-block: var(--space-8);
+  padding-block: var(--space-6);
   background: var(--color-surface-strong);
 }
 
 .articles__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-5);
-  margin-top: var(--space-6);
+  margin-top: var(--space-5);
+}
+
+/* Carrusel (xs): solo la tarjeta activa es visible */
+.articles__grid .article-card {
+  display: none;
+}
+
+.articles__grid .article-card.is-active {
+  display: block;
 }
 
 .article-card {
@@ -147,7 +135,7 @@
 }
 
 .article-card__text {
-  padding: 0 var(--space-4) var(--space-5);
+  padding: 0 var(--space-3) var(--space-5);
   margin-top: var(--space-3);
 }
 
@@ -162,13 +150,60 @@
 }
 
 .articles__cta {
-  margin-top: var(--space-6);
+  margin-top: var(--space-5);
 }
 
+/* ── Carruseles: controles (`2392:4005` y `2392:4101`) ──────────── */
+.carousel__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-5);
+}
+
+.carousel__arrow {
+  display: flex;
+}
+
+.carousel__arrow img {
+  width: 64px;
+  height: 64px;
+}
+
+.carousel__dots {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* Colores por instancia (specs/components/dotnav.md): sobre `--color-surface`
+ * los inactivos son `--color-border-soft`; sobre `--color-surface-strong`
+ * («La Materia Prima», solo `xs`) los inactivos son `--color-surface-alt`. */
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: var(--radius-circle);
+  background: var(--color-border-soft);
+}
+
+.carousel__dot.is-active {
+  background: var(--neutral-80);
+}
+
+.articles__pagination .carousel__dot {
+  background: var(--color-surface-alt);
+}
+
+.articles__pagination .carousel__dot.is-active {
+  background: var(--neutral-80);
+}
+
+/* ── 6 — sección-únete (`2392:4114`) ────────────────────────────── */
 .join-block--alt {
   background: var(--color-surface-alt);
 }
 
+/* ── Objetivo-modal (`2404:3499`) ───────────────────────────────── */
 .dialog {
   position: fixed;
   inset: 0;
@@ -184,18 +219,17 @@
 
 .dialog__panel {
   position: relative;
-  width: 100%;
-  max-width: 1024px;
+  width: calc(100% - var(--space-5));
   max-height: 100%;
   overflow: auto;
-  padding: var(--space-8) var(--space-7);
+  padding: var(--space-8) var(--space-3) var(--space-7);
   background: var(--color-surface);
 }
 
 .dialog__close {
   position: absolute;
-  top: var(--space-5);
-  right: var(--space-5);
+  top: var(--space-3);
+  right: var(--space-3);
   width: 32px;
   height: 32px;
 }
@@ -206,7 +240,7 @@
 }
 
 .dialog__title {
-  font-size: var(--font-size-l-h2);
+  font-size: var(--font-size-xs-h2);
 }
 
 .dialog__body {
@@ -217,4 +251,100 @@
 
 .dialog__cta {
   margin-top: var(--space-4);
+}
+
+/* ── `lg` (1448) — escritorio ───────────────────────────────────── */
+@media (min-width: 1448px) {
+  .hero {
+    padding-block: var(--space-header);
+  }
+
+  .hero__text {
+    max-width: 914px;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-l-h1-xxl);
+  }
+
+  .video {
+    padding-block: 0;
+  }
+
+  .video__media {
+    max-width: 1124px;
+    margin-inline: auto;
+  }
+
+  .section-intro {
+    max-width: 912px;
+  }
+
+  .section-intro h2 {
+    font-size: var(--font-size-l-h1);
+  }
+
+  .goals {
+    padding-block: var(--space-8);
+  }
+
+  .goals__grid {
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: var(--space-6);
+  }
+
+  /* `lg`: las 4 tarjetas visibles (el índice solo mueve foco y punto activo) */
+  .goals__grid .goal-card,
+  .articles__grid .article-card {
+    display: block;
+  }
+
+  .goal-card {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  .goal-card h3 {
+    font-size: var(--font-size-l-h3);
+  }
+
+  .goals__cta {
+    margin-top: var(--space-6);
+  }
+
+  .articles {
+    padding-block: var(--space-8);
+  }
+
+  .articles__grid {
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: var(--space-6);
+  }
+
+  .article-card__text {
+    padding: 0 var(--space-4) var(--space-5);
+  }
+
+  .articles__cta {
+    margin-top: var(--space-6);
+  }
+
+  /* El diseño de escritorio no dibuja controles en «La Materia Prima» */
+  .articles__pagination {
+    display: none;
+  }
+
+  .dialog__panel {
+    width: 100%;
+    max-width: 1024px;
+    padding: var(--space-8) var(--space-7);
+  }
+
+  .dialog__close {
+    top: var(--space-5);
+    right: var(--space-5);
+  }
+
+  .dialog__title {
+    font-size: var(--font-size-l-h2);
+  }
 }
