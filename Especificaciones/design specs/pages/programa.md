@@ -8,7 +8,7 @@ herramienta: TalkToFigma (`get_document_info`, `get_nodes_info`, `get_reactions`
 ---
 
 Frame: `2328:4307` — 1448×9475, fondo `--color-surface`. Contenido 1384 (padding
-lateral 32). Ritmo vertical del sitio: [layout.md](../../specs/layout.md).
+lateral 32). Ritmo vertical del sitio: [layout.md](../layout.md).
 
 ## Secciones (en orden)
 
@@ -26,9 +26,9 @@ sección-materialismo **938** · sección-puntos **6745** · footer **405**; el 
 (125) se superpone arriba.
 
 Detalle de componentes extraídos en este ticket:
-[components/images](../../specs/components/images.md),
-[components/buttons](../../specs/components/buttons.md),
-[components/footer](../../specs/components/footer.md).
+[components/images](../components/images.md),
+[components/buttons](../components/buttons.md),
+[components/footer](../components/footer.md).
 
 ## Detalle por sección
 
@@ -86,7 +86,7 @@ Detalle de componentes extraídos en este ticket:
 
 Solo `nav`, `footer` y el botón de `sección-puntos`; el resto del cuerpo no tiene
 interacciones. Registro completo y destinos en
-[interactions.md](../../specs/interactions.md).
+[interactions.md](../interactions.md).
 
 - `components/buttons` `2334:998` → NAVIGATE `Únete` (`2335:1229`), sin transición.
 - `nav`: `logo` → `inicio` (`110:2277`); enlaces → `Programa` (**sin

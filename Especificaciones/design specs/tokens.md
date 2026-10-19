@@ -8,7 +8,7 @@ file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en
 herramienta: TalkToFigma (`get_styles`, `get_node_info`, `get_nodes_info`)
 ---
 
-Los **valores** están en [`site/styles/tokens.css`](../site/styles/tokens.css).
+Los **valores** están en [`site/styles/tokens.css`](../../site/styles/tokens.css).
 Este documento dice **qué token se usa para qué rol**. Fuera de esta tabla,
 `--color-brand` no debe usarse como color de texto de párrafo.
 

@@ -237,7 +237,7 @@ el overlay de la propia página, no el de otra resolución.
 ## Menú móvil (`nav` `2396:2902`)
 
 Figma no registra reacción para la hamburguesa; el comportamiento lo fija el ticket
-(regla 4 de la §3.2) y ya está implementado en [site/scripts/nav.js](../site/scripts/nav.js):
+(regla 4 de la §3.2) y ya está implementado en [site/scripts/nav.js](../../site/scripts/nav.js):
 
 | Acción | Comportamiento |
 | --- | --- |
@@ -249,12 +249,12 @@ Figma no registra reacción para la hamburguesa; el comportamiento lo fija el ti
 
 Figma **no registra reacciones** para `prev`/`next`/`dotnav`, pero el ticket los pide
 funcionales. Esta definición es el contrato que implementa
-[site/scripts/inicio.js](../site/scripts/inicio.js); si cambia, cambia primero
+[site/scripts/inicio.js](../../site/scripts/inicio.js); si cambia, cambia primero
 aquí.
 
 ### Alcance
 
-Dos carruseles en [site/index.html](../site/index.html), con **una misma
+Dos carruseles en [site/index.html](../../site/index.html), con **una misma
 implementación** y 4 elementos cada uno:
 
 | Carrusel | Tarjetas | Controles | Visible a 375 | Visible a 768 | Visible a 1448 |
@@ -296,7 +296,7 @@ implementación** y 4 elementos cada uno:
     nuevo `index`), para que la navegación continúe desde ahí.
   - **a 1448** (objetivos): el foco pasa a la tarjeta del nuevo índice, para que la
     navegación continúe desde ahí (las 4 siguen visibles).
-- El foco usa el `:focus-visible` global de [main.css](../site/styles/main.css)
+- El foco usa el `:focus-visible` global de [main.css](../../site/styles/main.css)
   (2 px `--color-text-primary`).
 - **Sin animación de transición**: el cambio de tarjeta es instantáneo (el diseño no
   especifica movimiento), lo que además cumple `prefers-reduced-motion` sin

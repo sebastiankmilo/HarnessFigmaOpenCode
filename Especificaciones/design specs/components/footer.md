@@ -11,7 +11,7 @@ herramienta: TalkToFigma (`get_node_info`, `get_reactions`, `export_node_as_imag
 
 **No existe como componente en la página `components`**: es un frame idéntico
 repetido en cada pantalla. Se documenta aquí como pieza compartida
-([plan, punto Fase 4](../../docs/tickets/1-flujo-desarrollo-con-figma/planes/plan-vista-inicio-unete.md)).
+([plan, punto Fase 4](../../docs/Web/tickets/1-flujo-desarrollo-con-figma/planes/plan-vista-inicio-unete.md)).
 
 ## Anatomía
 
@@ -83,7 +83,7 @@ Instagram); en el `nav` sí apunta a `https://www.youtube.com/@VanguardiaColombi
   nombre accesible** (`aria-label="Facebook"`, etc.), no como botones mudos
   ([accessibility.md](../accessibility.md)).
 - Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-  [AGENTS.md](../../AGENTS.md)).
+  [AGENTS.md](../../../AGENTS.md)).
 
 ## Instancias en `375-xs` (leídas el 2026-10-04)
 

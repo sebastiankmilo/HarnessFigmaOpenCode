@@ -5,4 +5,7 @@ node_modules/
 tests/visual/actual/
 tests/visual/reports/
 docs/
+Especificaciones/docs/Arness/
+Especificaciones/docs/Web/
+onboarding-audit.html
 .DS_Store

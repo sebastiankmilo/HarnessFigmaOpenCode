@@ -19,21 +19,29 @@ Si `get_document_info` no responde (timeout): el socket, el MCP o el plugin est�
 Verificar en este orden: puerto 3055 escuchando → `lsof -nP -iTCP:3055` muestra una
 conexión **ESTABLISHED** (si no, el plugin se desconectó: reabrirlo y Connect) →
 `chanel_name` de `.env` = el del plugin → releer
-[troubleshooting](../../../docs/tickets/1-flujo-desarrollo-con-figma/entregables/flujo-figma-opencode.md).
+[troubleshooting](../../../Especificaciones/docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/flujo-figma-opencode.md).
 **No hay plan B: si no responde, se detiene y se avisa. No se improvisan valores.**
 
 ## Regla de dos niveles: qué se transcribe a specs y qué no
 
 **A MD (se transcribe — decisiones estables, globales o caras de re-derivar):**
 
-- Tokens (valores → `site/styles/tokens.css`; reglas de uso → `specs/tokens.md`).
-- Breakpoints y dirección de media queries → `specs/breakpoints.md`.
+- Tokens (valores → `site/styles/tokens.css`; reglas de uso → `Especificaciones/design specs/tokens.md`).
+- Breakpoints y dirección de media queries → `Especificaciones/design specs/breakpoints.md`.
 - Escala tipográfica y ritmo de layout (contenedor, gaps entre secciones) →
-  `specs/typography.md`, `specs/layout.md`.
-- **Inventario de estados/variantes** de cada componente → `specs/components/<nombre>.md`.
-- Comportamiento y flujos (`get_reactions`) → `specs/interactions.md`.
-- Mapa de página: secciones en orden **con ID de nodo** → `specs/pages/<pagina>.md`.
-- Manifiesto de assets → `specs/assets.md`.
+  `Especificaciones/design specs/typography.md`, `Especificaciones/design specs/layout.md`.
+- **Inventario de estados/variantes** de cada componente → `Especificaciones/design specs/components/<nombre>.md`.
+- Comportamiento y flujos (`get_reactions`) → `Especificaciones/design specs/interactions.md`.
+- Mapa de página: secciones en orden **con ID de nodo** → `Especificaciones/design specs/pages/<pagina>.md`.
+- Manifiesto de assets → `Especificaciones/design specs/assets.md`.
+
+**A JSON (el copy):**
+
+- El campo `characters` leído con `get_node_info` se transcribe a
+  `site/content/*.json` (un archivo por idioma; claves namespaced
+  `pagina.seccion.campo`). **Nunca** se escribe en los HTML: allí solo van los
+  placeholders `{{clave}}` con `data-i18n="clave"`, que rellena
+  `scripts/inject-content.mjs`.
 
 **A consulta viva (NUNCA se transcribe a MD):**
 
@@ -77,4 +85,4 @@ Toda spec extraída lleva encabezado con `fuente` (página + nodo), `extraido` (
 marca **`PENDIENTE-FIGMA`** — jamás se inventa un valor.
 
 Plantilla y formato de cada spec:
-[especificaciones-diseño](../../../docs/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
+[especificaciones-diseño](../../../Especificaciones/docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).

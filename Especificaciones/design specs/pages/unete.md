@@ -9,7 +9,7 @@ herramienta: TalkToFigma (`get_document_info`, `get_node_info`, `get_reactions`,
 
 Frame: `2335:1229` — 1448×1170.73, fondo `--color-surface`. Contenedor de
 contenido 1384 (padding lateral 32). Ritmo vertical del sitio:
-[layout.md](../../specs/layout.md).
+[layout.md](../layout.md).
 
 ## Secciones (en orden)
 
@@ -45,7 +45,7 @@ Alturas apiladas (gap 0): nav **125** · sección-únete **638.73** · footer **
 ## Comportamiento registrado (22 nodos con reacción)
 
 Solo `nav` y `footer`; el cuerpo de la pantalla no tiene interacciones.
-Registro completo y destinos en [interactions.md](../../specs/interactions.md).
+Registro completo y destinos en [interactions.md](../interactions.md).
 
 - `nav`: `logo` → `inicio` (`110:2277`); enlaces → `Programa` (`2328:4307`),
   `Decálogo` (`2334:1005`), `Únete` (**sin `destinationId`**: enlace a la propia

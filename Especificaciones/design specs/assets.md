@@ -15,9 +15,9 @@ herramienta: TalkToFigma (`export_node_as_image`, `get_local_components`)
 `const format = "PNG";`. Por eso:
 
 - Los iconos están exportados como **PNG a escala 4** (128×128) en
-  [`site/assets/icons/`](../site/assets/icons/) — y a escala 8 (256×256) `logo`
+  [`site/assets/icons/`](../../site/assets/icons/) — y a escala 8 (256×256) `logo`
   y `logo-02`, que se usan a 96px y 128px—, no en SVG como pide
-  [especificaciones-diseño §4.9](../docs/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
+  [especificaciones-diseño §4.9](../docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
 - La exportación SVG queda **PENDIENTE**: requiere un plugin que respete `format` o
   exportar a mano desde Figma.
 

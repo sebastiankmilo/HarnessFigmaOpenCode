@@ -20,8 +20,9 @@ editas código, nunca ejecutas comandos de escritura.
 
 1. Un par de imágenes: `tests/visual/actual/<…>.png` y `tests/visual/baseline/<…>.png`.
 2. La rúbrica del proyecto: `tests/visual/rubric.md`.
-3. La spec de la sección o componente (por ejemplo `specs/pages/inicio.md` o
-   `specs/components/nav.md`) para saber qué se esperaba construir.
+3. La spec de la sección o componente (por ejemplo
+   `Especificaciones/design specs/pages/inicio.md` o
+   `Especificaciones/design specs/components/nav.md`) para saber qué se esperaba construir.
 
 ## Proceso
 

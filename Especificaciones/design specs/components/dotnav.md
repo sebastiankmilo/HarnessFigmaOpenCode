@@ -53,7 +53,7 @@ pero no se les asigna comportamiento (punto 0.1.5 del plan).
 
 Detalle y gravedad en [accessibility.md](../accessibility.md).
 Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-[AGENTS.md](../../AGENTS.md)).
+[AGENTS.md](../../../AGENTS.md)).
 
 ## Instancias en `375-xs` (leídas el 2026-10-04)
 

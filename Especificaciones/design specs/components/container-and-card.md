@@ -83,7 +83,7 @@ Transición/estados hover: **no especificados en Figma** — PENDIENTE.
 
 La tarjeta es **clickeable en su totalidad**: requiere foco visible y nombre
 accesible. **No especificado en Figma** — PENDIENTE; el foco visible es obligatorio
-por [AGENTS.md](../../AGENTS.md).
+por [AGENTS.md](../../../AGENTS.md).
 
 ## Instancia en `375-xs` (leída el 2026-10-04)
 

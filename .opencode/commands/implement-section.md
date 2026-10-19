@@ -18,19 +18,20 @@ Ejecuta estas fases en orden y **detente si alguna falla**:
 ## 2. Extraer la spec (si no existe)
 
 1. Identificar la página y el nodo con `scan_nodes_by_types` / `get_document_info`.
-2. Generar o completar `specs/pages/<pagina>.md` y `specs/components/<nombre>.md`
+2. Generar o completar `Especificaciones/design specs/pages/<pagina>.md` y
+   `Especificaciones/design specs/components/<nombre>.md`
    siguiendo la plantilla de
-   [especificaciones-diseño](../../docs/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
+   [especificaciones-diseño](../../Especificaciones/docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
 3. Registrar trazabilidad (fuente, fecha, `file_key_copia`, herramientas) y marcar
    `PENDIENTE-FIGMA` lo no confirmable.
 4. Exportar a `site/assets/icons|img` cualquier asset nuevo y anotarlo en
-   `specs/assets.md`.
+   `Especificaciones/design specs/assets.md`.
 
 ## 3. Implementar
 
 Con la skill [design-implementation](../skills/design-implementation/SKILL.md):
 HTML/CSS/JS en `site/` tomando valores **solo** de `site/styles/tokens.css` y medidas
-**solo** de `specs/`. Si falta un dato → volver a la fase 2, no estimarlo.
+**solo** de `Especificaciones/design specs/`. Si falta un dato → volver a la fase 2, no estimarlo.
 
 ## 4. Capturar y verificar
 

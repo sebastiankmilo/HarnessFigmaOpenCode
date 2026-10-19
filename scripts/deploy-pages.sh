@@ -15,6 +15,11 @@ if [ ! -f site/index.html ]; then
   exit 1
 fi
 
+# Inyección de contenidos (site/content/*.json → HTML) antes de publicar.
+# Requiere Node ≥18. Si falla (clave faltante o placeholder residual), el
+# deploy se detiene con set -e y no se publica nada roto.
+node scripts/inject-content.mjs
+
 # gh-pages no puede estar checkeada en ningún worktree: se reescribe con update-ref.
 if git worktree list --porcelain | grep -qx 'branch refs/heads/gh-pages'; then
   echo "ERROR: la rama gh-pages está checkeada en un worktree; desenróllala antes." >&2

@@ -9,7 +9,7 @@ herramienta: TalkToFigma (`get_document_info`, `get_node_info`, `get_nodes_info`
 
 Frame: `110:2277` — 1448×4499. Ancho del contenedor de contenido: 1384 (padding
 lateral 32). Ritmo vertical, grillas y alturas de sección:
-[layout.md](../../specs/layout.md).
+[layout.md](../layout.md).
 
 ## Secciones (en orden)
 
@@ -24,9 +24,9 @@ lateral 32). Ritmo vertical, grillas y alturas de sección:
 | 7 | Footer | `2328:4305` | `icons/logo-02`, `icons/facebook`, `icons/instagram`, `icons/youtube`, `icons/x`, `icons/tik-tok` | — |
 
 Detalle de componentes extraídos en este ticket:
-[components/nav](../../specs/components/nav.md),
-[components/header-two-columns](../../specs/components/header-two-columns.md),
-[components/goal-card](../../specs/components/goal-card.md).
+[components/nav](../components/nav.md),
+[components/header-two-columns](../components/header-two-columns.md),
+[components/goal-card](../components/goal-card.md).
 
 ## Detalle por sección
 
@@ -103,12 +103,12 @@ de texto 560×285, mismo triángulo de play, gap 32 entre columnas).
 ### 7 — `footer` (`2328:4305`)
 
 1448×405, fondo `--color-surface-dark` (`#333333`), padding vertical **64**.
-Compartido por todas las pantallas: ver [components/footer](../../specs/components/footer.md).
+Compartido por todas las pantallas: ver [components/footer](../components/footer.md).
 
 ## Puntos de entrada del prototipo
 
 Registrados con `get_reactions` (tabla completa en
-[interactions.md](../../specs/interactions.md)):
+[interactions.md](../interactions.md)):
 
 - Botones del encabezado → `Programa` (`2328:4307`) y `Únete` (`2335:1229`).
 - Cada `goal-card` → abre `Objetivo-modal` (`2358:932`) como overlay.
@@ -122,25 +122,25 @@ Registradas para no perder lo observado al implementar:
 1. **Nav sin enlace activo**: en esta pantalla las 4 líneas de subrayado del nav **no
    son visibles** (el muestreo de píxeles del export devuelve color de fondo en
    `y=121–124`); **ningún enlace aparece activo**. (Contradice el texto de
-   [components/nav](../../specs/components/nav.md), que afirma que el enlace 1 va en
+   [components/nav](../components/nav.md), que afirma que el enlace 1 va en
    `--color-text-primary`.)
 2. **`goal-card` sin botón**: en las 4 instancias el `components/buttons` «Leer más»
    está **oculto** (el export del nodo devuelve 1×1); el botón, además, apuntaba a
    `y=345` y se solapaba con el párrafo. Las tarjetas se renderizan con avatar,
    título y párrafo, **sin botón**. El componente por sí mismo sí lo muestra
-   (ver [components/goal-card](../../specs/components/goal-card.md)).
+   (ver [components/goal-card](../components/goal-card.md)).
 3. **Paginación sin comportamiento en el prototipo**: `icons/prev` (`2326:4023`),
    `components/dotnav` (`2326:4033`) e `icons/next` (`2326:4026`) **no tienen
    reacciones** registradas (verificado también en `375-xs`: `2392:4005` y
    `2392:4101`). **Actualización v1.2 del ticket (2026-10-04)**: pese a eso, los
    controles **sí deben ser funcionales**; el comportamiento se definió en
-   [interactions.md](../../specs/interactions.md) y se implementa en
+   [interactions.md](../interactions.md) y se implementa en
    `site/scripts/inicio.js`.
 4. **Iconos de los botones ocultos**: los dos `icons/heart-fill` de cada
    `components/buttons` están ocultos en todas las instancias de la pantalla.
 5. **Colores sin token de rol**: la media de vídeo (`#c2c2c2`), la banda del vídeo
    (`#adadad`), el fondo de «La Materia Prima» (`#d6d6d6`) y el footer (`#333333`)
-   — se añadieron como tokens de rol en [tokens.md](../../specs/tokens.md).
+   — se añadieron como tokens de rol en [tokens.md](../tokens.md).
 6. **Nav en `xs`/`sm`**: las variantes del componente traen los 3 iconos por
    defecto (`weibo`, `xiao-hong-shu`, `wechat`), no los 5 reales del `lg`, y en `sm`
    solo 3 enlaces con texto de relleno (`Enlace 01`). **Relectura `2026-10-04`**:
@@ -151,7 +151,7 @@ Registradas para no perder lo observado al implementar:
    pendiente**: se leyó el 2026-10-05 (barra 768×75 = logo + 5 plataformas +
    hamburguesa; overlay `2424:446`) y está documentado en la sección `sm` de
    este archivo, en [components/nav.md](../components/nav.md) y en
-   [breakpoints.md](../../specs/breakpoints.md) (umbral **768px**). En `lg` se
+   [breakpoints.md](../breakpoints.md) (umbral **768px**). En `lg` se
    usan las instancias reales (5 plataformas, 4 enlaces).
 7. **Enlaces sin destino en el prototipo**: los botones `Aporta` y `Botón` del nav y
    el enlace `Aporta` del footer **no tienen reacción**; se dibujan como elementos
@@ -160,7 +160,7 @@ Registradas para no perder lo observado al implementar:
    `youtube` apunta a Instagram. La implementación usa la URL de YouTube correcta
    (`https://www.youtube.com/@VanguardiaColombiana`, la misma que el `nav`); el valor
    real de Figma queda registrado en
-   [interactions.md](../../specs/interactions.md) y [components/footer](../../specs/components/footer.md).
+   [interactions.md](../interactions.md) y [components/footer](../components/footer.md).
 9. **Contenido del `Objetivo-modal`**: Figma define **un único** diálogo (título y
    cuerpo de la primera `goal-card`); las 4 tarjetas abren ese mismo diálogo.
    Contenido por objetivo: **PENDIENTE**.
@@ -212,7 +212,7 @@ padding 16, título 25.6, entradilla 16, gap **8** entre título y entradilla.
 **Carrusel** (v1.2/v1.4 del ticket): a 375 se ve **1 tarjeta** por sección (`objetivos`
 `2392:4000`; artículos `2392:4057` con controles `2392:4101`), a 1448 se ven las 4.
 El comportamiento de `prev`/`next`/`dotnav` está definido en
-[interactions.md](../../specs/interactions.md) y se implementa en `site/scripts/inicio.js`.
+[interactions.md](../interactions.md) y se implementa en `site/scripts/inicio.js`.
 
 ### `sm` (768) — frame `268:3128`, 768×4233 (leído el 2026-10-05)
 
@@ -239,6 +239,6 @@ gap imagen→texto **16**, texto con padding **24**, título **25.6**, entradill
 **Carrusel**: a 768 se ven **2 tarjetas** de los 4 objetivos (controles
 `2408:1661` prev 64×64, `2408:1662` dotnav 80×8 con 4 puntos, `2408:1663` next
 64×64, en `2408:1660`, 714×64). El comportamiento está definido en
-[interactions.md](../../specs/interactions.md) y se implementa en
+[interactions.md](../interactions.md) y se implementa en
 `site/scripts/inicio.js`. El modal `Objetivo-modal` **no existe** en `1024-sm`
 (Caso 19) y no se implementa a tablet.

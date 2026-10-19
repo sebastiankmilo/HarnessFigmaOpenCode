@@ -77,7 +77,7 @@ frame de 1024 en el archivo.
 - **Confirmado por el equipo (2026-10-05): rige 768px** como umbral de la media query
   tablet («nos vamos a guiar por los tamaños de los elementos en Figma»). Registrado en
   el ticket 3 (Caso 20 de
-  [1-tarea-descripcion.md](../docs/tickets/3-vistas-tablet-1024-sm/1-tarea-descripcion.md)).
+  [1-tarea-descripcion.md](../docs/Web/tickets/3-vistas-tablet-1024-sm/1-tarea-descripcion.md)).
   Este documento registra la evidencia; la decisión es del equipo.
 
 ## Dirección de las media queries

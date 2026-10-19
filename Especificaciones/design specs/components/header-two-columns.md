@@ -9,7 +9,7 @@ herramienta: TalkToFigma (`get_node_info`, `get_nodes_info`)
 
 No está instanciado en `inicio` (observado: las secciones de esa pantalla usan
 `components/images` y frames propios). Se documenta porque
-[especificaciones-diseño §6](../../docs/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md) lo incluye
+[especificaciones-diseño §6](../../docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md) lo incluye
 en el lote inicial de componentes.
 
 ## Anatomía

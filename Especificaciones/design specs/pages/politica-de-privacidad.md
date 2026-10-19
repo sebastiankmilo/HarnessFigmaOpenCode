@@ -8,7 +8,7 @@ herramienta: TalkToFigma (`get_document_info`, `get_nodes_info`, `get_reactions`
 ---
 
 Frame: `2335:1533` — 1448×1836, fondo `--color-surface`. Contenido 1384 (padding
-lateral 32). Ritmo vertical del sitio: [layout.md](../../specs/layout.md).
+lateral 32). Ritmo vertical del sitio: [layout.md](../layout.md).
 
 **No tiene frame `header` propio**: el nav se superpone sobre `sección-puntos`
 (mismo caso que en [inicio](./inicio.md)).
@@ -25,8 +25,8 @@ Alturas apiladas (gap 0): sección-puntos **1304** · footer **405**; el nav (12
 se superpone arriba.
 
 Detalle de componentes extraídos en este ticket:
-[components/buttons](../../specs/components/buttons.md),
-[components/footer](../../specs/components/footer.md).
+[components/buttons](../components/buttons.md),
+[components/footer](../components/footer.md).
 
 ## Detalle por sección
 
@@ -47,7 +47,7 @@ Detalle de componentes extraídos en este ticket:
 ## Comportamiento registrado
 
 Solo `nav` y `footer`; el cuerpo de la pantalla no tiene interacciones. Registro
-completo y destinos en [interactions.md](../../specs/interactions.md).
+completo y destinos en [interactions.md](../interactions.md).
 
 - `nav`: `logo` → `inicio` (`110:2277`); enlaces → `Programa` (`2328:4307`),
   `Decálogo` (`2334:1005`), `Únete` (`2335:1229`) y `https://lamateriaprima.org/`;
@@ -92,4 +92,4 @@ sobre `2396:2891` **no registra reacción** en `375-xs` tampoco.
 2026-10-05; en `lg` (`2335:1574`) y `xs` (`2396:2891`) Figma **no le asigna
 destino** y ahí se mantiene el `PENDIENTE`. Como el HTML es único, el botón se
 implementa como enlace a `index.html` (el propio texto del botón declara el
-destino); registrado también en [interactions.md](../../specs/interactions.md).
+destino); registrado también en [interactions.md](../interactions.md).

@@ -77,7 +77,7 @@ La instancia `2358:1158` pinta la etiqueta `#ff8000` al 30 % sobre `#333333`
 - Etiqueta `--color-on-dark` sobre `--color-text-primary`: 21.00:1 — AA.
 - Etiqueta `--color-on-dark` sobre `--color-text-secondary`: 12.63:1 — AA.
 - Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-  [AGENTS.md](../../AGENTS.md)).
+  [AGENTS.md](../../../AGENTS.md)).
 
 ## Instancias en `375-xs` (leídas el 2026-10-04)
 

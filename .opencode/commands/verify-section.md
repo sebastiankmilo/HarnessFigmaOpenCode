@@ -18,11 +18,12 @@ la que esté marcada como en revisión).
 1. Lanzar el agente [visual-judge](../agents/visual-judge.md) con:
    - pares `tests/visual/actual/` vs `tests/visual/baseline/`,
    - `tests/visual/rubric.md`,
-   - la spec de la sección (`specs/pages/…`, `specs/components/…`).
+   - la spec de la sección (`Especificaciones/design specs/pages/…`,
+     `Especificaciones/design specs/components/…`).
 2. Criterio de paso: **0 hallazgos críticos y score ≥ 0.9**.
    La rúbrica **nunca** se afloja para aprobar: se corrige el CSS y se repite.
 3. Las interacciones se comprueban con aserciones funcionales (navegación,
-   apertura/cierre del modal, estados) contra `specs/interactions.md`.
+   apertura/cierre del modal, estados) contra `Especificaciones/design specs/interactions.md`.
 
 ## 3. Resultado
 

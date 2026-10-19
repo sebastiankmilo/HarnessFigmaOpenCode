@@ -35,14 +35,14 @@ Figma la pinta `#ff8000` al 30 % sobre `#333333`, es decir **`#704a24` → ratio
 `components/buttons` define la etiqueta en `--color-on-dark`.
 
 **Se implementa con `--color-on-dark` (12.63:1)**, por la regla de contraste AA
-obligatoria de [AGENTS.md](../../AGENTS.md). **PENDIENTE de confirmación con
+obligatoria de [AGENTS.md](../../../AGENTS.md). **PENDIENTE de confirmación con
 el diseño**: si se decide respetar el valor de Figma, hay que cambiarlo aquí y en la
 tabla de accesibilidad.
 
 ## Variantes y estados
 
 No hay variantes: un único frame. Estados del diálogo, obligatorios por
-[AGENTS.md](../../AGENTS.md) y **no especificados en Figma**: foco visible
+[AGENTS.md](../../../AGENTS.md) y **no especificados en Figma**: foco visible
 (`:focus-visible`), foco atrapado dentro del diálogo con restauración al cerrar, y
 cierre con `Escape`.
 
@@ -92,7 +92,7 @@ Baseline: `tests/visual/baseline/objetivo-modal-1448.png` — PENDIENTE
 ### `sm` (tablet) — **no existe frame** (Caso 19, leído el 2026-10-05)
 
 La página `1024-sm` (`10:214`) **no tiene frame `Objetivo-modal`** entre sus 6
-pantallas (ver [breakpoints.md](../../specs/breakpoints.md)) y `get_reactions`
+pantallas (ver [breakpoints.md](../breakpoints.md)) y `get_reactions`
 sobre las `goal-card` de `inicio` a 768 (`2408:1656`, `2408:1657`) devuelve
 **0 reacciones**: no hay `ON_CLICK` que abra un overlay.
 
