@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vanguardia Colombiana</title>
+  <title data-i18n="index.meta.title">Vanguardia Colombiana</title>
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/inicio.css">
@@ -16,13 +16,13 @@
       </a>
       <div class="site-nav__right">
         <ul class="site-nav__links">
-          <li><a class="site-nav__link" href="programa.html">Programa</a></li>
-          <li><a class="site-nav__link" href="decalogo.html">Decálogo</a></li>
-          <li><a class="site-nav__link" href="unete.html">Únete</a></li>
-          <li><a class="site-nav__link" href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer">La Materia Prima</a></li>
+          <li><a class="site-nav__link" href="programa.html" data-i18n="common.nav.programa">Programa</a></li>
+          <li><a class="site-nav__link" href="decalogo.html" data-i18n="common.nav.decalogo">Decálogo</a></li>
+          <li><a class="site-nav__link" href="unete.html" data-i18n="common.nav.unete">Únete</a></li>
+          <li><a class="site-nav__link" href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer" data-i18n="common.nav.materia-prima">La Materia Prima</a></li>
         </ul>
         <div class="site-nav__buttons">
-          <span class="btn btn--dark btn--s">Aporta</span>
+          <span class="btn btn--dark btn--s" data-i18n="common.nav.aporta">Aporta</span>
         </div>
         <div class="site-nav__platforms">
           <a class="site-nav__platform is-mobile" href="https://weibo.com/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/weibo.png" alt="Weibo"></a>
@@ -49,14 +49,14 @@
       <div class="site-nav__menu-content">
         <a href="index.html"><img class="site-nav__menu-logo" src="assets/icons/logo.png" alt="Vanguardia Colombiana"></a>
         <nav class="site-nav__menu-links" aria-label="Menú">
-          <a href="programa.html">Programa</a>
-          <a href="decalogo.html">Decálogo</a>
-          <a href="unete.html">Únete</a>
-          <a href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer">La Materia Prima</a>
-          <a href="politica-de-privacidad.html">Política de privacidad</a>
+          <a href="programa.html" data-i18n="common.nav.programa">Programa</a>
+          <a href="decalogo.html" data-i18n="common.nav.decalogo">Decálogo</a>
+          <a href="unete.html" data-i18n="common.nav.unete">Únete</a>
+          <a href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer" data-i18n="common.nav.materia-prima">La Materia Prima</a>
+          <a href="politica-de-privacidad.html" data-i18n="common.menu.privacidad">Política de privacidad</a>
         </nav>
         <div class="site-nav__menu-buttons">
-          <span class="btn btn--dark btn--s">Aporta</span>
+          <span class="btn btn--dark btn--s" data-i18n="common.nav.aporta">Aporta</span>
         </div>
         <div class="site-nav__menu-platforms">
           <a href="https://www.facebook.com/people/Vanguardia-Colombiana/100092503032769/" target="_blank" rel="noopener noreferrer"><img src="assets/icons/facebook.png" alt="Facebook"></a>
@@ -73,12 +73,12 @@
     <section class="hero">
       <div class="container">
         <div class="hero__text">
-          <h1>Vanguardia Colombiana</h1>
-          <p>Somos una asociación cultural con vocación política que busca desde la praxis y el análisis crítico de la realidad nacional e internacional, superar el estado de cosas actual en nuestro país y mejorar las condiciones materiales de la inmensa mayoría de nuestra sociedad. Los trabajadores, quienes somos el 90% de población, y si logramos ponernos deacuerdo sobre bases fundamentales, podremos construir una nación y una civilización en donde prevalezcan el bien común, la soberanía política y la independencia económica.</p>
+          <h1 data-i18n="inicio.hero.title">Vanguardia Colombiana</h1>
+          <p data-i18n="inicio.hero.lead">Somos una asociación cultural con vocación política que busca desde la praxis y el análisis crítico de la realidad nacional e internacional, superar el estado de cosas actual en nuestro país y mejorar las condiciones materiales de la inmensa mayoría de nuestra sociedad. Los trabajadores, quienes somos el 90% de población, y si logramos ponernos deacuerdo sobre bases fundamentales, podremos construir una nación y una civilización en donde prevalezcan el bien común, la soberanía política y la independencia económica.</p>
         </div>
         <div class="hero__actions">
-          <a class="btn btn--primary btn--m" href="programa.html">Nuestro programa</a>
-          <a class="btn btn--outline btn--m" href="unete.html">Únete</a>
+          <a class="btn btn--primary btn--m" href="programa.html" data-i18n="inicio.hero.cta">Nuestro programa</a>
+          <a class="btn btn--outline btn--m" href="unete.html" data-i18n="inicio.hero.cta-unete">Únete</a>
         </div>
       </div>
     </section>
@@ -97,36 +97,36 @@
     <section class="goals">
       <div class="container">
         <div class="section-intro">
-          <h2>Nuestros objetivos</h2>
-          <p>Los puntos básicos que guían nuestras ideas y nuestro proyecto político son:</p>
+          <h2 data-i18n="inicio.goals.title">Nuestros objetivos</h2>
+          <p data-i18n="inicio.goals.lead">Los puntos básicos que guían nuestras ideas y nuestro proyecto político son:</p>
         </div>
         <ul class="goals__grid" data-carousel="goals">
           <li class="goal-card is-active" role="button" tabindex="0" aria-label="Ver objetivo: Elevación de los trabajadores colombianos a la condición de clase nacional">
             <span class="goal-card__avatar"></span>
             <div class="goal-card__text">
-              <h3>Elevación de los trabajadores colombianos a la condición de clase nacional</h3>
-              <p>Los trabajadores hemos de controlar todas las capas y ramas del poder político y ser dueños del excedente de producción en las empresas, públicas y privadas, que nosotros mismos producimos.</p>
+              <h3 data-i18n="inicio.goals.card-1.title">Elevación de los trabajadores colombianos a la condición de clase nacional</h3>
+              <p data-i18n="inicio.goals.card-1.body">Los trabajadores hemos de controlar todas las capas y ramas del poder político y ser dueños del excedente de producción en las empresas, públicas y privadas, que nosotros mismos producimos.</p>
             </div>
           </li>
           <li class="goal-card" role="button" tabindex="0" aria-label="Ver objetivo: La insubordinación fundante de Colombia">
             <span class="goal-card__avatar"></span>
             <div class="goal-card__text">
-              <h3>La insubordinación fundante de Colombia</h3>
-              <p>La insubordinación fundante de Colombia contra la ideología del libre comercio, la industralización de la Nación Colombiana bajo control de los trabajadores contra nuestras oligarquías vendepatrias, subordinadas a Estados Unidos.</p>
+              <h3 data-i18n="inicio.goals.card-2.title">La insubordinación fundante de Colombia</h3>
+              <p data-i18n="inicio.goals.card-2.body">La insubordinación fundante de Colombia contra la ideología del libre comercio, la industralización de la Nación Colombiana bajo control de los trabajadores contra nuestras oligarquías vendepatrias, subordinadas a Estados Unidos.</p>
             </div>
           </li>
           <li class="goal-card" role="button" tabindex="0" aria-label="Ver objetivo: Planificación de la economía mediante la tecnología cibernética">
             <span class="goal-card__avatar"></span>
             <div class="goal-card__text">
-              <h3>Planificación de la economía mediante la tecnología cibernética</h3>
-              <p>Posibilitar la transmisión de información comercial, productiva, fiscal y distributiva mediante la tecnología de punta, siembre bajo control del Estado, a su vez bajo control de los trabajadores políticamente organizados.</p>
+              <h3 data-i18n="inicio.goals.card-3.title">Planificación de la economía mediante la tecnología cibernética</h3>
+              <p data-i18n="inicio.goals.card-3.body">Posibilitar la transmisión de información comercial, productiva, fiscal y distributiva mediante la tecnología de punta, siembre bajo control del Estado, a su vez bajo control de los trabajadores políticamente organizados.</p>
             </div>
           </li>
           <li class="goal-card" role="button" tabindex="0" aria-label="Ver objetivo: Política Exterior e Iberofonía">
             <span class="goal-card__avatar"></span>
             <div class="goal-card__text">
-              <h3>Política Exterior e Iberofonía</h3>
-              <p>Promoción de la fusión de la Secretaría General Iberoamericana (SEGIB) con la Comunidad de Países de Lengua Portuguesa; apoyo desde esta fusión a MERCOSUR, UNASUR, ALADI y CELAC, junto con otras organizaciones de integración del ámbito iberófono.</p>
+              <h3 data-i18n="inicio.goals.card-4.title">Política Exterior e Iberofonía</h3>
+              <p data-i18n="inicio.goals.card-4.body">Promoción de la fusión de la Secretaría General Iberoamericana (SEGIB) con la Comunidad de Países de Lengua Portuguesa; apoyo desde esta fusión a MERCOSUR, UNASUR, ALADI y CELAC, junto con otras organizaciones de integración del ámbito iberófono.</p>
             </div>
           </li>
         </ul>
@@ -144,15 +144,15 @@
             <img src="assets/icons/next.png" alt="">
           </button>
         </div>
-        <a class="btn btn--primary btn--m goals__cta" href="programa.html">Nuestro programa</a>
+        <a class="btn btn--primary btn--m goals__cta" href="programa.html" data-i18n="inicio.goals.cta">Nuestro programa</a>
       </div>
     </section>
 
     <section class="articles">
       <div class="container">
         <div class="section-intro">
-          <h2>La Materia Prima</h2>
-          <p>Revista dedicada al análisis de temas actuales desde el materialismo político.</p>
+          <h2 data-i18n="inicio.articles.title">La Materia Prima</h2>
+          <p data-i18n="inicio.articles.lead">Revista dedicada al análisis de temas actuales desde el materialismo político.</p>
         </div>
         <ul class="articles__grid" data-carousel="articles">
           <li class="article-card is-active">
@@ -160,8 +160,8 @@
               <span class="media__label">5:4</span>
             </div>
             <div class="article-card__text">
-              <h3>¿Está Cuba vendiendo una nueva imagen al mundo?</h3>
-              <p>Mientras muchos cubanos hacen filas por alimentos, el nieto de Raúl Castro exhibe un medallón de oro y dice que quisiera que todos vivieran como él...</p>
+              <h3 data-i18n="inicio.articles.card-1.title">¿Está Cuba vendiendo una nueva imagen al mundo?</h3>
+              <p data-i18n="inicio.articles.card-1.body">Mientras muchos cubanos hacen filas por alimentos, el nieto de Raúl Castro exhibe un medallón de oro y dice que quisiera que todos vivieran como él...</p>
             </div>
           </li>
           <li class="article-card">
@@ -169,8 +169,8 @@
               <span class="media__label">5:4</span>
             </div>
             <div class="article-card__text">
-              <h3>Ontología del Materialismo Político</h3>
-              <p>¿De qué está hecho el mundo? ¿Cuáles son los principios fundamentales que sostienen la realidad? Para el Materialismo Político, la materia, pero entendida como mucho más que aquello...</p>
+              <h3 data-i18n="inicio.articles.card-2.title">Ontología del Materialismo Político</h3>
+              <p data-i18n="inicio.articles.card-2.body">¿De qué está hecho el mundo? ¿Cuáles son los principios fundamentales que sostienen la realidad? Para el Materialismo Político, la materia, pero entendida como mucho más que aquello...</p>
             </div>
           </li>
           <li class="article-card">
@@ -178,8 +178,8 @@
               <span class="media__label">5:4</span>
             </div>
             <div class="article-card__text">
-              <h3>¿De qué hablamos cuando hablamos del Materialismo Político?</h3>
-              <p>Ni idealismo, ni empirismo, ni verdad revelada. El Materialismo Político es un sistema filosófico en construcción que fusiona el...</p>
+              <h3 data-i18n="inicio.articles.card-3.title">¿De qué hablamos cuando hablamos del Materialismo Político?</h3>
+              <p data-i18n="inicio.articles.card-3.body">Ni idealismo, ni empirismo, ni verdad revelada. El Materialismo Político es un sistema filosófico en construcción que fusiona el...</p>
             </div>
           </li>
           <li class="article-card">
@@ -187,8 +187,8 @@
               <span class="media__label">5:4</span>
             </div>
             <div class="article-card__text">
-              <h3>Elecciones en Colombia: Entre el fraude y la ilusión democrática</h3>
-              <p>El 31 de mayo, las elecciones colombianas dejaron en primera vuelta a Abelardo de la Espriella y a Iván Cepeda. Tomar partido por...</p>
+              <h3 data-i18n="inicio.articles.card-4.title">Elecciones en Colombia: Entre el fraude y la ilusión democrática</h3>
+              <p data-i18n="inicio.articles.card-4.body">El 31 de mayo, las elecciones colombianas dejaron en primera vuelta a Abelardo de la Espriella y a Iván Cepeda. Tomar partido por...</p>
             </div>
           </li>
         </ul>
@@ -206,7 +206,7 @@
             <img src="assets/icons/next.png" alt="">
           </button>
         </div>
-        <a class="btn btn--primary btn--m articles__cta" href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer">lamateriaprima.org</a>
+        <a class="btn btn--primary btn--m articles__cta" href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer" data-i18n="inicio.articles.cta">lamateriaprima.org</a>
       </div>
     </section>
 
@@ -220,8 +220,8 @@
             </div>
           </div>
           <div class="join-block__text">
-            <h2>Únete a Vanguardia Colombiana</h2>
-            <p>Para unirte a Vanguardia Colombiana, debes leer nuestro decálogo y estar de acuerdo con nuestros principios para unirte. Si estas de acuerdo con nuestros fundamentos y quieres hacer parte de Vanguardia Colombiana, escríbenos a vanguardiacolombiana@gmail.com para iniciar el proceso. Agradecemos tu interés.</p>
+            <h2 data-i18n="inicio.join.title">Únete a Vanguardia Colombiana</h2>
+            <p data-i18n="inicio.join.body">Para unirte a Vanguardia Colombiana, debes leer nuestro decálogo y estar de acuerdo con nuestros principios para unirte. Si estas de acuerdo con nuestros fundamentos y quieres hacer parte de Vanguardia Colombiana, escríbenos a vanguardiacolombiana@gmail.com para iniciar el proceso. Agradecemos tu interés.</p>
           </div>
         </div>
       </div>
@@ -240,15 +240,15 @@
           <a href="https://www.tiktok.com/@lavanguardiacolombiana" target="_blank" rel="noopener noreferrer"><img src="assets/icons/tik-tok.png" alt="TikTok"></a>
         </div>
         <ul class="site-footer__links">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="programa.html">Programa</a></li>
-          <li><a href="decalogo.html">Decálogo</a></li>
-          <li><a href="unete.html">Únete</a></li>
-          <li><a href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer">La Materia Prima</a></li>
-          <li><span>Aporta</span></li>
-          <li><a href="politica-de-privacidad.html">Pólitica de privacidad</a></li>
+          <li><a href="index.html" data-i18n="common.footer.inicio">Inicio</a></li>
+          <li><a href="programa.html" data-i18n="common.footer.programa">Programa</a></li>
+          <li><a href="decalogo.html" data-i18n="common.footer.decalogo">Decálogo</a></li>
+          <li><a href="unete.html" data-i18n="common.footer.unete">Únete</a></li>
+          <li><a href="https://lamateriaprima.org/" target="_blank" rel="noopener noreferrer" data-i18n="common.footer.materia-prima">La Materia Prima</a></li>
+          <li><span data-i18n="common.footer.aporta">Aporta</span></li>
+          <li><a href="politica-de-privacidad.html" data-i18n="common.footer.politica-privacidad">Pólitica de privacidad</a></li>
         </ul>
-        <p class="site-footer__copyright">© 2026 Vanguardia Colombiana. Todos los derechos reservados.</p>
+        <p class="site-footer__copyright" data-i18n="common.footer.copyright">© 2026 Vanguardia Colombiana. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
@@ -258,12 +258,13 @@
       <button class="dialog__close" type="button" aria-label="Cerrar">
         <img src="assets/icons/close.png" alt="">
       </button>
-      <h2 class="dialog__title" id="dialog-title">Elevación de los trabajadores colombianos a la condición de clase nacional</h2>
-      <p class="dialog__body">Los trabajadores hemos de controlar todas las capas y ramas del poder político y ser dueños del excedente de producción en las empresas, públicas y privadas, que nosotros mismos producimos.<br>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos</p>
-      <a class="btn btn--primary btn--m dialog__cta" href="programa.html">Nuestro programa</a>
+      <h2 class="dialog__title" id="dialog-title" data-i18n="inicio.dialog.title">Elevación de los trabajadores colombianos a la condición de clase nacional</h2>
+      <p class="dialog__body"><span data-i18n="inicio.dialog.body-1">Los trabajadores hemos de controlar todas las capas y ramas del poder político y ser dueños del excedente de producción en las empresas, públicas y privadas, que nosotros mismos producimos.</span><br><span data-i18n="inicio.dialog.body-2">Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos</span></p>
+      <a class="btn btn--primary btn--m dialog__cta" href="programa.html" data-i18n="inicio.dialog.cta">Nuestro programa</a>
     </div>
   </div>
 
+  <script src="scripts/i18n.js" defer></script>
   <script src="scripts/nav.js"></script>
   <script src="scripts/inicio.js"></script>
 </body>
