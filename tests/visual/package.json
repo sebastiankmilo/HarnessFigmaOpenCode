@@ -1,0 +1,14 @@
+{
+  "name": "vci-arness-visual",
+  "private": true,
+  "description": "Arnés de verificación visual del proyecto Vanguardia Colombiana (ticket Arness 2)",
+  "scripts": {
+    "test": "playwright test",
+    "test:desktop": "playwright test --project=desktop-1448",
+    "test:mobile": "playwright test --project=mobile-375",
+    "judge": "playwright test --list"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}
