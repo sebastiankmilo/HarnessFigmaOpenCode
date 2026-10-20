@@ -35,9 +35,10 @@ HTML/CSS/JS en `site/` tomando valores **solo** de `site/styles/tokens.css` y me
 
 ## 4. Capturar y verificar
 
-1. Capturas a 1448 y 375 desde `tests/visual/`.
+1. Capturas a 1448 y 375: `npm test` desde `tests/` (salida en
+   `tests/test-vanguardia/actual/`).
 2. Lanzar el agente [visual-judge](../agents/visual-judge.md) contra
-   `tests/visual/rubric.md`.
+   `tests/visual/especificaciones/rubric.md`.
 3. Aprobar solo con **0 críticos y score ≥ 0.9**; si no, corregir CSS y repetir.
 
 ## 5. Cierre

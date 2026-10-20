@@ -23,9 +23,31 @@
   --color-accent-mint: #6de4da;        /* Secondary Mint */
   --color-media-placeholder: #ebebeb;  /* relleno de components/images en el wireframe */
   --color-media-video: #c2c2c2;        /* Neutral 30 — relleno de las medias de vídeo (inicio 3 y 6, Únete) */
-  --color-video-band: #adadad;         /* Neutral 40 — banda a sangre de la sección de vídeo */
+  --color-video-band: #30250f;         /* banda a sangre de la sección de vídeo (baseline inicio y900-1530) */
   --color-avatar-placeholder: #d9d9d9; /* relleno del avatar de goal-card */
-  --color-dot-inactive: #858585;       /* Neutral 60 — punto activo del dotnav */
+  --color-dot-inactive: #858585;       /* Neutral 60 — punto activo del dotnav (wireframe; superado por --color-dot-inactive-new) */
+
+  /* ── Diseño definitivo (2026-10-20, ticket 4) ─────────────────── */
+  --color-surface-page: #fdfcfa;       /* fondo de página, nav, tarjetas default */
+  --color-surface-white: #ffffff;      /* fondo blanco de secciones (programa: ejes y puntos) */
+  --color-button-fill: #ffcd00;        /* relleno de components/buttons (Aporta, Nuestro programa) */
+  --color-hover-accent: #ff4520;       /* hover de botones, subrayado de enlaces, enlace activo del índice */
+  --color-card-hover: #f0ece6;         /* hover de goal-card y container-and-card */
+  --color-dot-active: #65543a;         /* punto activo del dotnav */
+  --color-dot-inactive-new: #d7d2ca;   /* puntos inactivos del dotnav y bordes suaves */
+  --color-cta-default: #ceac57;        /* fondo default del CTA lamateriaprima.org */
+  --color-cta-hover: #1b2c43;          /* fondo hover del CTA / texto default del CTA */
+  --color-text-brown: #30250f;         /* texto de nav, botones y enlaces del índice */
+  --color-heading-brown: #53411e;      /* titulares (modal, Puntos, goal-card, sección-únete) */
+  --color-link-underline: #786952;     /* subrayado default del enlace de texto de Únete */
+  --color-link-underline-hover: #003399; /* subrayado hover del índice de puntos */
+
+  /* Medidos por muestreo de píxeles sobre los 5 baselines (2026-10-26) */
+  --color-footer-bg: #ffd633;          /* fondo del footer en las 5 vistas */
+  --color-section-soft: #f0ece6;       /* fondo de la sección «Nuestros objetivos» (inicio) */
+  --color-band-dark: #1c2c43;          /* banda de «La Materia Prima» (inicio y2610-3490) */
+  --color-decal-hero: #cc371a;         /* fondo del hero de Decálogo (y160-780) */
+  --color-lang-inactive: #9e9382;      /* idioma inactivo (PT) del selector ES/PT */
 
   /* Escala neutral observada en la paleta de Figma (página components) */
   --neutral-0: #fafafa;
@@ -41,6 +63,17 @@
 
   /* ── Tipografía ──────────────────────────────────────────────── */
   --font-family-base: "DM Sans", sans-serif;
+  --font-family-display: "Bebas Neue", sans-serif; /* titulares del diseño definitivo (woff2 pendiente de vendorizar) */
+
+  /* Título del hero de inicio — Figma `encabezado-texto` (2325:3824), leído 2026-10-26 */
+  --font-size-display-hero: 65.7px;
+  --line-height-display-hero: 73.584px;
+  --tracking-display-hero: 2.628px;
+  --tracking-display: 0.92px;    /* letter-spacing de los titulares de sección a 46.1 (Bebas) */
+  --ejes-body-height: 419px;     /* alto del párrafo de sección-ejes (`2328:4513`, 674×419) */
+  --article-card-height: 525px;  /* alto de `container-and-card` (`2326:4137`, 322×525) */
+  --point-body-box-lg: 1225px;   /* caja del punto 3 de Programa (`2331:4699`, 794×1225) */
+  --mat-bullet-indent: 28px;     /* sangría del párrafo de materialismo bajo la estrella (268→296) */
 
   /* Escala desktop (estilos Figma `l/headings/*`) */
   --font-size-l-h1-xxl: 52px;
@@ -72,11 +105,15 @@
   --font-size-body-l: 22px;
   --font-size-body-xl: 25.6px;
 
+  --font-weight-regular: 400; /* DM Sans Regular — cuerpo de texto (Figma `fontWeight: 400`) */
   --font-weight-bold: 700;   /* DM Sans Bold  — headings, links, labels, botones */
   --font-weight-medium: 500; /* DM Sans Medium — párrafos de cuerpo */
 
   --line-height-heading: 1.12; /* observado: todos los headings ×1.12 */
   --line-height-body: 1.5;     /* observado: todos los párrafos ×1.5 */
+  /* Figma mide 30.96 px de interlínea pero su caja avanza 31 px por línea
+   * (589 = 19×31, 558 = 18×31, 434 = 14×31…): 1.7222×18 = 31 exacto. */
+  --line-height-lead: 1.7222222;
 
   /* ── Espaciado (escala observada en auto-layouts) ────────────── */
   --space-1: 8px;   /* label↔input, gap de botones del nav */
@@ -88,26 +125,41 @@
   --space-7: 64px;  /* botones de flecha (prev/next) del carrusel, padding vertical del footer */
   --space-8: 96px;  /* padding vertical de las secciones de contenido */
 
-  --space-header: 162px;      /* padding vertical del encabezado de inicio (lg) */
+  --space-header: 134.5px;    /* padding vertical del encabezado de inicio (lg, `2325:3824`: 294.5-160) */
   --space-header-sm: 128px;   /* padding vertical del encabezado de inicio (sm, `2408:1567`) */
   --space-intro-gap-sm: 53px; /* gap entre `section-intro` y la grilla de objetivos (sm, `2408:1650`) */
   --space-header-cta: 36px;   /* gap entre el texto y los botones del encabezado */
+  --space-points-top: 80px;   /* padding superior de sección-puntos (programa lg, 2154-2074) */
+  --space-ejes-bottom: 54px;  /* padding inferior de sección-ejes (programa lg, 1309-1255) */
+  --space-mat-top: 80px;      /* padding superior de sección-materialismo (programa lg) */
+  --space-mat-bottom: 76px;   /* padding inferior de sección-materialismo (programa lg) */
+  --legal-height: 904px;      /* alto del bloque legal (`2335:1546`, 910×904) */
   --nav-height-xs: 80px;      /* alto de la barra del nav en las instancias de 375-xs */
   --nav-height-sm: 75px;      /* alto de la barra del nav en las instancias de 1024-sm */
-  --nav-height-lg: 125px;     /* alto de la barra del nav en 1448-lg */
+  --nav-height-lg: 160px;     /* alto de la barra del nav en 1448-lg (diseño definitivo 2026-10-20; era 125) */
+  --nav-height-reduced: 83px; /* alto del header de navegación-reducida (4518:1968) */
   --nav-logo-xs: 48px;        /* logo del nav en 375-xs */
   --nav-logo-sm: 48px;        /* logo del nav en 1024-sm */
   --nav-logo-lg: 96px;        /* logo del nav en 1448-lg */
+  --nav-logo-reduced: 59px;   /* logo de la nav reducida (`logo-dorado` 4518:2002, 59×63; la barra mide 83) */
   --nav-gap-blocks: 28px;     /* gap entre bloques del right-nav (nav lg) */
-  --menu-close-top-sm: 18px;  /* offset superior del icons/close en el overlay de 1024-sm (`2424:1003`) */
-  --menu-close-right-sm: 21px;/* offset derecho del icons/close en el overlay de 1024-sm */
-  --nav-link-top: 47px;       /* offset superior del texto de un enlace (nav lg) */
-  --nav-underline-lg: 4px;    /* grosor del subrayado del enlace activo (nav lg) */
+  --nav-link-tracking: 1.704px; /* letter-spacing de los enlaces del nav lg (14.2 Black) */
+  --menu-close-top-sm: 24px;  /* offset superior del icons/close (24×24) en el overlay de 1024-sm: `2424:1003` está a y=24 dentro de `2424:446` */
+  --menu-close-right-sm: 16px;/* offset derecho: x=9688−8960=728 → 768−(728+24)=16 */
+  --nav-underline-lg: 1.5px;  /* grosor del subrayado del enlace activo (nav lg, medido y104-105.5) */
+  --nav-underline-offset: 12.5px; /* del texto al subrayado (nav lg: texto y70.5-91.5, raya y104) */
   --nav-underline-menu: 1px;  /* grosor del subrayado del enlace activo (menú móvil) */
   --btn-padding-x-m: 22px;    /* padding horizontal del botón size=m */
-  --btn-padding-y-m: 11px;    /* padding vertical del botón size=m */
+  --btn-padding-y-m: 10px;    /* padding vertical del botón size=m (47 = lh 27 + 20) */
+  --btn-tracking-m: 2.16px;   /* letter-spacing del botón size=m (Figma `style.letterSpacing`) */
   --media-label-top: 66px;    /* offset superior de la etiqueta 16:9 dentro del media */
   --media-label-left: 120px;  /* offset izquierdo de la etiqueta 16:9 dentro del media */
+
+  /* ── Índice de puntos (`enlaces-puntos` / `enlace-punto`) ──────── */
+  --index-link-width: 290px;     /* ancho del enlace (290 dentro del marco de 322) */
+  --index-link-gap: 16px;        /* entre enlaces (76 = 60 + 16, 52 = 36 + 16) */
+  --index-underline: 2px;        /* grosor del subrayado (medido y2228-2229, `#ff4520`) */
+  --index-underline-offset: 10px;/* del texto al subrayado (caja 60 = texto 48 + 10 + 2) */
 
   /* ── Radios ──────────────────────────────────────────────────── */
   /* get_node_info no reporta cornerRadius en nav, goal-card, form,

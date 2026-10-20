@@ -1,138 +1,65 @@
+---
+fuente: Figma — página `components-diseño` (`10:215`) y `1448-lg` (`110:1162`)
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`get_styles, get_node_info`)
+---
+
 # Tokens — reglas de uso
 
----
-fuente: Figma — página `components`, nodo `11:229` (`colors`) + estilos locales del
-archivo + rellenos de los frames de `1448-lg` (`inicio`, `Únete`, `Objetivo-modal`)
-extraido: 2026-10-03
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_styles`, `get_node_info`, `get_nodes_info`)
----
-
-Los **valores** están en [`site/styles/tokens.css`](../../site/styles/tokens.css).
-Este documento dice **qué token se usa para qué rol**. Fuera de esta tabla,
-`--color-brand` no debe usarse como color de texto de párrafo.
+Los **valores ejecutables** viven en `site/styles/tokens.css`. Esta spec documenta
+**qué token va en qué rol**, con la evidencia de Figma de la que sale cada rol.
 
 ## Color
 
-Fuente: muestras de la página `components` (nodo `11:229`, 17 muestras con su nombre
-en Figma). `get_styles` devuelve `colors: []` — el archivo **no tiene estilos de color
-definidos**; el color sale de los rellenos de los nodos.
+Rollen observado sobre los rellenos reales leídos con `get_node_info`:
 
-| Token | Rol | Regla |
-| --- | --- | --- |
-| `--color-surface` | Fondo principal de página | Único fondo base; sobre él va `--color-text-primary` o `--color-text-secondary` |
-| `--color-surface-alt` | Fondo de nav, cards y bloques alternos | No usar como color de texto |
-| `--color-surface-muted` | Bloques destacados (`encabezado-contenido`, `components/images`) | Fondo solo; texto encima `--color-text-primary`/`--color-text-secondary` |
-| `--color-surface-strong` | Fondo de la sección «La Materia Prima» (`inicio` §5) | Fondo solo; nunca como color de texto |
-| `--color-surface-dark` | Fondo del `footer` (todas las pantallas) | Fondo solo; el texto encima va siempre en `--color-on-dark` |
-| `--color-text-primary` | Titulares y texto sobre fondos claros | Único color de texto de titular |
-| `--color-text-secondary` | Cuerpo de texto y estados outline | Nunca para titulares |
-| `--color-on-dark` | Texto/iconos sobre `--color-text-primary` | Solo dentro de botón primario o fondos oscuros |
-| `--color-border-input` | Borde de inputs (`form`) | Solo en campos de formulario |
-| `--color-border-soft` | Borde de muestras y divisores finos | No usar en inputs |
-| `--color-brand` | Acciones principales (botones primarios, acentos) | **Nunca** como color de texto de párrafo (ratio 2.76:1 sobre `--color-surface-alt`) |
-| `--color-accent-blue` / `--color-accent-purple` / `--color-accent-mint` | Acentos decorativos de la paleta | No usar como fondo de texto (ratios 1.76 / 4.20 / 1.53:1) |
-| `--color-media-placeholder` | Relleno de `components/images` en el wireframe | Solo mientras el diseño no incluya imagen real |
-| `--color-media-video` | Relleno de las medias de vídeo (`inicio` §3 y §6, página `Únete`) | Mismo caso que el anterior; **no** usarlo como borde (para eso está `--color-border-input`, mismo valor) |
-| `--color-video-band` | Banda a sangre de `sección-video` (`inicio` §3) | Fondo solo; no usar como color de texto |
-| `--color-avatar-placeholder` | Avatar de `goal-card` | Mismo caso que `--color-media-placeholder` |
-| `--color-dot-inactive` | Punto activo/inactivo del `dotnav` | Ver [components/nav](./components/nav.md) y [pages/inicio](./pages/inicio.md) |
+| Rol | Token | Valor | Evidencia Figma (nodo) |
+| --- | --- | --- | --- |
+| Fondo de página / nav / tarjeta default | `--color-surface-page` | `#fdfcfa` | `size=lg` del nav `111:5222` y `goal-card` `2326:3924` (relleno de ambos) |
+| Texto de nav, botones y enlaces | `--color-text-brown` | `#30250f` | `Enlace 01` `111:5228`, `Botón` del hero `I2325:3794;14:81`, `Line 8` del índice |
+| Titulares | `--color-heading-brown` | `#53411e` | `VANGUARDIA COLOMBIANA` `2325:3792`, título de `goal-card` `2325:3903` |
+| Cuerpo de texto | `--color-text-secondary` | `#333333` | párrafo del hero `2325:3793`, cuerpo de `goal-card` `2325:3904` |
+| Relleno de botón primario | `--color-button-fill` | `#ffcd00` | `components/buttons` `2325:3794` y `315:5105` |
+| Fondo de footer | `--color-footer-bg` | `#ffd633` | `footer` `size=lg` `4370:4878` |
+| Placeholder de media | `--color-media-placeholder` | `#ebebeb` | variantes de `components/images` `19:91`…`243:5129` |
+| Acento de hover | `--color-hover-accent` | `#ff4520` | `Line 8` del enlace sobre el que está el cursor en `hovers` → `right-nav` `4672:3064` |
+| Hover de tarjeta | `--color-card-hover` | `#f0ece6` | segundo par de `goal-card` en `hovers` (`4518:2267`) |
+| Idioma inactivo | `--color-lang-inactive` | `#9e9382` | `Es`/`PT` del selector en `hovers` → `links` `4672:2994` y `4672:3000` |
+| Texto on-dark / sobre botón | `--color-on-dark` | `#ffffff` | `Botón` del set maestro `13:71` |
 
-### Mapeo desde los nombres de Figma
+> `get_styles` devuelve `colors: []` en este archivo: **no hay estilos de color
+> locales**. Todos los colores se leen de los rellenos de los nodos.
 
-| Nombre en Figma | Hex | Token |
-| --- | --- | --- |
-| Bright | `#ffffff` | `--color-surface` |
-| Neutral 0 | `#fafafa` | `--color-surface-alt` |
-| Neutral 10 | `#ebebeb` | `--color-surface-muted` |
-| Neutral 20 | `#d6d6d6` | `--color-border-soft` · `--color-surface-strong` |
-| Neutral 30 | `#c2c2c2` | `--color-border-input` · `--color-media-video` |
-| Neutral 40–90 | `#adadad` … `#474747` | `--neutral-40` … `--neutral-90` · `--color-video-band` (`#adadad`) |
-| Text | `#333333` | `--color-text-secondary` · `--color-surface-dark` |
-| Dark | `#000000` | `--color-text-primary` |
-| Main Orange | `#fc6b38` | `--color-brand` |
-| Main Blue | `#83cfdb` | `--color-accent-blue` |
-| Secondary Purple | `#995edd` | `--color-accent-purple` |
-| Secondary Mint | `#6de4da` | `--color-accent-mint` |
+### Pares que exigen contraste AA
+Ver [`accessibility.md`](accessibility.md).
 
 ## Tipografía
 
-- Familia única en todo el archivo: **DM Sans** (`--font-family-base`).
-- Pesos usados: **Bold** (titulares, links, labels, botones) y **Medium** (cuerpo).
-- Dos escalas de titular en Figma: `l/` (desktop) y `xs/` (móvil). Detalle completo
-  en [typography.md](./typography.md).
-- Regla: los párrafos usan `--font-weight-medium`; titulares, labels y botones
-  `--font-weight-bold`.
-- Interlineado fijo observado: titulares ×1.12 (`--line-height-heading`),
-  párrafos ×1.5 (`--line-height-body`).
+Los 41 estilos de texto locales se listan en [`typography.md`](typography.md).
+Regla de rol aquí: `--font-family-display` (Bebas Neue) para titulares,
+`--font-family-base` (DM Sans) para cuerpo, enlaces y botones.
 
 ## Espaciado
 
-Escala derivada de los auto-layouts leídos con `get_node_info` (padding y gaps
-calculados sobre `absoluteBoundingBox`, porque el plugin no expone `padding`/
-`itemSpacing` directamente).
+Escala derivada de auto-layouts (`padding = hijo.x − padre.x`,
+`gap = hijo[n+1].x − (hijo[n].x + hijo[n].width)`):
 
-- Entre secciones de página: las secciones de `inicio` se tocan (gap **0**); el ritmo
-  vertical lo da el padding interno de cada sección (**96px** superior e inferior en
-  `seccion-objetivos`: primer hijo a 96px del borde y último botón a 96px del fondo).
-- Dentro de tarjetas: padding `--space-4` (24px) en `goal-card`, con
-  `--space-6` (48px) inferior.
-- Márgenes laterales del contenido: `--space-3` (16px) en 375, `--space-4` (24px) en
-  768 (tablet), `--space-5` (32px) en 1448.
-- Grillas de 4 columnas: gap `--space-5` (32px).
-- Botón `components/buttons`: padding propio por tamaño (h 12/16/18/22/24/28 ·
-  v 6/8/9/11/12/14 para size xs→xl). Son medidas del componente, no de la escala.
-
-### Medidas puntuales (fuera de la escala `--space-*`)
-
-Extraídas de los frames de `1448-lg` el 2026-10-03 y registradas en `tokens.css`
-para no hardcodearlas en el CSS:
-
-| Token | Valor | Dónde se mide |
+| Token | Valor | Dónde se observa |
 | --- | --- | --- |
-| `--space-8` | 96px | padding vertical de las secciones de contenido (`seccion-objetivos`, `sección-La-Materia-Prima`, `sección-únete`) |
-| `--space-header` | 162px | padding vertical del `encabezado-contenido` |
-| `--space-header-cta` | 36px | gap entre `encabezado-texto` y `botones` |
-| `--nav-gap-blocks` | 28px | gap entre bloques del `right-nav` del `nav` (lg); fuera de la escala, registrado tal cual |
-| `--nav-height-xs` / `--nav-height-sm` / `--nav-height-lg` | 80 / **75** / 125px | alto de la barra del `nav` en las instancias de `375-xs`, `1024-sm` (**medido el 2026-10-05**: instancias 768×75) y `1448-lg` |
-| `--nav-logo-xs` / `--nav-logo-sm` / `--nav-logo-lg` | 48 / **48** / 96px | `icons/logo` dentro de la barra del `nav` en los tres breakpoints |
-| `--menu-close-top-sm` / `--menu-close-right-sm` | 18 / 21px | offset del `icons/close` en el overlay de `1024-sm` (`2424:1003`); en `xs` es 16/16 (`--space-3`) |
-| `--btn-padding-x-m` / `--btn-padding-y-m` | 22 / 11px | padding del `components/buttons` `size=m` (la escala no cubre ese tamaño) |
-| `--media-label-top` / `--media-label-left` | 66 / 120px | offset de la etiqueta `16:9` dentro de `components/images` |
+| `--space-3` | 16 | margen lateral móvil, gap de iconos 24×24 |
+| `--space-4` | 24 | padding de tarjetas, gap de columnas |
+| `--space-5` | 32 | margen lateral desktop (`texto-y-botones` x=142 sobre frame x=110) y gap de grillas |
+| `--space-6` | 48 | padding inferior de tarjeta, margen lateral de secciones tablet |
+| `--space-7` | 64 | padding vertical de secciones desktop |
+| `--space-8` | 96 | padding vertical de secciones de contenido |
+
+`get_node_info` **no expone** `padding`, `itemSpacing` ni `layoutMode`: todos los
+valores anteriores se derivan de `absoluteBoundingBox`. Lo que no se pudo derivar
+queda `PENDIENTE-FIGMA`.
 
 ## Radios
 
-Ningún componente inspeccionado (`nav`, `goal-card`, `form`, `buttons`,
-`header-two-columns`) reporta `cornerRadius`: el diseño usa esquinas rectas —
-`--radius-none` (0).
-
-Único caso circular: el avatar de `goal-card` (`Ellipse 1`) y los puntos del
-`dotnav` (`Ellipse`), que usan **`--radius-circle`** (50 %). Si otra sección necesita
-radio, extraerlo de Figma antes de usarlo.
-
-
-## Tokens nuevos del diseño definitivo (2026-10-20 — ticket 4)
-
-Extraídos de la capa `hovers`, `navegación-reducida` y las secciones releídas;
-valores aplicados en [`site/styles/tokens.css`](../../site/styles/tokens.css):
-
-| Token | Valor | Rol observado |
-| --- | --- | --- |
-| `--color-surface-page` | `#fdfcfa` | fondo de página, nav, tarjetas default, secciones |
-| `--color-button-fill` | `#ffcd00` | relleno de `components/buttons` (Aporta, Nuestro programa) |
-| `--color-hover-accent` | `#ff4520` | hover de botones, subrayado de enlaces, enlace activo del índice |
-| `--color-card-hover` | `#f0ece6` | hover de `goal-card` y `container-and-card` |
-| `--color-dot-active` | `#65543a` | punto activo del `dotnav` |
-| `--color-dot-inactive-new` | `#d7d2ca` | puntos inactivos del `dotnav` y bordes suaves |
-| `--color-cta-default` | `#ceac57` | fondo default del CTA `lamateriaprima.org` |
-| `--color-cta-hover` | `#1b2c43` | fondo hover del CTA / texto default del CTA |
-| `--color-text-brown` | `#30250f` | texto de nav, botones y enlaces del índice |
-| `--color-heading-brown` | `#53411e` | titulares (modal, Puntos, goal-card, sección-únete) |
-| `--color-link-underline` | `#786952` | subrayado default del enlace de texto de Únete |
-| `--color-link-underline-hover` | `#003399` | subrayado hover del índice de puntos |
-| `--nav-height-lg` | `160px` (antes 125) | alto de la barra del nav desktop |
-| `--nav-height-reduced` | `83px` | alto del header de `navegación-reducida` |
-| `--font-family-display` | `"Bebas Neue"` | titulares del diseño definitivo (modal, sección-únete, labels de media) — **archivo .woff2 pendiente de vendorizar** |
-
-Nota: `--color-dot-inactive` (`#858585`) del wireframe queda **superado** por
-`--color-dot-inactive-new` (`#d7d2ca`) en el diseño definitivo.
+Ningún nodo leído (`nav`, `goal-card`, `buttons`, `form`, `header-two-columns`)
+devuelve `cornerRadius`: **esquinas rectas** (`--radius-none: 0`). Los círculos
+(avatares, puntos del dotnav) son `Ellipse` → `--radius-circle`.

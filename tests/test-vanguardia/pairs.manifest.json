@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "tiles": {
+    "1448": { "width": 1448, "height": 900 },
+    "375": { "width": 375, "height": 812 }
+  },
+  "policy": { "min_score": 0.9, "max_criticals": 0 },
+  "pairs": [
+    {
+      "id": "inicio-1448",
+      "kind": "page",
+      "viewport": 1448,
+      "baseline": "baseline/inicio-1448.png",
+      "actual": "actual/inicio-1448.png",
+      "spec": "Figma 1448-lg -> frame inicio (110:2277), 1448x4514. Sin spec .md en disco: leer con get_node_info."
+    },
+    {
+      "id": "inicio-375",
+      "kind": "page",
+      "viewport": 375,
+      "baseline": "baseline/inicio-375.png",
+      "actual": "actual/inicio-375.png",
+      "spec": "Figma 375-xs -> frame inicio. Sin spec .md en disco: leer con get_node_info."
+    },
+    {
+      "id": "nav",
+      "kind": "component",
+      "viewport": 1448,
+      "baseline": "baseline/nav.png",
+      "actual": "actual/nav.png",
+      "spec": "Figma instancia components/nav (4442:1753) dentro del frame inicio, 1448x160."
+    },
+    {
+      "id": "goal-card",
+      "kind": "component",
+      "viewport": 1448,
+      "baseline": "baseline/goal-card.png",
+      "actual": "actual/goal-card.png",
+      "spec": "Figma instancia components/goal-card (2326:3937), 2a tarjeta de la grilla, 322x615."
+    },
+    {
+      "id": "buttons-s",
+      "kind": "component",
+      "viewport": 1448,
+      "baseline": "baseline/buttons-s.png",
+      "actual": "actual/buttons-s.png",
+      "spec": "Figma instancia components/buttons (I4442:1753;315:5105) en el nav, 94x37."
+    },
+    {
+      "id": "buttons-m",
+      "kind": "component",
+      "viewport": 1448,
+      "baseline": "baseline/buttons-m.png",
+      "actual": "actual/buttons-m.png",
+      "spec": "Figma instancia components/buttons (2325:3794), CTA hero «Nuestro programa», 266x47."
+    },
+    {
+      "id": "objetivo-modal-1448",
+      "kind": "state",
+      "viewport": 1024,
+      "baseline": "baseline/objetivo-modal-1448.png",
+      "actual": "actual/objetivo-modal-1448.png",
+      "spec": "Figma frame Objetivo-modal (2358:932), panel 1024x604."
+    },
+    {
+      "id": "programa-1448",
+      "kind": "page",
+      "viewport": 1448,
+      "baseline": "baseline/programa-1448.png",
+      "actual": "actual/programa-1448.png",
+      "spec": "Figma 1448-lg -> frame Programa (2328:4307), 1448x8743. Sin spec .md en disco: leer con get_node_info."
+    },
+    {
+      "id": "decalogo-1448",
+      "kind": "page",
+      "viewport": 1448,
+      "baseline": "baseline/decalogo-1448.png",
+      "actual": "actual/decalogo-1448.png",
+      "spec": "Figma 1448-lg -> frame Decálogo (2334:1005), 1448x8234. Sin spec .md en disco: leer con get_node_info."
+    },
+    {
+      "id": "unete-1448",
+      "kind": "page",
+      "viewport": 1448,
+      "baseline": "baseline/unete-1448.png",
+      "actual": "actual/unete-1448.png",
+      "spec": "Figma 1448-lg -> frame Únete (2335:1229), 1448x1182. Sin spec .md en disco: leer con get_node_info."
+    },
+    {
+      "id": "politica-de-privacidad-1448",
+      "kind": "page",
+      "viewport": 1448,
+      "baseline": "baseline/politica-de-privacidad-1448.png",
+      "actual": "actual/politica-de-privacidad-1448.png",
+      "spec": "Figma 1448-lg -> frame Política de privacidad (2335:1533), 1448x1792. Sin spec .md en disco: leer con get_node_info."
+    }
+  ]
+}

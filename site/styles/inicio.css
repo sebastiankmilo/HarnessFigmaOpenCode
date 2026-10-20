@@ -33,6 +33,23 @@
   background: var(--color-video-band);
 }
 
+/* Fachada del vídeo: la portada (`video-cover.png`) es ya la captura del
+ * reproductor y es lo que mide el baseline, así que se mantiene intacta. El
+ * enlace cubre `.media` y solo inyecta el iframe de YouTube al hacer clic
+ * (scripts/enlaces.js). */
+.video__play {
+  position: absolute;
+  inset: 0;
+}
+
+.video__player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ── 4 — seccion-objetivos (`2392:3995`) ────────────────────────── */
 .section-intro h2 {
   font-size: var(--font-size-xs-h1);
@@ -101,6 +118,12 @@
 .articles {
   padding-block: var(--space-6);
   background: var(--color-surface-strong);
+  /* Relleno IMAGE de la sección (`2328:4236`, `scaleMode: FILL` → cover).
+     El color de debajo queda como respaldo mientras carga. */
+  background-image: url("../assets/img/materia-prima-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .articles__grid {
@@ -120,7 +143,16 @@
 }
 
 .article-card {
+  position: relative;
   background: var(--color-surface-alt);
+  cursor: pointer;
+}
+
+/* Enlace de la card completa: la cubre sin alterar su layout ni su captura. */
+.article-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
 }
 
 .article-card__media {
@@ -324,6 +356,18 @@
     display: none;
   }
 
+  .article-card__media {
+    background: none;
+  }
+
+  .article-card {
+    height: var(--article-card-height);
+  }
+
+  .article-card h3 {
+    font-size: var(--font-size-l-h2);
+  }
+
   .article-card__text {
     padding: 0 var(--space-4) var(--space-5);
   }
@@ -332,15 +376,41 @@
 /* ── `lg` (1448) — escritorio ───────────────────────────────────── */
 @media (min-width: 1448px) {
   .hero {
+    position: relative;
+    overflow: hidden;
     padding-block: var(--space-header);
+    background: var(--color-surface-page);
+  }
+
+  /* Media derecha 590×740 a sangre (`2325:3824` → `4329:2096`) */
+  .hero__media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 590px;
+    height: 740px;
+    object-fit: cover;
   }
 
   .hero__text {
-    max-width: 914px;
+    max-width: 792px;
   }
 
   .hero h1 {
-    font-size: var(--font-size-l-h1-xxl);
+    font-size: var(--font-size-display-hero);
+    line-height: var(--line-height-display-hero);
+    letter-spacing: var(--tracking-display-hero);
+  }
+
+  .hero p {
+    margin-top: var(--space-1);
+    font-size: var(--font-size-body-base);
+    line-height: var(--line-height-lead);
+  }
+
+  .hero__actions {
+    margin-top: var(--space-5);
   }
 
   .video {
@@ -357,11 +427,19 @@
   }
 
   .section-intro h2 {
-    font-size: var(--font-size-l-h1);
+    font-size: var(--font-size-l-h1-xl);
+    letter-spacing: var(--tracking-display);
+  }
+
+  .section-intro p {
+    margin-top: var(--space-1);
+    font-size: var(--font-size-body-base);
+    line-height: var(--line-height-lead);
   }
 
   .goals {
-    padding-block: var(--space-8);
+    padding-block: var(--space-7);
+    background: var(--color-section-soft);
   }
 
   .goals__grid {
@@ -376,12 +454,28 @@
     display: block;
   }
 
+  /* Tarjeta 322×615: foto a sangre 322×194 + texto con 24 de lado (2326:3926) */
   .goal-card {
-    padding: var(--space-4) var(--space-4) var(--space-6);
+    padding: 0 0 var(--space-6);
+    background: var(--color-surface-page);
+  }
+
+  .goal-card__avatar {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 322 / 194;
+    border-radius: 0;
+    background: none;
+    object-fit: cover;
+  }
+
+  .goal-card__text {
+    margin-top: var(--space-3);
+    padding-inline: var(--space-4);
   }
 
   .goal-card h3 {
-    font-size: var(--font-size-l-h3);
+    font-size: var(--font-size-l-h1);
   }
 
   .goals__cta {
@@ -389,8 +483,25 @@
   }
 
   .articles {
-    padding-block: var(--space-8);
+    padding-block: var(--space-7);
+    /* `background-color` y no el shorthand `background`: el shorthand
+       borraría el `background-image` de la regla base. */
+    background-color: var(--color-band-dark);
+    color: var(--color-surface-page);
   }
+
+  .articles .section-intro p {
+    margin-top: var(--space-1);
+    font-size: var(--font-size-body-base);
+    line-height: var(--line-height-lead);
+    color: var(--color-surface-page);
+  }
+
+  .articles .article-card {
+    background: var(--color-surface-page);
+    color: var(--color-text-primary);
+  }
+
 
   .articles__grid {
     grid-template-columns: repeat(4, 1fr);
@@ -422,7 +533,58 @@
     right: var(--space-5);
   }
 
+  /* Diseño definitivo (objetivo-modal.md §2026-10-20): panel 1024×604,
+   * título Bebas Neue 41 (#53411e), botón #ffcd00 con hearts visibles */
+  .dialog__panel {
+    min-height: 604px;
+    padding: var(--space-8) var(--space-7);
+  }
+
   .dialog__title {
-    font-size: var(--font-size-l-h2);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-l-h1-l);
+    font-weight: 400;
+    color: var(--color-heading-brown);
+  }
+
+  .dialog__body {
+    line-height: 1.72; /* 30.96/18, medido en 2358:1146 */
+  }
+
+  .dialog__cta {
+    background: var(--color-button-fill);
+    color: var(--color-text-brown);
+  }
+
+  .dialog__cta:hover {
+    background: var(--color-hover-accent);
+  }
+
+  /* Transición del modal estilo UIkit (nota 4649:2017): backdrop
+   * rgba(0,0,0,0.25) + fade del panel; open/close animado en inicio.js */
+  .dialog {
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s ease;
+  }
+
+  .dialog.is-open {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .dialog__panel {
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .dialog.is-open .dialog__panel {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Slideshow de tarjetas: transición sutil tipo jitter (nota 4649:2016) */
+  .goal-card,
+  .article-card {
+    transition: opacity 0.35s ease, background 0.4s ease;
   }
 }

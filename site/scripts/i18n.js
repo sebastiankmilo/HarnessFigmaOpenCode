@@ -25,6 +25,17 @@
       // Clave faltante en el locale: se conserva el texto actual (fallback).
       if (value !== undefined) nodes[i].textContent = value;
     }
+    syncLangSwitch(locale);
+  }
+
+  // Selector ES/PT del nav: refleja el locale activo en el estado del botón.
+  function syncLangSwitch(locale) {
+    var buttons = document.querySelectorAll("[data-lang]");
+    for (var i = 0; i < buttons.length; i++) {
+      var active = buttons[i].getAttribute("data-lang") === locale;
+      buttons[i].classList.toggle("is-active", active);
+      buttons[i].setAttribute("aria-pressed", active ? "true" : "false");
+    }
   }
 
   function setLocale(locale) {
@@ -43,8 +54,13 @@
         return locale;
       })
       .catch(function (error) {
-        // Locale inexistente o fetch fallido: se conserva el texto actual.
-        console.warn("[i18n] no se pudo aplicar el locale \"" + locale + "\": " + error);
+        // Locale inexistente o fetch fallido: se conserva el texto actual
+        // (el conmutador ya se ha marcado igualmente en bindLangSwitch).
+        console.warn(
+          '[i18n] no se pudo aplicar el locale "' + locale + '": ' + error +
+          ' — si la página está abierta con file:// el navegador bloquea el fetch;' +
+          " sírvela con un servidor local."
+        );
         return null;
       });
   }
@@ -54,6 +70,29 @@
   }
 
   window.VCI18n = { setLocale: setLocale, getLocale: getLocale };
+
+  // Conmutador ES/PT: clic → estado visual inmediato → setLocale (persiste en
+  // localStorage) → apply(). El estado se marca antes del fetch para que el
+  // conmutador responda aunque la carga del JSON tarde o falle.
+  function bindLangSwitch() {
+    var buttons = document.querySelectorAll("[data-lang]");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function (event) {
+        var locale = event.currentTarget.getAttribute("data-lang");
+        if (locale === getLocale()) return;
+        document.documentElement.lang = locale;
+        syncLangSwitch(locale);
+        setLocale(locale);
+      });
+    }
+    syncLangSwitch(getLocale());
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindLangSwitch);
+  } else {
+    bindLangSwitch();
+  }
 
   var stored = null;
   try {

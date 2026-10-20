@@ -4,6 +4,8 @@
 node_modules/
 tests/visual/actual/
 tests/visual/reports/
+tests/test-vanguardia/actual/
+tests/test-vanguardia/reports/
 docs/
 Especificaciones/docs/Arness/
 Especificaciones/docs/Web/

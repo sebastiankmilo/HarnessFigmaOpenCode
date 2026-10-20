@@ -1,107 +1,81 @@
-# Assets — manifiesto
-
 ---
-fuente: Figma — componentes `icons/*` de la página `components` + nodo `2325:3856`
-de la página `1448-lg` (triángulo de play)
-extraido: 2026-10-03
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`export_node_as_image`, `get_local_components`)
+fuente: Figma — páginas `components-diseño` (`10:215`) y `1448-lg` (`110:1162`)
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`scan_nodes_by_types`, `get_node_info`, `export_node_as_image`)
 ---
 
-## Limitación de formato observada (registro, no se esquivó)
+# Manifiesto de assets
 
-`export_node_as_image` del plugin `cursor-talk-to-figma-mcp` **ignora el parámetro
-`format`** y devuelve siempre PNG: en el código del plugin la línea es
-`const format = "PNG";`. Por eso:
+Formato de la plantilla de [especificaciones-diseño §4.9](../docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
+El plugin de comunidad **solo exporta PNG** (el formato lo fija el plugin);
+SVG queda pendiente del parche del plugin.
 
-- Los iconos están exportados como **PNG a escala 4** (128×128) en
-  [`site/assets/icons/`](../../site/assets/icons/) — y a escala 8 (256×256) `logo`
-  y `logo-02`, que se usan a 96px y 128px—, no en SVG como pide
-  [especificaciones-diseño §4.9](../docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/especificaciones-diseño.md).
-- La exportación SVG queda **PENDIENTE**: requiere un plugin que respete `format` o
-  exportar a mano desde Figma.
+## A · Imágenes (`site/assets/img`)
 
-## Iconos exportados (17)
+Todas exportadas **@2x**: el tamaño en disco es 2× el `absoluteBoundingBox`
+del nodo en Figma.
 
-| Archivo | Nodo Figma | Formato/escala | Usado en |
-| --- | --- | --- | --- |
-| `site/assets/icons/play.png` | `1448-lg` / `2325:3856` | PNG @4x (384×340) | Triángulo de play de los bloques de vídeo: `inicio` secciones 3 y 6, y página `Únete` (centrado por su centroide: `translate(-33.33%, -50%)`) |
-| `site/assets/icons/logo.png` | `components` / `27:1675` | PNG @8x (256×256) | `nav` (32px en xs/sm, 64px en open-modal, **96px** en lg) |
-| `site/assets/icons/logo-02.png` | `components` / `2328:4285` | PNG @8x (256×256) | `footer` de todas las pantallas (**128px**) |
-| `site/assets/icons/heart-fill.png` | `components` / `21:262` | PNG @4x (128×128) | icono de `components/buttons` (16px y 24px). **Oculto en todas las instancias de `1448-lg`** (verificado con `export_node_as_image` → 1×1): no aparece en `inicio`, `Únete` ni `Objetivo-modal`. |
-| `site/assets/icons/prev.png` | `components` / `21:176` | PNG @4x (128×128) | `slideshow` (48px) y fila de paginación de `inicio` (64px) |
-| `site/assets/icons/next.png` | `components` / `21:168` | PNG @4x (128×128) | `slideshow` (48px) y fila de paginación de `inicio` (64px) |
-| `site/assets/icons/search.png` | `components` / `21:160` | PNG @4x (128×128) | `nav` (24px) |
-| `site/assets/icons/hamburger-two.png` | `components` / `21:150` | PNG @4x (128×128) | `nav` (24px) |
-| `site/assets/icons/close.png` | `components` / `21:155` | PNG @4x (130×128) | `nav` open-modal (32px) y `Objetivo-modal` |
-| `site/assets/icons/facebook.png` | `components` / `27:1930` | PNG @4x (128×128) | `platforms` del nav y del footer (24px) |
-| `site/assets/icons/instagram.png` | `components` / `27:1934` | PNG @4x (128×128) | `platforms` del nav y del footer (24px) |
-| `site/assets/icons/youtube.png` | `components` / `27:1951` | PNG @4x (128×128) | `platforms` del nav y del footer (24px) |
-| `site/assets/icons/x.png` | `components` / `27:1993` | PNG @4x (128×128) | `platforms` del nav y del footer (24px) |
-| `site/assets/icons/tik-tok.png` | `components` / `27:1977` | PNG @4x (128×128) | `platforms` del nav y del footer (24px) |
-| `site/assets/icons/weibo.png` | `components` / `27:2005` | PNG @4x (128×128) | `platforms` **por defecto** del `nav` (variante de componente) |
-| `site/assets/icons/xiao-hong-shu.png` | `components` / `27:1984` | PNG @4x (128×128) | `platforms` **por defecto** del `nav` |
-| `site/assets/icons/wechat.png` | `components` / `27:2007` | PNG @4x (128×128) | `platforms` **por defecto** del `nav` |
+| Archivo | px en disco | Nodo Figma | px Figma | Escala | Usado en |
+| --- | --- | --- | --- | --- | --- |
+| `hero.png` | 1180×1480 | `components/images` `4329:2096` | 590×740 | @2x | `inicio` › `encabezado-contenido` |
+| `video-cover.png` | 2248×1268 | `components/images` `2325:3851` | 1124×634 | @2x | `inicio` › `sección-video` |
+| `goal-1.png` | 644×388 | media de `goal-card` `2326:3926` (`Rectangle 177`) | 322×194 | @2x | `inicio` › `seccion-objetivos` (tarjeta 1) |
+| `goal-2.png` | 644×388 | media de `goal-card` `2326:3937` | 322×194 | @2x | ídem (tarjeta 2) |
+| `goal-3.png` | 644×388 | media de `goal-card` `2326:3948` | 322×194 | @2x | ídem (tarjeta 3) |
+| `goal-4.png` | 644×388 | media de `goal-card` `2326:3959` | 322×194 | @2x | ídem (tarjeta 4) |
+| `article-1.png` | 644×515 | `components/images` `I2326:4137;93:130` | 322×257 | @2x | `inicio` › `sección-La-Materia-Prima` (art. 1) |
+| `article-2.png` | 644×515 | `I2326:4173;93:130` | 322×257 | @2x | ídem (art. 2) |
+| `article-3.png` | 644×515 | `I2326:4185;93:130` | 322×257 | @2x | ídem (art. 3) |
+| `article-4.png` | 644×515 | `I2326:4197;93:130` | 322×257 | @2x | ídem (art. 4) |
+| `materia-prima-bg.png` | 1448×885 | relleno `IMAGE` (`scaleMode: FILL`) del frame `sección-La-Materia-Prima` `2328:4236` | 1448×887 | 1× | `inicio` › `sección-La-Materia-Prima` (fondo) |
+| `join.png` | 1286×850 | `components/images` `4426:1225` (y `4427:1241`) | 643×425 | @2x | `inicio`/`Únete` › `sección-únete` |
+| `programa-header.png` | 876×656 | `components/images` `2328:4501` | 438×328 | @2x | `Programa` › `header` |
+| `programa-ejes.png` | 878×878 | `components/images` `2329:4515` | 439×439 | @2x | `Programa` › `sección-ejes` |
+| `programa-materialismo-1.png` | 408×406 | `components/images` `2329:4519` | 204×203 | @2x | `Programa` › `sección-materialismo` |
+| `programa-materialismo-2.png` | 408×406 | `components/images` `4422:1115` | 204×203 | @2x | ídem |
+| `decalogo-header.png` | 876×700 | `components/images` `2335:1222` | 438×350 | @2x | `Decálogo` › `header` |
 
-**Observación de uso:** el componente `nav` trae por defecto `weibo`,
-`xiao-hong-shu` y `wechat` (tres `wechat` en `size=lg`); las instancias reales del
-`nav` en `1448-lg` los sustituyen por `facebook`, `instagram`, `youtube`, `x` y
-`tik-tok`. Se exportaron los dos juegos porque los dos existen en el diseño.
+## B · Iconos (`site/assets/icons`)
 
-## Imágenes
+El nodo de origen se identifica **por nombre** (`icons/<archivo-base>` en la
+página `components-diseño`). Donde el tamaño en disco no equivale a 2× del
+componente maestro, la **instancia exacta** queda `PENDIENTE-FIGMA`.
 
-No hay assets de imagen exportables: todas las medias del wireframe son rellenos
-sólidos de `components/images` (`--color-media-placeholder` `#ebebeb`), el avatar de
-`goal-card` es un `Ellipse` `#d9d9d9` y el fondo de `sección-video` es un
-`Rectangle` `#adadad`. **No existe ningún bitmap en el archivo Figma.**
+| Archivo | px en disco | Componente Figma | Nodo | Nota |
+| --- | --- | --- | --- | --- |
+| `close.png` | 130×128 | `icons/close` | `21:155` | maestro 32×32 |
+| `search.png` | 128×128 | `icons/search` | `21:160` | maestro 32×32 |
+| `hamburger-two.png` | 128×128 | `icons/hamburger-two` | `21:150` | maestro 32×32 |
+| `heart-fill.png` | 128×128 | `icons/heart-fill` | `21:262` | maestro 32×32 |
+| `play.png` | 384×340 | `icons/play` | `21:303` | maestro 32×32 → **instancia exacta PENDIENTE-FIGMA** |
+| `star.png` | 42×40 | `icons/star` | `21:265` | maestro 32×32; los `STAR` de `Programa` (`4370:4822`…) miden 22×22 → **instancia exacta PENDIENTE-FIGMA** |
+| `prev.png` / `next.png` | 64×64 | `icons/prev` / `icons/next` | `21:176` / `21:168` | — |
+| `facebook.png` | 128×128 | `icons/facebook` | `27:1930` | — |
+| `instagram.png` | 128×128 | `icons/instagram` | `27:1934` | — |
+| `youtube.png` | 128×128 | `icons/youtube` | `27:1951` | — |
+| `x.png` | 128×128 | `icons/x` | `27:1993` | — |
+| `tik-tok.png` | 128×128 | `icons/tik-tok` | `27:1977` | — |
+| `wechat.png` | 128×128 | `icons/wechat` | `27:2007` | — |
+| `weibo.png` | 128×128 | `icons/weibo` | `27:2005` | — |
+| `xiao-hong-shu.png` | 128×128 | `icons/xiao-hong-shu` | `27:1984` | — |
+| `logo.png` | 256×256 | `icons/logo` | `27:1675` | maestro 32×32; las instancias del footer miden 128×128 (2×256 ✓) |
+| `logo-02.png` | 256×256 | `icons/logo-02` | `2328:4285` | PENDIENTE-FIGMA (instancia exacta) |
+| `logo-color.png` | 192×206 | grupo `logo-color` del nav lg | `4331:2649` | 96×103 → 2× ✓ verificado |
 
-| Archivo | Nodo Figma | Formato/escala | Usado en |
-| --- | --- | --- | --- |
-| `site/assets/img/…` | PENDIENTE-FIGMA | — | Slots de imagen de `inicio` (hero/video, slideshow, artículos, avatar): hasta que el diseño incluya imagen real |
+## C · Tipografías (`site/assets/fonts`)
 
-## Pendientes de esta fase
+No salen de Figma: son ficheros vendorizados. `bebas-neue-latin.woff2`,
+`dm-sans-latin.woff2`, `dm-sans-latin-ext.woff2`.
 
-1. ~~Reexportar `logo.png` y `logo-02.png` a mayor escala~~ — **hecho**: 256×256
-   (escala 8) el 2026-10-03.
-2. Exportar en SVG (limitación del plugin descrita arriba).
-3. Assets de imagen cuando el diseño los incluya (`PENDIENTE-FIGMA`).
-4. Baselines de `tests/visual/baseline/…` — **fuera de alcance** del plan
-   (`tests/` requiere autorización explícita).
+## D · Baselines
 
-## Uso en `1024-sm` (verificado el 2026-10-05)
+Los PNG de `tests/test-vanguardia/baseline/` son **assets de verificación**, no
+assets del sitio: se exportan con `export_node_as_image` desde los nodos
+citados en cada spec. `tests/` requiere autorización explícita del proyecto.
 
-Los 6 frames tablet **no requieren exportar ningún asset nuevo**: usan los iconos
-ya versionados — `logo` (48 px en la barra, 64 px en el overlay), `logo-02`
-(128 px en el footer), `play` (bloques de vídeo), `prev`/`next` (64 px),
-`hamburger-two` (24 px), `close` (32 px en el overlay) y las 5 plataformas
-(`facebook`, `instagram`, `youtube`, `x`, `tik-tok`: 24 px en la barra, 32 px en
-el overlay). `search` y `wechat` existen como archivo pero **no se usan** a tablet
-(ocultos en el render).
+## Pendientes
 
-Las medias de `sección-ejes` y `sección-materialismo` **no se renderizan** a
-tablet (nodos ocultos), así que tampoco aportan slots de imagen nuevos.
-
-## Diseño definitivo `1448-lg` (2026-10-20 — ticket 4)
-
-| Archivo | Nodo Figma | Formato | Usado en |
-| --- | --- | --- | --- |
-| `site/assets/img/logo-color.png` | `4331:2100` (y variante `4331:2615`) | PNG @2x | Logo a color (variantes del nav/logo suelto) |
-| `site/assets/img/logo-dorado.png` | `4370:4698` (y variante `4370:4748`) | PNG @2x | Logo dorado (nav estado dorado) |
-| `site/assets/img/logo-vanguardias.png` | `4422:1219` | PNG @2x | Lockup «Vanguardias» |
-| `site/assets/img/star-1.png` | `4370:4822` | PNG @2x | Estrella decorativa de `Programa` (22×22) |
-| `site/assets/img/star-2.png` | `4370:4823` | PNG @2x | Ídem |
-| `site/assets/img/star-3.png` | `4370:4825` | PNG @2x | Ídem |
-
-- `icons8-hand-cursor 1` (`4519:2484`) es **anotación del diseñador** para la
-  capa `hovers`: **no** se exporta ni se usa.
-- `Line 1/2` de `Programa` (`4369:3550`, `4370:4808`, 1144 de largo): líneas
-  simples → se implementan con CSS (border), sin asset.
-- **Bebas Neue**: fuente de display del diseño definitivo — vendorizada el
-  2026-10-20 como `site/assets/fonts/bebas-neue-latin.woff2` (OFL, subconjunto
-  latin de Google Fonts); `@font-face` en `main.css`. Registro en
-  [typography.md](./typography.md).
-- **Export de logos/estrellas**: el plugin devuelve la imagen solo como
-  adjunto de la conversación (no escribe el archivo a disco) — **PENDIENTE de
-  export manual** desde Figma con los nodos de la tabla; hallazgo registrado
-  en el ticket 4. La barra del nav usa `icons/logo` (monochrome) como en el
-  wireframe, así que el header no queda bloqueado.
+- **SVG**: el plugin solo exporta PNG (`format` fijado por el plugin).
+- **Instancia exacta** de `play.png`, `star.png` y `logo-02.png`:
+  `PENDIENTE-FIGMA`.

@@ -1,0 +1,14 @@
+{
+  "name": "visual-tests",
+  "private": true,
+  "description": "Verificación visual: arnés agnóstico en visual/ + datos del proyecto en test-vanguardia/",
+  "scripts": {
+    "test": "playwright test --config test-vanguardia/playwright.config.js",
+    "test:desktop": "playwright test --config test-vanguardia/playwright.config.js --project=desktop-1448",
+    "test:mobile": "playwright test --config test-vanguardia/playwright.config.js --project=mobile-375",
+    "judge": "playwright test --list --config test-vanguardia/playwright.config.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

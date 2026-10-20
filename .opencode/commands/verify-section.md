@@ -9,15 +9,15 @@ la que esté marcada como en revisión).
 
 ## 1. Capturas
 
-1. Desde `tests/visual/`, ejecutar `npx playwright test`.
-2. Comprobar que en `tests/visual/actual/` quedaron las capturas de página,
-   componentes, estados y flujos a **1448** y **375**.
+1. Desde `tests/`, ejecutar `npm test`.
+2. Comprobar que en `tests/test-vanguardia/actual/` quedaron las capturas de
+   página, componentes, estados y flujos a **1448** y **375**.
 
 ## 2. Veredicto
 
 1. Lanzar el agente [visual-judge](../agents/visual-judge.md) con:
-   - pares `tests/visual/actual/` vs `tests/visual/baseline/`,
-   - `tests/visual/rubric.md`,
+   - pares `tests/test-vanguardia/actual/` vs `tests/test-vanguardia/baseline/`,
+   - `tests/visual/especificaciones/rubric.md`,
    - la spec de la sección (`Especificaciones/design specs/pages/…`,
      `Especificaciones/design specs/components/…`).
 2. Criterio de paso: **0 hallazgos críticos y score ≥ 0.9**.

@@ -1,15 +1,26 @@
 // Consolida veredictos + diagnósticos en informes por par y veredicto global.
-// Uso (desde tests/visual/): node tools/report.mjs
-// Entrada: reports/veredictos/<unidad>.json (comparación)
-//          reports/veredictos/<unidad>.diagnostico.json (causa raíz, opcional)
-// Salida:  reports/<par>.md  y  reports/veredicto-piloto.json
+// Uso (desde tests/): node visual/tools/report.mjs [ruta/al/pairs.manifest.json]
+// Sin argumento usa `test.manifest` del bloque test del .env (raíz del repo).
+// Entrada: <dir-del-manifest>/reports/veredictos/<unidad>.json (comparación)
+//          <dir-del-manifest>/reports/veredictos/<unidad>.diagnostico.json (causa raíz, opcional)
+// Salida:  <dir-del-manifest>/reports/<par>.md  y  reports/veredicto-piloto.json
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { loadTestEnv } from './load-test-env.js';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIR = path.join(ROOT, 'reports', 'veredictos');
-const manifest = JSON.parse(readFileSync(path.join(ROOT, 'pairs.manifest.json'), 'utf8'));
+const TOOLS_DIR = path.dirname(fileURLToPath(import.meta.url));
+const arg = process.argv[2];
+const envManifest = loadTestEnv().manifest;
+if (!arg && !envManifest) {
+  console.error('Uso: node visual/tools/report.mjs [ruta/al/pairs.manifest.json] — si se omite, usa test.manifest de .env');
+  process.exit(1);
+}
+const manifestPath = arg ? path.resolve(arg) : path.resolve(TOOLS_DIR, '..', '..', envManifest);
+const PROJECT_DIR = path.dirname(manifestPath);
+const REPORTS_DIR = path.join(PROJECT_DIR, 'reports');
+const DIR = path.join(REPORTS_DIR, 'veredictos');
+const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
 const { policy } = manifest;
 const fecha = new Date().toISOString().slice(0, 10);
 
@@ -88,12 +99,12 @@ for (const pair of manifest.pairs) {
     ``,
     `## Evidencia`,
     ``,
-    existsSync(path.join(ROOT, 'reports', 'tiles', pair.id))
+    existsSync(path.join(REPORTS_DIR, 'tiles', pair.id))
       ? `- Tiles: \`reports/tiles/${pair.id}/\` (baseline-NN.png vs actual-NN.png)`
       : `- Sin tiles (kind \`${pair.kind}\`: imagen entera)`,
     `- Imágenes: \`${pair.baseline}\` vs \`${pair.actual}\``,
   ].join('\n');
-  writeFileSync(path.join(ROOT, 'reports', `${pair.id}.md`), md);
+  writeFileSync(path.join(REPORTS_DIR, `${pair.id}.md`), md);
   console.log(`reports/${pair.id}.md — ${veredicto} (${score})`);
 }
 
@@ -103,5 +114,5 @@ const global = {
   piloto_cierra: salida.every((s) => s.veredicto === 'APROBADO'),
   pares: salida,
 };
-writeFileSync(path.join(ROOT, 'reports', 'veredicto-piloto.json'), JSON.stringify(global, null, 2));
+writeFileSync(path.join(REPORTS_DIR, 'veredicto-piloto.json'), JSON.stringify(global, null, 2));
 console.log(`\nreports/veredicto-piloto.json — piloto cierra: ${global.piloto_cierra}`);

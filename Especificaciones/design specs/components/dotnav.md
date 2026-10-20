@@ -1,90 +1,51 @@
+---
+fuente: Figma — página `components-diseño` (`10:215`), componente `components/dotnav` (`114:6780`)
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`scan_nodes_by_types, get_node_info`)
+---
+
 # Componente: `dotnav`
 
----
-fuente: Figma — página `components`, nodo `114:6780` (`COMPONENT`)
-extraido: 2026-10-03
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_node_info`, `export_node_as_image`)
----
-
-Indicadores de paginación de la fila de «Nuestros objetivos» en
-[inicio](../pages/inicio.md). Componente simple, **no es set de variantes**.
+Componente simple `114:6780` (**no** es `COMPONENT_SET`).
 
 ## Anatomía
 
-1. Contenedor 80×8, sin relleno ni `border-radius`.
-2. Cuatro `ELLIPSE` de **8×8** con gap **16** (posición `x`: 0, 24, 48, 72).
+| # | Nodo | Tamaño | Relleno |
+| --- | --- | --- | --- |
+| 1 | `Ellipse 32` `114:6775` | 8×8 | `#858585` |
+| 2 | `Ellipse 33` `114:6776` | 8×8 | `#ffffff` |
+| 3 | `Ellipse 34` `114:6777` | 8×8 | `#ffffff` |
+| 4 | `Ellipse 35` `2326:4037` | 8×8 | `#ffffff` |
+
+Total **80×8**: 4×8 de diámetro + 3 huecos → **gap 16**.
 
 ## Variantes y estados
 
-| Estado | Dónde | Activo | Inactivos |
-| --- | --- | --- | --- |
-| default (componente `114:6780`) | sobre `--color-media-placeholder` (`#ebebeb`) | `#858585` (`--neutral-60`, 1.er punto) | `#ffffff` ×3 |
-| instancia `2326:4033` en `inicio` | sobre `--color-surface` (`#ffffff`) | `#5c5c5c` (`--neutral-80`) | `#d6d6d6` (`--color-border-soft`) ×3 |
-| hover / focus / disabled | **no existe en Figma** | — | PENDIENTE de especificación de diseño |
-
-- No hay más estados ni más variantes (no existe `size` ni número de puntos variable).
-- Baseline: `tests/visual/baseline/dotnav-default.png` — PENDIENTE (`tests/` fuera de
-  alcance).
+**No tiene `COMPONENT_SET` ni variantes**: el estado activo/inactivo está
+expresado por el **relleno de cada elipse** dentro de la misma instancia. En el
+maestro, el primer punto es `#858585` y los otros tres `#ffffff`.
 
 ## Medidas y tokens
 
-- Puntos: 8×8, gap 16 (`--space-3`).
-- Colores: [tokens.md](../tokens.md). En `tokens.css` el primer punto se rige por
-  `--color-dot-inactive` (`#858585`) — **ojo: el nombre del token habla de
-  "inactive" pero el valor es el del punto activo del componente**; en la instancia de
-  `inicio` el activo es `--neutral-80` y los inactivos `--color-border-soft`.
+| Rol | Token | Valor |
+| --- | --- | --- |
+| Punto (wireframe) | `--color-dot-inactive` | `#858585` |
+| Punto activo (diseño definitivo) | `--color-dot-active` | `#65543a` |
+| Puntos inactivos (diseño definitivo) | `--color-dot-inactive-new` | `#d7d2ca` |
+| Radio | `--radius-circle` | 50% |
 
 ## Comportamiento
 
-**Sin reacciones registradas en el prototipo**: `get_reactions` sobre
-`2326:4033` (junto con `icons/prev` `2326:4023` e `icons/next` `2326:4026`) no
-devuelve ninguna. **PENDIENTE de especificación de diseño** — los puntos se dibujan
-pero no se les asigna comportamiento (punto 0.1.5 del plan).
+`get_reactions` **no registra** acciones sobre `components/dotnav` en
+`1448-lg`: no navega ni cambia de estado en el prototipo.
 
-## Accesibilidad
+## Dónde aparece
 
-| Par | Ratio | Veredicto |
-| --- | --- | --- |
-| `#5c5c5c` sobre `#ffffff` (activo en `inicio`) | 6.69 | AA |
-| `#d6d6d6` sobre `#ffffff` (inactivos en `inicio`) | **1.45** | **No cumple** — los indicadores son el único indicador de posición |
-| `#858585` sobre `#ebebeb` (activo por defecto) | 3.10 | Solo alcanza el mínimo de UI (3:1) |
-| `#ffffff` sobre `#ebebeb` (inactivos por defecto) | **1.19** | **No cumple** |
+Una sola instancia en todo `1448-lg`: dentro de `inicio › seccion-objetivos`.
+Las instancias de `hovers` (`Frame 1` `4518:2274`, `Frame 2` `4518:2287`)
+acompañan a `icons/prev`/`icons/next` del carrusel de tarjetas.
 
-Detalle y gravedad en [accessibility.md](../accessibility.md).
-Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-[AGENTS.md](../../../AGENTS.md)).
+## Baseline
 
-## Instancias en `375-xs` (leídas el 2026-10-04)
-
-| Instancia | Pantalla | Fondo | Activo | Inactivos |
-| --- | --- | --- | --- | --- |
-| `2392:4007` | `inicio` · «Nuestros objetivos» | `--color-surface` | `#5c5c5c` (`--neutral-80`) | `#d6d6d6` (`--color-border-soft`) ×3 |
-| `2392:4103` | `inicio` · «La Materia Prima» (**solo existe en `xs`**) | `--color-surface-strong` (`#d6d6d6`) | `#5c5c5c` (`--neutral-80`) | `#fafafa` ×3 |
-
-Ambos forman parte de los **carruseles funcionales** (v1.2/v1.4 del ticket): los
-puntos son botones con nombre accesible y el punto activo refleja la posición; ver
-[interactions.md](../interactions.md).
-
-## Instancias en `1024-sm` (leídas el 2026-10-05)
-
-| Instancia | Pantalla | Fondo | Activo | Inactivos |
-| --- | --- | --- | --- | --- |
-| `2408:1662` | `inicio` · «Nuestros objetivos» | `--color-surface` | `#5c5c5c` (`--neutral-80`) | `#d6d6d6` (`--color-border-soft`) ×3 |
-
-- `dotnav` **80×8**: 4 puntos de **8×8**, gap **16** (paso 24).
-- Fila de controles `Frame 1` `2408:1660` (**714×64**): `icons/prev` **64×64**
-  (`2408:1661`) a la izquierda con offset **27**, `icons/next` **64×64**
-  (`2408:1663`) a la derecha con offset **27**, `dotnav` **centrado**
-  (verticalmente, prev/next en `y` y dotnav +28).
-- **Solo existe en «Nuestros objetivos»**: `sección-La-Materia-Prima` a 768 **no
-  tiene fila de paginación** (igual que en `lg`; en `xs` sí la tiene).
-- Los controles son parte del carrusel definido en
-  [interactions.md](../interactions.md).
-
-
-## Colores del diseño definitivo (2026-10-20)
-
-Puntos 8×8: activo **`#65543a`**, inactivo **`#d7d2ca`** (pares `4518:2276` /
-`4518:2289` en la capa `hovers`). Sustituyen a `--color-dot-inactive`
-(`#858585`) del wireframe. Transición `all .4s ease` al cambiar de índice.
+No tiene par propio en `pairs.manifest.json`.

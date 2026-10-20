@@ -1,101 +1,43 @@
-# Página: Política de privacidad
-
 ---
-fuente: Figma — página `1448-lg`, frame `Política de privacidad` (`2335:1533`); página `1024-sm`, frame `2421:1246` (leído el 2026-10-05)
-extraido: 2026-10-03 (sm: 2026-10-05)
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_document_info`, `get_nodes_info`, `get_reactions`)
+fuente: Figma — página `1448-lg` (`110:1162`), frame `Política de privacidad` (`2335:1533`)
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`get_document_info, get_node_info`)
 ---
 
-Frame: `2335:1533` — 1448×1836, fondo `--color-surface`. Contenido 1384 (padding
-lateral 32). Ritmo vertical del sitio: [layout.md](../layout.md).
+# Página: politica-de-privacidad
 
-**No tiene frame `header` propio**: el nav se superpone sobre `sección-puntos`
-(mismo caso que en [inicio](./inicio.md)).
+Frame `2335:1533` — **1448×1792** px.
 
 ## Secciones (en orden)
 
-| # | Sección | Nodo | Componentes usados | Baseline |
-| --- | --- | --- | --- | --- |
-| 1 | Header / nav | `2338:2512` (instancia `components/nav`, declarada la última pero colocada arriba, `y=-27` = origen del frame) | `nav` | `tests/visual/baseline/politica-de-privacidad-1448.png` — PENDIENTE (`tests/` fuera de alcance) |
-| 2 | sección-puntos | `2335:1540` — 1448×1304, fondo `--color-surface` | `buttons` («Volver al inicio», `2335:1574`) | — |
-| 3 | Footer | `2338:2799` — 1448×405, fondo `--color-surface-dark` | `icons/logo-02`, `icons/facebook`, `icons/instagram`, `icons/youtube`, `icons/x`, `icons/tik-tok` | — |
+| # | Sección | Nodo | y | Tamaño | Tipo | Componentes usados | Baseline |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | **sección-puntos** | `2335:1540` | 133 | 1448×1227 | FRAME | `buttons` | `baseline/politica-de-privacidad-1448.png` |
+| 2 | **components/footer** | `4442:2879` | 1360 | 1448×405 | INSTANCE | `footer` |  |
+| 3 | **components/nav** | `2338:2512` | -27 | 1448×160 | INSTANCE | `nav`, `buttons`×2 |  |
 
-Alturas apiladas (gap 0): sección-puntos **1304** · footer **405**; el nav (125)
-se superpone arriba.
+### Notas de `politica-de-privacidad`
 
-Detalle de componentes extraídos en este ticket:
-[components/buttons](../components/buttons.md),
-[components/footer](../components/footer.md).
+- Una sola sección de contenido: `sección-puntos` `2335:1540` (1448×1227),
+  con un único `components/buttons` dentro (el CTA a inicio).
+- El footer arranca en y=1360 = 133 + 1227.
 
-## Detalle por sección
+## `sm` (1024-sm)
 
-### 2 — `sección-puntos` (`2335:1540`)
+Frame en la página `1024-sm` (`10:214`): **`2421:1246` (768×1846)**.
 
-1448×1304, fondo `--color-surface`, contenido de 910 de ancho:
+Hijos directos, en orden:
 
-- `2335:1667` «Política de privacidad» — Bold 32.4/36.29 (`--font-size-l-h2`),
-  `--color-text-primary`.
-- `puntos` `2335:1542` (910×1044):
-  - `Frame 9` `2335:1543` (910×960) — el texto legal: `2335:1546` «Esta página web
-    es propiedad de Asociación cultural Vanguardia Colombiana…» — Medium 20.2/30.3
-    (`--font-size-body-m`), `--color-text-secondary`. Contenido de la página, no de
-    un componente.
-  - `components/buttons` `2335:1574` — 187×52 (`size=m`), relleno
-    `--color-text-secondary`, etiqueta «Volver al inicio» (Bold 20.2/30.3).
+| # | Sección | Nodo | Tamaño |
+| --- | --- | --- | --- |
+| | **sección-puntos** | `2421:1346` | 768×1321 |
+| | **components/footer** | `4442:3806` | 768×450 |
+| | **components/nav** | `2424:2103` | 768×75 |
 
-## Comportamiento registrado
-
-Solo `nav` y `footer`; el cuerpo de la pantalla no tiene interacciones. Registro
-completo y destinos en [interactions.md](../interactions.md).
-
-- `nav`: `logo` → `inicio` (`110:2277`); enlaces → `Programa` (`2328:4307`),
-  `Decálogo` (`2334:1005`), `Únete` (`2335:1229`) y `https://lamateriaprima.org/`;
-  `platforms` → URLs externas.
-- `footer`: `logo-02` → `inicio`; enlaces → `inicio`, `Programa`, `Decálogo`,
-  `Únete`, `Pólitica de privacidad` (**sin `destinationId`**: enlace a la propia
-  pantalla) y `La Materia Prima` (URL externa); `platforms` → URLs externas.
-- Transición por defecto del prototipo: `DISSOLVE`, `EASE_OUT`, 0.3 s.
-
-**`PENDIENTE-FIGMA` — botón «Volver al inicio» (`2335:1574`):** `get_reactions`
-sobre `sección-puntos` (`2335:1540`) devuelve **0 reacciones**; el prototipo no le
-define destino. No se le asigna navegación hasta que el diseño la especifique.
-
-**Observación registrada (no corregida):** en el `footer` de esta pantalla el icono
-`icons/youtube` apunta a `https://www.instagram.com/vanguardiacol` (mismo destino que
-el de Instagram); en el `nav` sí apunta a YouTube. Mismo fallo que en
-[inicio](./inicio.md) y [Únete](./unete.md).
+Contenedor de contenido: **720 con padding 24** (ver [`../layout.md`](../layout.md) §`sm`).
 
 ## Diferencias por breakpoint
 
-### `xs` (375) — frame `2396:2820`, 375×3120 (leído el 2026-10-04)
-
-| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
-| --- | --- | --- | --- | --- |
-| 0 | `components/nav` | `2396:2821` | **80** | 125 → 80; logo 96 → 48; padding 32 → 16 |
-| 1 | `sección-puntos` | `2396:2885` | 2326 | padding **64** (96); título **32.4** (igual); gap título→cuerpo **32**; cuerpo 20.2 a ancho **343** (en lg el bloque va centrado a 910); gap cuerpo→CTA **32**; botón «Volver al inicio» **187×52** |
-| 2 | `footer` | `2396:2829` | 714 | igual que el de [inicio](./inicio.md) |
-
-El `PENDIENTE-FIGMA` del destino de «Volver al inicio» se mantiene: `get_reactions`
-sobre `2396:2891` **no registra reacción** en `375-xs` tampoco.
-
-### `sm` (768) — frame `2421:1246`, 768×1840 (leído el 2026-10-05)
-
-| # | Sección | Nodo | Alto | Cambio respecto a 1448 |
-| --- | --- | --- | --- | --- |
-| 0 | `components/nav` | `2424:2103` | **75** | 125 → 75; logo 48; sin enlaces de texto (solo plataformas + hamburguesa) |
-| 1 | `sección-puntos` | `2421:1346` | 1360 | padding **64** vertical (96) y **16** lateral; título `2421:1347` **344×36** (Bold **32.4**); gap título→cuerpo **32**; `puntos` **736** (`Frame 9` 736×1080) con cuerpo 20.2 (en lg va centrado a 910); gap cuerpo→CTA **32**; botón «Volver al inicio» **187×52** (`2421:1352`) |
-| 2 | `footer` | `2421:1247` | **405** | igual que el de [inicio](./inicio.md) a 768 |
-
-**`PENDIENTE-FIGMA` parcialmente resuelto:** en `sm` el botón «Volver al inicio»
-(`2421:1352`) **sí tiene reacción** → `NAVIGATE 268:3128` (`inicio` tablet), leída el
-2026-10-05; en `lg` (`2335:1574`) y `xs` (`2396:2891`) Figma **no le asigna
-destino** y ahí se mantiene el `PENDIENTE`. Como el HTML es único, el botón se
-implementa como enlace a `index.html` (el propio texto del botón declara el
-destino); registrado también en [interactions.md](../interactions.md).
-
-
-## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
-
-Frame `2335:1533`, **1448×1792** (era 1777). Secciones: `sección-puntos`
-`2335:1540` ·**1227** — footer `4442:2879` ·405 — nav `2338:2512` ·**160**.
+`1024-sm` → `política-de-privacidad` `2421:1246` (768×1846) · `375-xs` →
+`política de privacidad` `2396:2820` (375×2929). Detalle: **PENDIENTE-FIGMA**.

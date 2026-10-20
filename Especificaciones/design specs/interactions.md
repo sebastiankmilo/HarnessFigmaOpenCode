@@ -1,368 +1,153 @@
+---
+fuente: Figma — página `1448-lg` (`110:1162`) — `get_reactions` + frame `hovers` (`4518:2148`)
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`get_node_info, get_reactions, scan_nodes_by_types`)
+---
+
 # Interacciones y flujos
 
----
-fuente: Figma — página `1448-lg` (`110:1162`), reacciones de los nodos clicables;
-página `1024-sm` (`10:214`) leída el 2026-10-05
-extraido: 2026-10-03 (`1024-sm`: 2026-10-05)
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_reactions`)
----
+`get_reactions` con `nodeIds: ["110:1162"]` devuelve **220 nodos con reacciones**
+y **224 acciones** en total.
 
-`get_reactions` sobre la página `1448-lg`: **124 nodos con reacciones, 125 reacciones,
-122 únicas**. Transición por defecto del prototipo: `DISSOLVE`, `EASE_OUT`, **0.3s**.
+| Tipo de acción | Nº |
+| --- | --- |
+| `NODE` (navegar / abrir overlay) | 117 |
+| `URL` (enlace externo) | 104 |
+| `CLOSE` (cerrar overlay) | 3 |
+
+| Trigger | Nº |
+| --- | --- |
+| `ON_CLICK` | 220 |
+| `ON_DRAG` | 4 |
+
+| Navegación | Transición | Nº |
+| --- | --- | --- |
+| `NAVIGATE` | `DISSOLVE` 0,3 s `EASE_OUT` | 99 |
+| `NAVIGATE` | sin transición | 4 |
+| `OVERLAY` | `DISSOLVE` 0,3 s | 10 |
+| `OVERLAY` | `MOVE_IN` 0,3 s | 4 |
 
 ## Flujos de navegación
 
-### `inicio` (`110:2277`)
+| Origen | Trigger | Destino | Nodo destino | Verificación |
+| --- | --- | --- | --- | --- |
+| `inicio` › hero › botón «Nuestro programa» | click | `Programa` | `2328:4307` | URL + visión vs `baseline/programa-1448.png` |
+| `inicio` › hero › botón «Únete» | click | `Únete` | `2335:1229` | URL + visión vs `baseline/unete-1448.png` |
+| `inicio` › `seccion-objetivos` › CTA | click | `Programa` | `2328:4307` | ídem |
+| `inicio` › `seccion-objetivos` › `goal-card` | click / drag | **overlay** `Objetivo-modal` | `2358:932` | dialog visible + visión vs `baseline/objetivo-modal-1448.png` |
+| `Objetivo-modal` › `icons/close` | click | `CLOSE` | — | aserción funcional: dialog oculto |
+| `Objetivo-modal` › CTA | click | `Programa` | `2328:4307` | navegación |
+| `nav > right-nav > links > link` (todas las páginas) | click | `Programa` / `Decálogo` / `Únete` | `2328:4307` / `2334:1005` / `2335:1229` | navegación |
+| `nav > logo` / `logo-dorado` | click | `inicio` | `110:2277` | navegación |
+| `footer > Frame 5 > <enlace>` | click | su página | — | navegación |
+| `footer > icons/logo` | click | `inicio` | `110:2277` | navegación |
+| `footer > platforms > icons/*` | click | **URL** externa | Facebook/Instagram/YouTube/X/TikTok | aserción de `href` |
+| `inicio` › `sección-La-Materia-Prima` › `container-and-card` | click | **URL** `lamateriaprima.org` | 4 artículos | aserción de `href` |
+| `Decálogo` / `Programa` › `sección-puntos` › CTA | click | `Únete` | `2335:1229` | navegación |
+| `Política` › CTA | click | `inicio` | `110:2277` | navegación |
 
-| Origen | Trigger | Destino | Verificación |
+> El enlace de la **página actual** en `nav` y en `footer` apunta a
+> `destinationId: null` en su frame de origen: es el estado «estás aquí».
+
+## Animaciones y transiciones
+
+Fuente: los 6 nodos `TEXT` sueltos de `1448-lg` con las indicaciones del
+diseñador + las transiciones del prototipo (`get_reactions`).
+
+### Indicaciones del diseñador (nodos `TEXT` de la página)
+
+| Nodo | Indicación | Dónde se aplica |
+| --- | --- | --- |
+| `4649:2012` | `:hover { transition: all .4s ease; }` en enlaces, botones y tarjetas | `.btn`, `.goal-card`, `.article-card`, `.site-nav__link`, `.site-footer__links a`, `.page-index a` |
+| `4649:2013` | enlaces: `text-decoration: none; border-bottom: 1px solid (color); padding-bottom: .015rem` | subrayado de enlaces |
+| `4649:2014` | `html { scroll-behavior: smooth; }` en Decálogo y Programa | `html.has-smooth-scroll` |
+| `4649:2016` | slideshow de tarjetas tipo <https://jitter.video> | carruseles de `inicio` |
+| `4649:2017` | modales estilo UIkit, backdrop `rgba(0,0,0,0.25)` | `Objetivo-modal` |
+| `4649:2018` | fades sutiles tipo scrollspy al entrar cada sección, **sin animar el above the fold** (impacta Lighthouse) | `main > section` |
+
+### Transiciones del prototipo (`get_reactions`)
+
+| Acción | Transición | Nº |
+| --- | --- | --- |
+| `NAVIGATE` | `DISSOLVE` · `EASE_OUT` · **0,3 s** | 99 |
+| `OVERLAY` | `DISSOLVE` · **0,3 s** | 10 |
+| `OVERLAY` | `MOVE_IN` · **0,3 s** | 4 |
+| `NAVIGATE` | sin transición | 4 |
+
+> Los estados hover de `hovers` (`4518:2148`) **no tienen `reactions` propias**:
+> su duración y easing son los de `4649:2012` (0,4 s `ease`), no los del
+> prototipo.
+
+## Navegación reducida
+
+Frame **`4518:1968`** de `1448-lg` — **1448×83**, relleno `#fdfcfa`.
+
+Es el estado **colapsado de la barra del nav** al hacer scroll. No es una
+pantalla: es la misma `size=lg` (1448×**160**) reducida a **83**.
+
+| Propiedad | Valor | Nodo |
+| --- | --- | --- |
+| Tamaño | 1448×**83** | `4518:1968` |
+| Fondo | `#fdfcfa` | relleno del frame |
+| Contenido | `logo-color` `4518:1969`, `right-nav` `4518:2074` (4 `link`), `buttons` `4518:2088`, `platforms, search and toggle` `4518:2091`, selector de idioma `4672:2974` | hijos directos |
+
+**Comportamiento:** al superar en el scroll el alto de la barra completa
+(160 px), la barra pasa a 83 px. Tamaño completo → reducido: **160 → 83**.
+
+## Carruseles de `inicio`
+
+Dos carruseles, ambos en `1448-lg`:
+
+| Carrusel | Nodo | Ítems | Controles |
 | --- | --- | --- | --- |
-| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión vs baseline |
-| nav > enlace 1 | click | `Programa` (`2328:4307`) | URL + visión |
-| nav > enlace 2 | click | `Decálogo` (`2334:1005`) | URL + visión |
-| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
-| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
-| encabezado > botón 1 | click | `Programa` — NAVIGATE | URL + visión |
-| encabezado > botón 2 | click | `Únete` — NAVIGATE | URL + visión |
-| `goal-card` ×4 | click | `Objetivo-modal` (`2358:932`) — **OVERLAY** | dialog visible + visión |
-| `goal-card` (2.ª) | `ON_DRAG` | `Objetivo-modal` — OVERLAY, `MOVE_IN` RIGHT 0.3s | arrastre + visión |
-| `seccion-objetivos` > botón | click | `Programa` — NAVIGATE | URL + visión |
-| `sección-La-Materia-Prima` > `container-and-card` ×4 | click | URL externa `lamateriaprima.org` (4 artículos distintos) | apertura externa |
-| `sección-La-Materia-Prima` > botón | click | URL externa `lamateriaprima.org/` | apertura externa |
-| footer > enlace `Programa` | click | `Programa` | URL + visión |
-| footer > enlace `Decálogo` | click | `Decálogo` | URL + visión |
-| footer > enlace `Únete` | click | `Únete` | URL + visión |
-| footer > enlace `Pólitica de privacidad` | click | `Política de privacidad` (`2335:1533`) | URL + visión |
-| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
+| Nuestros objetivos | `seccion-objetivos` `2326:4021` › `objetivos-tarjetas` | 4 × `goal-card` (`2326:3926`, `2326:3937`, `2326:3948`, `2326:3959`) | `Frame 1` con `icons/prev`, `components/dotnav` `2326:4033` (80×8, 4 puntos), `icons/next` |
+| La Materia Prima | `sección-La-Materia-Prima` `2328:4236` › `artículos` | 4 × `container-and-card` (`2326:4137`, `2326:4173`, `2326:4185`, `2326:4197`) | mismos controles |
 
-### `Objetivo-modal` (`2358:932`)
+- `components/dotnav` `114:6780`: 4 elipses de 8×8, la activa rellena y las
+  otras vacías → es el indicador de índice.
+- Las 4 `goal-card` tienen `ON_DRAG` → `OVERLAY` además del `ON_CLICK`.
+- En `hovers` los controles aparecen como par `Frame 1` `4518:2274` ↔
+  `Frame 2` `4518:2287`.
 
-| Origen | Trigger | Destino | Verificación |
-| --- | --- | --- | --- |
-| `modal > icons/close` | click | **CLOSE** (cierra el overlay) | aserción funcional |
-| `modal > components/buttons` | click | `Programa` — NAVIGATE | URL + visión |
+**Estado por breakpoint:**
+- `lg` (1448): las 4 tarjetas visibles a la vez.
+- `sm` (768): ventana de **2 tarjetas** y los controles **no se dibujan** —
+  en `1024-sm`, `seccion-objetivos` `2408:1650` no trae `Frame 1` de controles.
+- `xs` (375): 1 tarjeta.
 
-Al cerrar con `CLOSE`, el flujo de vuelta es al estado anterior (`inicio`): aserción
-funcional de que el diálogo desaparece.
+## Comportamiento
 
-### `Únete` (`2335:1229`)
+Reglas de interacción que no son ni navegación ni animación:
 
-22 nodos con reacción, **todos en `nav` y `footer`** — el cuerpo de la pantalla
-(media + texto) no tiene ninguna interacción.
-
-| Origen | Trigger | Destino | Verificación |
-| --- | --- | --- | --- |
-| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
-| nav > enlace 1 | click | `Programa` (`2328:4307`) | URL + visión |
-| nav > enlace 2 | click | `Decálogo` (`2334:1005`) | URL + visión |
-| nav > enlace 3 «Únete» | click | **sin `destinationId`** (página actual) | — |
-| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
-| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
-| footer > enlace `Inicio` | click | `inicio` | URL + visión |
-| footer > enlace `Programa` | click | `Programa` | URL + visión |
-| footer > enlace `Decálogo` | click | `Decálogo` | URL + visión |
-| footer > enlace `Únete` | click | **sin `destinationId`** (página actual) | — |
-| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| footer > enlace `Pólitica de privacidad` | click | `Política de privacidad` (`2335:1533`) | URL + visión |
-| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
-
-**Sin reacción**: el enlace `Aporta` del footer y el cuerpo de la pantalla.
-
-### `Programa` (`2328:4307`)
-
-23 reacciones: `nav` (10), `footer` (12) y el CTA de `sección-puntos`.
-
-| Origen | Trigger | Destino | Verificación |
-| --- | --- | --- | --- |
-| `sección-puntos` > `components/buttons` `2334:998` | click | `Únete` (`2335:1229`) — NAVIGATE, sin transición | URL + visión |
-| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
-| nav > enlace 1 «Programa» | click | **sin `destinationId`** (página actual) | — |
-| nav > enlace 2 | click | `Decálogo` (`2334:1005`) | URL + visión |
-| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
-| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
-| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
-| footer > enlace `Inicio` | click | `inicio` | URL + visión |
-| footer > enlace `Programa` | click | **sin `destinationId`** (página actual) | — |
-| footer > enlace `Decálogo` | click | `Decálogo` | URL + visión |
-| footer > enlace `Únete` | click | `Únete` | URL + visión |
-| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| footer > enlace `Pólitica de privacidad` | click | `Política de privacidad` (`2335:1533`) | URL + visión |
-| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
-
-**Sin reacción**: el enlace `Aporta` del footer y el cuerpo de la pantalla.
-
-### `Decálogo` (`2334:1005`)
-
-23 reacciones: mismo mapa que `Programa`, con la variante del enlace activo.
-
-| Origen | Trigger | Destino | Verificación |
-| --- | --- | --- | --- |
-| `sección-puntos` > `components/buttons` `2334:1059` | click | `Únete` (`2335:1229`) — NAVIGATE, sin transición | URL + visión |
-| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
-| nav > enlace 1 | click | `Programa` (`2328:4307`) | URL + visión |
-| nav > enlace 2 «Decálogo» | click | **sin `destinationId`** (página actual) | — |
-| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
-| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
-| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
-| footer > enlace `Inicio` | click | `inicio` | URL + visión |
-| footer > enlace `Programa` | click | `Programa` | URL + visión |
-| footer > enlace `Decálogo` | click | **sin `destinationId`** (página actual) | — |
-| footer > enlace `Únete` | click | `Únete` | URL + visión |
-| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| footer > enlace `Pólitica de privacidad` | click | `Política de privacidad` (`2335:1533`) | URL + visión |
-| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
-
-**Sin reacción**: el enlace `Aporta` del footer y el cuerpo de la pantalla.
-
-### `Política de privacidad` (`2335:1533`)
-
-22 reacciones: `nav` (10) y `footer` (12). El cuerpo no tiene ninguna.
-
-| Origen | Trigger | Destino | Verificación |
-| --- | --- | --- | --- |
-| nav > `logo` | click | `inicio` (`110:2277`) — NAVIGATE | URL + visión |
-| nav > enlace 1 | click | `Programa` (`2328:4307`) | URL + visión |
-| nav > enlace 2 | click | `Decálogo` (`2334:1005`) | URL + visión |
-| nav > enlace 3 | click | `Únete` (`2335:1229`) | URL + visión |
-| nav > enlace 4 | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| nav > iconos `platforms` | click | URL externa: Facebook, Instagram, YouTube, X, TikTok | apertura externa |
-| footer > `logo-02` | click | `inicio` — NAVIGATE | URL + visión |
-| footer > enlace `Inicio` | click | `inicio` | URL + visión |
-| footer > enlace `Programa` | click | `Programa` | URL + visión |
-| footer > enlace `Decálogo` | click | `Decálogo` | URL + visión |
-| footer > enlace `Únete` | click | `Únete` | URL + visión |
-| footer > enlace `La Materia Prima` | click | URL externa `https://lamateriaprima.org/` | apertura externa |
-| footer > enlace `Pólitica de privacidad` | click | **sin `destinationId`** (página actual) | — |
-| footer > iconos `platforms` | click | URL externa (Facebook, Instagram, YouTube, X, TikTok) | apertura externa |
-
-**Sin reacción**: el enlace `Aporta` del footer, el cuerpo de la pantalla y el botón
-`components/buttons` «Volver al inicio» (`2335:1574`) — **`PENDIENTE-FIGMA`**:
-`get_reactions` sobre `sección-puntos` (`2335:1540`) devuelve 0.
-
-### Elementos de `inicio` sin comportamiento
-
-Verificado con `get_reactions` el 2026-10-03: `icons/prev` (`2326:4023`),
-`components/dotnav` (`2326:4033`) e `icons/next` (`2326:4032` > `2326:4026`) **no
-tienen ninguna reacción**. **PENDIENTE de especificación de diseño**: se dibujan y no
-se les asigna comportamiento.
+| Elemento | Regla |
+| --- | --- |
+| `goal-card` | `ON_CLICK` y `ON_DRAG` abren `Objetivo-modal` como `OVERLAY` (las 4 tarjetas) |
+| `Objetivo-modal` | `icons/close` `2358:1153` → `CLOSE`; el CTA navega a `Programa` |
+| Carrusel (`lg`) | al cambiar de índice, el foco pasa a la tarjeta del nuevo índice |
+| Carrusel (`sm`) | el foco solo se mueve si la tarjeta enfocada sale de la ventana de 2 |
+| Carrusel (`xs`) | el foco queda en la única tarjeta visible |
+| Enlace de la página actual | `destinationId: null` (estado «estás aquí») |
+| Selector ES/PT | **sin reacciones** en el prototipo |
 
 ## Estados interactivos por componente
 
-- [components/nav.md](./components/nav.md): subrayado de enlace activo; hamburguesa
-  **sin reacción** registrada (la variante `status=open-modal` existe pero el
-  prototipo no expone su conexión).
-- [components/goal-card.md](./components/goal-card.md): `ON_CLICK` y `ON_DRAG` al overlay.
-- [components/header-two-columns.md](./components/header-two-columns.md): **sin
-  reacciones** — slideshow y botones no tienen comportamiento definido.
-- [components/container-and-card.md](./components/container-and-card.md): click →
-  URL externa `lamateriaprima.org`; sin estados hover.
-- [components/buttons.md](./components/buttons.md): la reacción la lleva la
-  instancia, no el componente (cada pantalla la declara arriba).
-- [components/dotnav.md](./components/dotnav.md): **sin reacciones** (pendiente de
-  diseño), igual que `icons/prev` e `icons/next`.
-- [components/images.md](./components/images.md), [components/footer.md](./components/footer.md):
-  los destinos viven en los enlaces del footer (arriba).
+Los estados hover **no son variantes del `COMPONENT_SET`**: están dibujados en
+el frame **`hovers` `4518:2148`** de `1448-lg`, en pares default ↔ hover, con un
+grupo `cursor` (y el frame `icons8-hand-cursor 1` `4519:2484`) marcando el
+puntero.
 
-## Inconsistencias observadas (registradas, no corregidas)
-
-- En **las cinco pantallas**, el icono `youtube` del footer apunta a
-  `https://www.instagram.com/vanguardiacol` (mismo destino que el de Instagram);
-  en el nav, `youtube` sí apunta a `https://www.youtube.com/@VanguardiaColombiana`.
-- 6 reacciones `NAVIGATE` sin `destinationId`: en todas, el origen es el enlace de la
-  **página actual** (el enlace del footer y el del nav de `Programa`, `Decálogo` y
-  `Únete` apuntando a sí mismas).
-- `nav` y `footer` repiten la misma lista de enlaces y destinos en todas las
-  pantallas, salvo el enlace de la página actual.
-
-## `375-xs` — reacciones leídas el 2026-10-04
-
-`get_reactions` sobre los nodos de las vistas móviles:
-
-| Origen | Nodo | Trigger | Destino |
+| Elemento | Default | Hover | Nodos del par |
 | --- | --- | --- | --- |
-| `objetivos` (contenedor de las `goal-card`) | `2392:4000` | `ON_CLICK` | `Objetivo-modal` (`2404:3499`) — **OVERLAY**, `DISSOLVE` 0.3s `EASE_OUT` |
-| `icons/prev` / `components/dotnav` / `icons/next` de objetivos | `2392:4005` | — | **0 reacciones** |
-| `icons/prev` / `components/dotnav` / `icons/next` de «La Materia Prima» | `2392:4101` | — | **0 reacciones** |
-| Botón «Volver al inicio» | `2396:2891` | — | **0 reacciones** → `PENDIENTE-FIGMA` (igual que en `lg`) |
-| hamburguesa del nav | instancia `35:703` | — | **0 reacciones** (la variante `status=open-modal` existe, el prototipo no expone la conexión) |
+| Enlaces de `right-nav` | `Line 8` stroke `#ffffff` (invisible) | `Line 8` stroke **`#ff4520`** | `4672:3060` (`right-nav`) |
+| Selector ES/PT | `PT` en `#9e9382`, separador `/` en `#30250f` | — | `4672:2992` (`links`) |
+| `goal-card` | fondo `#fdfcfa` | fondo **`#f0ece6`** | `4518:2257` ↔ `4518:2267` |
+| `buttons` | relleno `#ffcd00` | outline `#30250f` | pares `4518:2149`/`2157`/`2164`/`2167` |
+| `container-and-card` | — | — | `4518:2299` ↔ `4518:2309` |
+| `footer` | — | — | `4518:2316` ↔ `4518:2363` |
+| `Objetivo-modal` | — | — | `4518:2402` ↔ `4518:2420` |
+| `enlaces-puntos` (índice) | enlace activo subrayado `#ff4520`; resto `#ffffff` | subrayado **`#003399`** | `4518:2435` ↔ `4518:2460` |
+| `dotnav` + `icons/prev`/`next` | — | — | `4518:2274` ↔ `4518:2287` |
 
-Los destinos de `nav` y `footer` en `375-xs` son los mismos que en `1448-lg`
-(tablas de más arriba), con la particularidad de que el overlay del menú añade los
-enlaces «La Materia Prima» y «Política de privacidad».
-
-## `1024-sm` — reacciones leídas el 2026-10-05
-
-`get_reactions` sobre los nodos de las 6 vistas tablet:
-
-| Origen | Nodo | Trigger | Destino |
-| --- | --- | --- | --- |
-| hamburguesa (`search and toggle`) de la barra | `I2424:1959;101:3323` | `ON_CLICK` | **`OVERLAY 2424:446`** (overlay tablet) |
-| padre `platforms, search and toggle` | `I2424:1959;101:3318` | `ON_CLICK` | `OVERLAY 2396:2902` (**nav de `375-xs`**) — hallazgo, ver abajo |
-| `icons/logo` de la barra | `I2424:1959;101:3317`, `I2408:1817;101:3317` | — | **0 reacciones** en Figma |
-| `icons/close` del overlay | `2424:1003` | `ON_CLICK` | `CLOSE` (con devolución de foco) |
-| `icons/logo` del overlay | `2424:975` | `ON_CLICK` | `NAVIGATE 268:3128` (`inicio` tablet) |
-| 5 `link-nav` del overlay | `2424:978`…`2424:990` | `ON_CLICK` | `2408:1816` (Programa) · `2408:2098` (Decálogo) · `2408:2315` (Únete) · URL `https://lamateriaprima.org/` · `2421:1246` (Política) |
-| botón «Aporta» del overlay | `2424:994` | — | **0 reacciones** (se dibuja como no interactivo) |
-| plataformas del overlay | `2424:997`…`2424:1001` | `ON_CLICK` | URL solo en **facebook, instagram y youtube**; `x` y `tik-tok` **sin reacción** |
-| botones del hero (`Nuestro programa`, `Únete`) | `2408:1572`, `2408:1573` | — | **0 reacciones** |
-| CTA de objetivos | `2408:1664` | — | **0 reacciones** |
-| CTA «lamateriaprima.org» | `2408:1717` | `ON_CLICK` | URL |
-| CTA de `sección-puntos` | `2408:2043` (Programa), `2408:2307` (Decálogo) | `ON_CLICK` | `NAVIGATE 2408:2315` (`Únete` tablet) |
-| «Volver al inicio» | `2421:1352` | `ON_CLICK` | `NAVIGATE 268:3128` (`inicio` tablet) |
-| `footer` (idéntico en las 5 pantallas) | `2408:1765`, `2408:2170`, `2421:1247` | `ON_CLICK` | URL solo en las **5 plataformas** y en **«La Materia Prima»**; `logo-02` y los otros 5 enlaces **sin reacción** |
-| `icons/prev`, `components/dotnav`, `icons/next` de objetivos | `2408:1661`, `2408:1662`, `2408:1663` | — | **0 reacciones** (el carrusel se define abajo) |
-| `goal-card` | `2408:1656`, `2408:1657` | — | **0 reacciones** (no hay `Objetivo-modal` a tablet, Caso 19) |
-
-- **`PENDIENTE-FIGMA` resuelto en tablet**: «Volver al inicio» (`2421:1352`) **sí
-  navega** a `inicio` (`268:3128`) a 768; el destino sigue sin existir en `lg`
-  (`2335:1574`) ni en `xs` (`2396:2891`), donde se mantiene el `PENDIENTE`.
-- **Logo de la barra → `inicio` (indicación del equipo, 2026-10-05)**: Figma no
-  registra reacción en el `icons/logo` de la barra (ni en `xs` ni en `sm`), pero
-  el equipo indica que **el logo debe ir a `inicio`** → se implementa como enlace,
-  mismo destino que el overlay y que `lg`. El HTML ya lo cumple:
-  `<a class="site-nav__logo" href="index.html">` en las cinco páginas.
-
-### Hallazgo: overlay duplicado
-
-`search and toggle` (hamburguesa) abre el overlay tablet `2424:446`, pero su padre
-`platforms, search and toggle` abre `2396:2902` (el nav de `375-xs`). **La
-implementación sigue `2424:446`** (el de la página, §7 del ticket): `nav.js` abre
-el overlay de la propia página, no el de otra resolución.
-
-## Menú móvil (`nav` `2396:2902`)
-
-Figma no registra reacción para la hamburguesa; el comportamiento lo fija el ticket
-(regla 4 de la §3.2) y ya está implementado en [site/scripts/nav.js](../../site/scripts/nav.js):
-
-| Acción | Comportamiento |
-| --- | --- |
-| Clic en la hamburguesa | Abre el overlay `.site-nav__menu` a pantalla completa (`aria-expanded="true"`, `aria-hidden="false"`), mueve el foco al botón de cerrar |
-| Clic en `icons/close` o `Escape` | Cierra el overlay y **devuelve el foco** a la hamburguesa que lo abrió |
-| `Tab` dentro del overlay | Foco atrapado en los enlaces, plataformas y botones del menú |
-
-## Carruseles de `inicio` — definición previa al JS (v1.2/v1.4 del ticket)
-
-Figma **no registra reacciones** para `prev`/`next`/`dotnav`, pero el ticket los pide
-funcionales. Esta definición es el contrato que implementa
-[site/scripts/inicio.js](../../site/scripts/inicio.js); si cambia, cambia primero
-aquí.
-
-### Alcance
-
-Dos carruseles en [site/index.html](../../site/index.html), con **una misma
-implementación** y 4 elementos cada uno:
-
-| Carrusel | Tarjetas | Controles | Visible a 375 | Visible a 768 | Visible a 1448 |
-| --- | --- | --- | --- | --- | --- |
-| «Nuestros objetivos» | `.goal-card` ×4 | `.carousel__pagination` (en el HTML era `.goals__pagination`; renombrado a clases neutras para reutilizarlo en ambos carruseles) | 1 tarjeta | **2 tarjetas** + controles (`2408:1661`/`1662`/`1663`) | las 4 + controles |
-| «La Materia Prima» | `.article-card` ×4 | `.carousel__pagination .articles__pagination` (**nuevo**, solo en HTML de `index.html`) | 1 tarjeta + controles | **2 tarjetas**, **sin controles** (el diseño `sm` no los dibuja) | las 4, **controles ocultos** (el diseño `lg` no los dibuja) |
-
-### Estado
-
-- `index` ∈ `0..3` por carrusel, **independiente** entre carruseles.
-- **Recorrido circular**: `next` en 3 → 0 y `prev` en 0 → 3 (no hay estados
-  deshabilitados porque el diseño no define estilos de `disabled`).
-- El **punto activo** del `dotnav` es siempre el `index` (`aria-current="true"`).
-
-### Comportamiento por breakpoint
-
-| Breakpoint | Efecto de `prev`/`next`/punto |
-| --- | --- |
-| **375** (base) | Solo se renderiza la tarjeta `index`; las otras tres quedan `display:none` (fuera del flujo y del árbol de accesibilidad). Cambiar de índice **cambia la tarjeta visible** (Caso 18). |
-| **768** (`objetivos`) | Ventana de **2 tarjetas**: se renderizan `index` y `(index+1) % 4`; las otras dos quedan `display:none`. `prev`/`next` y el punto activo se comportan igual que en el resto de breakpoints (recorrido circular, punto = `index`). |
-| **768** (`artículos`) | **2 tarjetas fijas** (las dos primeras) en grilla de 2 columnas; los controles **no existen en el diseño** → `display:none` y `index` no tiene efecto visible (mismo criterio que `lg`). |
-| **1448** (`objetivos`) | Las 4 tarjetas siguen visibles; el control mueve el `index`, actualiza el punto activo y **lleva el foco** a la tarjeta `index` (Caso 19: el comportamiento se conserva con las 4 visibles). |
-| **1448** (`artículos`) | Los controles están `display:none`; el índice no tiene efecto visible y las 4 tarjetas permanecen visibles. |
-
-### Teclado y accesibilidad
-
-- Los controles son `<button type="button">` con **nombre accesible**:
-  «Objetivo anterior» / «Objetivo siguiente» y «Artículo anterior» /
-  «Artículo siguiente»; cada punto es un botón «Ir al objetivo N» / «Ir al
-  artículo N» con `aria-current="true"` en el activo.
-- `Enter` y `Espacio` activan el control enfocado (nativo del `<button>`).
-- `←` y `→` con el foco **dentro del carrusel** (controles o tarjetas) cambian de
-  índice (equivalente a `prev`/`next`), en los tres breakpoints.
-- Tras un cambio de índice:
-  - **a 375**: el foco se queda donde estaba; si estaba en una tarjeta que pasa a
-    `display:none`, se traslada a la tarjeta ahora visible.
-  - **a 768** (`objetivos`): misma regla que a 375 — si la tarjeta enfocada sale de
-    la **ventana de 2**, el foco pasa a una de las dos tarjetas visibles (la del
-    nuevo `index`), para que la navegación continúe desde ahí.
-  - **a 1448** (objetivos): el foco pasa a la tarjeta del nuevo índice, para que la
-    navegación continúe desde ahí (las 4 siguen visibles).
-- El foco usa el `:focus-visible` global de [main.css](../../site/styles/main.css)
-  (2 px `--color-text-primary`).
-- **Sin animación de transición**: el cambio de tarjeta es instantáneo (el diseño no
-  especifica movimiento), lo que además cumple `prefers-reduced-motion` sin
-  condiciones adicionales.
-
-### Fuera de esta definición
-
-`ON_DRAG` de `goal-card`, autoplay, y `prev`/`next`/`dotnav` del slideshow del
-encabezado de escritorio (OUT OF SCOPE del ticket).
-
-
-## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
-
-### Navegación reducida (frame `4518:1968`, 1448×83)
-
-- **Umbral**: al superar `--nav-height-lg` (160px) de scroll, el header pasa al
-  estado compacto (`4518:1968`, 83px, logo `icons/logo` 96×96) y permanece
-  `position: fixed`; al volver por debajo del umbral reaparece el header completo.
-- El prototipo no tiene trigger de scroll: el umbral se deriva de la altura del
-  header completo (decisión registrada aquí).
-- El overlay del menú (hamburguesa) se cierra con el mismo foco devuelto que el
-  nav normal. Con `prefers-reduced-motion: reduce` el cambio de estado no usa
-  transición de altura.
-
-### Hovers (capa `hovers` `4518:2148`, pares default↔hover)
-
-| Elemento | Default | Hover | Nodos |
-| --- | --- | --- | --- |
-| `components/buttons` (relleno) | `#ffcd00` | `#ff4520` | `4518:2150` ↔ `4518:2158` |
-| `components/buttons` (outline) | stroke `#30250f` | igual | `4518:2151` etc. |
-| CTA `lamateriaprima.org` | fondo `#ceac57`, texto `#1b2c43` | fondo `#1b2c43`, texto `#ceac57` (inversión) | `4518:2240` ↔ `4518:2252` |
-| `goal-card` | fondo `#fdfcfa` | fondo `#f0ece6` | `4518:2257` ↔ `4518:2267` |
-| `container-and-card` | fondo `#fdfcfa` | fondo `#f0ece6` | `4518:2299` ↔ `4518:2309` |
-| `dotnav` | activo `#65543a`, inactivo `#d7d2ca` (8×8) | mismo (la posición activa cambia de índice) | `4518:2276` / `4518:2289` |
-| Enlace de texto de `Únete` | subrayado `#786952` | subrayado `#ff4520` | `4518:2183` ↔ `4518:2180` (orden de capa: `#ff4520` primero; el patrón de todos los pares es acento-en-hover) |
-| `enlaces-puntos` (índice) | enlace activo (página actual) subrayado `#ff4520`; resto stroke `#ffffff` (invisible) | enlace hover subrayado `#003399` | `4518:2435` ↔ `4518:2460` |
-| `components/footer`, `Objetivo-modal` | copias de referencia en la capa | — | `4518:2316`/`2363`, `4518:2402`/`2420` |
-
-- Transición: `transition: all .4s ease` para enlaces, botones y tarjetas
-  (nota `4649:2012`).
-- Enlaces: `text-decoration: none; border-bottom: 1px solid (color);
-  padding-bottom: .015rem` (nota `4649:2013`).
-- **Ninguna función depende del hover** (accesibilidad táctil).
-
-### Animaciones (notas TEXT `4649:2012`–`4649:2018`)
-
-| Nota | Comportamiento aprobado |
-| --- | --- |
-| `4649:2014` | `html { scroll-behavior: smooth; }` en `Programa` y `Decálogo` (ensayo del diseñador en la página de Vanguardia Mexicana) |
-| `4649:2017` | Apertura/cierre de modales estilo UIkit, backdrop `rgba(0,0,0,0.25)` |
-| `4649:2018` | Fades sutiles de secciones al entrar en viewport (tipo scrollspy); **sin animar el above-the-fold** (impacto en Lighthouse) |
-| `4649:2016` | Slideshow de tarjetas: patrón tipo jitter.video |
-
-Todas anulables con `prefers-reduced-motion: reduce`.
-
-### Resolución de reacciones (`get_reactions` sobre `110:1162`, 215 reacciones)
-
-- **15 reacciones con `destinationId: null`** (logo-dorado de `inicio` y de
-  `navegación-reducida`, logo e «Inicio» del footer en `inicio`/`inicio-prueba`,
-  self-links): destino válido = la página actual (`index.html` para logo de
-  inicio; enlaces de footer/nav a la página donde están → sin href o `#`).
-- **4 `ON_DRAG` sobre `goal-card`**: residuo del prototipo (abren el mismo
-  overlay que el click) — **no se implementan** (Caso 16, ticket 4).
-- **Instagram con 2 variantes** (`…/vanguardiacol` y `…/vanguardiacol/`):
-  canónica **sin barra final**.
-- **`lamateriaprima.org` sin `https://`** en CTA y artículos: canónica
-  **`https://lamateriaprima.org/`** (igual que los enlaces del nav).
-- Destinos del modal: botón → `programa.html`; `icons/close` → cerrar con
-  devolución de foco.
+Duración y easing de estos estados: ver [§Animaciones y transiciones](#animaciones-y-transiciones)
+(`4649:2012`, 0,4 s `ease`). No tienen `reactions` propias en el prototipo.

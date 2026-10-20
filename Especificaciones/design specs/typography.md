@@ -1,154 +1,111 @@
-# Tipografía
-
 ---
-fuente: Figma — estilos locales (`get_styles`) + muestras nodo `8:19` (`375-xs`) y
-`98:1630` (`1024-sm`) + uso real en `1448-lg > inicio` (`110:2277`) + uso real en
-los frames de `375-xs` (2026-10-04) y de `1024-sm` (2026-10-05)
-extraido: 2026-10-03 (actualizado 2026-10-04; `1024-sm` el 2026-10-05)
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_styles`, `get_node_info`, `scan_text_nodes`)
+fuente: Figma — estilos locales (`get_styles`) + `encabezado-contenido` `2325:3824` de `1448-lg`
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`get_styles, get_node_info`)
 ---
 
-Familia única en el archivo: **DM Sans** (`--font-family-base`). Pesos: **Bold** (700)
-y **Medium** (500). `get_styles` devuelve 36 estilos de texto, 0 estilos de color,
-0 efectos y 4 rejillas.
+# Escala tipográfica
 
-Interlineado constante y verificado sobre los nodos: titulares `fontSize × 1.12`
-(`--line-height-heading`), párrafos `fontSize × 1.5` (`--line-height-body`).
-Letter-spacing: `0` en todos los estilos leídos. Alineación: `LEFT`.
+## Familias
 
-## Escala de titulares — `l/` (desktop)
+| Familia | Rol | Evidence |
+| --- | --- | --- |
+| **Bebas Neue** (`Regular`, peso Figma 400) | titulares `l/headings/*` y `xs/headings/*` | `fontName.family` de los 14 estilos de headings |
+| **DM Sans** (`Regular` 400 / `Bold` 700 / `Black` 900) | párrafos, enlaces y botones | `fontName.family` de `paragraphs/*`, `links/*`, `buttons/*` |
 
-| Rol | Estilo Figma | Familia | Tamaño | Peso | Interlineado | Token |
-| --- | --- | --- | --- | --- | --- | --- |
-| h1 xxl | `l/headings/h1/xxl` | DM Sans | 52px | 700 | 58.24 | `--font-size-l-h1-xxl` |
-| h1 xl | `l/headings/h1/xl` | DM Sans | 46.1px | 700 | 51.63 | `--font-size-l-h1-xl` |
-| h1 l | `l/headings/h1/l` | DM Sans | 41px | 700 | 45.92 | `--font-size-l-h1-l` |
-| h1 | `l/headings/h1` | DM Sans | 36.49px | 700 | 40.87 | `--font-size-l-h1` |
-| h2 | `l/headings/h2` | DM Sans | 32.4px | 700 | 36.29 | `--font-size-l-h2` |
-| h3 | `l/headings/h3` | DM Sans | 28.8px | 700 | 32.26 | `--font-size-l-h3` |
-| h4 | `l/headings/h4` | DM Sans | 22.7px | 700 | 25.42 | `--font-size-l-h4` |
-| h5 | `l/headings/h5` | DM Sans | 20.2px | 700 | 22.62 | `--font-size-l-h5` |
-| h6 | `l/headings/h6` | DM Sans | 18px | 700 | 20.16 | `--font-size-l-h6` |
+> `get_styles` **no expone** `lineHeight` ni `letterSpacing`: solo `fontSize` y
+> `fontName`. El interlineado y el tracking se leen del nodo concreto con
+> `get_node_info` → campo `style` (tabla siguiente).
 
-## Escala de titulares — `xs/` (móvil)
+## Medido en un nodo real (`encabezado-contenido`, `2325:3824`)
 
-| Rol | Estilo Figma | Familia | Tamaño | Peso | Interlineado | Token |
-| --- | --- | --- | --- | --- | --- | --- |
-| h1 xxl | `xs/headings/h1/xxl` | DM Sans | 46.1px | 700 | 51.63 | `--font-size-xs-h1-xxl` |
-| h1 xl | `xs/headings/h1/xl` | DM Sans | 41px | 700 | 45.92 | `--font-size-xs-h1-xl` |
-| h1 l | `xs/headings/h1/l` | DM Sans | 36.5px | 700 | 40.88 | `--font-size-xs-h1-l` |
-| h1 | `xs/headings/h1` | DM Sans | 32.4px | 700 | 36.29 | `--font-size-xs-h1` |
-| h2 | `xs/headings/h2` | DM Sans | 28.8px | 700 | 32.26 | `--font-size-xs-h2` |
-| h3 | `xs/headings/h3` | DM Sans | 25.6px | 700 | 28.67 | `--font-size-xs-h3` |
-| h4 | `xs/headings/h4` | DM Sans | 22.7px | 700 | 25.42 | `--font-size-xs-h4` |
-| h5 | `xs/headings/h5` | DM Sans | 20.2px | 700 | 22.62 | `--font-size-xs-h5` |
-| h6 | `xs/headings/h6` | DM Sans | 18px | 700 | 20.16 | `--font-size-xs-h6` |
+| Rol | Nodo | Familia / peso | `fontSize` | `lineHeightPx` | `fontWeight` | `letterSpacing` | Color |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| H1 hero | `2325:3792` | Bebas Neue Regular | **65.7** | **73.584** | 400 | **2.628** | `#53411e` |
+| Lead / body | `2325:3793` | DM Sans Regular | **18** | **30.96** | 400 | 0 | `#333333` |
+| Botón (hero, `size=base`) | `I2325:3794;14:81` | DM Sans Black | **18** | **27** | 900 | **2.16** | `#30250f` |
+| Etiqueta de ratio de `components/images` | `I4329:2096;19:96` | Bebas Neue Regular | 58.4 | 65.408 | 400 | 2.336 | `#ffffff` |
 
-## Párrafos, negritas y links
+La caja del lead mide **310 px** de alto con 10 líneas → la caja avanza
+**31 px por línea** (310 = 10×31), no 30.96.
 
-Un solo rango de tamaños para `paragraphs/*`, `paragraphs/bold/*` y `links/*`.
+## Estilos locales (41)
 
-| Rol | Estilos Figma | Tamaño | Peso | Interlineado | Token de tamaño |
-| --- | --- | --- | --- | --- | --- |
-| body xs | `paragraphs/xs`, `paragraphs/bold/xs`, `links/xs` | 14.2px | 500 / 700 / 700 | 21.3 | `--font-size-body-xs` |
-| body s | `paragraphs/s`, `paragraphs/bold/s`, `links/s` | 16px | 500 / 700 / 700 | 24 | `--font-size-body-s` |
-| body base | `paragraphs/base`, `paragraphs/bold/base`, `links/base` | 18px | 500 / 700 / 700 | 27 | `--font-size-body-base` |
-| body m | `paragraphs/m`, `paragraphs/bold/m`, `links/m` | 20.2px | 500 / 700 / 700 | 30.3 | `--font-size-body-m` |
-| body l | `paragraphs/l`, `paragraphs/bold/l`, `links/l` | 22px | 500 / 700 / 700 | 33 | `--font-size-body-l` |
-| body xl | `paragraphs/xl`, `paragraphs/bold/xl`, `links/xl` | 25.6px | 500 / 700 / 700 | 38.4 | `--font-size-body-xl` |
+`get_styles` → `texts`:
 
-Regla de uso: párrafo → `--font-weight-medium`; label, link, título y texto de botón
-→ `--font-weight-bold`.
-
-## Uso observado en `1448-lg` (`inicio`, `Únete`, `Objetivo-modal`)
-
-| Rol en la página | Medida leída | Estilo Figma equivalente | Color |
+| Estilo | Familia | Estilo de fuente | `fontSize` |
 | --- | --- | --- | --- |
-| Título del encabezado (`Vanguardia Colombiana`) | Bold 52 / 58.24 | `l/headings/h1/xxl` | `--color-text-primary` |
-| Títulos de sección (`Nuestros objetivos`, `La Materia Prima`, `Únete a Vanguardia Colombiana`) | Bold 36.49 / 40.87 | `l/headings/h1` | `--color-text-primary` |
-| Título de `goal-card` | Bold 28.8 / 32.26 | `l/headings/h3` | `--color-text-primary` |
-| Título de artículo (`container-and-card`) | Bold 25.6 / 28.67 | `xs/headings/h3` (25.6 no existe en la escala `l/`) | `--color-text-primary` |
-| Entradilla de sección | Medium 18 / 27 | `paragraphs/base` | `--color-text-secondary` |
-| Cuerpo dentro de tarjeta | Medium 16 / 24 | `paragraphs/s` | `--color-text-secondary` |
-| Entradilla de `sección-únete` | Medium 20.2 / 30.3 | `paragraphs/m` | `--color-text-secondary` |
-| Copyright del footer | Medium 14.2 / 21.3 | `paragraphs/xs` | `--color-on-dark` |
-| Enlaces del footer | Bold 16 / 24 | `links/s` | `--color-on-dark` |
-| Enlaces del nav | Bold 18 / 27 | `links/base` | `--color-text-primary` |
-| Texto de botón (nav) | Bold 16 / 24 | `paragraphs/bold/s` | `--color-on-dark` / `--color-text-primary` (outline) |
-| Texto de botón (`goal-card`, size=s) | Bold 16 / 24 | `paragraphs/bold/s` | `--color-on-dark` |
-| Texto de botón (secciones, size=m) | Bold 20.2 / 30.3 | `paragraphs/bold/m` | `--color-on-dark` |
-| Título de `Objetivo-modal` (`2358:1144`) | Bold 32.4 / 36.29 | `l/headings/h2` | `--color-text-primary` |
-| Cuerpo de `Objetivo-modal` (`2358:1146`) | Medium 18 / 27 | `paragraphs/base` | `--color-text-secondary` |
-| Título de la sección 6 de `inicio` y de `Únete` (`2328:4243` / `2335:1373`) | Bold 36.49 / 40.87 | `l/headings/h1` | `--color-text-primary` |
-| Entradilla de la sección 6 de `inicio` y de `Únete` | Medium 20.2 / 30.3 | `paragraphs/m` | `--color-text-secondary` |
+| `l/headings/h1` | Bebas Neue | Regular | 46 |
+| `l/headings/h2` | Bebas Neue | Regular | 41 |
+| `l/headings/h3` | Bebas Neue | Regular | 36.4 |
+| `l/headings/h4` | Bebas Neue | Regular | 32.4 |
+| `l/headings/h5` | Bebas Neue | Regular | 28.8 |
+| `l/headings/h6` | Bebas Neue | Regular | 25.6 |
+| `l/headings/h1/xxl` | Bebas Neue | Regular | 65.7 |
+| `l/headings/h1/xl` | Bebas Neue | Regular | 58.4 |
+| `l/headings/h1/l` | Bebas Neue | Regular | 52 |
+| `xs/headings/h1` | Bebas Neue | Regular | 41 |
+| `xs/headings/h2` | Bebas Neue | Regular | 36.4 |
+| `xs/headings/h3` | Bebas Neue | Regular | 32.4 |
+| `xs/headings/h4` | Bebas Neue | Regular | 28.3 |
+| `xs/headings/h5` | Bebas Neue | Regular | 25.6 |
+| `xs/headings/h6` | Bebas Neue | Regular | 22.7 |
+| `xs/headings/h1/xxl` | Bebas Neue | Regular | 58.4 |
+| `xs/headings/h1/xl` | Bebas Neue | Regular | 52 |
+| `xs/headings/h1/l` | Bebas Neue | Regular | 46 |
+| `paragraphs/s` | DM Sans | Regular | 16 |
+| `paragraphs/base` | DM Sans | Regular | 18 |
+| `paragraphs/m` | DM Sans | Regular | 20.2 |
+| `paragraphs/l` | DM Sans | Regular | 22 |
+| `paragraphs/xl` | DM Sans | Medium | 25.6 |
+| `paragraphs/bold/xs` | DM Sans | Bold | 14.2 |
+| `paragraphs/bold/s` | DM Sans | Bold | 16 |
+| `paragraphs/bold/base` | DM Sans | Bold | 18 |
+| `paragraphs/bold/m` | DM Sans | Bold | 20.2 |
+| `paragraphs/bold/l` | DM Sans | Bold | 22 |
+| `paragraphs/bold/xl` | DM Sans | Bold | 25.6 |
+| `links/xs` | DM Sans | Black | 14.2 |
+| `links/s` | DM Sans | Black | 16 |
+| `links/base` | DM Sans | Black | 18 |
+| `links/m` | DM Sans | Black | 20.2 |
+| `links/l` | DM Sans | Black | 22 |
+| `links/xl` | DM Sans | Black | 25.6 |
+| `buttons/xs` | DM Sans | Black | 14.2 |
+| `buttons/s` | DM Sans | Black | 16 |
+| `buttons/base` | DM Sans | Black | 18 |
+| `buttons/m` | DM Sans | Black | 20.2 |
+| `buttons/l` | DM Sans | Black | 22 |
+| `buttons/xl` | DM Sans | Black | 25.6 |
 
-## Cambio por breakpoint
+### Escala desktop `l/headings/*` (Bebas Neue)
 
-- Las guías de `375-xs` (nodo `8:19`) y de `1024-sm` (nodo `98:1630`) muestran
-  **los mismos valores**, que coinciden con la escala `xs/`.
-- Las pantallas de `1448-lg` usan valores de la escala `l/`, salvo los títulos de
-  artículo (25.6 = `xs/headings/h3`), que mezclan escalas en el propio diseño.
-- Las etiquetas `16:9` / `5:4` sobre los bloques de imagen son anotaciones de
-  placeholder del wireframe (Bold 46.1 / 51.63), no texto de interfaz.
-- Confirmado por el equipo (2026-10-03): `375-xs` y `1024-sm` solo tenían guías de
-  estilos y pantallas de plantilla. **Actualizado el 2026-10-04**: `375-xs` ya tiene
-  los 7 frames de las vistas móviles (ver [breakpoints.md](./breakpoints.md)) y de
-  ellos se midió el uso real de la escala (tabla siguiente).
-- **Actualizado el 2026-10-05**: `1024-sm` ya tiene los 6 frames de las vistas
-  tablet y de ellos se midió el uso real (§Uso observado en `1024-sm`).
+`h1/xxl` 65.7 · `h1/xl` 58.4 · `h1/l` 52 · `h1` 46 · `h2` 41 · `h3` 36.4 ·
+`h4` 32.4 · `h5` 28.8 · `h6` 25.6
 
-## Uso observado en `375-xs` (2026-10-04, `get_node_info`)
+### Escala móvil `xs/headings/*` (Bebas Neue)
 
-| Rol en la página | Medida leída | Estilo Figma equivalente | Token | Cambio vs. 1448 |
-| --- | --- | --- | --- | --- |
-| Título `inicio` / `Programa` (`Vanguardia Colombiana`, `Nuestro Programa`) | Bold 46.1 / 51.63 | `xs/headings/h1/xxl` | `--font-size-xs-h1-xxl` | 52 → 46.1 |
-| Título `Decálogo` (`2396:2526`) | Bold **52** / 58.24 | `l/headings/h1/xxl` | `--font-size-l-h1-xxl` | **sin cambio** (excepción del diseño) |
-| Títulos de sección (objetivos, Materia Prima, Únete, ejes, Materialismo político, Puntos programáticos, Política de privacidad) | Bold 32.4 / 36.29 | `xs/headings/h1` | `--font-size-xs-h1` | 36.49 → 32.4 |
-| Título de `goal-card`, de artículo y de cada punto | Bold 25.6 / 28.67 | `xs/headings/h3` | `--font-size-xs-h3` | 28.8 → 25.6 |
-| Párrafo del header de `Programa` y `Decálogo` | Medium 22 / 33 | `paragraphs/l` | `--font-size-body-l` | 22 en Programa (igual); **20.2 → 22 en Decálogo** |
-| Entradilla de sección | Medium 18 / 27 | `paragraphs/base` | `--font-size-body-base` | igual |
-| Cuerpo dentro de tarjeta y de punto | Medium 16 / 24 · Medium 20.2 / 30.3 | `paragraphs/s` · `paragraphs/m` | `--font-size-body-s` / `--font-size-body-m` | igual |
-| Título de `Objetivo-modal` (`2404:3501`) | Bold 28.8 / 32.26 | `xs/headings/h2` | `--font-size-xs-h2` | 32.4 → 28.8 |
-| Cuerpo de `Objetivo-modal` (`2404:3502`) | Medium 18 / 27 | `paragraphs/base` | `--font-size-body-base` | igual |
-| Enlaces del menú móvil (overlay `2396:2902`) | Bold 18 / 27 | `links/base` | `--font-size-body-base` | igual |
-| Enlaces del footer, texto de botón, copyright | Bold 16 / 24 · Bold 20.2 / 30.3 · Medium 14.2 / 21.3 | `links/s` · `paragraphs/bold/m` · `paragraphs/xs` | `--font-size-body-s` / `--font-size-body-m` / `--font-size-body-xs` | igual |
+`h1/xxl` 58.4 · `h1/xl` 52 · `h1/l` 46 · `h1` 41 · `h2` 36.4 · `h3` 32.4 ·
+`h4` 28.3 · `h5` 25.6 · `h6` 22.7
 
-Conclusión: a 375 se usa la escala **`xs/`** para titulares (una talla por debajo de
-`l/`), **excepto** el título de `Decálogo` (52) y todos los párrafos, que mantienen su
-tamaño de escritorio.
+### Párrafos (DM Sans)
 
-## Uso observado en `1024-sm` (2026-10-05, `scan_text_nodes`)
+`s` 16 · `base` 18 · `m` 20.2 · `l` 22 · `xl` 25.6 (Medium 500),
+más la variante `paragraphs/bold/*` en 14.2 / 16 / 18 / 20.2 / 22 / 25.6 (Bold 700).
 
-Los 6 frames tablet usan la **escala `xs/`** en titulares — la misma que a 375 — y
-mantienen los párrafos de escritorio. Escala `sm/`: **no se usa en ninguna pantalla**.
+### Enlaces y botones (DM Sans Black 900)
 
-| Rol en la página | Medida leída | Estilo Figma equivalente | Token |
-| --- | --- | --- | --- |
-| Título `inicio` / `Programa` / `Decálogo` (`Vanguardia Colombiana`, `Nuestro Programa`, `Decálogo Político…`) | Bold 46.1 / 51.63 | `xs/headings/h1/xxl` | `--font-size-xs-h1-xxl` |
-| Títulos de sección (objetivos, Materia Prima, Únete, ejes, Puntos programáticos, Política de privacidad) | Bold 32.4 / 36.29 | `xs/headings/h1` | `--font-size-xs-h1` |
-| Título de `goal-card` y de cada punto | Bold 25.6 / 28.67 | `xs/headings/h3` | `--font-size-xs-h3` |
-| Párrafo del header de `Programa` y `Decálogo` | Medium 22 / 33 | `paragraphs/l` | `--font-size-body-l` |
-| Párrafo de sección y de `goal-card` | Medium 20.2 / 30.3 | `paragraphs/m` | `--font-size-body-m` |
-| Entradilla de sección | Medium 18 / 27 | `paragraphs/base` | `--font-size-body-base` |
-| Texto dentro de `goal-card` (2.º párrafo) | Medium 16 / 24 | `paragraphs/s` | `--font-size-body-s` |
-| Enlaces del menú tablet (overlay `2424:446`) | Bold 18 / 27 | `links/base` | `--font-size-body-base` |
-| Texto de botón (`size=s`, h40, overlay) y enlaces del footer | Bold 16 / 24 | `links/s` | `--font-size-body-s` |
-| Texto de botón (`size=m`, h52, secciones) | Bold 20.2 / 30.3 | `paragraphs/bold/m` | `--font-size-body-m` |
-| Copyright del footer | Medium 14.2 / 21.3 | `paragraphs/xs` | `--font-size-body-xs` |
-| Etiquetas `4:3` / `1:1` / `5:4` de los placeholders de imagen | Bold 46.1 / 51.63 | anotación de wireframe | — |
+`xs` 14.2 · `s` 16 · `base` 18 · `m` 20.2 · `l` 22 · `xl` 25.6 — las tres
+familias de estilos (`links/*`, `buttons/*`) comparten la escala.
 
-Diferencia con 375: el título de `Decálogo` **sí baja a 46.1** (la excepción de 52
-que existe en `375-xs` no se repite en tablet).
+## Mapeo a tokens
 
-Conclusión: a 768 se usa la escala **`xs/`** para titulares y se conservan los
-tamaños de párrafo de escritorio, igual que a 375; la escala `sm/` **no se usa**.
+| Rol | Token (`site/styles/tokens.css`) | Valor |
+| --- | --- | --- |
+| H1 hero | `--font-size-display-hero` / `--line-height-display-hero` / `--tracking-display-hero` | 65.7 / 73.584 / 2.628 |
+| Cuerpo | `--font-size-body-base` + `--font-weight-regular` | 18 / 400 |
+| Interlineado de cuerpo | `--line-height-lead` | 1.7222222 (×18 = 31) |
+| Botón | `--btn-tracking-m` + `--font-weight-bold` | 2.16 / 900 |
 
-## Fuente de display del diseño definitivo (2026-10-20)
-
-El diseño definitivo usa **Bebas Neue Regular** para titulares nuevos: título
-del `Objetivo-modal` (41/45.92), títulos de `sección-únete` (46/51.52) y
-labels de media («16:9»/«3:2», 58.4/65.41). Token `--font-family-display`.
-**Archivo .woff2 pendiente de vendorizar** en `site/assets/fonts/` (ver
-[assets.md](./assets.md)); mientras tanto el CSS declara la familia con
-fallback sans-serif.
+La correspondencia token↔valor de toda la escala está en `site/styles/tokens.css`
+(`--font-size-l-h1-xxl`…`--font-size-xs-h6`, `--font-size-body-*`).

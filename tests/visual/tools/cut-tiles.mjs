@@ -1,14 +1,26 @@
 // Corta las páginas en tiles fijos (manifest) y calcula la métrica de altura.
-// Uso (desde tests/visual/): node tools/cut-tiles.mjs
+// Uso (desde tests/): node visual/tools/cut-tiles.mjs [ruta/al/pairs.manifest.json]
+// Sin argumento usa `test.manifest` del bloque test del .env (raíz del repo).
+// El manifest es el único dato de pares: baseline/, actual/ y reports/tiles/
+// se resuelven junto al directorio del manifest.
 // Sin dependencias nuevas: el recorte se hace con el canvas de Chromium (ya instalado).
 import { chromium } from '@playwright/test';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { loadTestEnv } from './load-test-env.js';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const manifest = JSON.parse(readFileSync(path.join(ROOT, 'pairs.manifest.json'), 'utf8'));
-const OUT = path.join(ROOT, 'reports', 'tiles');
+const TOOLS_DIR = path.dirname(fileURLToPath(import.meta.url));
+const arg = process.argv[2];
+const envManifest = loadTestEnv().manifest;
+if (!arg && !envManifest) {
+  console.error('Uso: node visual/tools/cut-tiles.mjs [ruta/al/pairs.manifest.json] — si se omite, usa test.manifest de .env');
+  process.exit(1);
+}
+const manifestPath = arg ? path.resolve(arg) : path.resolve(TOOLS_DIR, '..', '..', envManifest);
+const PROJECT_DIR = path.dirname(manifestPath);
+const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+const OUT = path.join(PROJECT_DIR, 'reports', 'tiles');
 const b64 = (p) => `data:image/png;base64,${readFileSync(p).toString('base64')}`;
 
 const browser = await chromium.launch();
@@ -38,8 +50,8 @@ const crop = async (src, y0, h) =>
 const resumen = [];
 for (const pair of manifest.pairs) {
   if (pair.kind !== 'page') continue;
-  const base = path.join(ROOT, pair.baseline);
-  const act = path.join(ROOT, pair.actual);
+  const base = path.join(PROJECT_DIR, pair.baseline);
+  const act = path.join(PROJECT_DIR, pair.actual);
   if (!existsSync(base) || !existsSync(act)) {
     console.log(`SKIP ${pair.id}: falta baseline o actual`);
     continue;

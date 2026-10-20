@@ -1,129 +1,93 @@
+---
+fuente: Figma — página `components-diseño` (`10:215`), `COMPONENT_SET` `components/footer` (`4370:4879`)
+extraido: 2026-10-26
+file_key_copia: GP23gIdp6DOtURfMNM0PzX
+herramienta: TalkToFigma (`scan_nodes_by_types, get_node_info, get_reactions`)
+---
+
 # Componente: `footer`
 
----
-fuente: Figma — página `1448-lg`, frames `footer` `2328:4305` (en `inicio`),
-`2338:2746` (en `Únete`), `2338:2640` (en `Programa`), `2338:2693` (en `Decálogo`) y
-`2338:2799` (en `Política de privacidad`)
-extraido: 2026-10-03
-file_key_copia: PENDIENTE (el MCP no expone el FILE_KEY y no está registrado en el repo)
-herramienta: TalkToFigma (`get_node_info`, `get_reactions`, `export_node_as_image`)
----
-
-**No existe como componente en la página `components`**: es un frame idéntico
-repetido en cada pantalla. Se documenta aquí como pieza compartida
-([plan, punto Fase 4](../../docs/Web/tickets/1-flujo-desarrollo-con-figma/planes/plan-vista-inicio-unete.md)).
+`COMPONENT_SET` `4370:4879`.
 
 ## Anatomía
 
-Frame 1448×405, relleno `--color-surface-dark` (`#333333`), padding vertical **64**:
+Variante `size=lg` (`4370:4878`, 1448×405, relleno **`#ffd633`**):
 
-1. `icons/logo-02` — 128×128, **centrado** horizontalmente, `padding-top` **64**.
-2. `footer-nav` — 1384×117, `pL=32` (contenedor), `pT=224` desde el borde del footer:
-   - `platforms` — 184×24, **centrado**: 5 × icono 24×24 con gap **16**
-     (`facebook`, `instagram`, `youtube`, `x`, `tik-tok`).
-   - `Frame 5` — fila de enlaces 1384×24, `pT=48` bajo `platforms`, **centrada**:
-     gap **24** entre enlaces, Bold 16/24 (`--font-size-body-s`), `--color-on-dark`.
-     Texto, en orden: `Inicio` · `Programa` · `Decálogo` · `Únete` ·
-     `La Materia Prima` · `Aporta` · `Pólitica de privacidad`.
-   - Copyright — `pT=48` bajo la fila de enlaces (1384×21): « © 2026 Vanguardia
-     Colombiana. Todos los derechos reservados. » — Medium 14.2/21.3
-     (`--font-size-body-xs`), `--color-on-dark`.
+1. `icons/logo` `4370:4828` — 128×128, booleano `#191919`.
+2. `footer-nav` `4370:4829` (1384×117):
+   - `platforms` `4370:4830` — 184×24, 5 iconos 24×24
+     (`facebook`, `instagram`, `youtube`, `x`, `tik-tok`), fill `#30250f`.
+   - `Frame 5` `4370:4836` — 1384×21, **7 enlaces**: Inicio · Programa ·
+     Decálogo · Únete · La Materia Prima · Aporta · Pólitica de privacidad,
+     todos `#30250f`.
+   - Copyright `4370:4844` — 1384×24, `#30250f`.
 
 ## Variantes y estados
 
-Un único aspecto (no hay variantes ni estados en Figma): el mismo footer aparece en
-las cinco pantallas de `1448-lg` (`inicio`, `Únete`, `Programa`, `Decálogo`,
-`Política de privacidad`) con textos idénticos. **No hay enlace activo ni
-subrayado** en el footer de ninguna pantalla. Destinos: el enlace de la pantalla
-actual apunta a **`destinationId: null`** en su propio footer (`Únete` en el footer
-de `Únete`, `Programa` en el de `Programa`, `Decálogo` en el de `Decálogo`,
-`Pólitica de privacidad` en el de `Política de privacidad`).
+Propiedad del set: **`size`** (xs | sm | lg). Sin variantes de estado.
 
-Baseline: `tests/visual/baseline/footer-1448.png` — PENDIENTE (`tests/` fuera de
-alcance).
+| Variante | Nodo | Tamaño | `footer-nav` | `Frame 5` (enlaces) |
+| --- | --- | --- | --- | --- |
+| `size=lg` | `4370:4878` | **1448×405** | 1384×117 | 1384×21 (una línea) |
+| `size=sm` | `4436:2833` | **768×450** | 720×162 | 558×66 (dos líneas) |
+| `size=xs` | `4440:3129` | **375×715** | 333×427 | PENDIENTE-FIGMA (no se leyó en profundidad) |
+
+## `1024-sm`
+
+### Barra (variante `size=sm`)
+
+`4436:2833` — **768×450**, relleno `#ffd633`.
+
+| Parte | Nodo | Tamaño |
+| --- | --- | --- |
+| `icons/logo` | `4436:2834` | 128×128 (booleano `#191919`) |
+| `footer-nav` | `4436:2835` | **720×162** |
+| ↳ `platforms` | `4436:2836` | 184×24 (5 iconos) |
+| ↳ `Frame 5` | `4436:2842` | **558×66** — los 7 enlaces pasan a **dos líneas** |
+| ↳ copyright | `4436:2850` | 720×24 |
+
+Comparado con `lg` (`1384×117`, enlaces en una sola línea de 1384×21): en `sm`
+la fila de enlaces se parte y `footer-nav` pasa de 117 a 162 de alto.
+
+### Instancias en las páginas `sm`
+
+| Página | Instancia | Tamaño |
+| --- | --- | --- |
+| inicio | `4436:3004` | 768×450 |
+| programa | `4442:3668` | 768×450 |
+| decálogo | `4442:3714` | 768×450 |
+| Únete | `4442:3760` | 768×450 |
+| política | `4442:3806` | 768×450 |
+
+Además, `programa` y `decálogo` en `sm` contienen un frame **`footer`** plano
+(`2408:1858` y `2408:2100`, ambos **768×405**) hermano de las secciones, junto
+al `components/footer` de la tabla. Son dos representaciones del pie en la misma
+página; la instancia del componente es la que se usa.
 
 ## Medidas y tokens
 
-| Propiedad | Valor | Token |
+| Rol | Token | Valor |
 | --- | --- | --- |
-| Fondo | `#333333` | `--color-surface-dark` |
-| Texto y enlaces | `#ffffff` | `--color-on-dark` |
-| Separación de filas | 48 | `--space-6` |
-| Gap de enlaces | 24 | `--space-4` |
-| Gap de iconos | 16 | `--space-3` |
-| Padding vertical | 64 | `--space-7` |
+| Fondo | `--color-footer-bg` | `#ffd633` |
+| Texto e iconos | `--color-text-brown` | `#30250f` |
+| Padding vertical lg | `--space-7` | 64px |
+
+Los iconos van **oscuros sobre amarillo**: no aplica ningún filtro
+`brightness/invert`.
 
 ## Comportamiento
 
-`get_reactions` (24 nodos con reacción en `Únete`, repartidos entre `nav` y footer):
-
-| Origen | Destino |
-| --- | --- |
-| `icons/logo-02` | `inicio` (`110:2277`) — NAVIGATE, `DISSOLVE` 0.3s |
-| enlace `Inicio` | `inicio` (`110:2277`) |
-| enlace `Programa` | `Programa` (`2328:4307`) |
-| enlace `Decálogo` | `Decálogo` (`2334:1005`) |
-| enlace `Únete` | **`destinationId: null`** (enlace a la pantalla actual cuando el footer está en `Únete`) |
-| enlace `La Materia Prima` | URL externa `https://lamateriaprima.org/` |
-| enlace `Pólitica de privacidad` | `Política de privacidad` (`2335:1533`) |
-| enlace `Aporta` | **sin reacción registrada** — PENDIENTE |
-| `platforms` ×5 | URLs externas (Facebook, Instagram, YouTube, X, TikTok) |
-
-**Inconsistencia registrada (no corregida):** en ambos footers el icono `youtube`
-apunta a `https://www.instagram.com/vanguardiacol` (mismo destino que el de
-Instagram); en el `nav` sí apunta a `https://www.youtube.com/@VanguardiaColombiana`.
+`get_reactions`: en **todas** las páginas, `footer-nav > Frame 5 > <enlace>`
+navega a su destino con `NAVIGATE`; `icons/logo` navega a `inicio`. El enlace
+de la página actual apunta a `destinationId: null`. `platforms > icons/*`
+ejecutan acciones **`URL`** (Facebook, Instagram, YouTube, X, TikTok).
 
 ## Accesibilidad
 
-| Par | Ratio | Veredicto |
-| --- | --- | --- |
-| `--color-on-dark` sobre `--color-surface-dark` | 12.63 | AA |
+Par `#30250f` sobre `#ffd633` — ratio en
+[`../accessibility.md`](../accessibility.md).
 
-- Los iconos sociales navegan a URLs externas: deben exponerse como **enlaces con
-  nombre accesible** (`aria-label="Facebook"`, etc.), no como botones mudos
-  ([accessibility.md](../accessibility.md)).
-- Foco visible: **no especificado en Figma** — PENDIENTE (obligatorio en
-  [AGENTS.md](../../../AGENTS.md)).
+## Baseline
 
-## Instancias en `375-xs` (leídas el 2026-10-04)
-
-Footer **375×714** idéntico en las cinco pantallas (`2395:4123`, `2396:2719`,
-`2396:2474`, `2396:2575`, `2396:2829`): relleno `--color-surface-dark`,
-padding vertical **64**.
-
-1. `icons/logo-02` **128×128** centrado, `padding-top` **64**.
-2. `footer-nav` **343×426** (padding lateral **16**), gap **32** bajo el logo:
-   - `platforms` **184×24** centrada: 5 × icono 24×24 con gap **16**.
-   - gap **24** → **7 enlaces apilados y centrados** (paso **48** = gap **24**
-     entre líneas de 24 px), Bold 16/24, mismo orden y destinos que en `lg`.
-   - gap **24** → copyright **343×42** centrado, Medium 14.2/21.3.
-3. Padding inferior **64**.
-
-## Instancias en `1024-sm` (leídas el 2026-10-05)
-
-Footer **768×405** idéntico en las cinco pantallas (`2408:1765`, `2408:2051`,
-`2408:2170`, `2408:2316`, `2421:1247`): relleno `--color-surface-dark`,
-padding vertical **64**. **Mismo alto que en `lg`** (a `xs` era 714).
-
-1. `icons/logo-02` **128×128** centrado, `padding-top` **64**.
-2. `footer-nav` **704×117** (padding lateral **32**), gap **32** bajo el logo:
-   - `platforms` **184×24** centrada: 5 × icono 24×24 con gap **16**.
-   - gap **24** → **fila de 7 enlaces** (`Frame 5`, 704×24): Bold 16/24,
-     gap **16** entre enlaces, mismo orden y destinos que en `lg`.
-   - gap **24** → copyright **704×21**, Medium 14.2/21.3.
-3. Padding inferior **64**.
-
-`programa` y `decálogo` declaran **dos** footers en Figma (`2408:1858`,
-`2408:2100` solapados con `sección-puntos`); solo se implementa el final
-(`2408:2051`, `2408:2170`) — decisión 10 del plan.
-
-
-## Instancias del diseño definitivo (2026-10-20)
-
-Nuevas instancias `4442:*` en las 5 pantallas (`4442:2242` inicio,
-`4379:5083` Programa, `4442:2784` Decálogo, `4442:2832` Únete, `4442:2879`
-Política), todas **1448×405** (alto sin cambios). En la capa `hovers` hay dos
-copias de referencia (`4518:2316`, `4518:2363`) **sin par de hover**: el
-diseño no define estado hover del footer. Relleno de las copias `#ffd633` —
-**pendiente de confirmar** con la instancia real de página antes de cambiar el
-fondo actual del sitio (hallazgo del ticket 4).
+No tiene par propio; se juzga dentro de los pares de página
+(`tests/test-vanguardia/baseline/*-1448.png`).
