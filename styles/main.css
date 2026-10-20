@@ -233,6 +233,11 @@ button {
   color: var(--color-text-secondary);
 }
 
+/* Cierre «Agradecemos tu interés.»: párrafo aparte (bloque 560×285, unete.md) */
+.join-block__text p + p {
+  margin-top: var(--space-3);
+}
+
 .site-nav {
   background: var(--color-surface-alt);
 }
@@ -299,6 +304,7 @@ button {
    (specs/components/nav.md). Las plataformas vuelven en `lg`. */
 .site-nav__platforms {
   display: none;
+  gap: var(--space-3);
 }
 
 .site-nav__toggle {
@@ -513,6 +519,9 @@ button {
 .site-footer__platforms img {
   width: 24px;
   height: 24px;
+  /* Los PNG exportados son glifos negros; el rol sobre `--color-surface-dark`
+     es `--color-on-dark` (footer.md): se fuerza a blanco */
+  filter: brightness(0) invert(1);
 }
 
 .site-footer__links {
@@ -574,5 +583,6 @@ button {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    gap: var(--space-4);
   }
 }
