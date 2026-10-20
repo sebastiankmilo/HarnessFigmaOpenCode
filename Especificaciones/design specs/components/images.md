@@ -49,6 +49,15 @@ alcance).
 La etiqueta `16:9` / `5:4` es una **anotación de placeholder del wireframe**, no texto
 de interfaz ([typography.md](../typography.md)).
 
+> **Constancia (2026-10-20, ticket Arness 2):** el baseline de `inicio` (frames
+> `110:2277` y `322:6042`) **no pinta** la etiqueta en los bloques de vídeo: las
+> instancias de la página ocultan el TEXT del componente (y `filterFigmaNode` no
+> expone `visible`, limitación registrada en `layout.md`). Por «el render manda»
+> las etiquetas «16:9» de las medias de vídeo se retiraron del HTML
+> (`site/index.html`); **siguen** las «5:4» de La Materia Prima y las
+> «4:3»/«1:1» de `Programa`/`Decálogo`, que el baseline sí pinta. Revisar este
+> criterio cuando el plugin exponga `visible`.
+
 ## Medidas y tokens
 
 - Rellenos: [tokens.md](../tokens.md) — `--color-media-placeholder`,

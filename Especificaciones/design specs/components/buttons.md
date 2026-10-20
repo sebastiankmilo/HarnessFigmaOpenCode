@@ -32,8 +32,7 @@ Propiedad del set: **solo `size`** (no hay variantes `filled`/`outline` ni estad
 | default | `size=xl` | `14:89` | 130×66 | 28 / 14 | 24 | Bold 25.6/38.4 |
 | hover / focus / active / disabled | **no existe en Figma** | — | — | — | — | PENDIENTE de especificación de diseño |
 
-Baseline: `tests/visual/baseline/buttons-<size>.png` — PENDIENTE (`tests/` fuera de
-alcance).
+Baseline: ver «Baseline por vista» más abajo (instancias exportadas 2026-10-19).
 
 ### Estilos observados en las instancias (overrides, no variantes)
 
@@ -53,6 +52,26 @@ alcance).
 
 El ancho de estas instancias es *hug* de la etiqueta (relleno
 `--color-text-secondary`, estilo «primario oscuro»).
+
+## Baseline por vista (exportación)
+
+**Criterio (ticket Arness 2, 2026-10-19):** el baseline de cada botón **no** se
+exporta del maestro del set `14:74` (guía de anatomía y fuente de la convención
+`buttons-<size>.png`): el par juzgable se exporta con `export_node_as_image`
+(PNG @1x) desde el **nodo de instancia en la vista** (overrides de relleno/
+etiqueta incluidos). Los maestros `xs/base/l/xl` quedan como referencia de
+anatomía **sin par** (el sitio no usa esos tamaños) y no se juzgan. El par
+*maestro ↔ instancia* produce falsos positivos (iconos `heart-fill` del maestro,
+etiqueta «Botón») — regla de triage en
+[`tests/visual/rubric.md`](../../../tests/visual/rubric.md) §1.0.
+
+| Vista | Nodo de instancia | Baseline |
+| --- | --- | --- |
+| `1448-lg` › `inicio` › nav «Aporta» | `I2338:2192;315:5105` (87×40, `size=s`) | `tests/visual/baseline/buttons-s.png` |
+| `1448-lg` › `inicio` › encabezado CTA «Nuestro programa» | `2325:3794` (224×52, `size=m`) | `tests/visual/baseline/buttons-m.png` |
+| `1448-lg` › `inicio` › encabezado «Únete» (outline) | `2325:3817` (103×52) | *sin par hoy* |
+| Maestros `xs`/`base`/`l`/`xl` (referencia) | `13:73` / `14:80` / `14:86` / `14:89` | `buttons-{xs,base,l,xl}.png` (no se juzgan) |
+| Estados `hover`/`focus`/`active` | **no existen en Figma** | sin baseline (evidencia en `actual/` + aserción funcional) |
 
 ## Medidas y tokens
 
