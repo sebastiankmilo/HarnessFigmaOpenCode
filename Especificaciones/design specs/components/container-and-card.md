@@ -106,3 +106,9 @@ Instancias `2408:1713` (**346×571**) y `2408:1714` (**350×571**) de
   `xs` era 16).
 - Título **25.6** (`--font-size-xs-h3`) → gap **8** → entradilla 16.
 - Sin fila de paginación (a diferencia de `xs`): la sección no tiene controles.
+
+
+## Hover (capa `hovers`, 2026-10-20)
+
+Par `4518:2299` ↔ `4518:2309` (322×525): fondo `#fdfcfa` → **`#f0ece6`**
+(mismo patrón que `goal-card`). Transición `all .4s ease`.

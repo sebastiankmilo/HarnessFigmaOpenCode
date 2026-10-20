@@ -242,3 +242,29 @@ gap imagen→texto **16**, texto con padding **24**, título **25.6**, entradill
 [interactions.md](../interactions.md) y se implementa en
 `site/scripts/inicio.js`. El modal `Objetivo-modal` **no existe** en `1024-sm`
 (Caso 19) y no se implementa a tablet.
+
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
+
+Frame `110:2277`, **1448×4514**. Secciones directas (nodo · alto):
+
+| Sección | Nodo | Alto |
+| --- | --- | --- |
+| `encabezado-contenido` | `2325:3824` | 740 |
+| `sección-video` | `2325:3923` | 634 |
+| `seccion-objetivos` | `2326:4021` | 1073 |
+| `sección-La-Materia-Prima` | `2328:4236` | 887 |
+| `sección-únete` (vídeo) | `2328:4249` | 555.25 |
+| **`sección-únete` (imagen 3:2) — NUEVA** | `4426:1111` | **616.73** |
+| `components/footer` | `4442:2242` | 405 |
+| `components/nav` | `4442:1753` | **160** |
+
+- La segunda `sección-únete` (`4426:1111`): `components/images` 643×424.73
+  (3:2) a la izquierda + `Frame 3` 644×231 con título «Únete a Vanguardia
+  Colombiana» (Bebas Neue 46/51.52, `#53411e`) y el mismo párrafo de la primera
+  sección (DM Sans 18/30.96, `#333333`).
+- `goal-card` de `seccion-objetivos`: `ON_CLICK` → OVERLAY `2358:932`
+  (los 4 `ON_DRAG` residuales no se implementan).
+- Frame `inicio-prueba` `4490:2493` (1448×2995): variante sin vídeo ni La
+  Materia Prima — **no implementada** (Caso 21, ticket 4; confirmado por el
+  equipo 2026-10-20).

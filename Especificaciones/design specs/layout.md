@@ -179,3 +179,13 @@ dotnav +28).
   texto y el icono de búsqueda están ocultos.
 - El overlay `2424:446` muestra 5 enlaces, **1 botón** (`Aporta`; el segundo
   `Botón` está oculto) y **5 plataformas** (WeChat oculto).
+
+
+## `1448-lg` — diseño definitivo (2026-10-20)
+
+Altos de frame (ticket 4): `inicio` 4514 · `Programa` 8743 · `Decálogo` 8234 ·
+`Únete` 1182 · `Política de privacidad` 1792 · `Objetivo-modal` 1024×604 ·
+`navegación-reducida` 1448×83. Contenedor de contenido: 1384 (margen lateral
+32), sin cambios. `inicio` y `Únete` pasan a **dos** `sección-únete`
+(555.25 con vídeo + 616.73 con imagen 3:2). Detalle de secciones en
+[pages/](./pages/).

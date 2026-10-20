@@ -83,3 +83,20 @@ Contenedor: 343 (padding 16). La sección es idéntica a la sección 5 de `inici
 
 Contenedor: **720** (padding lateral 24). La sección es idéntica a la sección 5
 de `inicio` a 768 (`2408:1756`), mismas medidas.
+
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
+
+Frame `2335:1229`, **1448×1182** (era 1027). Secciones:
+
+| Sección | Nodo | Alto | Contenido |
+| --- | --- | --- | --- |
+| `sección-únete` (vídeo) | `4395:1871` | 555.25 | `video` 644×363.25 (imagen 16:9 + play) + `Frame 3` 644×231 |
+| **`sección-únete` (imagen 3:2) — NUEVA** | `4427:1240` | **616.73** | `components/images` 643×424.73 + `Frame 3` 644×231 |
+| `components/footer` | `4442:2832` | 405 | |
+| `components/nav` | `2338:2384` | **160** | |
+
+`Frame 3` (ambas): título «Únete a Vanguardia Colombiana» Bebas Neue
+46/51.52 `#53411e` + párrafo DM Sans 18/30.96 `#333333` (copy idéntico,
+registrado en `es.json`). El enlace de texto del bloque usa subrayado
+`#786952` → hover `#ff4520` (ver [interactions.md](../interactions.md)).

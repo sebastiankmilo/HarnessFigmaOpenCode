@@ -171,3 +171,40 @@ Relleno `--color-surface-alt`; `components/nav` `2424:973` ocupa todo el frame.
 Gaps dentro de `nav-content`: logo→links **64** · links→buttons **32** ·
 buttons→platforms **32**. Enlaces, en orden: Programa · Decálogo · Únete ·
 La Materia Prima · Política de privacidad.
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20)
+
+### Instancias desktop: **1448×160** (eran 125)
+
+Las 5 pantallas usan instancias nuevas del componente (`4442:1753` en `inicio`,
+`4442:1914` en `Programa`, `4442:2075` en `Decálogo`, `2338:2384` en `Únete`,
+`2338:2512` en `Política`), todas **1448×160**, relleno `#fdfcfa`. El
+`right-nav` (828×53) es **idéntico al de `navegación-reducida`** (ver abajo):
+4 enlaces (Programa · Decálogo · Únete · La Materia Prima), botón «Aporta»
+`#ffcd00` 94×37 + outline 109×37, 5 plataformas 24×24 + búsqueda + hamburguesa.
+Enlaces: DM Sans Black 14.2/21.3, `letter-spacing` 1.704, texto `#30250f`;
+`Line 8` de subrayado con stroke opacidad 0 (oculto por defecto).
+
+- El alto pasa de 125 a **160** → token `--nav-height-lg` se actualiza en
+  `tokens.css` (implementación del ticket 4).
+- Los logos `logo-color`/`logo-dorado` apilados dentro de la instancia son
+  variantes de diseño; el ícono renderizado es `icons/logo` 96×96 `#191919`.
+
+### `navegación-reducida` — frame `4518:1968` (1448×83)
+
+Header compacto que permanece fijo al hacer scroll (comportamiento en
+[interactions.md](../interactions.md)). Relleno `#fdfcfa`:
+
+| Elemento | Nodo | Medida / valor |
+| --- | --- | --- |
+| `logo` | `4518:2072` | **96×96**, `icons/logo` `#191919` |
+| `right-nav` | `4518:2074` | **828×53** (mismo que en las instancias 160) |
+| `links` | `4518:2075` | 4 × `link`: Programa 95×35, Decálogo 92×37, Únete 53×37, La Materia Prima 158×37; texto `#30250f` + `Line 8` |
+| `buttons` | `4518:2088` | «Aporta» `components/buttons` **94×37** relleno `#ffcd00` + outline **109×37** stroke `#30250f` |
+| `platforms, search and toggle` | `4518:2091` | **184×24**: 5 plataformas 24×24 + `search and toggle` 24×24 (search + hamburger) |
+
+- Diferencia con la barra de 160: alto (83 vs 160) y logo monochrome 96×96
+  (`icons/logo`) en lugar del logo color/dorado apilado.
+- El prototipo **no tiene trigger de scroll** (0 reacciones `SCROLL_TO`/
+  `AFTER_TIMEOUT`): el umbral se define en [interactions.md](../interactions.md)
+  a partir de la altura del header completo.

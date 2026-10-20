@@ -80,3 +80,28 @@ el overlay). `search` y `wechat` existen como archivo pero **no se usan** a tabl
 
 Las medias de `sección-ejes` y `sección-materialismo` **no se renderizan** a
 tablet (nodos ocultos), así que tampoco aportan slots de imagen nuevos.
+
+## Diseño definitivo `1448-lg` (2026-10-20 — ticket 4)
+
+| Archivo | Nodo Figma | Formato | Usado en |
+| --- | --- | --- | --- |
+| `site/assets/img/logo-color.png` | `4331:2100` (y variante `4331:2615`) | PNG @2x | Logo a color (variantes del nav/logo suelto) |
+| `site/assets/img/logo-dorado.png` | `4370:4698` (y variante `4370:4748`) | PNG @2x | Logo dorado (nav estado dorado) |
+| `site/assets/img/logo-vanguardias.png` | `4422:1219` | PNG @2x | Lockup «Vanguardias» |
+| `site/assets/img/star-1.png` | `4370:4822` | PNG @2x | Estrella decorativa de `Programa` (22×22) |
+| `site/assets/img/star-2.png` | `4370:4823` | PNG @2x | Ídem |
+| `site/assets/img/star-3.png` | `4370:4825` | PNG @2x | Ídem |
+
+- `icons8-hand-cursor 1` (`4519:2484`) es **anotación del diseñador** para la
+  capa `hovers`: **no** se exporta ni se usa.
+- `Line 1/2` de `Programa` (`4369:3550`, `4370:4808`, 1144 de largo): líneas
+  simples → se implementan con CSS (border), sin asset.
+- **Bebas Neue**: fuente de display del diseño definitivo — vendorizada el
+  2026-10-20 como `site/assets/fonts/bebas-neue-latin.woff2` (OFL, subconjunto
+  latin de Google Fonts); `@font-face` en `main.css`. Registro en
+  [typography.md](./typography.md).
+- **Export de logos/estrellas**: el plugin devuelve la imagen solo como
+  adjunto de la conversación (no escribe el archivo a disco) — **PENDIENTE de
+  export manual** desde Figma con los nodos de la tabla; hallazgo registrado
+  en el ticket 4. La barra del nav usa `icons/logo` (monochrome) como en el
+  wireframe, así que el header no queda bloqueado.

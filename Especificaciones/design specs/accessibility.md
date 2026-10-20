@@ -137,3 +137,23 @@ contexto tablet:
 - **Carrusel de objetivos** (2 tarjetas visibles): controles `<button>` con nombre
   accesible, `:focus-visible` y teclado `←`/`→`; las 2 tarjetas fuera de ventana
   usan `display:none` (ver [interactions.md](./interactions.md)).
+
+
+## Diseño definitivo `1448-lg` (2026-10-20 — ticket 4)
+
+- `prefers-reduced-motion: reduce` desactiva: transición de la navegación
+  reducida (cambio de estado sin animación), `transition: all .4s ease` de
+  hovers, apertura/cierre del `Objetivo-modal` (cambio instantáneo, backdrop
+  sin fade), fades de secciones (visibles desde el inicio) y la transición del
+  slideshow. `scroll-behavior` vuelve a `auto` en `Programa`/`Decálogo`.
+- Fades de secciones: **nunca sobre el above-the-fold** (la nota `4649:2018`
+  lo pide por Lighthouse); el observer solo aplica a secciones por debajo del
+  primer viewport.
+- Contraste de los nuevos colores sobre `#fdfcfa` (fondo de página del diseño):
+  `#ff4520` ≈ 3.3:1 — **solo** para bordes/subrayados y fondos de botón con
+  texto `#30250f` (≈ 4.9:1 sobre `#ff4520`, cumple AA para texto grande y
+  normal 14.2 bold queda en el límite — verificar por elemento); `#30250f` ≈
+  13:1; `#53411e` ≈ 7.4:1; `#1b2c43` ≈ 14:1; `#ceac57` con texto `#1b2c43` ≈
+  8.5:1.
+- Hover de tarjetas (`#fdfcfa` → `#f0ece6`) no altera el contraste del texto
+  (`#53411e`/`#333333` siguen ≥ 4.5:1 sobre `#f0ece6`).

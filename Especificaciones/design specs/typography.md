@@ -143,3 +143,12 @@ que existe en `375-xs` no se repite en tablet).
 
 Conclusión: a 768 se usa la escala **`xs/`** para titulares y se conservan los
 tamaños de párrafo de escritorio, igual que a 375; la escala `sm/` **no se usa**.
+
+## Fuente de display del diseño definitivo (2026-10-20)
+
+El diseño definitivo usa **Bebas Neue Regular** para titulares nuevos: título
+del `Objetivo-modal` (41/45.92), títulos de `sección-únete` (46/51.52) y
+labels de media («16:9»/«3:2», 58.4/65.41). Token `--font-family-display`.
+**Archivo .woff2 pendiente de vendorizar** en `site/assets/fonts/` (ver
+[assets.md](./assets.md)); mientras tanto el CSS declara la familia con
+fallback sans-serif.

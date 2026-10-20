@@ -105,3 +105,12 @@ Contenedor: 343 (padding 16). El índice lateral de 1448 (322px) **se oculta** e
 
 Contenedor: **720** (padding lateral 24). El índice lateral de 1448 (322px) **no
 aparece** en `sm`, igual que en `xs`.
+
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
+
+Frame `2334:1005`, **1448×8234**. Secciones: `header` `2335:1221` ·639 —
+`sección-puntos` `2334:1027` ·7030 — nav `4442:2075` ·**160** — footer
+`4442:2784` ·405. `scroll-behavior: smooth` (nota `4649:2014`). El índice
+`enlaces-puntos` usa hover `#003399` y activo `#ff4520` (ver
+[interactions.md](../interactions.md)).

@@ -93,3 +93,9 @@ sobre `2396:2891` **no registra reacción** en `375-xs` tampoco.
 destino** y ahí se mantiene el `PENDIENTE`. Como el HTML es único, el botón se
 implementa como enlace a `index.html` (el propio texto del botón declara el
 destino); registrado también en [interactions.md](../interactions.md).
+
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
+
+Frame `2335:1533`, **1448×1792** (era 1777). Secciones: `sección-puntos`
+`2335:1540` ·**1227** — footer `4442:2879` ·405 — nav `2338:2512` ·**160**.

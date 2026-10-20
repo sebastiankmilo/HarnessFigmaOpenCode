@@ -135,3 +135,13 @@ como observación, sin cambiar el HTML.
 Los CTA de `sección-puntos` miden **361×52** a 768 (a `xs` el interior era 317×30).
 Se mantiene el renderizado **solo con la etiqueta** (iconos `icons/heart-fill`
 solapados), por coherencia con `xs` y `lg`.
+
+
+## Hover (capa `hovers`, 2026-10-20)
+
+- Relleno default `#ffcd00` → hover `#ff4520` (par `4518:2150` ↔ `4518:2158`);
+  texto `#30250f` en ambos; transición `all .4s ease`.
+- Variante outline: stroke `#30250f`, sin cambio de hover.
+- CTA grande (`4518:2240` ↔ `4518:2252`, 281×47): inversión completa —
+  default fondo `#ceac57` / texto `#1b2c43`; hover fondo `#1b2c43` / texto
+  `#ceac57`.

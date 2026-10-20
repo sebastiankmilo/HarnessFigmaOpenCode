@@ -109,3 +109,30 @@ Ningún componente inspeccionado (`nav`, `goal-card`, `form`, `buttons`,
 Único caso circular: el avatar de `goal-card` (`Ellipse 1`) y los puntos del
 `dotnav` (`Ellipse`), que usan **`--radius-circle`** (50 %). Si otra sección necesita
 radio, extraerlo de Figma antes de usarlo.
+
+
+## Tokens nuevos del diseño definitivo (2026-10-20 — ticket 4)
+
+Extraídos de la capa `hovers`, `navegación-reducida` y las secciones releídas;
+valores aplicados en [`site/styles/tokens.css`](../../site/styles/tokens.css):
+
+| Token | Valor | Rol observado |
+| --- | --- | --- |
+| `--color-surface-page` | `#fdfcfa` | fondo de página, nav, tarjetas default, secciones |
+| `--color-button-fill` | `#ffcd00` | relleno de `components/buttons` (Aporta, Nuestro programa) |
+| `--color-hover-accent` | `#ff4520` | hover de botones, subrayado de enlaces, enlace activo del índice |
+| `--color-card-hover` | `#f0ece6` | hover de `goal-card` y `container-and-card` |
+| `--color-dot-active` | `#65543a` | punto activo del `dotnav` |
+| `--color-dot-inactive-new` | `#d7d2ca` | puntos inactivos del `dotnav` y bordes suaves |
+| `--color-cta-default` | `#ceac57` | fondo default del CTA `lamateriaprima.org` |
+| `--color-cta-hover` | `#1b2c43` | fondo hover del CTA / texto default del CTA |
+| `--color-text-brown` | `#30250f` | texto de nav, botones y enlaces del índice |
+| `--color-heading-brown` | `#53411e` | titulares (modal, Puntos, goal-card, sección-únete) |
+| `--color-link-underline` | `#786952` | subrayado default del enlace de texto de Únete |
+| `--color-link-underline-hover` | `#003399` | subrayado hover del índice de puntos |
+| `--nav-height-lg` | `160px` (antes 125) | alto de la barra del nav desktop |
+| `--nav-height-reduced` | `83px` | alto del header de `navegación-reducida` |
+| `--font-family-display` | `"Bebas Neue"` | titulares del diseño definitivo (modal, sección-únete, labels de media) — **archivo .woff2 pendiente de vendorizar** |
+
+Nota: `--color-dot-inactive` (`#858585`) del wireframe queda **superado** por
+`--color-dot-inactive-new` (`#d7d2ca`) en el diseño definitivo.

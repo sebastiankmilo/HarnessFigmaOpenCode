@@ -306,3 +306,63 @@ implementación** y 4 elementos cada uno:
 
 `ON_DRAG` de `goal-card`, autoplay, y `prev`/`next`/`dotnav` del slideshow del
 encabezado de escritorio (OUT OF SCOPE del ticket).
+
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
+
+### Navegación reducida (frame `4518:1968`, 1448×83)
+
+- **Umbral**: al superar `--nav-height-lg` (160px) de scroll, el header pasa al
+  estado compacto (`4518:1968`, 83px, logo `icons/logo` 96×96) y permanece
+  `position: fixed`; al volver por debajo del umbral reaparece el header completo.
+- El prototipo no tiene trigger de scroll: el umbral se deriva de la altura del
+  header completo (decisión registrada aquí).
+- El overlay del menú (hamburguesa) se cierra con el mismo foco devuelto que el
+  nav normal. Con `prefers-reduced-motion: reduce` el cambio de estado no usa
+  transición de altura.
+
+### Hovers (capa `hovers` `4518:2148`, pares default↔hover)
+
+| Elemento | Default | Hover | Nodos |
+| --- | --- | --- | --- |
+| `components/buttons` (relleno) | `#ffcd00` | `#ff4520` | `4518:2150` ↔ `4518:2158` |
+| `components/buttons` (outline) | stroke `#30250f` | igual | `4518:2151` etc. |
+| CTA `lamateriaprima.org` | fondo `#ceac57`, texto `#1b2c43` | fondo `#1b2c43`, texto `#ceac57` (inversión) | `4518:2240` ↔ `4518:2252` |
+| `goal-card` | fondo `#fdfcfa` | fondo `#f0ece6` | `4518:2257` ↔ `4518:2267` |
+| `container-and-card` | fondo `#fdfcfa` | fondo `#f0ece6` | `4518:2299` ↔ `4518:2309` |
+| `dotnav` | activo `#65543a`, inactivo `#d7d2ca` (8×8) | mismo (la posición activa cambia de índice) | `4518:2276` / `4518:2289` |
+| Enlace de texto de `Únete` | subrayado `#786952` | subrayado `#ff4520` | `4518:2183` ↔ `4518:2180` (orden de capa: `#ff4520` primero; el patrón de todos los pares es acento-en-hover) |
+| `enlaces-puntos` (índice) | enlace activo (página actual) subrayado `#ff4520`; resto stroke `#ffffff` (invisible) | enlace hover subrayado `#003399` | `4518:2435` ↔ `4518:2460` |
+| `components/footer`, `Objetivo-modal` | copias de referencia en la capa | — | `4518:2316`/`2363`, `4518:2402`/`2420` |
+
+- Transición: `transition: all .4s ease` para enlaces, botones y tarjetas
+  (nota `4649:2012`).
+- Enlaces: `text-decoration: none; border-bottom: 1px solid (color);
+  padding-bottom: .015rem` (nota `4649:2013`).
+- **Ninguna función depende del hover** (accesibilidad táctil).
+
+### Animaciones (notas TEXT `4649:2012`–`4649:2018`)
+
+| Nota | Comportamiento aprobado |
+| --- | --- |
+| `4649:2014` | `html { scroll-behavior: smooth; }` en `Programa` y `Decálogo` (ensayo del diseñador en la página de Vanguardia Mexicana) |
+| `4649:2017` | Apertura/cierre de modales estilo UIkit, backdrop `rgba(0,0,0,0.25)` |
+| `4649:2018` | Fades sutiles de secciones al entrar en viewport (tipo scrollspy); **sin animar el above-the-fold** (impacto en Lighthouse) |
+| `4649:2016` | Slideshow de tarjetas: patrón tipo jitter.video |
+
+Todas anulables con `prefers-reduced-motion: reduce`.
+
+### Resolución de reacciones (`get_reactions` sobre `110:1162`, 215 reacciones)
+
+- **15 reacciones con `destinationId: null`** (logo-dorado de `inicio` y de
+  `navegación-reducida`, logo e «Inicio» del footer en `inicio`/`inicio-prueba`,
+  self-links): destino válido = la página actual (`index.html` para logo de
+  inicio; enlaces de footer/nav a la página donde están → sin href o `#`).
+- **4 `ON_DRAG` sobre `goal-card`**: residuo del prototipo (abren el mismo
+  overlay que el click) — **no se implementan** (Caso 16, ticket 4).
+- **Instagram con 2 variantes** (`…/vanguardiacol` y `…/vanguardiacol/`):
+  canónica **sin barra final**.
+- **`lamateriaprima.org` sin `https://`** en CTA y artículos: canónica
+  **`https://lamateriaprima.org/`** (igual que los enlaces del nav).
+- Destinos del modal: botón → `programa.html`; `icons/close` → cerrar con
+  devolución de foco.

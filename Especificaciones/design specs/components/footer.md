@@ -116,3 +116,14 @@ padding vertical **64**. **Mismo alto que en `lg`** (a `xs` era 714).
 `programa` y `decálogo` declaran **dos** footers en Figma (`2408:1858`,
 `2408:2100` solapados con `sección-puntos`); solo se implementa el final
 (`2408:2051`, `2408:2170`) — decisión 10 del plan.
+
+
+## Instancias del diseño definitivo (2026-10-20)
+
+Nuevas instancias `4442:*` en las 5 pantallas (`4442:2242` inicio,
+`4379:5083` Programa, `4442:2784` Decálogo, `4442:2832` Únete, `4442:2879`
+Política), todas **1448×405** (alto sin cambios). En la capa `hovers` hay dos
+copias de referencia (`4518:2316`, `4518:2363`) **sin par de hover**: el
+diseño no define estado hover del footer. Relleno de las copias `#ffd633` —
+**pendiente de confirmar** con la instancia real de página antes de cambiar el
+fondo actual del sitio (hallazgo del ticket 4).

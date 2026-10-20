@@ -120,3 +120,11 @@ en [interactions.md](../interactions.md)).
 - `get_reactions` sobre `2408:1656` devuelve **0 reacciones**: no hay `ON_CLICK`
   hacia `Objetivo-modal` a tablet (Caso 19, ver
   [objetivo-modal.md](../pages/objetivo-modal.md)).
+
+
+## Hover (capa `hovers`, 2026-10-20)
+
+Par `4518:2257` ↔ `4518:2267` (322×557): solo cambia el fondo de la tarjeta
+`#fdfcfa` → **`#f0ece6`**; títulos `#53411e`, cuerpo `#333333` y botón «Leer
+más» (texto `#fdfcfa`) sin cambio. Transición `all .4s ease`. El `ON_DRAG`
+residual del prototipo **no se implementa**.

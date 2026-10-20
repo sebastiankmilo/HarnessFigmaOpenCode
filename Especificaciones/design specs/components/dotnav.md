@@ -81,3 +81,10 @@ puntos son botones con nombre accesible y el punto activo refleja la posición; 
   tiene fila de paginación** (igual que en `lg`; en `xs` sí la tiene).
 - Los controles son parte del carrusel definido en
   [interactions.md](../interactions.md).
+
+
+## Colores del diseño definitivo (2026-10-20)
+
+Puntos 8×8: activo **`#65543a`**, inactivo **`#d7d2ca`** (pares `4518:2276` /
+`4518:2289` en la capa `hovers`). Sustituyen a `--color-dot-inactive`
+(`#858585`) del wireframe. Transición `all .4s ease` al cambiar de índice.

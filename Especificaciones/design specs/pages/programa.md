@@ -130,3 +130,13 @@ Contenedor: 343 (padding 16). El índice lateral de 1448 (322px) **se oculta** e
 
 Contenedor: **720** (padding lateral 24). El índice lateral de 1448 (322px) **no
 aparece** en `sm`, igual que en `xs`.
+
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20 — ticket 4)
+
+Frame `2328:4307`, **1448×8743**. Secciones: `header` `2328:4508` ·520 —
+`sección-ejes` `2328:4509` ·629 — `sección-materialismo` `2330:4593` ·785 —
+`sección-puntos` `2330:4683` ·6264 — `Star 1/2/3` `4370:4822/4823/4825` ·22×22
+— `Line 1/2` `4369:3550`/`4370:4808` ·1144 — footer `4379:5083` ·405 — nav
+`4442:1914` ·**160**. Estrellas y líneas son decorativas (assets en
+[assets.md](../assets.md)). `scroll-behavior: smooth` (nota `4649:2014`).

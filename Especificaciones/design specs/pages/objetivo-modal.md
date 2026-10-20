@@ -101,3 +101,29 @@ diálogo existente (heredado de `lg`/`xs`) mantiene sus estilos y reacciones
 actuales sin variación en el rango 768–1447. Cualquier decisión de llevarlo a
 tablet debe venir como instrucción explícita del equipo y actualizar este
 documento y el ticket 3.
+
+> **Actualización 2026-10-20 (ticket 4):** el diseño definitivo de `1024-sm`
+> **sí incluye** un frame `Objetivo-modal` (`4441:3492`, 720×624); su
+> implementación queda para el ticket 5. La nota anterior queda superada allí.
+
+## Diseño definitivo `1448-lg` (leído el 2026-10-20)
+
+El frame `2358:932` ahora mide **1024×604** (era 1024×569); el panel `modal`
+`2358:1145` mide 1024×604. Cambios respecto al wireframe:
+
+| Parte | Nodo | Medida (nueva) | Detalle nuevo |
+| --- | --- | --- | --- |
+| Contenedor | `2358:1145` | **1024×604** | padding contenido: 64 lateral (columna 896, x=174−110); título en y=4771 (96 desde el top del panel) |
+| Título | `2358:1144` | 896×**92** | **Bebas Neue Regular 41/45.92**, `#53411e` — cambia familia (antes DM Sans Bold 32.4) |
+| Párrafo | `2358:1146` | 896×**233** | DM Sans Regular **18/30.96**, `#333333`; gap bajo el título **8** (4871−(4771+92)) |
+| Botón | `2358:1158` | **266×47** | relleno `#ffcd00` (antes `--color-text-secondary`); etiqueta DM Sans Black **18/27** ls 2.16 `#30250f`, «Nuestro programa»; heart-fill **visible** 24×24 `#fafafa` a los lados; gap bajo el párrafo **32** (5136−(4871+233)) |
+| Cierre | `2358:1153` | 32×32 | `icons/close` `#000000`, inset ~32/32 (x=1070, y=4707; borde derecho del panel en 1134) |
+
+- El panel mide 1024×604 y el contenido 896: paddings 64 laterales; vertical:
+  96 arriba (4771−4675), 96 abajo (5269−5172 ≈ 97).
+- Fuentes: el título usa **Bebas Neue** (fuente de display del diseño
+  definitivo — pendiente vendorizar en `site/assets/fonts/`, ver
+  [assets.md](../assets.md)); el cuerpo y la etiqueta siguen en DM Sans.
+- `ON_DRAG` residual de `goal-card` **no se implementa** (Caso 16, ticket 4).
+- Transición de apertura/cierre: estilo UIkit con backdrop `rgba(0,0,0,0.25)`
+  (nota `4649:2017`), documentada en [interactions.md](../interactions.md).
