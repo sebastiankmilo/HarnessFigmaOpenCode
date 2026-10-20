@@ -248,6 +248,13 @@
   margin-top: var(--space-4);
   font-size: var(--font-size-body-base);
   color: var(--color-text-secondary);
+  white-space: pre-wrap;
+}
+
+/* Párrafo de entrada → párrafo lorem: espaciado de párrafo 16 (objetivo-modal
+   §Anatomía: bloque 896×205 = 189 + 16) */
+.dialog__body + .dialog__body {
+  margin-top: var(--space-3);
 }
 
 .dialog__cta {
@@ -359,6 +366,7 @@
 
   .goals__grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
     margin-top: var(--space-6);
   }
 
@@ -386,6 +394,7 @@
 
   .articles__grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
     margin-top: var(--space-6);
   }
 

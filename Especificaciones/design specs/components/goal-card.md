@@ -30,12 +30,30 @@ Sin `border-radius` (`--radius-none`).
 
 | Estado | Variante Figma | Baseline | Notas |
 | --- | --- | --- | --- |
-| default | `2326:3924` (único) | `tests/visual/baseline/goal-card-default.png` — PENDIENTE (`tests/` fuera de alcance) | 322×433 con texto de muestra corto |
+| default | `2326:3924` (único) | `tests/visual/baseline/goal-card.png` (instancia por vista, ver «Baseline por vista») | 322×433 con texto de muestra |
 | hover / focus / active / disabled | **no existe en Figma** | — | PENDIENTE de especificación de diseño: sin ella, el agente no construye esos estados |
 
 Las instancias de `inicio` miden **322×537** (una 322×529): el alto crece con el
 texto real, es decir el componente hace *hug* verticalmente. El ancho de columna
 (322) es fijo.
+
+## Baseline por vista (exportación)
+
+**Criterio (ticket Arness 2, 2026-10-19):** el baseline **no** se exporta del
+nodo maestro `2326:3924` (guía de anatomía): se exporta con
+`export_node_as_image` (PNG @1x) la **instancia tal como aparece en la grilla de
+cada vista** (overrides y alto *hug* incluidos). El par *maestro ↔ instancia*
+genera falsos positivos en el juez (botón «Leer más» oculto en las instancias,
+alto por contenido) — ver regla de triage en
+[`tests/visual/rubric.md`](../../../tests/visual/rubric.md) §1.0.
+
+Localizar las instancias escaneando hijos `INSTANCE` de la grilla con
+`scan_nodes_by_types` (o en [`pages/inicio.md`](../pages/inicio.md) §objetivos).
+
+| Vista | Nodo de instancia | Baseline |
+| --- | --- | --- |
+| `1448-lg` › `inicio` › grilla `2326:4020` (2.ª tarjeta) | `2326:3937` (322×537) | `tests/visual/baseline/goal-card.png` |
+| `375-xs` › `inicio` (instancia `2392:4001`, 343×498) | *PENDIENTE: añadir fila al exportarla* | — |
 
 ## Medidas y tokens
 

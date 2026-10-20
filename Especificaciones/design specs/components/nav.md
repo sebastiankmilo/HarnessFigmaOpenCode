@@ -42,8 +42,26 @@ Propiedades del set: `size` (xs | sm | lg) y `status` (open-modal, solo en xs).
   fondo), es decir, un "enlace activo" implícito. En `Programa` el enlace 1 y en
   `Decálogo` el enlace 2 apuntan a **`destinationId: null`** (la pantalla actual);
   `Política de privacidad` no está en el nav, así que sus 4 enlaces tienen destino.
-- Baseline: `tests/visual/baseline/nav-default.png` — PENDIENTE
-  (`tests/` fuera de alcance del plan).
+- Baseline: ver «Baseline por vista» más abajo (exportado 2026-10-19).
+
+## Baseline por vista (exportación)
+
+**Criterio (ticket Arness 2, 2026-10-19):** el baseline visual de `nav` **no**
+se exporta del nodo maestro `111:5222` (guía de anatomía únicamente): se exporta
+con `export_node_as_image` (PNG @1x) el **nodo de instancia tal como aparece en
+cada vista**, con sus overrides. El par *maestro ↔ instancia real* produce
+falsos positivos en el juez (el maestro tiene 2 botones + búsqueda; la vista
+puede no tenerlos) — el juez lo detecta como `par_invalido` según la regla de
+triage de [`tests/visual/rubric.md`](../../../tests/visual/rubric.md) §1.0.
+
+Localizar la instancia en la tabla de secciones de la spec de la página
+([`pages/inicio.md`](../pages/inicio.md)) o escaneando hijos `INSTANCE` del frame
+con `scan_nodes_by_types`.
+
+| Vista | Nodo de instancia | Baseline |
+| --- | --- | --- |
+| `1448-lg` › `inicio` (header) | `2338:2192` (1448×125) | `tests/visual/baseline/nav.png` |
+| Otras vistas / breakpoints | *PENDIENTE: añadir fila al exportarlas* | — |
 
 ## Medidas y tokens
 
