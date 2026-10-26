@@ -7,6 +7,15 @@
   var STORAGE_KEY = "vc-locale";
   var BASE_LOCALE = "es";
 
+  // Diccionario del locale activo, en memoria. Lo necesitan los componentes
+  // que generan markup en runtime (el diálogo de objetivos lee
+  // `inicio.dialog-N`), que no pueden esperar a que alguien cambie de idioma.
+  var currentData = null;
+
+  function getData() {
+    return currentData;
+  }
+
   function lookup(data, key) {
     var node = data;
     var parts = key.split(".");
@@ -18,6 +27,7 @@
   }
 
   function apply(data, locale) {
+    currentData = data;
     document.documentElement.lang = locale;
     var nodes = document.querySelectorAll("[data-i18n]");
     for (var i = 0; i < nodes.length; i++) {
@@ -69,7 +79,29 @@
     return document.documentElement.lang || BASE_LOCALE;
   }
 
-  window.VCI18n = { setLocale: setLocale, getLocale: getLocale };
+  function load(locale) {
+    return fetch("content/" + locale + ".json")
+      .then(function (response) {
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response.json();
+      })
+      .then(function (data) {
+        currentData = data;
+        return data;
+      });
+  }
+
+  window.VCI18n = {
+    setLocale: setLocale,
+    getLocale: getLocale,
+    getData: getData,
+    load: load,
+  };
+
+  // Carga de mejor esfuerzo del diccionario base: si el fetch falla (p. ej.
+  // página abierta con `file://`), `getData()` devuelve null y los componentes
+  // que lo usan se quedan con el texto ya inyectado en el HTML.
+  load(BASE_LOCALE).catch(function () {});
 
   // Conmutador ES/PT: clic → estado visual inmediato → setLocale (persiste en
   // localStorage) → apply(). El estado se marca antes del fetch para que el

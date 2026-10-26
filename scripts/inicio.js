@@ -3,9 +3,87 @@
   const cards = Array.prototype.slice.call(document.querySelectorAll(".goal-card"));
   const closeButton = dialog ? dialog.querySelector(".dialog__close") : null;
   const dialogTitle = dialog ? dialog.querySelector(".dialog__title") : null;
-  const dialogBody = dialog ? dialog.querySelector(".dialog__body") : null;
+  const dialogContent = dialog ? dialog.querySelector(".dialog__content") : null;
 
   if (!dialog || !cards.length || !closeButton) return;
+
+  // `inicio.dialog` (objetivo 1 conserva su key original) y `inicio.dialog-N`
+  // para el resto: título + `body-1..body-N` desarrollados en content/es.json.
+  function prefixFor(index) {
+    return index === 0 ? "inicio.dialog" : "inicio.dialog-" + (index + 1);
+  }
+
+  function lookup(data, key) {
+    let node = data;
+    const parts = key.split(".");
+    for (let i = 0; i < parts.length; i++) {
+      if (node === null || typeof node !== "object") return undefined;
+      node = node[parts[i]];
+    }
+    return node && typeof node === "object" ? node : undefined;
+  }
+
+  // El número de párrafos varía por objetivo (de 1 a 3): se ajustan los
+  // nodos al catálogo y se reapunta `data-i18n` para que un cambio de idioma
+  // con el diálogo abierto los vuelva a traducir.
+  function setParagraphs(attrs, texts) {
+    if (!dialogContent) return;
+    let nodes = Array.prototype.slice.call(
+      dialogContent.querySelectorAll(".dialog__body")
+    );
+    while (nodes.length > texts.length) {
+      dialogContent.removeChild(nodes.pop());
+    }
+    while (nodes.length < texts.length) {
+      dialogContent.appendChild(nodes[0].cloneNode(true));
+      nodes = Array.prototype.slice.call(
+        dialogContent.querySelectorAll(".dialog__body")
+      );
+    }
+    nodes.forEach(function (node, i) {
+      node.setAttribute("data-i18n", attrs[i]);
+      node.textContent = texts[i];
+    });
+  }
+
+  function fillDialog(card, index) {
+    const prefix = prefixFor(index);
+    const data = window.VCI18n ? window.VCI18n.getData() : null;
+    const block = lookup(data, prefix);
+    const cardTitle = card.querySelector("h3");
+    const cardBody = card.querySelector("p");
+
+    if (dialogTitle) {
+      const title = block && typeof block.title === "string" ? block.title : null;
+      dialogTitle.setAttribute("data-i18n", title ? prefix + ".title" : "inicio.goals.card-" + (index + 1) + ".title");
+      dialogTitle.textContent = title || cardTitle.textContent;
+    }
+
+    const bodyKeys = block
+      ? Object.keys(block)
+          .filter(function (key) {
+            return /^body-\d+$/.test(key);
+          })
+          .sort()
+      : [];
+
+    if (bodyKeys.length) {
+      setParagraphs(
+        bodyKeys.map(function (key) {
+          return prefix + "." + key;
+        }),
+        bodyKeys.map(function (key) {
+          return block[key];
+        })
+      );
+    } else {
+      // Sin diccionario todavía (fetch pendiente o fallado): el texto de la card.
+      setParagraphs(
+        ["inicio.goals.card-" + (index + 1) + ".body"],
+        [cardBody ? cardBody.textContent : ""]
+      );
+    }
+  }
 
   let lastFocused = null;
 
@@ -44,21 +122,12 @@
 
   function open(card) {
     lastFocused = card;
-    // Texto del diálogo = el de la card clicada (4518:2402 es solo un ejemplo;
-    // el cuerpo extra Lorem de `body-2` sí es común a todos). Se toma del DOM
-    // para que salga ya en el idioma activo, y se reapunta `data-i18n` para que
-    // un cambio de idioma con el diálogo abierto lo traduzca igual.
+    // Texto del diálogo = `inicio.dialog-N` del JSON (el objetivo 1 conserva
+    // `inicio.dialog`); el título y los cuerpos salen del catálogo activo para
+    // que ya salgan en el idioma en curso. Si el JSON aún no está cargado, se
+    // recurre al texto de la propia card.
     const index = cards.indexOf(card);
-    const titulo = card.querySelector("h3");
-    const cuerpo = card.querySelector("p");
-    if (index !== -1 && dialogTitle && titulo) {
-      dialogTitle.setAttribute("data-i18n", "inicio.goals.card-" + (index + 1) + ".title");
-      dialogTitle.textContent = titulo.textContent;
-    }
-    if (index !== -1 && dialogBody && cuerpo) {
-      dialogBody.setAttribute("data-i18n", "inicio.goals.card-" + (index + 1) + ".body");
-      dialogBody.textContent = cuerpo.textContent;
-    }
+    if (index !== -1) fillDialog(card, index);
     if (closeTimer) {
       clearTimeout(closeTimer);
       closeTimer = null;
@@ -111,6 +180,8 @@
 (function () {
   var isDesktop = window.matchMedia("(min-width: 1448px)");
   var isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1447px)");
+  // Huecos de la grilla en `lg` (`grid-template-columns: repeat(4, 1fr)`).
+  var VISIBLE_LG = 4;
 
   function initCarousel(grid) {
     var name = grid.getAttribute("data-carousel");
@@ -131,6 +202,19 @@
         item.classList.toggle("is-active", i === index);
         // `is-next` alimenta la ventana de 2 tarjetas de `sm` (inicio.css)
         item.classList.toggle("is-next", i === nextIndex);
+        // Ventana: en `lg` solo caben `VISIBLE_LG` tarjetas, así que con más
+        // items que huecos las que quedan fuera se ocultan (`is-out`) y las
+        // visibles se reordenan, también cuando la vuelta activa items de los
+        // extremos a la vez.
+        if (isDesktop.matches && items.length > VISIBLE_LG) {
+          var offset = ((i - index) % items.length + items.length) % items.length;
+          var inside = offset < VISIBLE_LG;
+          item.classList.toggle("is-out", !inside);
+          item.style.order = inside ? String(offset) : "";
+        } else {
+          item.classList.remove("is-out");
+          item.style.order = "";
+        }
       });
       dots.forEach(function (dot, i) {
         var active = i === index;
@@ -200,6 +284,11 @@
     grid.addEventListener("keydown", onKeydown);
 
     render();
+
+    // Al cruzar un breakpoint hay que rehacer la ventana de tarjetas visibles
+    // (y soltar `is-out` si `lg` deja de ser la referencia).
+    isDesktop.addEventListener("change", render);
+    isTablet.addEventListener("change", render);
   }
 
   Array.prototype.forEach.call(

@@ -70,7 +70,11 @@
   function measure() {
     if (!navRoot || !navInner) return;
     navRoot.classList.remove("is-reduced");
-    threshold = navInner.offsetHeight;
+    /* Umbral = alto del header completo, leído del token `--nav-height-lg`
+     * y no de `offsetHeight`: justo al quitar la clase la transición de
+     * 0.3 s devuelve una altura intermedia y el umbral salía corto. */
+    var raw = getComputedStyle(navInner).getPropertyValue("--nav-height-lg");
+    threshold = parseFloat(raw) || navInner.offsetHeight;
     onScroll();
   }
 
