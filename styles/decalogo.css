@@ -139,12 +139,12 @@
   }
 
   .decal-hero .media {
-    flex: 0 0 438px;
+    flex: 0 0 var(--hero-media-basis);
     width: auto;
   }
 
   .decal-hero__text {
-    flex: 0 1 788px;
+    flex: 0 1 var(--hero-text-basis);
     width: auto;
   }
 
@@ -165,12 +165,12 @@
 
   .decal-points__inner {
     flex-direction: row;
-    max-width: 1148px;
+    max-width: var(--points-inner-width);
     margin-inline: auto;
   }
 
   .decal-points__body {
-    flex: 1 1 794px;
+    flex: 1 1 var(--points-body-basis);
     width: auto;
   }
 
@@ -183,7 +183,7 @@
     position: sticky;
     top: calc(var(--nav-height-reduced) + var(--space-5));
     align-self: flex-start;
-    flex: 0 1 322px;
+    flex: 0 1 var(--index-column-basis);
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);

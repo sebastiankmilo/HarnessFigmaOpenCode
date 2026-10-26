@@ -131,7 +131,7 @@ button {
 
 :focus-visible {
   outline: 2px solid var(--color-text-primary);
-  outline-offset: 2px;
+  outline-offset: var(--focus-outline-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -147,7 +147,7 @@ button {
 
 .container {
   width: 100%;
-  max-width: 1448px;
+  max-width: var(--container-width);
   margin-inline: auto;
   padding-inline: var(--space-3);
 }
@@ -178,8 +178,8 @@ button {
 
 .btn img {
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: var(--icon-btn);
+  height: var(--icon-btn);
 }
 
 .btn--primary {
@@ -362,7 +362,7 @@ button {
 .site-nav__lang-sep {
   font-size: var(--font-size-body-base);
   font-weight: var(--font-weight-bold);
-  line-height: 1;
+  line-height: var(--line-height-tight);
 }
 
 .site-nav__lang-btn {
@@ -386,8 +386,8 @@ button {
 
 .site-nav__platforms img,
 .site-nav__toggle img {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-nav-toggle);
+  height: var(--icon-nav-toggle);
 }
 
 .site-nav__platform.is-desktop {
@@ -413,8 +413,8 @@ button {
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
-  width: 32px;
-  height: 32px;
+  width: var(--icon-menu-close);
+  height: var(--icon-menu-close);
 }
 
 .site-nav__menu-close img {
@@ -427,13 +427,13 @@ button {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 343px;
+  max-width: var(--menu-content-width-xs);
 }
 
 .site-nav__menu-logo {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: var(--icon-menu-logo);
+  height: var(--icon-menu-logo);
 }
 
 .site-nav__menu-links {
@@ -471,8 +471,8 @@ button {
 }
 
 .site-nav__menu-platforms img {
-  width: 32px;
-  height: 32px;
+  width: var(--icon-menu-platform);
+  height: var(--icon-menu-platform);
 }
 
 .site-nav__menu-buttons {
@@ -516,7 +516,7 @@ button {
   }
 
   .site-nav__menu-content {
-    max-width: 736px;
+    max-width: var(--menu-content-width);
   }
 }
 
@@ -579,14 +579,14 @@ button {
    ancla mide lo mismo que el logo y centra ella. */
 .site-footer__logo-link {
   display: block;
-  width: 128px;
+  width: var(--icon-footer-logo);
   margin-inline: auto;
 }
 
 .site-footer__logo {
   display: block;
-  width: 128px;
-  height: 128px;
+  width: var(--icon-footer-logo);
+  height: var(--icon-footer-logo);
   margin: 0;
 }
 
@@ -601,8 +601,8 @@ button {
 }
 
 .site-footer__platforms img {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-footer-platform);
+  height: var(--icon-footer-platform);
   /* PNG de glifos negros: sobre el amarillo del footer van oscuros (baseline) */
 }
 
@@ -670,12 +670,12 @@ button {
   }
 
   .join-block__media {
-    flex: 0 0 643px;
+    flex: 0 0 var(--join-media-basis);
     width: auto;
   }
 
   .join-block__text {
-    flex: 0 0 644px;
+    flex: 0 0 var(--join-text-basis);
     width: auto;
   }
 
@@ -712,7 +712,7 @@ button {
  * above-the-fold), así el JS añade la clase y no hay flash inicial. */
 .js-reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(var(--reveal-offset));
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -900,7 +900,7 @@ html.has-smooth-scroll {
   h2,
   h3 {
     font-family: var(--font-family-display);
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
     text-transform: uppercase;
     color: var(--color-heading-brown);
   }
@@ -908,7 +908,7 @@ html.has-smooth-scroll {
   .join-block__text h1,
   .join-block__text h2 {
     font-family: var(--font-family-display);
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
     color: var(--color-heading-brown);
   }
 }

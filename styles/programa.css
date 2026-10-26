@@ -220,7 +220,7 @@
   }
 
   .prog-hero .media {
-    flex: 0 0 438px;
+    flex: 0 0 var(--hero-media-basis);
     width: auto;
   }
 
@@ -239,25 +239,25 @@
   .prog-ejes__inner {
     flex-direction: row;
     align-items: flex-start;
-    max-width: 1145px;
+    max-width: var(--ejes-inner-width);
     margin-inline: auto;
     padding-block: var(--space-8) var(--space-ejes-bottom);
   }
 
   .prog-ejes__text {
-    flex: 1 1 674px;
+    flex: 1 1 var(--ejes-text-basis);
     width: auto;
   }
 
   .prog-ejes .media {
     display: block;
-    flex: 0 0 439px;
+    flex: 0 0 var(--ejes-media-basis);
     width: auto;
   }
 
   .prog-mat .media {
     display: block;
-    flex: 0 0 204px;
+    flex: 0 0 var(--mat-media-basis);
     width: auto;
   }
 
@@ -278,7 +278,7 @@
     flex-direction: row;
     align-items: center;
     gap: var(--space-5);
-    max-width: 1147px;
+    max-width: var(--mat-row-width);
     margin-inline: auto;
   }
 
@@ -294,7 +294,7 @@
   }
 
   .prog-mat__text {
-    max-width: 912px;
+    max-width: var(--mat-text-width);
     margin: var(--space-6) auto 0;
   }
 
@@ -308,8 +308,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 22px;
-    height: 22px;
+    width: var(--icon-mat-bullet);
+    height: var(--icon-mat-bullet);
     background: url("../assets/icons/star.png") no-repeat center / contain;
   }
 
@@ -319,12 +319,12 @@
 
   .prog-points__inner {
     flex-direction: row;
-    max-width: 1148px;
+    max-width: var(--points-inner-width);
     margin-inline: auto;
   }
 
   .prog-points__body {
-    flex: 1 1 794px;
+    flex: 1 1 var(--points-body-basis);
     width: auto;
   }
 
@@ -341,7 +341,7 @@
     position: sticky;
     top: calc(var(--nav-height-reduced) + var(--space-5));
     align-self: flex-start;
-    flex: 0 1 322px;
+    flex: 0 1 var(--index-column-basis);
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);

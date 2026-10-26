@@ -166,6 +166,53 @@
   --dialog-body-height: 233px;  /* bloque de cuerpo `2358:1146` (896×233): hueco que
                                    ocupa el desarrollo y, si desborda, su scroll */
 
+  /* ── Overlay, movimiento y foco ───────────────────────────────── */
+  --overlay-backdrop: rgba(0, 0, 0, 0.25); /* backdrop del modal (nota 4649:2017) */
+  --reveal-offset: 12px;        /* desplazamiento de entrada: `.js-reveal` y panel del modal */
+  --focus-outline-offset: 2px;  /* separación del anillo de foco (:focus-visible) */
+
+  /* ── Tipografía: etiquetas ────────────────────────────────────── */
+  --line-height-tight: 1;       /* etiquetas compactas (selector ES/PT) */
+
+  /* ── Iconos (caja renderizada) ────────────────────────────────── */
+  --icon-btn: 16px;             /* img de `.btn` */
+  --icon-nav-toggle: 24px;      /* `.site-nav__toggle img` */
+  --icon-menu-close: 32px;      /* `.site-nav__menu-close` */
+  --icon-menu-logo: 64px;       /* `.site-nav__menu-logo` */
+  --icon-menu-platform: 32px;   /* `.site-nav__menu-platforms img` */
+  --icon-footer-logo: 128px;    /* logo del footer */
+  --icon-footer-platform: 24px; /* `.site-footer__platforms img` */
+  --icon-carousel-arrow: 64px;  /* `.carousel__arrow img` (prev/next) */
+  --icon-dot: 8px;              /* `.carousel__dot` (dotnav 8×8) */
+  --icon-dialog-close: 32px;    /* `.dialog__close` (icons/close 32×32) */
+  --icon-mat-bullet: 22px;      /* viñeta `::before` de `.prog-mat__text` */
+  --goal-avatar-size: 137px;    /* avatar de `goal-card` (estado xs/sm) */
+
+  /* ── Layout: anchos de contenedor, columnas y cajas ───────────── */
+  --container-width: 1448px;    /* `.container` */
+  --menu-content-width-xs: 343px; /* `.site-nav__menu-content` en xs */
+  --menu-content-width: 736px;  /* `.site-nav__menu-content` en lg */
+  --hero-media-width: 590px;    /* `.hero__media` de inicio (lg) */
+  --hero-media-height: 740px;
+  --hero-text-width: 792px;     /* `.hero__text` de inicio (lg) */
+  --video-media-width: 1124px;  /* `.video__media` de inicio (lg) */
+  --section-intro-width: 912px; /* `.section-intro` de inicio (lg) */
+  --dialog-panel-width: 1024px; /* `.dialog__panel` (frame `2358:932`) */
+  --join-media-basis: 643px;    /* `.join-block__media` de Únete */
+  --join-text-basis: 644px;     /* `.join-block__text` de Únete */
+  --hero-media-basis: 438px;    /* `.decal-hero .media` y `.prog-hero .media` */
+  --hero-text-basis: 788px;     /* `.decal-hero__text` */
+  --points-inner-width: 1148px; /* `.decal-points__inner` y `.prog-points__inner` */
+  --points-body-basis: 794px;   /* cuerpo de los puntos (Decálogo y Programa) */
+  --index-column-basis: 322px;  /* `.page-index` (marco de los enlaces de 290) */
+  --ejes-inner-width: 1145px;   /* `.prog-ejes__inner` */
+  --ejes-text-basis: 674px;     /* `.prog-ejes__text` */
+  --ejes-media-basis: 439px;    /* `.prog-ejes .media` */
+  --mat-media-basis: 204px;     /* `.prog-mat .media` */
+  --mat-row-width: 1147px;      /* `.prog-mat__row` */
+  --mat-text-width: 912px;      /* `.prog-mat__text` */
+  --privac-width: 910px;        /* `.privac__inner` (bloque legal `2335:1546`) */
+
   /* ── Radios ──────────────────────────────────────────────────── */
   /* get_node_info no reporta cornerRadius en nav, goal-card, form,
      buttons ni header-two-columns: el diseño usa esquinas rectas. */

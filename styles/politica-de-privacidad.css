@@ -53,7 +53,7 @@
   }
 
   .privac__inner {
-    max-width: 910px;
+    max-width: var(--privac-width);
     margin-inline: auto;
   }
 
