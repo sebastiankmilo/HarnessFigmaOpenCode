@@ -90,8 +90,8 @@
 
 .goal-card__avatar {
   display: block;
-  width: 137px;
-  height: 137px;
+  width: var(--goal-avatar-size);
+  height: var(--goal-avatar-size);
   border-radius: var(--radius-circle);
   background: var(--color-avatar-placeholder);
 }
@@ -199,8 +199,8 @@
 }
 
 .carousel__arrow img {
-  width: 64px;
-  height: 64px;
+  width: var(--icon-carousel-arrow);
+  height: var(--icon-carousel-arrow);
 }
 
 .carousel__dots {
@@ -212,8 +212,8 @@
  * los inactivos son `--color-border-soft`; sobre `--color-surface-strong`
  * («La Materia Prima», solo `xs`) los inactivos son `--color-surface-alt`. */
 .carousel__dot {
-  width: 8px;
-  height: 8px;
+  width: var(--icon-dot);
+  height: var(--icon-dot);
   padding: 0;
   border-radius: var(--radius-circle);
   background: var(--color-border-soft);
@@ -263,8 +263,8 @@
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
-  width: 32px;
-  height: 32px;
+  width: var(--icon-dialog-close);
+  height: var(--icon-dialog-close);
 }
 
 .dialog__close img {
@@ -408,13 +408,13 @@
     top: 0;
     right: 0;
     display: block;
-    width: 590px;
-    height: 740px;
+    width: var(--hero-media-width);
+    height: var(--hero-media-height);
     object-fit: cover;
   }
 
   .hero__text {
-    max-width: 792px;
+    max-width: var(--hero-text-width);
   }
 
   .hero h1 {
@@ -438,12 +438,12 @@
   }
 
   .video__media {
-    max-width: 1124px;
+    max-width: var(--video-media-width);
     margin-inline: auto;
   }
 
   .section-intro {
-    max-width: 912px;
+    max-width: var(--section-intro-width);
   }
 
   .section-intro h2 {
@@ -550,7 +550,7 @@
 
   .dialog__panel {
     width: 100%;
-    max-width: 1024px;
+    max-width: var(--dialog-panel-width);
     padding: var(--space-8) var(--space-7);
   }
 
@@ -569,12 +569,12 @@
   .dialog__title {
     font-family: var(--font-family-display);
     font-size: var(--font-size-l-h1-l);
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
     color: var(--color-heading-brown);
   }
 
   .dialog__body {
-    line-height: 1.72; /* 30.96/18, medido en 2358:1146 */
+    line-height: var(--line-height-lead); /* 30.96/18, medido en 2358:1146 */
   }
 
   /* Cuerpo acotado al hueco de Figma: el desarrollo largo de cada objetivo
@@ -596,17 +596,17 @@
   /* Transición del modal estilo UIkit (nota 4649:2017): backdrop
    * rgba(0,0,0,0.25) + fade del panel; open/close animado en inicio.js */
   .dialog {
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
     transition: background 0.3s ease;
   }
 
   .dialog.is-open {
-    background: rgba(0, 0, 0, 0.25);
+    background: var(--overlay-backdrop);
   }
 
   .dialog__panel {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(calc(-1 * var(--reveal-offset)));
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
