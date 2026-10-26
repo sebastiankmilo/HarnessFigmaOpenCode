@@ -7,7 +7,7 @@
 
 /* ── 2 — header (`2396:2399`) ───────────────────────────────────── */
 .prog-hero {
-  background: var(--color-surface-muted);
+  background: var(--color-surface-page);
 }
 
 .prog-hero__grid {
@@ -32,14 +32,15 @@
 }
 
 .prog-hero p {
-  margin-top: var(--space-4);
-  font-size: var(--font-size-body-l);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
 /* ── 3 — sección-ejes (`2396:2416`) ─────────────────────────────── */
 .prog-ejes {
-  background: var(--color-surface-alt);
+  background: var(--color-surface-white);
 }
 
 .prog-ejes__inner {
@@ -65,8 +66,9 @@
 }
 
 .prog-ejes p {
-  margin-top: var(--space-4);
-  font-size: var(--font-size-body-m);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
@@ -96,8 +98,9 @@
 }
 
 .prog-mat__lead p {
-  margin-top: var(--space-4);
-  font-size: var(--font-size-body-m);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
@@ -106,14 +109,15 @@
   flex-direction: column;
   gap: var(--space-4);
   margin-top: var(--space-5);
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
 /* ── 5 — sección-puntos (`2396:2435`) ───────────────────────────── */
 .prog-points {
   padding-block: var(--space-7);
-  background: var(--color-surface-alt);
+  background: var(--color-surface-white);
 }
 
 .prog-points__inner {
@@ -147,7 +151,7 @@
 .point {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .point h3 {
@@ -155,13 +159,14 @@
 }
 
 .point p {
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
   white-space: pre-line;
 }
 
 .cta {
-  margin-top: var(--space-5);
+  margin-top: var(--space-6);
 }
 
 /* ── Medias del wireframe (rellenos y etiqueta centrada) ───────── */
@@ -209,21 +214,26 @@
   .prog-hero__grid {
     flex-direction: row;
     align-items: center;
+    gap: var(--space-5);
     padding-block: var(--space-8);
+    padding-inline: var(--space-5);
   }
 
   .prog-hero .media {
-    flex: 0 1 438px;
+    flex: 0 0 438px;
     width: auto;
   }
 
   .prog-hero__text {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    min-width: 0;
     width: auto;
   }
 
   .prog-hero h1 {
-    font-size: var(--font-size-l-h1-xxl);
+    font-size: var(--font-size-display-hero);
+    line-height: var(--line-height-display-hero);
+    letter-spacing: var(--tracking-display-hero);
   }
 
   .prog-ejes__inner {
@@ -231,7 +241,7 @@
     align-items: flex-start;
     max-width: 1145px;
     margin-inline: auto;
-    padding-block: var(--space-8);
+    padding-block: var(--space-8) var(--space-ejes-bottom);
   }
 
   .prog-ejes__text {
@@ -240,37 +250,47 @@
   }
 
   .prog-ejes .media {
-    flex: 0 1 439px;
+    display: block;
+    flex: 0 0 439px;
+    width: auto;
+  }
+
+  .prog-mat .media {
+    display: block;
+    flex: 0 0 204px;
     width: auto;
   }
 
   .prog-ejes h2 {
-    font-size: var(--font-size-l-h1);
+    font-size: var(--font-size-l-h1-xl);
+    letter-spacing: var(--tracking-display);
+  }
+
+  .prog-ejes p {
+    min-height: var(--ejes-body-height);
   }
 
   .prog-mat {
-    padding-block: var(--space-8);
+    padding-block: var(--space-mat-top) var(--space-mat-bottom);
   }
 
   .prog-mat__row {
     flex-direction: row;
     align-items: center;
-    max-width: 1150px;
+    gap: var(--space-5);
+    max-width: 1147px;
     margin-inline: auto;
   }
 
-  .prog-mat .media {
-    flex: 0 1 320px;
-    width: auto;
-  }
 
   .prog-mat__lead {
-    flex: 1 1 798px;
+    flex: 1 1 0;
+    min-width: 0;
     width: auto;
   }
 
   .prog-mat__lead h2 {
-    font-size: var(--font-size-l-h1);
+    font-size: var(--font-size-l-h1-xl);
   }
 
   .prog-mat__text {
@@ -278,8 +298,23 @@
     margin: var(--space-6) auto 0;
   }
 
+  .prog-mat__text p {
+    position: relative;
+    padding-left: var(--mat-bullet-indent);
+  }
+
+  .prog-mat__text p::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    background: url("../assets/icons/star.png") no-repeat center / contain;
+  }
+
   .prog-points {
-    padding-block: var(--space-8);
+    padding-block: var(--space-points-top) var(--space-8);
   }
 
   .prog-points__inner {
@@ -294,19 +329,31 @@
   }
 
   .prog-points h2 {
-    font-size: var(--font-size-l-h1);
+    font-size: var(--font-size-l-h1-xl);
   }
 
   .page-index {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: var(--index-link-gap);
+    /* El índice permanece visible y lo que se mueve es el texto (como el
+     * índice lateral de la doc de UIkit): se ancla bajo la nav sticky. */
+    position: sticky;
+    top: calc(var(--nav-height-reduced) + var(--space-5));
+    align-self: flex-start;
     flex: 0 1 322px;
-    font-size: var(--font-size-l-h6);
+    font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);
-    white-space: pre-line;
   }
 
   .point h3 {
-    font-size: var(--font-size-l-h3);
+    font-size: var(--font-size-l-h1);
+  }
+
+  /* `2331:4699` mide 1225 px: Figma aplica `paragraphSpacing` al salto de
+   * párrafo y CSS no puede expresarlo dentro de un mismo <p>. */
+  .prog-points .point:nth-child(3) p {
+    min-height: var(--point-body-box-lg);
   }
 }

@@ -58,4 +58,34 @@
 
   openButton.addEventListener("click", open);
   closeButton.addEventListener("click", close);
+
+  /* Navegación reducida (frame `4518:1968`, specs/interactions.md):
+   * al superar el alto del header completo en el scroll, la barra pasa al
+   * estado compacto (CSS `.is-reduced` en `main.css`, solo ≥1448). */
+  var navRoot = document.querySelector(".site-nav");
+  var navInner = document.querySelector(".site-nav__inner");
+  var isDesktop = window.matchMedia("(min-width: 1448px)");
+  var threshold = 0;
+
+  function measure() {
+    if (!navRoot || !navInner) return;
+    navRoot.classList.remove("is-reduced");
+    threshold = navInner.offsetHeight;
+    onScroll();
+  }
+
+  function onScroll() {
+    if (!navRoot || !isDesktop.matches) {
+      if (navRoot) navRoot.classList.remove("is-reduced");
+      return;
+    }
+    navRoot.classList.toggle("is-reduced", window.scrollY > threshold);
+  }
+
+  if (navRoot && navInner) {
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure);
+    isDesktop.addEventListener("change", measure);
+  }
 })();

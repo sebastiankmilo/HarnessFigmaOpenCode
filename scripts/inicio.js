@@ -2,6 +2,8 @@
   const dialog = document.querySelector(".dialog");
   const cards = Array.prototype.slice.call(document.querySelectorAll(".goal-card"));
   const closeButton = dialog ? dialog.querySelector(".dialog__close") : null;
+  const dialogTitle = dialog ? dialog.querySelector(".dialog__title") : null;
+  const dialogBody = dialog ? dialog.querySelector(".dialog__body") : null;
 
   if (!dialog || !cards.length || !closeButton) return;
 
@@ -37,21 +39,56 @@
     }
   }
 
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var closeTimer = null;
+
   function open(card) {
     lastFocused = card;
+    // Texto del diálogo = el de la card clicada (4518:2402 es solo un ejemplo;
+    // el cuerpo extra Lorem de `body-2` sí es común a todos). Se toma del DOM
+    // para que salga ya en el idioma activo, y se reapunta `data-i18n` para que
+    // un cambio de idioma con el diálogo abierto lo traduzca igual.
+    const index = cards.indexOf(card);
+    const titulo = card.querySelector("h3");
+    const cuerpo = card.querySelector("p");
+    if (index !== -1 && dialogTitle && titulo) {
+      dialogTitle.setAttribute("data-i18n", "inicio.goals.card-" + (index + 1) + ".title");
+      dialogTitle.textContent = titulo.textContent;
+    }
+    if (index !== -1 && dialogBody && cuerpo) {
+      dialogBody.setAttribute("data-i18n", "inicio.goals.card-" + (index + 1) + ".body");
+      dialogBody.textContent = cuerpo.textContent;
+    }
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
     dialog.hidden = false;
     dialog.setAttribute("aria-hidden", "false");
     document.addEventListener("keydown", onKeydown);
+    // Fade del backdrop y del panel (nota 4649:2017) en el siguiente frame
+    requestAnimationFrame(function () {
+      dialog.classList.add("is-open");
+    });
     closeButton.focus();
   }
 
   function close() {
-    dialog.hidden = true;
-    dialog.setAttribute("aria-hidden", "true");
+    dialog.classList.remove("is-open");
     document.removeEventListener("keydown", onKeydown);
     if (lastFocused && typeof lastFocused.focus === "function") {
       lastFocused.focus();
     }
+    if (reduceMotion.matches) {
+      dialog.hidden = true;
+      dialog.setAttribute("aria-hidden", "true");
+      return;
+    }
+    closeTimer = setTimeout(function () {
+      dialog.hidden = true;
+      dialog.setAttribute("aria-hidden", "true");
+      closeTimer = null;
+    }, 300);
   }
 
   cards.forEach(function (card) {

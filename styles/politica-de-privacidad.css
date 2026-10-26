@@ -8,24 +8,25 @@
 /* ── 2 — sección-puntos (`2396:2885`) ──────────────────────────── */
 .privac {
   padding-block: var(--space-7);
-  background: var(--color-surface);
+  background: var(--color-surface-page);
 }
 
 .privac h1 {
-  font-size: var(--font-size-l-h2);
+  font-size: var(--font-size-l-h1-xl);
 }
 
 .privac__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  margin-top: var(--space-5);
+  gap: var(--space-6);
+  margin-top: var(--space-3);
 }
 
 .privac__legal {
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 /* «Volver al inicio»: en `lg` y `xs` Figma no le asigna reacción
@@ -48,11 +49,15 @@
 /* ── `lg` (1448) — escritorio ──────────────────────────────────── */
 @media (min-width: 1448px) {
   .privac {
-    padding-block: var(--space-8);
+    padding-block: var(--space-7) var(--space-8);
   }
 
   .privac__inner {
     max-width: 910px;
     margin-inline: auto;
+  }
+
+  .privac__legal {
+    min-height: var(--legal-height);
   }
 }

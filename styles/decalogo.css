@@ -7,7 +7,7 @@
 
 /* ── 2 — header (`2396:2523`) ───────────────────────────────────── */
 .decal-hero {
-  background: var(--color-surface-muted);
+  background: var(--color-decal-hero);
 }
 
 .decal-hero__grid {
@@ -33,15 +33,16 @@
 }
 
 .decal-hero p {
-  margin-top: var(--space-4);
-  font-size: var(--font-size-body-l);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
 /* ── 3 — sección-puntos (`2396:2543`) ───────────────────────────── */
 .decal-points {
   padding-block: var(--space-7);
-  background: var(--color-surface);
+  background: var(--color-surface-page);
 }
 
 .decal-points__inner {
@@ -70,7 +71,7 @@
 .point {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .point h3 {
@@ -78,13 +79,14 @@
 }
 
 .point p {
-  font-size: var(--font-size-body-m);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
   white-space: pre-line;
 }
 
 .cta {
-  margin-top: var(--space-5);
+  margin-top: var(--space-6);
 }
 
 /* ── Medias del wireframe (rellenos y etiqueta centrada) ───────── */
@@ -120,12 +122,24 @@
 @media (min-width: 1448px) {
   .decal-hero__grid {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
+    gap: var(--space-5);
     padding-block: var(--space-8);
+    padding-inline: var(--space-5);
+  }
+
+  .decal-hero h1,
+  .decal-hero p {
+    color: var(--color-surface-page);
+  }
+
+  /* la imagen del header es 438×349.87 (5:4), no 4:3 */
+  .decal-hero .media {
+    aspect-ratio: 5 / 4;
   }
 
   .decal-hero .media {
-    flex: 0 1 438px;
+    flex: 0 0 438px;
     width: auto;
   }
 
@@ -134,8 +148,15 @@
     width: auto;
   }
 
+  .decal-hero h1 {
+    font-size: var(--font-size-display-hero);
+    line-height: var(--line-height-display-hero);
+    letter-spacing: var(--tracking-display-hero);
+  }
+
   .decal-hero p {
-    font-size: var(--font-size-body-m);
+    font-size: var(--font-size-body-base);
+    line-height: var(--line-height-lead);
   }
 
   .decal-points {
@@ -154,15 +175,21 @@
   }
 
   .page-index {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: var(--index-link-gap);
+    /* El índice permanece visible y lo que se mueve es el texto (como el
+     * índice lateral de la doc de UIkit): se ancla bajo la nav sticky. */
+    position: sticky;
+    top: calc(var(--nav-height-reduced) + var(--space-5));
+    align-self: flex-start;
     flex: 0 1 322px;
-    font-size: var(--font-size-l-h6);
+    font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);
-    white-space: pre-line;
   }
 
   .point h3 {
-    font-size: var(--font-size-l-h3);
+    font-size: var(--font-size-l-h1);
   }
 }
