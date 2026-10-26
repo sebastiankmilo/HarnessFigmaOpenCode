@@ -107,6 +107,29 @@ test.describe('hovers de la capa `hovers` (4518:2148)', () => {
     await expect(cta).toHaveCSS('background-color', 'rgb(255, 69, 32)');
     await expect(cta).toHaveCSS('color', 'rgb(253, 252, 250)');
   });
+
+  test('el botón «Únete» del hero: stroke #ffcd00, rótulo #30250f y hover rojo', async ({ page }) => {
+    await page.goto('/index.html');
+    // Instancia Figma `2325:3817` (107×47): stroke #ffcd00 por dentro,
+    // rótulo #30250f, padding 20/10 (hoy el texto mide 68 px y Figma 67,
+    // así que el ancho queda 108 frente a 107 — 1 px de métrica de fuente).
+    const btn = page.locator('.btn--outline');
+    await expect(btn).toHaveCSS('color', 'rgb(48, 37, 15)');
+    await expect(btn).toHaveCSS('box-shadow', 'rgb(255, 205, 0) 0px 0px 0px 1px inset');
+    await expect(btn).toHaveCSS('padding-left', '20px');
+    await expect(btn).toHaveCSS('border-radius', '0px');
+    const box = await btn.boundingBox();
+    expect(Math.round(box.height)).toBe(47);
+    expect(box.width).toBeGreaterThanOrEqual(105);
+    expect(box.width).toBeLessThanOrEqual(110);
+
+    // Hover: mismo par que los botones amarillos (`4518:2148`).
+    await btn.hover();
+    await page.waitForTimeout(500);
+    await expect(btn).toHaveCSS('background-color', 'rgb(255, 69, 32)');
+    await expect(btn).toHaveCSS('color', 'rgb(253, 252, 250)');
+    await expect(btn).toHaveCSS('box-shadow', 'rgb(255, 69, 32) 0px 0px 0px 1px inset');
+  });
 });
 
 test.describe('enlaces configurables (content/enlaces.json)', () => {
@@ -188,28 +211,37 @@ test.describe('enlaces configurables (content/enlaces.json)', () => {
 });
 
 test.describe('diálogo de objetivos: texto por card', () => {
-  test('cada card abre su propio título y cuerpo', async ({ page }) => {
+  test('cada card abre su diálogo con el título y los cuerpos de dialog-N', async ({ page }) => {
     await page.goto('/index.html');
+    // El diálogo lee `content/es.json` en runtime (window.VCI18n.getData).
+    await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
     const cards = page.locator('.goal-card');
 
+    // Objetivo 1 → `inicio.dialog` (conserva la key original, sin sufijo).
     await cards.nth(0).click();
     await expect(page.locator('.dialog')).toHaveClass(/is-open/);
-    const titulo1 = await page.locator('.dialog__title').textContent();
-    const cuerpo1 = await page.locator('.dialog__body').first().textContent();
-    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.goals.card-1.title');
+    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.dialog.title');
+    await expect(page.locator('.dialog__title')).toHaveText(await cards.nth(0).locator('h3').textContent());
+    await expect(page.locator('.dialog__body')).toHaveCount(2);
+    await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.dialog.body-1');
+    // El diálogo ya no repite el texto de la card: usa el desarrollo del JSON.
+    expect(await page.locator('.dialog__body').first().textContent()).not.toBe(
+      await cards.nth(0).locator('p').textContent()
+    );
     await page.keyboard.press('Escape');
     await expect(page.locator('.dialog')).not.toHaveClass(/is-open/);
 
+    // Objetivo 3 → `inicio.dialog-3` con tres párrafos.
     await cards.nth(2).click();
-    const titulo3 = await page.locator('.dialog__title').textContent();
-    const cuerpo3 = await page.locator('.dialog__body').first().textContent();
-    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.goals.card-3.title');
+    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.dialog-3.title');
+    await expect(page.locator('.dialog__body')).toHaveCount(3);
+    await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.dialog-3.body-1');
+    await expect(page.locator('.dialog__title')).toHaveText(await cards.nth(2).locator('h3').textContent());
 
-    expect(titulo3).not.toBe(titulo1);
-    expect(cuerpo3).not.toBe(cuerpo1);
-    // El diálogo repite el texto de la card clicada.
-    expect(titulo3).toBe(await cards.nth(2).locator('h3').textContent());
-    expect(cuerpo3).toBe(await cards.nth(2).locator('p').textContent());
+    // El panel sigue midiendo 1024×604 de Figma: lo largo se desplaza dentro.
+    const panel = await page.locator('.dialog__panel').boundingBox();
+    expect(panel.width).toBeGreaterThanOrEqual(1020);
+    expect(panel.height).toBeLessThanOrEqual(615);
   });
 });
 

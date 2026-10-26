@@ -234,6 +234,28 @@ test.describe('carruseles de inicio (nota 4649:2016)', () => {
       'true'
     );
   });
+
+  test('la ventana mantiene 4 tarjetas con 6 objetivos', async ({ page }) => {
+    await page.goto('/index.html');
+    const grid = page.locator('.goals__grid');
+    const controls = page.locator('[data-carousel-controls="goals"]');
+
+    await expect(grid.locator('> li')).toHaveCount(6);
+    await expect(controls.locator('[data-carousel-dot]')).toHaveCount(6);
+    // En `lg` solo caben 4: los dos últimos quedan fuera de la ventana.
+    await expect(grid.locator('> li:not(.is-out)')).toHaveCount(4);
+    await expect(grid.locator('> li.is-out')).toHaveCount(2);
+
+    await controls.locator('[data-carousel-dot="5"]').click();
+
+    // Ventana que arrastra el final y el principio: 6, 1, 2, 3.
+    await expect(grid.locator('> li').nth(5)).not.toHaveClass(/is-out/);
+    await expect(grid.locator('> li').nth(0)).not.toHaveClass(/is-out/);
+    await expect(grid.locator('> li').nth(3)).toHaveClass(/is-out/);
+    await expect(grid.locator('> li').nth(4)).toHaveClass(/is-out/);
+    await expect(grid.locator('> li').nth(5)).toHaveCSS('order', '0');
+    await expect(grid.locator('> li:not(.is-out)')).toHaveCount(4);
+  });
 });
 
 test.describe('prefers-reduced-motion anula las animaciones', () => {

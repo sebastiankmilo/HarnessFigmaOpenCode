@@ -192,10 +192,13 @@ button {
   color: var(--color-on-dark);
 }
 
+/* Botón «Únete» del hero (instancia Figma `2325:3817`, 107×47): stroke
+ * `#ffcd00`, rótulo `#30250f`, esquinas rectas. El borde va por dentro
+ * (1 px) igual que el stroke `INSIDE` de Figma. */
 .btn--outline {
   background: transparent;
-  color: var(--color-text-secondary);
-  box-shadow: inset 0 0 0 1px var(--color-text-secondary);
+  color: var(--color-text-brown);
+  box-shadow: inset 0 0 0 1px var(--color-button-fill);
 }
 
 .btn--outline-dark {
@@ -748,14 +751,23 @@ html.has-smooth-scroll {
   }
 
   /* ── Nav desktop: 160px + navegación-reducida (4518:1968, 83px) ──
-   * El header completo mide --nav-height-lg y se vuelve sticky; al
-   * superar ese umbral (scroll), nav.js añade `.is-reduced` y la barra
-   * pasa al estado compacto fijo (interactions.md §Navegación reducida). */
+   * El header se ancla al viewport con `position: fixed` y `body` reserva
+   * su altura con `padding-top`. Con `position: sticky` la barra seguía en
+   * el flujo: al aplicar `.is-reduced` (160 → 83) el documento cambiaba de
+   * alto, el navegador reajustaba el scroll (scroll anchoring) y `nav.js`
+   * volvía a alternar la clase → bucle infinito de transición en todas las
+   * páginas. Fuera del flujo el alto del header ya no toca al documento. */
   .site-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 90;
     background: var(--color-surface-page);
+  }
+
+  body {
+    padding-top: var(--nav-height-lg);
   }
 
   .site-nav__inner {
@@ -808,6 +820,15 @@ html.has-smooth-scroll {
   .btn--primary:hover {
     background: var(--color-hover-accent);
     color: var(--color-surface-page);
+  }
+
+  /* «Únete» del hero (`btn--outline`): mismo hover que los botones
+   * amarillos — relleno `#ff4520`, rótulo `#fdfcfa` y el stroke amarillo
+   * pasa al rojo del relleno, con lo que queda como botón sólido. */
+  .btn--outline:hover {
+    background: var(--color-hover-accent);
+    color: var(--color-surface-page);
+    box-shadow: inset 0 0 0 1px var(--color-hover-accent);
   }
 
   /* Iconos de redes y logo del footer: `#30250f → #ff4520`
