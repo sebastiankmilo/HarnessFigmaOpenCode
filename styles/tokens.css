@@ -198,10 +198,11 @@
   --dialog-panel-height: 604px; /* alto mínimo del panel en `lg` (frame 1024×604) */
   --dialog-body-height: 233px;  /* bloque de cuerpo `2358:1146` (896×233): hueco que
                                    ocupa el desarrollo y, si desborda, su scroll */
-  /* Modal de tablet (`4441:3492`, 720×624): el panel no cambia de alto; el
-     cuerpo es lo que scrollea cuando el texto no cabe. */
-  --dialog-panel-width-sm: 720px;
-  --dialog-panel-height-sm: 624px;
+  /* Modal de tablet: el frame medía 720×624, pero desde 2026-11-03 el panel
+     ocupa el 90% del ancho y el 90% del alto del viewport; el cuerpo scrollea
+     si el texto no cabe. */
+  --dialog-panel-width-sm: 90%;
+  --dialog-panel-height-sm: 90%;
   --dialog-cta-width-sm: 266px;
   /* Modal de mobile (`2404:3499`, 343×1095): panel más alto que el viewport;
      el overlay scrollea y el cuerpo tiene 636 de hueco. */

@@ -538,9 +538,9 @@
     display: flex;
     flex-direction: column;
     width: var(--dialog-panel-width-sm);
-    max-width: calc(100% - (2 * var(--space-4)));
+    max-width: var(--dialog-panel-width-sm);
     height: var(--dialog-panel-height-sm);
-    max-height: 100%;
+    max-height: var(--dialog-panel-height-sm);
     padding: var(--space-8) var(--space-4) var(--space-7);
     overflow: hidden;
   }
