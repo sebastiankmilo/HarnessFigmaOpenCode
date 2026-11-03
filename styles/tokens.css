@@ -23,7 +23,8 @@
   --color-accent-mint: #6de4da;        /* Secondary Mint */
   --color-media-placeholder: #ebebeb;  /* relleno de components/images en el wireframe */
   --color-media-video: #c2c2c2;        /* Neutral 30 — relleno de las medias de vídeo (inicio 3 y 6, Únete) */
-  --color-video-band: #30250f;         /* banda a sangre de la sección de vídeo (baseline inicio y900-1530) */
+  --color-video-band: #30250f;         /* banda a sangre de la sección de vídeo en lg (`2325:3923`) */
+  --color-video-band-compact: #53411e; /* la misma banda en xs/sm (`2396:2407`, `2408:1586`; leído 2026-10-26) */
   --color-avatar-placeholder: #d9d9d9; /* relleno del avatar de goal-card */
   --color-dot-inactive: #858585;       /* Neutral 60 — punto activo del dotnav (wireframe; superado por --color-dot-inactive-new) */
 
@@ -35,10 +36,12 @@
   --color-card-hover: #f0ece6;         /* hover de goal-card y container-and-card */
   --color-dot-active: #65543a;         /* punto activo del dotnav */
   --color-dot-inactive-new: #d7d2ca;   /* puntos inactivos del dotnav y bordes suaves */
+  --color-surface-menu: #f0ece6;      /* fondo del overlay del nav en sm (`2424:446`) */
   --color-cta-default: #ceac57;        /* fondo default del CTA lamateriaprima.org */
   --color-cta-hover: #1b2c43;          /* fondo hover del CTA / texto default del CTA */
   --color-text-brown: #30250f;         /* texto de nav, botones y enlaces del índice */
   --color-heading-brown: #53411e;      /* titulares (modal, Puntos, goal-card, sección-únete) */
+  --color-heading-gold: #ceac57;       /* título de sección sobre banda oscura («La Materia Prima», `2392:4055`; leído 2026-10-26) */
   --color-link-underline: #786952;     /* subrayado default del enlace de texto de Únete */
   --color-link-underline-hover: #003399; /* subrayado hover del índice de puntos */
 
@@ -46,8 +49,16 @@
   --color-footer-bg: #ffd633;          /* fondo del footer en las 5 vistas */
   --color-section-soft: #f0ece6;       /* fondo de la sección «Nuestros objetivos» (inicio) */
   --color-band-dark: #1c2c43;          /* banda de «La Materia Prima» (inicio y2610-3490) */
+  --color-materia-bg: #1b2c43;         /* sólido bajo la imagen de «La Materia Prima» (`2408:1708`, `2392:4053`) */
   --color-decal-hero: #cc371a;         /* fondo del hero de Decálogo (y160-780) */
   --color-lang-inactive: #9e9382;      /* idioma inactivo (PT) del selector ES/PT */
+
+  /* Fondo de «La Materia Prima»: en xs/sm el fill IMAGE es STRETCH con un
+     recorte horizontal (`imageTransform` x = 0.2470677 y 0.5315786). El
+     background-size se calcula como 100 / escala para mostrar esa franja
+     izquierda estirada al ancho de la sección. */
+  --materia-bg-scale-xs: 404.747%;
+  --materia-bg-scale-sm: 188.119%;
 
   /* Escala neutral observada en la paleta de Figma (página components) */
   --neutral-0: #fafafa;
@@ -70,8 +81,19 @@
   --line-height-display-hero: 73.584px;
   --tracking-display-hero: 2.628px;
   --tracking-display: 0.92px;    /* letter-spacing de los titulares de sección a 46.1 (Bebas) */
+
+  /* Hero a 375 y 768 — `2392:3974` y `2408:1569` (leído 2026-10-26) */
+  --font-size-display-hero-compact: 58.4px;
+  --line-height-display-hero-compact: 65.408px;
+  --tracking-display-hero-compact: 2.336px;
+  /* Titulares de sección a 41 (Bebas) en xs/sm — `2392:3997`, `2408:1652` */
+  --tracking-display-compact: 0.82px;
+  /* Tracking de los títulos de goal-card/article-card a 32.4 (Bebas) —
+     `I2408:1656;4436:2786`, `I2392:4058;93:133` (letterSpacing 0.648) */
+  --tracking-card-display: 0.648px;
   --ejes-body-height: 419px;     /* alto del párrafo de sección-ejes (`2328:4513`, 674×419) */
   --article-card-height: 525px;  /* alto de `container-and-card` (`2326:4137`, 322×525) */
+  --article-card-height-xs: 513px; /* alto de la card de artículo en `375-xs` (`2392:4053` › artículos) */
   --point-body-box-lg: 1225px;   /* caja del punto 3 de Programa (`2331:4699`, 794×1225) */
   --mat-bullet-indent: 28px;     /* sangría del párrafo de materialismo bajo la estrella (268→296) */
 
@@ -108,6 +130,7 @@
   --font-weight-regular: 400; /* DM Sans Regular — cuerpo de texto (Figma `fontWeight: 400`) */
   --font-weight-bold: 700;   /* DM Sans Bold  — headings, links, labels, botones */
   --font-weight-medium: 500; /* DM Sans Medium — párrafos de cuerpo */
+  --font-weight-black: 900;  /* DM Sans Black — enlaces del footer y rótulos de botón (Figma `fontWeight: 900`, leído 2026-10-26) */
 
   --line-height-heading: 1.12; /* observado: todos los headings ×1.12 */
   --line-height-body: 1.5;     /* observado: todos los párrafos ×1.5 */
@@ -127,23 +150,33 @@
 
   --space-header: 134.5px;    /* padding vertical del encabezado de inicio (lg, `2325:3824`: 294.5-160) */
   --space-header-sm: 128px;   /* padding vertical del encabezado de inicio (sm, `2408:1567`) */
-  --space-intro-gap-sm: 53px; /* gap entre `section-intro` y la grilla de objetivos (sm, `2408:1650`) */
+  --space-intro-gap-sm: 35px; /* gap entre `section-intro` y la grilla de objetivos (sm, `2408:1650`: 1548−1513; re-medido 2026-10-26) */
   --space-header-cta: 36px;   /* gap entre el texto y los botones del encabezado */
   --space-points-top: 80px;   /* padding superior de sección-puntos (programa lg, 2154-2074) */
   --space-ejes-bottom: 54px;  /* padding inferior de sección-ejes (programa lg, 1309-1255) */
   --space-mat-top: 80px;      /* padding superior de sección-materialismo (programa lg) */
   --space-mat-bottom: 76px;   /* padding inferior de sección-materialismo (programa lg) */
+  --prog-ejes-media-size-xs: 337px; /* media de `sección-ejes` en `375-xs` (`2396:2420`, 337×337; oculta en el render) */
+  --prog-mat-media-gap-xs: 18px;    /* gap entre las dos imágenes 163×163 de `sección-materialismo` xs */
+  --prog-mat-bullet-indent-xs: 40px;/* sangría del texto tras la viñeta de materialismo xs */
+  --prog-mat-bullet-left-xs: 24px;  /* posición de la viñeta (`•`) en materialismo xs */
   --legal-height: 904px;      /* alto del bloque legal (`2335:1546`, 910×904) */
-  --nav-height-xs: 80px;      /* alto de la barra del nav en las instancias de 375-xs */
+  --nav-height-xs: 83.38px;   /* alto de la barra del nav en las instancias de 375-xs (`2396:2902` §2.3, ticket 6) */
+  --nav-height-xs-reduced: 56px; /* estado compacto de xs (misma altura que sm; pedido 2026-11-03) */
   --nav-height-sm: 75px;      /* alto de la barra del nav en las instancias de 1024-sm */
+  --nav-height-sm-reduced: 56px; /* estado compacto de sm (decisión 2026-11-03; Figma solo define lg) */
   --nav-height-lg: 160px;     /* alto de la barra del nav en 1448-lg (diseño definitivo 2026-10-20; era 125) */
   --nav-height-reduced: 83px; /* alto del header de navegación-reducida (4518:1968) */
   --nav-logo-xs: 48px;        /* logo del nav en 375-xs */
+  --nav-logo-xs-reduced: 40px; /* logo en el estado compacto de xs (48 → 40; misma decisión que sm) */
   --nav-logo-sm: 48px;        /* logo del nav en 1024-sm */
+  --nav-logo-sm-reduced: 40px; /* logo en el estado compacto de sm (48 → 40; decisión 2026-11-03) */
   --nav-logo-lg: 96px;        /* logo del nav en 1448-lg */
   --nav-logo-reduced: 59px;   /* logo de la nav reducida (`logo-dorado` 4518:2002, 59×63; la barra mide 83) */
   --nav-gap-blocks: 28px;     /* gap entre bloques del right-nav (nav lg) */
   --nav-link-tracking: 1.704px; /* letter-spacing de los enlaces del nav lg (14.2 Black) */
+  --menu-link-tracking: 1.92px; /* letter-spacing de los enlaces/rótulos del overlay sm (16 Black, `2424:979`) */
+  --menu-btn-padding-y: 10px;   /* padding vertical del Aporta del overlay sm (`2424:994`, 44 = 24 + 2×10) */
   --menu-close-top-sm: 24px;  /* offset superior del icons/close (24×24) en el overlay de 1024-sm: `2424:1003` está a y=24 dentro de `2424:446` */
   --menu-close-right-sm: 16px;/* offset derecho: x=9688−8960=728 → 768−(728+24)=16 */
   --nav-underline-lg: 1.5px;  /* grosor del subrayado del enlace activo (nav lg, medido y104-105.5) */
@@ -165,6 +198,25 @@
   --dialog-panel-height: 604px; /* alto mínimo del panel en `lg` (frame 1024×604) */
   --dialog-body-height: 233px;  /* bloque de cuerpo `2358:1146` (896×233): hueco que
                                    ocupa el desarrollo y, si desborda, su scroll */
+  /* Modal de tablet (`4441:3492`, 720×624): el panel no cambia de alto; el
+     cuerpo es lo que scrollea cuando el texto no cabe. */
+  --dialog-panel-width-sm: 720px;
+  --dialog-panel-height-sm: 624px;
+  --dialog-cta-width-sm: 266px;
+  /* Modal de mobile (`2404:3499`, 343×1095): panel más alto que el viewport;
+     el overlay scrollea y el cuerpo tiene 636 de hueco. */
+  --dialog-panel-width-xs: 343px;
+  --dialog-panel-height-xs: 1095px;
+  --dialog-cta-width-xs: 297px;
+  --dialog-cta-height-xs: 54px;
+  --dialog-cta-size-xs: 20.2px;
+  --dialog-cta-line-xs: 30.3px;
+  --dialog-cta-tracking-xs: 2.424px;
+  --dialog-cta-padding-x-xs: 22px;
+  --dialog-cta-padding-y-xs: 12px;
+  --dialog-title-size-xs: 36.4px;
+  --dialog-title-line-xs: 40.768px;
+  --dialog-close-top-xs: 29px;
 
   /* ── Overlay, movimiento y foco ───────────────────────────────── */
   --overlay-backdrop: rgba(0, 0, 0, 0.25); /* backdrop del modal (nota 4649:2017) */
@@ -177,21 +229,25 @@
   /* ── Iconos (caja renderizada) ────────────────────────────────── */
   --icon-btn: 16px;             /* img de `.btn` */
   --icon-nav-toggle: 24px;      /* `.site-nav__toggle img` */
-  --icon-menu-close: 32px;      /* `.site-nav__menu-close` */
-  --icon-menu-logo: 64px;       /* `.site-nav__menu-logo` */
+  --icon-menu-close: 24px;      /* `.site-nav__menu-close` en xs (`2396:3288;38:1068`, 24×24) */
+  --icon-menu-close-sm: 24px;   /* close del overlay sm (`2424:1003`, 24×24) */
+  --icon-menu-logo: 96px;       /* `.site-nav__menu-logo` en xs (`2396:3288;4835:3945`, 96×103) */
+  --icon-menu-logo-sm: 128px;   /* logo del overlay sm (`4439:3417`, 128×137) */
   --icon-menu-platform: 32px;   /* `.site-nav__menu-platforms img` */
   --icon-footer-logo: 128px;    /* logo del footer */
   --icon-footer-platform: 24px; /* `.site-footer__platforms img` */
   --icon-carousel-arrow: 64px;  /* `.carousel__arrow img` (prev/next) */
   --icon-dot: 8px;              /* `.carousel__dot` (dotnav 8×8) */
   --icon-dialog-close: 32px;    /* `.dialog__close` (icons/close 32×32) */
+  --icon-dialog-close-sm: 24px; /* `.dialog__close` en el modal de tablet (`4441:3498`, 24×24) */
+  --icon-dialog-close-xs: 24px; /* `.dialog__close` en el modal de mobile (`2404:3504`, 24×24) */
   --icon-mat-bullet: 22px;      /* viñeta `::before` de `.prog-mat__text` */
   --goal-avatar-size: 137px;    /* avatar de `goal-card` (estado xs/sm) */
 
   /* ── Layout: anchos de contenedor, columnas y cajas ───────────── */
   --container-width: 1448px;    /* `.container` */
   --menu-content-width-xs: 343px; /* `.site-nav__menu-content` en xs */
-  --menu-content-width: 736px;  /* `.site-nav__menu-content` en lg */
+  --menu-content-width: 736px;  /* `.site-nav__menu-content` en sm (`2424:974`, 736×709) */
   --hero-media-width: 590px;    /* `.hero__media` de inicio (lg) */
   --hero-media-height: 740px;
   --hero-text-width: 792px;     /* `.hero__text` de inicio (lg) */
@@ -200,6 +256,8 @@
   --dialog-panel-width: 1024px; /* `.dialog__panel` (frame `2358:932`) */
   --join-media-basis: 643px;    /* `.join-block__media` de Únete */
   --join-text-basis: 644px;     /* `.join-block__text` de Únete */
+  --join-media-aspect-xs: 341.079 / 216; /* media de Únete en `2396:2712` (341,079×216) */
+  --join-play-size: 38.8px;     /* `Polygon 1` de Únete (`2396:2715`, 38,8×29,7) */
   --hero-media-basis: 438px;    /* `.decal-hero .media` y `.prog-hero .media` */
   --hero-text-basis: 788px;     /* `.decal-hero__text` */
   --points-inner-width: 1148px; /* `.decal-points__inner` y `.prog-points__inner` */

@@ -6,6 +6,7 @@
   <title data-i18n="programa.meta.title">Programa — Vanguardia Colombiana</title>
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
   <link rel="stylesheet" href="styles/programa.css">
 </head>
 <body>
@@ -67,7 +68,7 @@
         <img src="assets/icons/close.png" alt="">
       </button>
       <div class="site-nav__menu-content">
-        <a href="index.html"><img class="site-nav__menu-logo" src="assets/icons/logo-color.png" alt="Vanguardia Colombiana"></a>
+        <a href="index.html"><img class="site-nav__menu-logo" src="assets/icons/logo-menu.png" alt="Vanguardia Colombiana"></a>
         <nav class="site-nav__menu-links" aria-label="Menú">
           <a class="is-current" href="programa.html" aria-current="page" data-i18n="common.nav.programa">Programa</a>
           <a href="decalogo.html" data-i18n="common.nav.decalogo">Decálogo</a>
@@ -85,6 +86,11 @@
           <a href="https://x.com/VanguardiaColo" target="_blank" rel="noopener noreferrer"><img src="assets/icons/x.png" alt="X"></a>
           <a href="https://www.tiktok.com/@lavanguardiacolombiana" target="_blank" rel="noopener noreferrer"><img src="assets/icons/tik-tok.png" alt="TikTok"></a>
         </div>
+        <div class="site-nav__menu-lang" role="group" aria-label="Idioma">
+          <button class="site-nav__lang-btn is-active" type="button" data-lang="es" aria-pressed="true">ES</button>
+          <span class="site-nav__lang-sep" aria-hidden="true">/</span>
+          <button class="site-nav__lang-btn" type="button" data-lang="pt" aria-pressed="false">PT</button>
+        </div>
       </div>
     </div>
   </header>
@@ -97,8 +103,12 @@
             <img class="media__img" src="assets/img/programa-header.png" alt="">
           </div>
           <div class="prog-hero__text">
-            <h1 data-i18n="programa.hero.title">Nuestros principios fundamentales</h1>
-            <p data-i18n="programa.hero.lead">Vanguardia Colombiana, como asociación con vocación de servicio a la sociedad, presenta un programa con un proyecto político definido respecto del Estado en el que se conectan la gestión de la vida cotidiana de los trabajadores por parte de estos mismos trabajadores con una política exterior, una geopolítica y unas relaciones internacionales centralistas, cuya meta sea la insubordinación de Colombia frente al sometimiento de la Patria a intereses extranjeros constantes desde hace dos siglos.
+            <h1 class="prog-hero__title">
+              <span class="prog-hero__title--compact" data-i18n="programa.hero.title-compact">Nuestro Programa</span>
+              <span class="prog-hero__title--wide" data-i18n="programa.hero.title">Nuestros principios fundamentales</span>
+            </h1>
+            <p class="prog-hero__lead prog-hero__lead--compact" data-i18n="programa.hero.lead-compact">Vanguardia Colombiana, como asociación con vocación de servicio a la sociedad, presenta un programa con un proyecto político definido respecto del Estado en el que se conectan la gestión de la vida cotidiana de los trabajadores por parte de estos mismos trabajadores con una política exterior, una geopolítica y unas relaciones internacionales cuya meta sea la insubordinación de Colombia frente al sometimiento de la Patria a intereses extranjeros constantes desde hace dos siglos.</p>
+            <p class="prog-hero__lead prog-hero__lead--wide" data-i18n="programa.hero.lead">Vanguardia Colombiana, como asociación con vocación de servicio a la sociedad, presenta un programa con un proyecto político definido respecto del Estado en el que se conectan la gestión de la vida cotidiana de los trabajadores por parte de estos mismos trabajadores con una política exterior, una geopolítica y unas relaciones internacionales centralistas, cuya meta sea la insubordinación de Colombia frente al sometimiento de la Patria a intereses extranjeros constantes desde hace dos siglos.
 
 Los ejes sobre los que desarrollamos nuestros programa son en primer lugar la predominancia de los intereses del pueblo trabajador por encima de las ambiciones de la burguesía parasitaria que lleva dos siglos manteniendonos en el subdesarrollo, la impotencia y la barbarie.
 
@@ -112,8 +122,9 @@ Y para poder realizar efectivamente esos planes y programas, partimos de los sig
       <div class="container">
         <div class="prog-ejes__inner">
         <div class="prog-ejes__text">
-            <h2 data-i18n="programa.ejes.title">Los ejes de nuestros principios</h2>
-            <p data-i18n="programa.ejes.body">1. La disciplina de partido
+            <h2 class="prog-ejes__title prog-ejes__title--compact" data-i18n="programa.ejes.title-compact">Los ejes de nuestro programa</h2>
+            <h2 class="prog-ejes__title prog-ejes__title--wide" data-i18n="programa.ejes.title">Los ejes de nuestros principios</h2>
+            <p class="prog-ejes__body prog-ejes__body--wide" data-i18n="programa.ejes.body">1. La disciplina de partido
 
 Con disciplina de partido no estamos hablando de obediencia ciega, sino de la condición necesaria para transformar nuestras convicciones en fuerza histórica organizada. Un partido con verdadero potencial revolucionario no es la mera suma de individuos que compartan determinadas ideas: debe constituirse como una organización consciente, cohesionada y capaz de actuar como una voluntad política común. Sin disciplina, la organización se disuelve en el individualismo; sin organización, las ideas quedan reducidas a meras opiniones incapaces de transformar la realidad.
 
@@ -136,6 +147,9 @@ Pero esta unidad no consiste en uniformidad, nuestra filosofía es pluralista, p
 Por ello, disciplina y unidad en la acción son dos dimensiones inseparables, pero no idénticas. La disciplina garantiza la cohesión de la organización; la unidad en la acción transforma esa cohesión en intervención política. La primera organiza las voluntades; la segunda las pone en práctica.
 
 Solo un partido disciplinado, organizado y consciente de sus objetivos, capaz de deliberar colectivamente y actuar de manera unificada, puede dejar de ser un mero objeto espectador de la historia para convertirse en sujeto capaz de disputar y construir el poder real que determine efectivamente el rumbo y el destino de nuestra nación.</p>
+            <p class="prog-ejes__body prog-ejes__body--compact" data-i18n="programa.ejes.intro">Los ejes sobre los que desarrollamos nuestros programa son la construcción de un Socialismo Netamente Colombiano que nos convierta en una comunidad económicamente independiente, de una Iberofonía que nos permita ser políticamente soberanos a la vez que ayudamos a conformar un bloque de naciones hermanas de alcance universal, el Cibercomunismo como herramienta de construcción tecnocientífica de una comunidad política postcapitalista, y el Materialismo Político como doctrina y teoría que organiza esta construcción política, geopolítica, económica, administrativa y moral.
+
+Por ello, el proyecto de Vanguardia Colombiana no es, como diría el marxista peruano José Carlos Mariátegui, «ni calco ni copia, sino creación heroica» que, por supuesto, no parte de la nada, sino de realidades históricas, culturales, filosóficas y políticas de largo recorrido a las que, entendemos, es preciso darles una nueva orientación adaptada a nuestra realidad concreta en el aquí y ahora.</p>
           </div>
         <div class="media media--square media--muted media--center">
             <img class="media__img" src="assets/img/programa-ejes.png" alt="">
@@ -154,14 +168,18 @@ Solo un partido disciplinado, organizado y consciente de sus objetivos, capaz de
             <img class="media__img" src="assets/img/programa-materialismo-2.png" alt="">
           </div>
           <div class="prog-mat__lead">
-            <h2 data-i18n="programa.mat.title">El Materialismo político</h2>
-            <p data-i18n="programa.mat.lead">La concepción materialista de la vida política es la doctrina filosófica a la que nos suscribimos todas las Vanguardias Iberófonas socialistas, y en la que orgullosamente, Vanguardia Colombiana ha hecho aportes importantes en la construcción de sus principios doctrinales fundamentales.
+            <h2 class="prog-mat__title">
+              <span class="prog-mat__title--compact" data-i18n="programa.mat.title-compact">Materialismo político</span>
+              <span class="prog-mat__title--wide" data-i18n="programa.mat.title">El Materialismo político</span>
+            </h2>
+            <p class="prog-mat__lead-text prog-mat__lead-text--compact" data-i18n="programa.mat.lead-compact">Vanguardia Colombiana construye el Materialismo Político, cuyos ejes son el materialismo histórico de Marx, el materialismo filosófico de Gustavo Bueno, la tradición filosófica grecorromana y la filosofía hispánica.</p>
+            <p class="prog-mat__lead-text prog-mat__lead-text--wide" data-i18n="programa.mat.lead">La concepción materialista de la vida política es la doctrina filosófica a la que nos suscribimos todas las Vanguardias Iberófonas socialistas, y en la que orgullosamente, Vanguardia Colombiana ha hecho aportes importantes en la construcción de sus principios doctrinales fundamentales.
 
 Es una filosofía producto del desarrollo histórico mediante rupturas y continuidades de toda la tradición filosófica previa:</p>
           </div>
         </div>
         <div class="prog-mat__text">
-          <p data-i18n="programa.mat.body-1">Platón: Inicia el primer sistema filosófico, al distinguir a un falso filosofo o sofista de un verdadero filósofo, estableciendo la ontología de las Ideas y el principio de Symploké, según el cual la realidad no es un monismo donde todo se conecta ni un atomismo donde todo está absolutamente inconexo.
+          <p class="prog-mat__body prog-mat__body--wide" data-i18n="programa.mat.body-1">Platón: Inicia el primer sistema filosófico, al distinguir a un falso filosofo o sofista de un verdadero filósofo, estableciendo la ontología de las Ideas y el principio de Symploké, según el cual la realidad no es un monismo donde todo se conecta ni un atomismo donde todo está absolutamente inconexo.
 
 Aristóteles: Terrenaliza la filosofía mediante las categorías, define al ser humano como un animal político cuya racionalidad depende del marco de la sociedad política y aporta una claridad lógica precientífica.
 
@@ -178,18 +196,21 @@ Marx: Da la «vuelta del revés» a la dialéctica hegeliana, descubriendo que e
 Gustavo Bueno: Intenta dar la «vuelta del revés» a Marx para purgarlo de vestigios idealistas, desarrollando el materialismo filosófico mediante la teoría del cierre categorial, el pluralismo ontológico discontinuista y la idea del Ego Trascendental.
 
 Y el Materialismo Político (Polimat) consuma la síntesis o «fusión nuclear» del materialismo histórico marxista, el materialismo filosófico buenista y la tradición filosófica hispánica-católica para construir un sistema filosófico orientado a transformar revolucionariamente la realidad desde la Iberofonía.</p>
-          <p data-i18n="programa.mat.body-2">Desde la escuela del Materialismo Político nos reconocemos como herederos legítimos de la racionalidad católica —aunque no los únicos— y de una tradición de pensamiento que, sin negar otras fuentes, puede situarse en una línea genealógica que se extiende desde los griegos clásicos hasta la actualidad, transitando principalmente por los ya mencionados Platón, Aristóteles, Tomás de Aquino, Francisco Suárez, Spinoza, Hegel, Marx y Bueno, entre muchos otros autores y pensadores antiguos y contemporáneos.
+          <p class="prog-mat__body prog-mat__body--wide" data-i18n="programa.mat.body-2">Desde la escuela del Materialismo Político nos reconocemos como herederos legítimos de la racionalidad católica —aunque no los únicos— y de una tradición de pensamiento que, sin negar otras fuentes, puede situarse en una línea genealógica que se extiende desde los griegos clásicos hasta la actualidad, transitando principalmente por los ya mencionados Platón, Aristóteles, Tomás de Aquino, Francisco Suárez, Spinoza, Hegel, Marx y Bueno, entre muchos otros autores y pensadores antiguos y contemporáneos.
 
 Nos consideramos a la vanguardia de ese linaje. No renegamos de nuestra historia sino que reivindicamos este legado que hemos heredado y lo estudiamos en profundidad, junto con su historia, sus aportes y sus categorías fundamentales, para luego asimilarlos, aplicarlos, desarrollarlos y entretejerlos dialécticamente con lo más avanzado y racional de las ciencias y las humanidades actuales.
 
 No pretendemos «modernizar» la escolástica ni de construir un tomismo de izquierda, simplemente reconocemos que nuestra propia tradición de pensamiento hispano católico contiene elementos potentemente racionales, sistemáticos, políticos y realista-materialistas que pueden y deben integrarse en una concepción filosófica colombiana e Iberófona del presente.
 
 Si quieres profundizar más en nuestro Materialismo Político te recomendamos las siguientes lecturas:</p>
-          <p data-i18n="programa.mat.body-3">La implantación política de nuestra doctrina ha de ser desde el poder del Estado, en todas sus capas y ramas, para que adquiera un carácter secular y trascendental, que acabe con la hegemonía del liberalismo producto del idealismo de raíz protestante, kantiano y burgués.
+          <p class="prog-mat__body prog-mat__body--wide" data-i18n="programa.mat.body-3">La implantación política de nuestra doctrina ha de ser desde el poder del Estado, en todas sus capas y ramas, para que adquiera un carácter secular y trascendental, que acabe con la hegemonía del liberalismo producto del idealismo de raíz protestante, kantiano y burgués.
 
 Nos oponemos al idealismo, al gnosticismo, al postmodernismo, al irracionalismo, al espiritualismo y al deísmo en cualquiera de sus vertientes. Somos ateos católicos, siendo ateo el sustantivo y católico el adjetivo. Reivindicamos el contexto cultural católico en que nos desarrollamos y, sin el cual, no pueden entenderse ni Colombia ni la Iberofonía.
 
 Nuestro materialismo político es solidario del socialismo, pues solo desarrollando un modelo socialista de sociedad nuestra doctrina se puede implantar. Entendemos nuestro socialismo como un periodo de transición entre capitalismo y comunismo. No somos anticapitalistas, sino postcapitalistas. No queremos destruir el capital sino ponerlo al servicio de la clase trabajadora colombiana hasta superarlo dialecticamente.</p>
+                    <p class="prog-mat__body prog-mat__body--compact" data-i18n="programa.mat.body-compact.0">La implantación política de nuestra doctrina ha de ser desde el poder del Estado, en todas sus capas y ramas, para que adquiera un carácter secular y trascendental, que acabe con la hegemonía del idealismo kantiano capitalista burgués.</p>
+          <p class="prog-mat__body prog-mat__body--compact" data-i18n="programa.mat.body-compact.1">Nos oponemos al idealismo, al gnosticismo, al postmodernismo, al irracionalismo, al espiritualismo y al deísmo en cualquiera de sus vertientes. Somos ateos católicos, siendo ateo el sustantivo y católico el adjetivo. Reivindicamos el contexto cultural católico en que nos desarrollamos y, sin el cual, no pueden entenderse ni la Iberofonía ni España.</p>
+          <p class="prog-mat__body prog-mat__body--compact" data-i18n="programa.mat.body-compact.2">Nuestro materialismo político es solidario del socialismo, pues solo desarrollando un modelo socialista de sociedad nuestra doctrina se puede implantar. Entendemos nuestro socialismo como un periodo de transición entre capitalismo y comunismo. No somos anticapitalistas, sino postcapitalistas.</p>
         </div>
       </div>
     </section>
@@ -249,7 +270,7 @@ Se fomentará en las escuelas una educación materialista compatible con  asigna
               <p data-i18n="programa.point-9.body">Centralización de las competencias en educación y sanidad. Tarjeta única de la  Seguridad Social para toda España, compartición de los expedientes  sanitarios de todos los españoles en todos los centros sanitarios de la  Nación. Ampliación de las patologías de salud dental cubiertas por la  Seguridad Social. Mejora en la contratación de personal sanitario y en  la gestión de los plazos de atención médica. Ampliación de la plantilla  en las especialidades con listas de espera más largas en la Seguridad  Social. Producción y distribución, a través del sistema sanitario del  Estado, de gafas. Sistema y programa educativo único en todas las  asignaturas y en todos los cursos, mediante Ley Orgánica. Modernización  de la Formación Profesional española para adecuarla a las necesidades  del mercado laboral actual. Docencia de Formación y Orientación Laboral  en todas las ramas del sistema educativo. Defensa de la Educación  Pública de calidad, aumento del presupuesto estatal destinado a su  desarrollo, apoyando mediante becas y ayudas a los estudiantes con  mayores necesidades económicas y que más se esfuercen en los estudios  sacando mejores notas. Reforzamiento institucional de la figura del  profesor y de su autoridad en el aula. Obligatoriedad de uniforme  escolar en todas las etapas formativas, salvo la Universitaria, para  igualar a los alumnos entre sí. Establecimiento de un sistema iberófono  de intercambio de estudiantes mayores de 18 años. Fin de la desigualdad  en las oposiciones a funcionariado: única convocatoria a nivel nacional y sin contar la lengua regional como mérito para conseguir la plaza.</p>
             </article>
           </div>
-          <a class="btn btn--primary btn--m cta" href="unete.html" data-i18n="programa.cta">Únete a Vanguardia Colombiana</a>
+          <a class="btn btn--primary btn--m cta" href="unete.html" data-i18n="programa.cta">Únete</a>
           </div>
         </div>
       </div>

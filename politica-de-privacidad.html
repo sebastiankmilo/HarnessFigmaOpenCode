@@ -6,6 +6,7 @@
   <title data-i18n="politica-de-privacidad.meta.title">Política de privacidad — Vanguardia Colombiana</title>
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
   <link rel="stylesheet" href="styles/politica-de-privacidad.css">
 </head>
 <body>
@@ -67,7 +68,7 @@
         <img src="assets/icons/close.png" alt="">
       </button>
       <div class="site-nav__menu-content">
-        <a href="index.html"><img class="site-nav__menu-logo" src="assets/icons/logo-color.png" alt="Vanguardia Colombiana"></a>
+        <a href="index.html"><img class="site-nav__menu-logo" src="assets/icons/logo-menu.png" alt="Vanguardia Colombiana"></a>
         <nav class="site-nav__menu-links" aria-label="Menú">
           <a href="programa.html" data-i18n="common.nav.programa">Programa</a>
           <a href="decalogo.html" data-i18n="common.nav.decalogo">Decálogo</a>
@@ -85,6 +86,11 @@
           <a href="https://x.com/VanguardiaColo" target="_blank" rel="noopener noreferrer"><img src="assets/icons/x.png" alt="X"></a>
           <a href="https://www.tiktok.com/@lavanguardiacolombiana" target="_blank" rel="noopener noreferrer"><img src="assets/icons/tik-tok.png" alt="TikTok"></a>
         </div>
+        <div class="site-nav__menu-lang" role="group" aria-label="Idioma">
+          <button class="site-nav__lang-btn is-active" type="button" data-lang="es" aria-pressed="true">ES</button>
+          <span class="site-nav__lang-sep" aria-hidden="true">/</span>
+          <button class="site-nav__lang-btn" type="button" data-lang="pt" aria-pressed="false">PT</button>
+        </div>
       </div>
     </div>
   </header>
@@ -95,17 +101,19 @@
         <div class="privac__inner">
           <h1 data-i18n="politica-de-privacidad.title">Política de privacidad</h1>
           <div class="privac__body">
-            <p class="privac__legal" data-i18n="politica-de-privacidad.legal">Esta página web es propiedad de Asociación cultural Vanguardia Española (en  adelante nos referiremos a la Asociación cultural Vanguardia Española  como ‘Vanguardia Española’), asociación sin ánimo de lucro declarada de  utilidad pública con sede social en la calle C/ 15 de agosto, número 11, 3º A - 28026 MADRID (Madrid).
-Condiciones Generales de uso de www.vanguardiaespañola.com
-Estas son las Condiciones Generales que regulan el uso del Sitio Web www.vanguardiaespañola.com (en adelante Sitio Web) que Vanguardia Española pone a su disposición como Usuario.
-La utilización del Sitio Web supone la plena aceptación por el Usuario de  todas las Condiciones Generales de Uso del Sitio Web vigentes en el  momento en el que el Usuario acceda al mismo, por lo que si éste no está de acuerdo con el mismo, no deberá hacer uso del Sitio Web. Vanguardia  Española se reserva el derecho de modificar en cualquier momento las  presentes Condiciones Generales de Uso así como cualesquiera otras  condiciones generales o particulares, reglamentos de uso, instrucciones o avisos que resulten de aplicación. Así mismo, se reserva el derecho de  suspender, interrumpir o dejar de operar el Sitio Web en cualquier  momento.
-El acceso al Sitio Web por parte de los Usuarios tiene carácter libre y  gratuito, no obstante, algunos de los servicios ofrecidos por Vanguardia Española pueden encontrarse sujetos a Condiciones Particulares, en cuyo caso se pondrán a su disposición en todo momento.
-El acceso, navegación y uso del Sitio Web es responsabilidad del Usuario,  por lo que éste se compromete a usar los contenidos de forma diligente,  correcta y lícita.
-Datos de Vanguardia Española:
-Denominación: Vanguardia Española
-Dirección: C/ 15 de agosto, 11, 3º A - 28026 MADRID (Madrid)
-Correo electrónico: contacto@xn--vanguardiaespaola-sxb.com
-CIF/NIF: G-42713784</p>
+            <div class="privac__legal">
+            <p data-i18n="politica-de-privacidad.legal.0">Esta página web es propiedad de Asociación cultural Vanguardia Española (en  adelante nos referiremos a la Asociación cultural Vanguardia Española  como ‘Vanguardia Española’), asociación sin ánimo de lucro declarada de  utilidad pública con sede social en la calle C/ 15 de agosto, número 11, 3º A - 28026 MADRID (Madrid).</p>
+            <p data-i18n="politica-de-privacidad.legal.1">Condiciones Generales de uso de www.vanguardiaespañola.com</p>
+            <p data-i18n="politica-de-privacidad.legal.2">Estas son las Condiciones Generales que regulan el uso del Sitio Web www.vanguardiaespañola.com (en adelante Sitio Web) que Vanguardia Española pone a su disposición como Usuario.</p>
+            <p data-i18n="politica-de-privacidad.legal.3">La utilización del Sitio Web supone la plena aceptación por el Usuario de  todas las Condiciones Generales de Uso del Sitio Web vigentes en el  momento en el que el Usuario acceda al mismo, por lo que si éste no está de acuerdo con el mismo, no deberá hacer uso del Sitio Web. Vanguardia  Española se reserva el derecho de modificar en cualquier momento las  presentes Condiciones Generales de Uso así como cualesquiera otras  condiciones generales o particulares, reglamentos de uso, instrucciones o avisos que resulten de aplicación. Así mismo, se reserva el derecho de  suspender, interrumpir o dejar de operar el Sitio Web en cualquier  momento.</p>
+            <p data-i18n="politica-de-privacidad.legal.4">El acceso al Sitio Web por parte de los Usuarios tiene carácter libre y  gratuito, no obstante, algunos de los servicios ofrecidos por Vanguardia Española pueden encontrarse sujetos a Condiciones Particulares, en cuyo caso se pondrán a su disposición en todo momento.</p>
+            <p data-i18n="politica-de-privacidad.legal.5">El acceso, navegación y uso del Sitio Web es responsabilidad del Usuario,  por lo que éste se compromete a usar los contenidos de forma diligente,  correcta y lícita.</p>
+            <p data-i18n="politica-de-privacidad.legal.6">Datos de Vanguardia Española:</p>
+            <p data-i18n="politica-de-privacidad.legal.7">Denominación: Vanguardia Española</p>
+            <p data-i18n="politica-de-privacidad.legal.8">Dirección: C/ 15 de agosto, 11, 3º A - 28026 MADRID (Madrid)</p>
+            <p data-i18n="politica-de-privacidad.legal.9">Correo electrónico: contacto@xn--vanguardiaespaola-sxb.com</p>
+            <p data-i18n="politica-de-privacidad.legal.10">CIF/NIF: G-42713784</p>
+          </div>
             <a class="btn btn--primary btn--m cta" href="index.html" data-i18n="politica-de-privacidad.cta">Inicio</a>
           </div>
         </div>

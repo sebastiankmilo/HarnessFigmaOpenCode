@@ -135,62 +135,12 @@
   font-size: var(--font-size-xs-h1);
 }
 
-/* El índice lateral no existe en `xs` */
-.page-index {
-  display: none;
-}
-
-/* ── Contenido compartido de las pantallas de puntos ───────────── */
+/* `.points`, `.point`, `.cta` y `.page-index` son componentes compartidos
+   con Decálogo: viven en styles/components.css. Aquí solo queda el margen
+   contextual de la lista — en Programa va tras el `<h2>` de la sección y
+   necesita el hueco (en Decálogo no hay título y por eso no lo lleva). */
 .points {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
   margin-top: var(--space-5);
-}
-
-.point {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.point h3 {
-  font-size: var(--font-size-xs-h3);
-}
-
-.point p {
-  font-size: var(--font-size-body-base);
-  line-height: var(--line-height-lead);
-  color: var(--color-text-secondary);
-  white-space: pre-line;
-}
-
-.cta {
-  margin-top: var(--space-6);
-}
-
-/* ── Medias del wireframe (rellenos y etiqueta centrada) ───────── */
-.media--4-3 {
-  aspect-ratio: 4 / 3;
-}
-
-.media--square,
-.media--square-sm {
-  aspect-ratio: 1 / 1;
-}
-
-.media--strong {
-  background: var(--color-surface-strong);
-}
-
-.media--muted {
-  background: var(--color-surface-muted);
-}
-
-.media--center .media__label {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /* ── `sm` (768) — tablet ───────────────────────────────────────── *
@@ -332,28 +282,176 @@
     font-size: var(--font-size-l-h1-xl);
   }
 
-  .page-index {
-    display: flex;
-    flex-direction: column;
-    gap: var(--index-link-gap);
-    /* El índice permanece visible y lo que se mueve es el texto (como el
-     * índice lateral de la doc de UIkit): se ancla bajo la nav sticky. */
-    position: sticky;
-    top: calc(var(--nav-height-reduced) + var(--space-5));
-    align-self: flex-start;
-    flex: 0 1 var(--index-column-basis);
-    font-size: var(--font-size-body-s);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-body);
-  }
-
-  .point h3 {
-    font-size: var(--font-size-l-h1);
-  }
-
   /* `2331:4699` mide 1225 px: Figma aplica `paragraphSpacing` al salto de
    * párrafo y CSS no puede expresarlo dentro de un mismo <p>. */
   .prog-points .point:nth-child(3) p {
     min-height: var(--point-body-box-lg);
+  }
+}
+
+/* ── `xs` (375) — frame `2396:104` ──────────────────────────────── *
+ * El diseño definitivo acorta el header (copia compacta, 16:9), quita los
+ * cuatro desarrollos de ejes (queda el intro sobre la imagen) y deja solo
+ * las tres conclusiones de materialismo; los puntos ya usan la tipografía
+ * compartida de `.point`. */
+@media (max-width: 767px) {
+  .prog-hero__grid {
+    padding-block: var(--space-6);
+  }
+
+  .prog-hero .media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .prog-hero .media .media__img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .prog-hero h1 {
+    font-size: var(--font-size-display-hero-compact);
+    line-height: var(--line-height-display-hero-compact);
+    letter-spacing: var(--tracking-display-hero-compact);
+  }
+
+  .prog-hero__title--wide,
+  .prog-hero__lead--wide {
+    display: none;
+  }
+
+  .prog-hero__title--compact,
+  .prog-hero__lead--compact {
+    display: block;
+  }
+
+  /* Ejes: imagen 337×337 detrás del título/intro; el texto mide 337. */
+  .prog-ejes__inner {
+    position: relative;
+    display: block;
+    padding-block: var(--space-6);
+  }
+
+  /* El `components/images` de 337×337 está oculto en el render de Figma:
+   * el export de `2396:2416` solo muestra título + intro. */
+  .prog-ejes .media {
+    display: none;
+  }
+
+  .prog-ejes__text {
+    position: relative;
+    z-index: 1;
+    width: var(--prog-ejes-media-size-xs);
+  }
+
+  .prog-ejes h2 {
+    font-size: var(--font-size-xs-h1-xl);
+    letter-spacing: var(--tracking-display-compact);
+  }
+
+  .prog-ejes__title--wide,
+  .prog-ejes__body--wide {
+    display: none;
+  }
+
+  .prog-ejes__title--compact,
+  .prog-ejes__body--compact {
+    display: block;
+  }
+
+  .prog-ejes .prog-ejes__body--compact {
+    margin-top: var(--space-4);
+    white-space: pre-line;
+  }
+
+  /* Materialismo: dos imágenes 163 en fila, lead compacto y solo body-3. */
+  .prog-mat {
+    padding-block: var(--space-6) var(--space-7);
+  }
+
+  .prog-mat__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--prog-mat-media-gap-xs);
+    row-gap: var(--space-5);
+  }
+
+  .prog-mat__lead {
+    grid-column: 1 / -1;
+  }
+
+  .prog-mat__lead h2 {
+    font-size: var(--font-size-xs-h1-xl);
+    letter-spacing: var(--tracking-display-compact);
+  }
+
+  .prog-mat__title--wide,
+  .prog-mat__lead-text--wide,
+  .prog-mat__body--wide {
+    display: none;
+  }
+
+  .prog-mat__title--compact,
+  .prog-mat__lead-text--compact,
+  .prog-mat__body--compact {
+    display: block;
+  }
+
+  .prog-mat__text {
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .prog-mat__body--compact {
+    position: relative;
+    padding-left: var(--prog-mat-bullet-indent-xs);
+    white-space: pre-line;
+  }
+
+  .prog-mat__body--compact::before {
+    content: "•";
+    position: absolute;
+    top: 0;
+    left: var(--prog-mat-bullet-left-xs);
+    color: var(--color-text-secondary);
+  }
+}
+
+@media (min-width: 768px) {
+  .prog-hero__title--compact,
+  .prog-hero__lead--compact,
+  .prog-ejes__title--compact,
+  .prog-ejes__body--compact,
+  .prog-mat__title--compact,
+  .prog-mat__lead-text--compact,
+  .prog-mat__body--compact {
+    display: none;
+  }
+
+  .prog-hero__title--wide,
+  .prog-hero__lead--wide,
+  .prog-ejes__title--wide,
+  .prog-ejes__body--wide,
+  .prog-mat__title--wide,
+  .prog-mat__lead-text--wide,
+  .prog-mat__body--wide {
+    display: block;
+  }
+}
+
+
+/* `sección-puntos` en xs (`2396:2437`): título 41 y CTA «Únete» 107×47. */
+@media (max-width: 767px) {
+  .prog-points {
+    padding-block: var(--space-6) var(--space-7);
+  }
+
+  .prog-points h2 {
+    font-size: var(--font-size-xs-h1-xl);
+    letter-spacing: var(--tracking-display-compact);
+  }
+
+  .prog-points .cta {
+    margin-top: var(--space-5);
   }
 }

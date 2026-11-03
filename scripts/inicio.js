@@ -1,16 +1,23 @@
 (function () {
   const dialog = document.querySelector(".dialog");
   const cards = Array.prototype.slice.call(document.querySelectorAll(".goal-card"));
-  const closeButton = dialog ? dialog.querySelector(".dialog__close") : null;
   const dialogTitle = dialog ? dialog.querySelector(".dialog__title") : null;
   const dialogContent = dialog ? dialog.querySelector(".dialog__content") : null;
 
-  if (!dialog || !cards.length || !closeButton) return;
+  if (!dialog || !cards.length) return;
 
-  // `inicio.dialog` (objetivo 1 conserva su key original) y `inicio.dialog-N`
-  // para el resto: título + `body-1..body-N` desarrollados en content/es.json.
+  // Modal de UIkit: gestiona apertura/cierre, Escape, clic en el backdrop,
+  // foco (trampa y retorno) y el bloqueo del scroll. El contenido se rellena
+  // antes de `show()` porque depende de la card pulsada.
+  const modal = window.UIkit && window.UIkit.modal
+    ? window.UIkit.modal(dialog, { bgClose: true, escClose: true })
+    : null;
+  if (!modal) return;
+
+  // Un objetivo = un objeto `inicio.goals.card-N`: `title`, `body-small`
+  // (extracto de la card) y `body-complete` (array de párrafos del modal).
   function prefixFor(index) {
-    return index === 0 ? "inicio.dialog" : "inicio.dialog-" + (index + 1);
+    return "inicio.goals.card-" + (index + 1);
   }
 
   function lookup(data, key) {
@@ -55,109 +62,35 @@
 
     if (dialogTitle) {
       const title = block && typeof block.title === "string" ? block.title : null;
-      dialogTitle.setAttribute("data-i18n", title ? prefix + ".title" : "inicio.goals.card-" + (index + 1) + ".title");
+      dialogTitle.setAttribute("data-i18n", prefix + ".title");
       dialogTitle.textContent = title || cardTitle.textContent;
     }
 
-    const bodyKeys = block
-      ? Object.keys(block)
-          .filter(function (key) {
-            return /^body-\d+$/.test(key);
-          })
-          .sort()
-      : [];
+    // `body-complete` es el array de párrafos del modal; se publica cada uno
+    // con su índice para que i18n lo vuelva a traducir en runtime.
+    const bodies =
+      block && Array.isArray(block["body-complete"]) ? block["body-complete"] : null;
 
-    if (bodyKeys.length) {
+    if (bodies && bodies.length) {
       setParagraphs(
-        bodyKeys.map(function (key) {
-          return prefix + "." + key;
+        bodies.map(function (_, i) {
+          return prefix + ".body-complete." + i;
         }),
-        bodyKeys.map(function (key) {
-          return block[key];
-        })
+        bodies
       );
     } else {
       // Sin diccionario todavía (fetch pendiente o fallado): el texto de la card.
-      setParagraphs(
-        ["inicio.goals.card-" + (index + 1) + ".body"],
-        [cardBody ? cardBody.textContent : ""]
-      );
+      setParagraphs([prefix + ".body-small"], [cardBody ? cardBody.textContent : ""]);
     }
   }
-
-  let lastFocused = null;
-
-  function focusables() {
-    return Array.prototype.slice
-      .call(dialog.querySelectorAll("a[href], button:not([disabled])"))
-      .filter(function (el) {
-        return el.offsetParent !== null;
-      });
-  }
-
-  function onKeydown(event) {
-    if (event.key === "Escape") {
-      close();
-      return;
-    }
-    if (event.key !== "Tab") return;
-
-    const items = focusables();
-    if (!items.length) return;
-
-    const first = items[0];
-    const last = items[items.length - 1];
-
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var closeTimer = null;
 
   function open(card) {
-    lastFocused = card;
-    // Texto del diálogo = `inicio.dialog-N` del JSON (el objetivo 1 conserva
-    // `inicio.dialog`); el título y los cuerpos salen del catálogo activo para
-    // que ya salgan en el idioma en curso. Si el JSON aún no está cargado, se
-    // recurre al texto de la propia card.
     const index = cards.indexOf(card);
     if (index !== -1) fillDialog(card, index);
-    if (closeTimer) {
-      clearTimeout(closeTimer);
-      closeTimer = null;
-    }
-    dialog.hidden = false;
-    dialog.setAttribute("aria-hidden", "false");
-    document.addEventListener("keydown", onKeydown);
-    // Fade del backdrop y del panel (nota 4649:2017) en el siguiente frame
-    requestAnimationFrame(function () {
-      dialog.classList.add("is-open");
-    });
-    closeButton.focus();
-  }
-
-  function close() {
-    dialog.classList.remove("is-open");
-    document.removeEventListener("keydown", onKeydown);
-    if (lastFocused && typeof lastFocused.focus === "function") {
-      lastFocused.focus();
-    }
-    if (reduceMotion.matches) {
-      dialog.hidden = true;
-      dialog.setAttribute("aria-hidden", "true");
-      return;
-    }
-    closeTimer = setTimeout(function () {
-      dialog.hidden = true;
-      dialog.setAttribute("aria-hidden", "true");
-      closeTimer = null;
-    }, 300);
+    // UIkit usa `target` para devolver el foco al cerrar (y sincronizar
+    // `aria-expanded` si la card lo declara).
+    modal.target = card;
+    modal.show();
   }
 
   cards.forEach(function (card) {
@@ -171,8 +104,6 @@
       }
     });
   });
-
-  closeButton.addEventListener("click", close);
 })();
 
 /* Carruseles de «Nuestros objetivos» y «La Materia Prima».

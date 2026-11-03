@@ -9,7 +9,7 @@
 
   // Diccionario del locale activo, en memoria. Lo necesitan los componentes
   // que generan markup en runtime (el diálogo de objetivos lee
-  // `inicio.dialog-N`), que no pueden esperar a que alguien cambie de idioma.
+  // `inicio.goals.card-N`), que no pueden esperar a que alguien cambie de idioma.
   var currentData = null;
 
   function getData() {
