@@ -204,10 +204,11 @@
   --dialog-panel-width-sm: 90%;
   --dialog-panel-height-sm: 90%;
   --dialog-cta-width-sm: 266px;
-  /* Modal de mobile (`2404:3499`, 343×1095): panel más alto que el viewport;
-     el overlay scrollea y el cuerpo tiene 636 de hueco. */
-  --dialog-panel-width-xs: 343px;
-  --dialog-panel-height-xs: 1095px;
+  /* Modal de mobile: el frame medía 343×1095, pero desde 2026-11-03 el panel
+     ocupa el 90% del ancho y el 90% del alto del viewport; el cuerpo scrollea
+     si el texto no cabe. */
+  --dialog-panel-width-xs: 90%;
+  --dialog-panel-height-xs: 90%;
   --dialog-cta-width-xs: 297px;
   --dialog-cta-height-xs: 54px;
   --dialog-cta-size-xs: 20.2px;
