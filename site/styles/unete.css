@@ -12,3 +12,25 @@
 .join-block--surface {
   background: var(--color-surface-page);
 }
+
+/* `xs` (`2396:2712`, 375×739): padding 48, video 341,079×216 con play,
+ * título→párrafo 8 y bloque de texto 395. La copia del body es la corta de
+ * Figma, con «Agradecemos tu interés.» dentro del mismo párrafo. */
+@media (max-width: 767px) {
+  .join-block--surface {
+    padding-block: var(--space-6);
+  }
+
+  .join-block--surface .media--3-2 {
+    aspect-ratio: var(--join-media-aspect-xs);
+  }
+
+  .join-block--surface .join-block__text p {
+    margin-top: var(--space-1);
+  }
+
+  .join-block--surface .media__play {
+    width: var(--join-play-size);
+    transform: translate(-50%, -50%);
+  }
+}

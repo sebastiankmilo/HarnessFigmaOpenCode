@@ -2,7 +2,8 @@
  * Spec: specs/pages/politica-de-privacidad.md · valores: solo styles/tokens.css
  * Frames: `2335:1533` (1448) y `2396:2820` (375, leído 2026-10-04).
  * Mobile-first: base = 375 · `min-width: 1448px` = escritorio.
- * El bloque `.join-block` (no usado aquí) y el nav/footer viven en main.css.
+ * El bloque `.join-block` (no usado aquí), el nav y el footer viven en
+ * styles/components.css.
  */
 
 /* ── 2 — sección-puntos (`2396:2885`) ──────────────────────────── */
@@ -26,14 +27,24 @@
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
+  white-space: normal;
+}
+
+/* Los párrafos son bloques: conservan los espacios dobles del texto legal
+ * sin que los saltos de línea del HTML metan líneas fantasma en el bloque. */
+.privac__legal p {
   white-space: pre-wrap;
 }
 
 /* «Volver al inicio»: en `lg` y `xs` Figma no le asigna reacción
    (PENDIENTE-FIGMA), pero en `sm` sí — `2421:1352` → NAVIGATE `268:3128`
-   (specs/pages/politica-de-privacidad.md §sm) → se implementa como enlace. */
+   (specs/pages/politica-de-privacidad.md §sm) → se implementa como enlace.
+   `.cta` (components.css) lleva `margin-top: var(--space-6)` para el cierre
+   de la sección de puntos de Programa/Decálogo; aquí el hueco lo da el gap
+   de `.privac__body`, así que se anula. */
 .cta {
   align-self: flex-start;
+  margin-top: 0;
 }
 
 /* ── `sm` (768) — tablet ───────────────────────────────────────── *
@@ -59,5 +70,22 @@
 
   .privac__legal {
     min-height: var(--legal-height);
+  }
+}
+
+/* `xs` (`2396:2885`, 375×2134): título 41, párrafos legales como bloques con
+ * 16 de separación (el texto de Figma usa paragraph spacing) y 32 entre el
+ * bloque legal y el CTA. */
+@media (max-width: 767px) {
+  .privac h1 {
+    font-size: var(--font-size-xs-h1-xl);
+  }
+
+  .privac__body {
+    gap: var(--space-5);
+  }
+
+  .privac__legal p + p {
+    margin-top: var(--space-3);
   }
 }

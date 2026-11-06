@@ -1,7 +1,10 @@
 # Reglas del proyecto — Página web Vanguardia Colombiana
 
+- Cada vez que hagas un html que guardes dentro de un tmp hazle un llms.txt en el html de la siguiente forma: agrega a ese html un <script type="text/plain" id="llms.txt"> llms.txt </script> que seria la info del html pero siguiendo el estandar llms.txt
+
 ## Contexto
-Sitio estático vanilla (HTML/CSS/JS) en `site/`. Sin framework ni build step.
+Sitio estático vanilla (HTML/CSS/JS) en `site/`. Sin framework: el único paso de
+build es `node scripts/inject-content.mjs` (copy, copia en `pt/`, SEO, sitemap).
 El diseño vive en Figma. **Nunca modificar el Figma.**
 - Cada pantalla es `site/<pagina>.html`, con su spec homónima en
   `Especificaciones/design specs/pages/<pagina>.md` (p. ej. `site/unete.html` ↔
@@ -15,13 +18,29 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
 ## Diseño → código
 - Fuente de verdad visual: `site/styles/tokens.css`. PROHIBIDO hardcodear
   colores hex, px de espaciado, fuentes o radios fuera de tokens.
-- Fuente de verdad del copy: `site/content/*.json` (un archivo por idioma; hoy
-  solo `es.json`). PROHIBIDO escribir o editar textos visibles en los HTML: el
-  copy se escribe en el JSON (claves namespaced `pagina.seccion.campo`, y
-  `common.*` para nav/menú/footer) y en el HTML solo va el placeholder
-  `{{clave}}` con su atributo `data-i18n="clave"`. El texto se aplica con
-  `node scripts/inject-content.mjs` (corre solo en cada deploy vía
-  `scripts/deploy-pages.sh`). Gemela de la regla de tokens.
+- Fuente de verdad del copy: `site/content/<locale>.json` (un archivo por
+  idioma: `es.json` y `pt.json`, hoy con las mismas claves — el build falla si
+  divergen). PROHIBIDO escribir o editar textos visibles en los HTML: el copy se
+  escribe en el JSON (claves namespaced `pagina.seccion.campo`, y `common.*`
+  para nav/menú/footer) y en el HTML queda ya inyectado con su atributo
+  `data-i18n="clave"`. El build es `node scripts/inject-content.mjs` (corre solo
+  en cada deploy vía `scripts/deploy-pages.sh`) y hace cuatro cosas:
+  inyecta el copy del locale base en `site/<pagina>.html`, genera la copia en
+  `site/pt/<pagina>.html` (mismo marcado, rutas con `../`, `hreflang` y selector
+  de idioma como enlaces), escribe el bloque de metadatos SEO entre los
+  marcadores `@seo:start`/`@seo:end`, y regenera `robots.txt` + `sitemap.xml`.
+  Es idempotente: lo generado entre marcadores se reemplaza entero, y los
+  metadatos se editan en `content/seo.json` (no traducible) o en
+  `<pagina>.meta.title` / `<pagina>.meta.description` de cada `*.json`.
+  Gemela de la regla de tokens.
+- Cambio de idioma: el selector son **enlaces reales** (con `href` y `hreflang`,
+  para que cada idioma tenga URL propia e indexable). `scripts/i18n.js` intercepta
+  el clic: sustituye el texto en su sitio y actualiza la URL con `pushState`, así
+  que **no hay recarga ni salto de scroll**; Atrás/Adelante reaplican el idioma.
+  Sin JS, o si falla el catálogo, el enlace navega a la versión traducida.
+- SEO: la URL pública vive en `content/seo.json` → `baseUrl`. Si cambia el
+  dominio, se cambia ahí y se reconstruye; nunca se escribe una URL absoluta a
+  mano en un HTML.
 - El diseño se trabaja sobre la COPIA propia en Drafts (FILE_KEY local
   documentado en
   `Especificaciones/docs/Web/tickets/1-flujo-desarrollo-con-figma/entregables/flujo-figma-opencode.md`).
@@ -97,6 +116,13 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
 - Verificación visual obligatoria a 1448 y 375 (mismo ancho que los frames de
   Figma para comparar 1:1).
 - Accesibilidad obligatoria: foco visible, contraste AA, `prefers-reduced-motion`.
+- Navegación entre páginas: el sitio es multipágina a propósito. El fundido de
+  entrada/salida lo da `@view-transition { navigation: auto }` en `main.css`
+  (dentro de `prefers-reduced-motion: no-preference`) y
+  `scripts/navigation.js` prerenderiza los enlaces locales con
+  `speculationrules` al pasar el cursor. Nada de eso cambia el HTML servido ni
+  el SEO, y sin soporte del navegador la navegación es la de siempre: no se
+  añade un router ni se convierte el sitio en una SPA.
 
 ## Verificación (obligatoria antes de dar una sección por terminada)
 1. `npm test` desde `tests/` genera las capturas en

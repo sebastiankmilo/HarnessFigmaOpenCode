@@ -5,64 +5,86 @@
  * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = escritorio.
  */
 
-/* ── 2 — encabezado-contenido (`2392:3972`) ─────────────────────── */
+/* ── 2 — encabezado-contenido (`2392:3972` / `2408:1567`) ───────── *
+ * xs: media a sangre 16:9 pegada al nav (`4440:2696` 375×211.5), sin
+ * banda gris; sm: media 768×433.2 (`4436:2536`). Fondo de página. */
 .hero {
-  padding-block: var(--space-7);
-  background: var(--color-surface-muted);
+  padding-bottom: var(--space-7);
+  background: var(--color-surface-page);
+}
+
+.hero__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* A <1448 la media es el recorte exportado del diseño
+   (`hero-media-compact.png`, nodo `4436:2536`) */
+.hero picture {
+  display: contents;
+}
+
+.hero__text {
+  margin-top: var(--space-5); /* hueco media → texto (312.5−280.5 en xs, 465.2−433.2 en sm) */
 }
 
 .hero h1 {
-  font-size: var(--font-size-xs-h1-xxl);
+  font-size: var(--font-size-display-hero-compact);
+  line-height: var(--line-height-display-hero-compact);
+  letter-spacing: var(--tracking-display-hero-compact);
 }
 
 .hero p {
-  margin-top: var(--space-4);
-  font-size: var(--font-size-body-m);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
+/* Lead corto en xs/sm (frames `2392:3975` y `2408:1570`) y lead largo en
+ * lg (`2325:3793`). El contenido cambia por breakpoint, no solo el tamaño. */
+.hero__lead--wide,
+.section-intro__lead--wide {
+  display: none;
+}
+
+/* xs: botones apilados y alineados a la izquierda (`2392:3976` 359×110) */
 .hero__actions {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-3);
-  margin-top: var(--space-header-cta);
+  margin-top: var(--space-5);
 }
 
-/* ── 3 — bloque de vídeo (`2396:2407`) ──────────────────────────── */
+/* ── 3 — bloque de vídeo (`2396:2407` xs, `2408:1585` sm) ────────── */
 .video {
   padding-block: var(--space-6);
-  background: var(--color-video-band);
+  background: var(--color-video-band-compact);
 }
 
-/* Fachada del vídeo: la portada (`video-cover.png`) es ya la captura del
- * reproductor y es lo que mide el baseline, así que se mantiene intacta. El
- * enlace cubre `.media` y solo inyecta el iframe de YouTube al hacer clic
- * (scripts/enlaces.js). */
-.video__play {
-  position: absolute;
-  inset: 0;
-}
+/* Reproductor de YouTube incrustado: el `.media` hace de marco 16/9 y
+ * `components.css` (`.media__iframe`) lo estira al hueco. `loading="lazy"`
+ * evita que el reproductor retrase el primer render. */
 
-.video__player iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* ── 4 — seccion-objetivos (`2392:3995`) ────────────────────────── */
+/* ── 4 — seccion-objetivos (`2392:3995` / `2408:1650`) ──────────── */
 .section-intro h2 {
-  font-size: var(--font-size-xs-h1);
+  font-size: var(--font-size-xs-h1-xl); /* 41 (Bebas) — `2392:3997`, `2408:1652` */
+  letter-spacing: var(--tracking-display-compact);
 }
 
 .section-intro p {
-  margin-top: var(--space-4);
+  margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
 .goals {
   padding-block: var(--space-6);
+  background: var(--color-section-soft); /* `2392:3995` #f0ece6, también en xs/sm */
 }
 
 .goals__grid {
@@ -82,29 +104,42 @@
   display: block;
 }
 
+/* Anatomía compacta = la de lg (media rectangular a sangre, texto con
+ * inset 16): `2392:4001` (xs) y `2408:1656` (sm), foto 343/348×210. */
 .goal-card {
-  padding: var(--space-3) var(--space-3) var(--space-5);
-  background: var(--color-surface-alt);
+  padding: 0 0 var(--space-5);
+  background: var(--color-surface-page);
   cursor: pointer;
 }
 
 .goal-card__avatar {
   display: block;
-  width: var(--goal-avatar-size);
-  height: var(--goal-avatar-size);
-  border-radius: var(--radius-circle);
-  background: var(--color-avatar-placeholder);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 322 / 194;
+  border-radius: 0;
+  background: none;
+  object-fit: cover;
 }
 
 .goal-card__text {
   margin-top: var(--space-3);
+  padding-inline: var(--space-3);
 }
 
 .goal-card h3 {
-  font-size: var(--font-size-xs-h3);
+  font-size: var(--font-size-xs-h1); /* 32.4 (Bebas) — `I2408:1656;4436:2786` */
+  letter-spacing: var(--tracking-card-display);
 }
 
+/* Cuerpo corto de la card: `paragraphs/s` (16/24) recortado a 3 líneas
+ * (72 px, la caja de cuerpo del componente). El texto completo se lee en
+ * el modal, que usa `paragraphs/base` (18/30,96). */
 .goal-card p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
   margin-top: var(--space-1);
   font-size: var(--font-size-body-s);
   color: var(--color-text-secondary);
@@ -117,13 +152,21 @@
 /* ── 5 — sección-La-Materia-Prima (`2392:4053`) ─────────────────── */
 .articles {
   padding-block: var(--space-6);
-  background: var(--color-surface-strong);
-  /* Relleno IMAGE de la sección (`2328:4236`, `scaleMode: FILL` → cover).
-     El color de debajo queda como respaldo mientras carga. */
+  background-color: var(--color-materia-bg);
+  /* En xs/sm el fill IMAGE de la sección no es `cover`: es STRETCH con un
+     recorte horizontal (`imageTransform`). Se muestra la franja izquierda
+     estirada al ancho de la sección; en lg el recorte es la imagen completa
+     y vuelve a `cover`. */
   background-image: url("../assets/img/materia-prima-bg.png");
-  background-size: cover;
-  background-position: center;
+  background-size: var(--materia-bg-scale-xs) 100%;
+  background-position: left center;
   background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) and (max-width: 1447px) {
+  .articles {
+    background-size: var(--materia-bg-scale-sm) 100%;
+  }
 }
 
 .articles__grid {
@@ -144,7 +187,7 @@
 
 .article-card {
   position: relative;
-  background: var(--color-surface-alt);
+  background: var(--color-surface-page); /* `2392:4058` #fdfcfa */
   cursor: pointer;
 }
 
@@ -173,7 +216,8 @@
 }
 
 .article-card h3 {
-  font-size: var(--font-size-xs-h3);
+  font-size: var(--font-size-xs-h1); /* 32.4 (Bebas) — `I2392:4058;93:133` */
+  letter-spacing: var(--tracking-card-display);
 }
 
 .article-card p {
@@ -184,6 +228,24 @@
 
 .articles__cta {
   margin-top: var(--space-5);
+  background: var(--color-cta-default); /* `2392:4062` #ceac57 — todos los breakpoints */
+  color: var(--color-cta-hover);
+}
+
+.articles__cta:hover {
+  background: var(--color-cta-hover);
+  color: var(--color-cta-default);
+}
+
+/* Sobre la banda navy: título dorado y lead claro (`2392:4055` #ceac57,
+   `2392:4056` #fdfcfa) — en xs/sm también; en lg ya lo cubrían las reglas
+   propias de la sección. */
+.articles .section-intro h2 {
+  color: var(--color-heading-gold);
+}
+
+.articles .section-intro p {
+  color: var(--color-surface-page);
 }
 
 /* ── Carruseles: controles (`2392:4005` y `2392:4101`) ──────────── */
@@ -208,19 +270,20 @@
   gap: var(--space-3);
 }
 
-/* Colores por instancia (specs/components/dotnav.md): sobre `--color-surface`
- * los inactivos son `--color-border-soft`; sobre `--color-surface-strong`
- * («La Materia Prima», solo `xs`) los inactivos son `--color-surface-alt`. */
+/* Colores por instancia (specs/components/dotnav.md + relectura 2026-10-26):
+ * goals xs: activo #53411e (`2392:4007`), inactivos #d7d2ca;
+ * goals sm/lg: activo #65543a (`2408:1662`);
+ * «La Materia Prima»: activo #ceac57 (`2392:4103`), inactivos #fafafa. */
 .carousel__dot {
   width: var(--icon-dot);
   height: var(--icon-dot);
   padding: 0;
   border-radius: var(--radius-circle);
-  background: var(--color-border-soft);
+  background: var(--color-dot-inactive-new);
 }
 
 .carousel__dot.is-active {
-  background: var(--neutral-80);
+  background: var(--color-heading-brown);
 }
 
 .articles__pagination .carousel__dot {
@@ -228,7 +291,7 @@
 }
 
 .articles__pagination .carousel__dot.is-active {
-  background: var(--neutral-80);
+  background: var(--color-cta-default);
 }
 
 /* ── 6 — sección-únete (`2392:4114`) ────────────────────────────── */
@@ -236,18 +299,31 @@
   background: var(--color-surface-alt);
 }
 
-/* ── Objetivo-modal (`2404:3499`) ───────────────────────────────── */
+/* ── Objetivo-modal (`2404:3499`) ───────────────────────────────── *
+ * El contenedor es un Modal de UIkit (`uk-modal`, inicializado en
+ * `inicio.js`): UIkit controla `uk-open`, el foco, Escape, el clic fuera y
+ * el bloqueo del scroll. El panel lleva `uk-margin-auto-vertical` para que
+ * el componente use su rama `uk-flex` y lo centre en el viewport.
+ * La transición (nota 4649:2017) es global: backdrop de 0,3 s y fade/slide
+ * del panel en sm/xs/lg, con `uk-open` como estado que pone UIkit. */
 .dialog {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 200;
+  overflow-y: auto;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.dialog.uk-flex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.dialog[hidden] {
-  display: none;
+.dialog.uk-open {
+  background: var(--overlay-backdrop);
 }
 
 .dialog__panel {
@@ -257,6 +333,14 @@
   overflow: auto;
   padding: var(--space-8) var(--space-3) var(--space-7);
   background: var(--color-surface);
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--reveal-offset)));
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dialog.uk-open .dialog__panel {
+  opacity: 1;
+  transform: none;
 }
 
 .dialog__close {
@@ -273,12 +357,13 @@
 }
 
 .dialog__title {
-  font-size: var(--font-size-xs-h2);
+  font-size: var(--font-size-xs-h1-l);
 }
 
 .dialog__body {
   margin-top: var(--space-4);
   font-size: var(--font-size-body-base);
+  line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
   white-space: pre-wrap;
 }
@@ -289,7 +374,7 @@
   margin-top: var(--space-3);
 }
 
-/* El desarrollo de cada objetivo ocupa de 1 a 3 párrafos (`inicio.dialog-N`):
+/* El desarrollo de cada objetivo ocupa de 1 a 3 párrafos (`inicio.goals.card-N.body-complete`):
    el contenedor hereda el hueco que dejaba el primer `<p>` suelto y, en `lg`,
    limita su alto al bloque de cuerpo de Figma (`2358:1146`) para que el panel
    siga midiendo 1024×604 con texto largo (el resto se desplaza dentro). */
@@ -313,22 +398,71 @@
   margin-top: var(--space-4);
 }
 
+/* Modal de mobile (`2404:3499`): el frame medía 343×1095, pero el panel ocupa
+ * el 90% del ancho y el 90% del alto del viewport. Título y CTA quedan fijos;
+ * solo el cuerpo scrollea. El overlay no scrollea. */
+@media (max-width: 767px) {
+  .dialog.uk-flex {
+    align-items: center;
+  }
+
+  .dialog__panel {
+    display: flex;
+    flex-direction: column;
+    width: var(--dialog-panel-width-xs);
+    max-width: var(--dialog-panel-width-xs);
+    height: var(--dialog-panel-height-xs);
+    max-height: var(--dialog-panel-height-xs);
+    padding: var(--space-8) var(--space-3) var(--space-7);
+    overflow: hidden;
+  }
+
+  .dialog__close {
+    top: var(--dialog-close-top-xs);
+    right: var(--space-3);
+    width: var(--icon-dialog-close-xs);
+    height: var(--icon-dialog-close-xs);
+  }
+
+  .dialog__title {
+    flex-shrink: 0;
+    font-size: var(--dialog-title-size-xs);
+    line-height: var(--dialog-title-line-xs);
+  }
+
+  .dialog__content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    margin-top: var(--space-1);
+  }
+
+  .dialog__cta {
+    flex-shrink: 0;
+    width: var(--dialog-cta-width-xs);
+    height: var(--dialog-cta-height-xs);
+    margin-top: var(--space-5);
+    padding: var(--dialog-cta-padding-y-xs) var(--dialog-cta-padding-x-xs);
+    font-size: var(--dialog-cta-size-xs);
+    line-height: var(--dialog-cta-line-xs);
+    letter-spacing: var(--dialog-cta-tracking-xs);
+  }
+}
+
 /* ── `sm` (768) — tablet ────────────────────────────────────────── *
- * Frame `268:3128` (leído 2026-10-05): hero con padding 128, vídeo a sangre,
- * grillas de 2 columnas (gap 24) y ventana de 2 tarjetas del carrusel. */
+ * Frame `268:3128` (releído 2026-10-26): hero a sangre sin banda,
+ * vídeo a sangre, grillas de 2 columnas (gap 24) y ventana de 2
+ * tarjetas del carrusel. */
 @media (min-width: 768px) {
-  .hero {
-    padding-block: var(--space-header-sm);
+  /* xs: botones apilados; sm: en fila con gap 36 (`2408:1571` 389×47) */
+  .hero__actions {
+    margin-top: var(--space-header-cta);
   }
 
   /* Medido: media 713.32×402.35 a 27.87 del borde — se implementa al ancho del
      contenedor (720) por no existir token para ese ancho (desviación ~7 px). */
   .video {
     padding-block: 0;
-  }
-
-  .goals {
-    padding-block: var(--space-7);
   }
 
   .goals__grid {
@@ -344,36 +478,23 @@
     display: block;
   }
 
-  .goal-card {
-    padding: var(--space-4) var(--space-4) var(--space-6);
-  }
-
-  .goals__cta {
-    margin-top: var(--space-7);
-  }
-
-  .articles {
-    padding-block: var(--space-7);
-  }
-
   .articles__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
     margin-top: var(--space-5);
   }
 
-  /* El diseño `sm` dibuja 2 tarjetas y no dibuja controles (interactions.md):
-     se muestran solo las dos primeras, sea cual sea el índice. */
-  .articles__grid .article-card.is-active {
-    display: none;
-  }
-
-  .articles__grid .article-card:nth-child(-n + 2) {
+  /* Ventana de 2 tarjetas que sigue al carrusel (mismo patrón que goals,
+     `is-next` lo marca inicio.js). El diseño `sm` sí dibuja los controles
+     de esta sección (flecha + 4 puntos, baseline `268:3128`). */
+  .articles__grid .article-card.is-next {
     display: block;
   }
 
-  .articles__pagination {
-    display: none;
+  /* Punto activo de goals en sm: #65543a (`2408:1662`); el de «La Materia
+     Prima» sigue en #ceac57 por mayor especificidad de la regla base. */
+  .carousel__dot.is-active {
+    background: var(--color-dot-active);
   }
 
   .article-card__media {
@@ -385,11 +506,45 @@
   }
 
   .article-card h3 {
-    font-size: var(--font-size-l-h2);
+    font-size: var(--font-size-l-h2); /* 32.4 — mismo cuerpo que la base */
+  }
+}
+
+/* ── `sm` (768–1447) — modal de tablet (`4441:3492`) ───────────── *
+ * Panel fijo 720×624 (como el de `lg`): título y CTA no se mueven; el
+ * bloque de cuerpo tiene el alto restante y es el que scrollea si el texto
+ * no cabe. El panel nunca crece con el contenido. */
+@media (min-width: 768px) and (max-width: 1447px) {
+  .dialog__panel {
+    display: flex;
+    flex-direction: column;
+    width: var(--dialog-panel-width-sm);
+    max-width: var(--dialog-panel-width-sm);
+    height: var(--dialog-panel-height-sm);
+    max-height: var(--dialog-panel-height-sm);
+    padding: var(--space-8) var(--space-4) var(--space-7);
+    overflow: hidden;
   }
 
-  .article-card__text {
-    padding: 0 var(--space-4) var(--space-5);
+  .dialog__close {
+    top: var(--space-4);
+    right: var(--space-3);
+    width: var(--icon-dialog-close-sm);
+    height: var(--icon-dialog-close-sm);
+  }
+
+  .dialog__content {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-top: var(--space-1);
+    overflow-y: auto;
+  }
+
+  .dialog__cta {
+    flex: none;
+    align-self: flex-start;
+    min-width: var(--dialog-cta-width-sm);
+    margin-top: var(--space-5);
   }
 }
 
@@ -415,6 +570,7 @@
 
   .hero__text {
     max-width: var(--hero-text-width);
+    margin-top: 0; /* en lg la media es absoluta: no hay hueco superior */
   }
 
   .hero h1 {
@@ -430,11 +586,13 @@
   }
 
   .hero__actions {
+    flex-direction: row;
     margin-top: var(--space-5);
   }
 
   .video {
     padding-block: 0;
+    background: var(--color-video-band); /* lg: `2325:3923` #30250f */
   }
 
   .video__media {
@@ -512,7 +670,9 @@
     padding-block: var(--space-7);
     /* `background-color` y no el shorthand `background`: el shorthand
        borraría el `background-image` de la regla base. */
-    background-color: var(--color-band-dark);
+    background-color: var(--color-materia-bg);
+    background-size: cover;
+    background-position: center;
     color: var(--color-surface-page);
   }
 
@@ -593,31 +753,44 @@
     background: var(--color-hover-accent);
   }
 
-  /* Transición del modal estilo UIkit (nota 4649:2017): backdrop
-   * rgba(0,0,0,0.25) + fade del panel; open/close animado en inicio.js */
-  .dialog {
-    background: transparent;
-    transition: background 0.3s ease;
-  }
-
-  .dialog.is-open {
-    background: var(--overlay-backdrop);
-  }
-
-  .dialog__panel {
-    opacity: 0;
-    transform: translateY(calc(-1 * var(--reveal-offset)));
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .dialog.is-open .dialog__panel {
-    opacity: 1;
-    transform: none;
+  /* Hover de tarjetas (nota 4649:2012, capa `hovers` `4518:2257 ↔ 4518:2267`):
+     par default `#fdfcfa` ↔ hover `#f0ece6`. El selector lleva la sección
+     (0,3,0) porque `inicio.css` declara `.articles .article-card` (0,2,0)
+     más abajo y se lo comería un `.article-card:hover` simple. */
+  .goals .goal-card:hover,
+  .articles .article-card:hover {
+    background: var(--color-card-hover);
   }
 
   /* Slideshow de tarjetas: transición sutil tipo jitter (nota 4649:2016) */
   .goal-card,
   .article-card {
     transition: opacity 0.35s ease, background 0.4s ease;
+  }
+}
+
+/* `lg`: la copia larga de los leads (la de Figma para 1448). */
+@media (min-width: 1448px) {
+  .hero__lead--compact,
+  .section-intro__lead--compact {
+    display: none;
+  }
+
+  .hero__lead--wide,
+  .section-intro__lead--wide {
+    display: block;
+  }
+}
+
+/* `xs`: medidas del frame 375-xs que no aplican a sm/lg. */
+@media (max-width: 767px) {
+  /* La card de objetivo tiene un inset superior de 16 (`2392:4001`). */
+  .goal-card {
+    padding-top: var(--space-3);
+  }
+
+  /* La card de artículo mide 513 en `2392:4053`; el texto ya ocupa 208. */
+  .article-card {
+    min-height: var(--article-card-height-xs);
   }
 }
