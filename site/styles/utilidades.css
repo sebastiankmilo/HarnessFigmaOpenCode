@@ -1,0 +1,42 @@
+/* site/styles/utilidades.css — clases transversales de una sola declaración
+ *
+ * Una utilidad no sabe qué elemento la usa: funciona igual en un `p`, un
+ * `div` o un `button`, y su nombre no menciona ningún componente. El prefijo
+ * `u-` las distingue de un vistazo dentro de `class="…"`, igual que `js-`
+ * marca los ganchos de comportamiento e `is-` los estados transitorios.
+ *
+ * Se carga última: así gana a igual especificidad sin necesidad de `@layer`
+ * ni de `!important`.
+ *
+ * Estas cuatro reemplazan a los modificadores `--compact`/`--wide`, que no
+ * describían un estilo sino qué versión del texto se muestra en cada
+ * breakpoint (el contenido cambia por breakpoint, no solo el tamaño).
+ */
+
+/* Oculto por debajo de 768 · visible de 768 en adelante */
+@media (max-width: 767px) {
+  .u-hide-below-md {
+    display: none;
+  }
+}
+
+/* Visible por debajo de 768 · oculto de 768 en adelante */
+@media (min-width: 768px) {
+  .u-hide-above-md {
+    display: none;
+  }
+}
+
+/* Oculto por debajo de 1448 · visible de 1448 en adelante */
+@media (max-width: 1447px) {
+  .u-hide-below-lg {
+    display: none;
+  }
+}
+
+/* Visible por debajo de 1448 · oculto de 1448 en adelante */
+@media (min-width: 1448px) {
+  .u-hide-above-lg {
+    display: none;
+  }
+}

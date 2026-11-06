@@ -318,16 +318,6 @@
     letter-spacing: var(--tracking-display-hero-compact);
   }
 
-  .programa-hero__title--wide,
-  .programa-hero__lead--wide {
-    display: none;
-  }
-
-  .programa-hero__title--compact,
-  .programa-hero__lead--compact {
-    display: block;
-  }
-
   /* Ejes: imagen 337×337 detrás del título/intro; el texto mide 337. */
   .programa-ejes__inner {
     position: relative;
@@ -373,14 +363,12 @@
     letter-spacing: var(--tracking-display-compact);
   }
 
-  .programa-materialismo__title--wide,
-  .programa-materialismo__lead-text--wide,
+  /* El cuerpo conserva `--compact`/`--wide` hasta que la lista falsa de
+   * filósofos sea un <dl> real; título y lead se ocultan con `u-hide-*`. */
   .programa-materialismo__body--wide {
     display: none;
   }
 
-  .programa-materialismo__title--compact,
-  .programa-materialismo__lead-text--compact,
   .programa-materialismo__body--compact {
     display: block;
   }
@@ -406,18 +394,10 @@
 }
 
 @media (min-width: 768px) {
-  .programa-hero__title--compact,
-  .programa-hero__lead--compact,
-  .programa-materialismo__title--compact,
-  .programa-materialismo__lead-text--compact,
   .programa-materialismo__body--compact {
     display: none;
   }
 
-  .programa-hero__title--wide,
-  .programa-hero__lead--wide,
-  .programa-materialismo__title--wide,
-  .programa-materialismo__lead-text--wide,
   .programa-materialismo__body--wide {
     display: block;
   }

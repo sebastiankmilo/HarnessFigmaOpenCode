@@ -43,13 +43,6 @@
   color: var(--color-text-secondary);
 }
 
-/* Lead corto en xs/sm (frames `2392:3975` y `2408:1570`) y lead largo en
- * lg (`2325:3793`). El contenido cambia por breakpoint, no solo el tamaño. */
-.hero__lead--wide,
-.section-intro__lead--wide {
-  display: none;
-}
-
 /* xs: botones apilados y alineados a la izquierda (`2392:3976` 359×110) */
 .hero__actions {
   display: flex;
@@ -755,19 +748,6 @@
   .tarjeta-objetivo,
   .tarjeta-articulo {
     transition: opacity 0.35s ease, background 0.4s ease;
-  }
-}
-
-/* `lg`: la copia larga de los leads (la de Figma para 1448). */
-@media (min-width: 1448px) {
-  .hero__lead--compact,
-  .section-intro__lead--compact {
-    display: none;
-  }
-
-  .hero__lead--wide,
-  .section-intro__lead--wide {
-    display: block;
   }
 }
 
