@@ -1,0 +1,32 @@
+{
+  "_comment": "Configuración de SEO e indexabilidad. NO es contenido traducible: los títulos y descripciones viven en es.json/pt.json bajo <pagina>.meta. Si cambia el dominio publicable, se cambia solo `baseUrl` aquí y se reconstruye (node scripts/inject-content.mjs).",
+  "baseUrl": "https://sebastiankmilo.github.io/HarnessFigmaOpenCode/",
+  "siteName": "Vanguardia Colombiana",
+  "themeColor": "#fdfcfa",
+  "image": {
+    "path": "assets/img/og-vanguardia.jpg",
+    "type": "image/jpeg",
+    "width": 1200,
+    "height": 630,
+    "alt": "Trabajador soldando: Vanguardia Colombiana, materialismo político"
+  },
+  "defaultLocale": "es",
+  "locales": {
+    "es": { "htmlLang": "es", "ogLocale": "es_CO", "pathPrefix": "" },
+    "pt": { "htmlLang": "pt", "ogLocale": "pt_BR", "pathPrefix": "pt/" }
+  },
+  "socials": [
+    "https://www.facebook.com/people/Vanguardia-Colombiana/100092503032769/",
+    "https://www.instagram.com/vanguardiacol",
+    "https://www.youtube.com/@VanguardiaColombiana",
+    "https://x.com/VanguardiaColo",
+    "https://www.tiktok.com/@lavanguardiacolombiana"
+  ],
+  "pages": [
+    { "file": "index.html", "slug": "", "priority": "1.0", "changefreq": "monthly" },
+    { "file": "programa.html", "slug": "programa.html", "priority": "0.9", "changefreq": "monthly" },
+    { "file": "decalogo.html", "slug": "decalogo.html", "priority": "0.9", "changefreq": "monthly" },
+    { "file": "unete.html", "slug": "unete.html", "priority": "0.8", "changefreq": "yearly" },
+    { "file": "politica-de-privacidad.html", "slug": "politica-de-privacidad.html", "priority": "0.3", "changefreq": "yearly" }
+  ]
+}
