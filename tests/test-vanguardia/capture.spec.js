@@ -86,14 +86,14 @@ test.describe('componentes y estados', () => {
     const width = page.viewportSize().width;
     await page.goto('/index.html');
     await settle(page);
-    await shotCard(page, '.goals__grid > .goal-card:not(.is-active)', capName(width, 'goal-card.png', 'goal-card'));
+    await shotCard(page, '.objetivos__grid > .tarjeta-objetivo:not(.is-active)', capName(width, 'goal-card.png', 'goal-card'));
   });
 
   test('goal-card is-active (evidencia, sin par)', async ({ page }) => {
     const width = page.viewportSize().width;
     await page.goto('/index.html');
     await settle(page);
-    await shotCard(page, '.goals__grid > .goal-card.is-active', capName(width, 'goal-card-is-active.png', 'goal-card-is-active'));
+    await shotCard(page, '.objetivos__grid > .tarjeta-objetivo.is-active', capName(width, 'goal-card-is-active.png', 'goal-card-is-active'));
   });
 
   test('buttons-s dark (par: baseline/buttons-s.png)', async ({ page }) => {
@@ -151,7 +151,7 @@ test.describe('componentes y estados', () => {
     const width = page.viewportSize().width;
     await page.goto('/index.html');
     await settle(page);
-    const card = await requireVisible(page, '.goal-card');
+    const card = await requireVisible(page, '.tarjeta-objetivo');
     await card.click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();

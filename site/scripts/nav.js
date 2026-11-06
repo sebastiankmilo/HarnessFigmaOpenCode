@@ -1,7 +1,7 @@
 (function () {
   const menu = document.querySelector(".site-nav__menu");
-  const openButton = document.querySelector(".site-nav__menu-open");
-  const closeButton = document.querySelector(".site-nav__menu-close");
+  const openButton = document.querySelector(".js-menu-open");
+  const closeButton = document.querySelector(".js-menu-close");
 
   if (!menu || !openButton || !closeButton) return;
 

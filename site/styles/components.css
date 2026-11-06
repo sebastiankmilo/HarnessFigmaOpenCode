@@ -109,29 +109,29 @@
 
 /* ══ Bloque «Únete» (sección `2396:2712` / `2408:2478`) ═══════════ */
 
-.join-block {
+.bloque-unete {
   padding-block: var(--space-7);
 }
 
-.join-block__grid {
+.bloque-unete__grid {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.join-block__media,
-.join-block__text {
+.bloque-unete__media,
+.bloque-unete__text {
   flex: none;
   width: 100%;
 }
 
-.join-block__text h1,
-.join-block__text h2 {
+.bloque-unete__text h1,
+.bloque-unete__text h2 {
   font-size: var(--font-size-xs-h1-xl); /* 41 — `2392:4119`, `4436:2824` */
   letter-spacing: var(--tracking-display-compact);
 }
 
-.join-block__text p {
+.bloque-unete__text p {
   margin-top: var(--space-3);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -139,40 +139,40 @@
 }
 
 /* Cierre «Agradecemos tu interés.»: párrafo aparte (bloque 560×285, unete.md) */
-.join-block__text p + p {
+.bloque-unete__text p + p {
   margin-top: var(--space-3);
 }
 
 /* Únete: 160 nav + 617 + 405 footer = 1182 (`4426:1111`) */
 @media (min-width: 1448px) {
-  .join-block {
+  .bloque-unete {
     padding-block: var(--space-8);
   }
 
-  .join-block__grid {
+  .bloque-unete__grid {
     flex-direction: row;
     gap: var(--space-5);
     align-items: center;
     justify-content: center;
   }
 
-  .join-block__media {
+  .bloque-unete__media {
     flex: 0 0 var(--join-media-basis);
     width: auto;
   }
 
-  .join-block__text {
+  .bloque-unete__text {
     flex: 0 0 var(--join-text-basis);
     width: auto;
   }
 
-  .join-block__text h1,
-  .join-block__text h2 {
+  .bloque-unete__text h1,
+  .bloque-unete__text h2 {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .join-block__text p {
+  .bloque-unete__text p {
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
   }
@@ -365,7 +365,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.site-nav__menu-close {
+.js-menu-close {
   position: absolute;
   top: var(--space-4);
   right: var(--space-3);
@@ -375,11 +375,11 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.site-nav__menu.is-open .site-nav__menu-close {
+.site-nav__menu.is-open .js-menu-close {
   opacity: 1;
 }
 
-.site-nav__menu-close img {
+.js-menu-close img {
   width: 100%;
   height: 100%;
 }
@@ -514,7 +514,7 @@ body {
     background: var(--color-surface-menu);
   }
 
-  .site-nav__menu-close {
+  .js-menu-close {
     top: var(--menu-close-top-sm);
     right: var(--menu-close-right-sm);
     width: var(--icon-menu-close-sm);
@@ -752,33 +752,33 @@ body {
 
 /* ══ Bloque de puntos: contenido compartido de programa y decálogo ══ */
 
-.points {
+.puntos {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.point {
+.punto {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.point h3 {
+.punto h3 {
   font-size: var(--font-size-xs-h3);
 }
 
 /* En xs los títulos de punto son 32.4/36.288 (3 líneas en el 1, 2 y 6),
  * como en `2396:2640` y `2396:2643`. */
 @media (max-width: 767px) {
-  .point h3 {
+  .punto h3 {
     font-size: var(--font-size-xs-h1);
     line-height: var(--line-height-heading);
     letter-spacing: var(--tracking-card-display);
   }
 }
 
-.point p {
+.punto p {
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
@@ -787,18 +787,18 @@ body {
 
 /* CTA de cierre de la sección de puntos (programa/decálogo). En
  * política-de-privacidad `.cta` se usa sin este margen: la página lo
- * anula con `.privac .cta`. */
+ * anula con `.privacidad .cta`. */
 .cta {
   margin-top: var(--space-6);
 }
 
 /* El índice lateral no existe en `xs` */
-.page-index {
+.indice {
   display: none;
 }
 
 @media (min-width: 1448px) {
-  .point h3 {
+  .punto h3 {
     font-size: var(--font-size-l-h1);
   }
 
@@ -810,7 +810,7 @@ body {
    * evento `active` de UIkit Scrollspy Nav, para lectores de pantalla) y la
    * clase `uk-active` que pone UIkit directamente sobre el enlace. Como el
    * enlace es bloque, la raya ocupa el ancho completo del ítem. */
-  .page-index {
+  .indice {
     display: flex;
     flex-direction: column;
     gap: var(--index-link-gap);
@@ -825,28 +825,28 @@ body {
     line-height: var(--line-height-body);
   }
 
-  .page-index li {
+  .indice li {
     width: var(--index-link-width);
   }
 
-  .page-index a {
+  .indice a {
     display: block;
     padding-bottom: var(--index-underline-offset);
     border-bottom: var(--index-underline) solid transparent;
     transition: all 0.4s ease;
   }
 
-  .page-index a[aria-current="true"],
-  .page-index a.uk-active {
+  .indice a[aria-current="true"],
+  .indice a.uk-active {
     border-bottom-color: var(--color-hover-accent);
   }
 
-  .page-index a:hover {
+  .indice a:hover {
     border-bottom-color: var(--color-link-underline-hover);
   }
 
   /* Salto a un punto: el header sticky (83 px) no debe tapar el título. */
-  .points .point {
+  .puntos .punto {
     scroll-margin-top: var(--nav-height-reduced);
   }
 }

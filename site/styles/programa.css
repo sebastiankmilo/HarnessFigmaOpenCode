@@ -6,32 +6,32 @@
  */
 
 /* ── 2 — header (`2396:2399`) ───────────────────────────────────── */
-.prog-hero {
+.programa-hero {
   background: var(--color-surface-page);
 }
 
-.prog-hero__grid {
+.programa-hero__grid {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
   padding-block: var(--space-7);
 }
 
-.prog-hero .media {
+.programa-hero .media {
   flex: none;
   width: 100%;
 }
 
-.prog-hero__text {
+.programa-hero__text {
   flex: none;
   width: 100%;
 }
 
-.prog-hero h1 {
+.programa-hero h1 {
   font-size: var(--font-size-xs-h1-xxl);
 }
 
-.prog-hero p {
+.programa-hero p {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -39,11 +39,11 @@
 }
 
 /* ── 3 — sección-ejes (`2396:2416`) ─────────────────────────────── */
-.prog-ejes {
+.programa-ejes {
   background: var(--color-surface-white);
 }
 
-.prog-ejes__inner {
+.programa-ejes__inner {
   display: flex;
   /* En `xs` la imagen va arriba y el texto debajo; en HTML el texto viene primero */
   flex-direction: column-reverse;
@@ -51,21 +51,21 @@
   padding-block: var(--space-7);
 }
 
-.prog-ejes__text {
+.programa-ejes__text {
   flex: none;
   width: 100%;
 }
 
-.prog-ejes .media {
+.programa-ejes .media {
   flex: none;
   width: 100%;
 }
 
-.prog-ejes h2 {
+.programa-ejes h2 {
   font-size: var(--font-size-xs-h1);
 }
 
-.prog-ejes p {
+.programa-ejes p {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -76,38 +76,38 @@
 }
 
 /* ── 4 — sección-materialismo (`2396:2423`) ─────────────────────── */
-.prog-mat {
+.programa-materialismo {
   padding-block: var(--space-7);
 }
 
-.prog-mat__row {
+.programa-materialismo__row {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.prog-mat .media {
+.programa-materialismo .media {
   flex: none;
   width: 100%;
 }
 
-.prog-mat__lead {
+.programa-materialismo__lead {
   flex: none;
   width: 100%;
 }
 
-.prog-mat__lead h2 {
+.programa-materialismo__lead h2 {
   font-size: var(--font-size-xs-h1);
 }
 
-.prog-mat__lead p {
+.programa-materialismo__lead p {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
-.prog-mat__text {
+.programa-materialismo__text {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -118,31 +118,31 @@
 }
 
 /* ── 5 — sección-puntos (`2396:2435`) ───────────────────────────── */
-.prog-points {
+.programa-puntos {
   padding-block: var(--space-7);
   background: var(--color-surface-white);
 }
 
-.prog-points__inner {
+.programa-puntos__inner {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.prog-points__body {
+.programa-puntos__body {
   flex: none;
   width: 100%;
 }
 
-.prog-points h2 {
+.programa-puntos h2 {
   font-size: var(--font-size-xs-h1);
 }
 
-/* `.points`, `.point`, `.cta` y `.page-index` son componentes compartidos
+/* `.puntos`, `.punto`, `.cta` y `.indice` son componentes compartidos
    con Decálogo: viven en styles/components.css. Aquí solo queda el margen
    contextual de la lista — en Programa va tras el `<h2>` de la sección y
    necesita el hueco (en Decálogo no hay título y por eso no lo lleva). */
-.points {
+.puntos {
   margin-top: var(--space-5);
 }
 
@@ -152,19 +152,19 @@
  * imágenes de `sección-ejes` y `sección-materialismo` (ocultas en el render
  * exportado, specs/pages/programa.md §sm). */
 @media (min-width: 768px) {
-  .prog-hero__grid {
+  .programa-hero__grid {
     gap: var(--space-4);
   }
 
-  .prog-ejes .media,
-  .prog-mat .media {
+  .programa-ejes .media,
+  .programa-materialismo .media {
     display: none;
   }
 }
 
 /* ── `lg` (1448) — escritorio ──────────────────────────────────── */
 @media (min-width: 1448px) {
-  .prog-hero__grid {
+  .programa-hero__grid {
     flex-direction: row;
     align-items: center;
     gap: var(--space-5);
@@ -172,24 +172,24 @@
     padding-inline: var(--space-5);
   }
 
-  .prog-hero .media {
+  .programa-hero .media {
     flex: 0 0 var(--hero-media-basis);
     width: auto;
   }
 
-  .prog-hero__text {
+  .programa-hero__text {
     flex: 1 1 0;
     min-width: 0;
     width: auto;
   }
 
-  .prog-hero h1 {
+  .programa-hero h1 {
     font-size: var(--font-size-display-hero);
     line-height: var(--line-height-display-hero);
     letter-spacing: var(--tracking-display-hero);
   }
 
-  .prog-ejes__inner {
+  .programa-ejes__inner {
     flex-direction: row;
     align-items: flex-start;
     max-width: var(--ejes-inner-width);
@@ -197,37 +197,37 @@
     padding-block: var(--space-8) var(--space-ejes-bottom);
   }
 
-  .prog-ejes__text {
+  .programa-ejes__text {
     flex: 1 1 var(--ejes-text-basis);
     width: auto;
   }
 
-  .prog-ejes .media {
+  .programa-ejes .media {
     display: block;
     flex: 0 0 var(--ejes-media-basis);
     width: auto;
   }
 
-  .prog-mat .media {
+  .programa-materialismo .media {
     display: block;
     flex: 0 0 var(--mat-media-basis);
     width: auto;
   }
 
-  .prog-ejes h2 {
+  .programa-ejes h2 {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .prog-ejes p {
+  .programa-ejes p {
     min-height: var(--ejes-body-height);
   }
 
-  .prog-mat {
+  .programa-materialismo {
     padding-block: var(--space-mat-top) var(--space-mat-bottom);
   }
 
-  .prog-mat__row {
+  .programa-materialismo__row {
     flex-direction: row;
     align-items: center;
     gap: var(--space-5);
@@ -236,27 +236,27 @@
   }
 
 
-  .prog-mat__lead {
+  .programa-materialismo__lead {
     flex: 1 1 0;
     min-width: 0;
     width: auto;
   }
 
-  .prog-mat__lead h2 {
+  .programa-materialismo__lead h2 {
     font-size: var(--font-size-l-h1-xl);
   }
 
-  .prog-mat__text {
+  .programa-materialismo__text {
     max-width: var(--mat-text-width);
     margin: var(--space-6) auto 0;
   }
 
-  .prog-mat__text p {
+  .programa-materialismo__text p {
     position: relative;
     padding-left: var(--mat-bullet-indent);
   }
 
-  .prog-mat__text p::before {
+  .programa-materialismo__text p::before {
     content: "";
     position: absolute;
     top: 0;
@@ -266,28 +266,28 @@
     background: url("../assets/icons/star.png") no-repeat center / contain;
   }
 
-  .prog-points {
+  .programa-puntos {
     padding-block: var(--space-points-top) var(--space-8);
   }
 
-  .prog-points__inner {
+  .programa-puntos__inner {
     flex-direction: row;
     max-width: var(--points-inner-width);
     margin-inline: auto;
   }
 
-  .prog-points__body {
+  .programa-puntos__body {
     flex: 1 1 var(--points-body-basis);
     width: auto;
   }
 
-  .prog-points h2 {
+  .programa-puntos h2 {
     font-size: var(--font-size-l-h1-xl);
   }
 
   /* `2331:4699` mide 1225 px: Figma aplica `paragraphSpacing` al salto de
    * párrafo y CSS no puede expresarlo dentro de un mismo <p>. */
-  .prog-points .point:nth-child(3) p {
+  .programa-puntos .punto:nth-child(3) p {
     min-height: var(--point-body-box-lg);
   }
 }
@@ -296,40 +296,40 @@
  * El diseño definitivo acorta el header (copia compacta, 16:9), quita los
  * cuatro desarrollos de ejes (queda el intro sobre la imagen) y deja solo
  * las tres conclusiones de materialismo; los puntos ya usan la tipografía
- * compartida de `.point`. */
+ * compartida de `.punto`. */
 @media (max-width: 767px) {
-  .prog-hero__grid {
+  .programa-hero__grid {
     padding-block: var(--space-6);
   }
 
-  .prog-hero .media {
+  .programa-hero .media {
     aspect-ratio: 16 / 9;
     overflow: hidden;
   }
 
-  .prog-hero .media .media__img {
+  .programa-hero .media .media__img {
     position: absolute;
     inset: 0;
   }
 
-  .prog-hero h1 {
+  .programa-hero h1 {
     font-size: var(--font-size-display-hero-compact);
     line-height: var(--line-height-display-hero-compact);
     letter-spacing: var(--tracking-display-hero-compact);
   }
 
-  .prog-hero__title--wide,
-  .prog-hero__lead--wide {
+  .programa-hero__title--wide,
+  .programa-hero__lead--wide {
     display: none;
   }
 
-  .prog-hero__title--compact,
-  .prog-hero__lead--compact {
+  .programa-hero__title--compact,
+  .programa-hero__lead--compact {
     display: block;
   }
 
   /* Ejes: imagen 337×337 detrás del título/intro; el texto mide 337. */
-  .prog-ejes__inner {
+  .programa-ejes__inner {
     position: relative;
     display: block;
     padding-block: var(--space-6);
@@ -337,66 +337,66 @@
 
   /* El `components/images` de 337×337 está oculto en el render de Figma:
    * el export de `2396:2416` solo muestra título + intro. */
-  .prog-ejes .media {
+  .programa-ejes .media {
     display: none;
   }
 
-  .prog-ejes__text {
+  .programa-ejes__text {
     position: relative;
     z-index: 1;
     width: var(--prog-ejes-media-size-xs);
   }
 
-  .prog-ejes h2 {
+  .programa-ejes h2 {
     font-size: var(--font-size-xs-h1-xl);
     letter-spacing: var(--tracking-display-compact);
   }
 
   /* Materialismo: dos imágenes 163 en fila, lead compacto y solo body-3. */
-  .prog-mat {
+  .programa-materialismo {
     padding-block: var(--space-6) var(--space-7);
   }
 
-  .prog-mat__row {
+  .programa-materialismo__row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: var(--prog-mat-media-gap-xs);
     row-gap: var(--space-5);
   }
 
-  .prog-mat__lead {
+  .programa-materialismo__lead {
     grid-column: 1 / -1;
   }
 
-  .prog-mat__lead h2 {
+  .programa-materialismo__lead h2 {
     font-size: var(--font-size-xs-h1-xl);
     letter-spacing: var(--tracking-display-compact);
   }
 
-  .prog-mat__title--wide,
-  .prog-mat__lead-text--wide,
-  .prog-mat__body--wide {
+  .programa-materialismo__title--wide,
+  .programa-materialismo__lead-text--wide,
+  .programa-materialismo__body--wide {
     display: none;
   }
 
-  .prog-mat__title--compact,
-  .prog-mat__lead-text--compact,
-  .prog-mat__body--compact {
+  .programa-materialismo__title--compact,
+  .programa-materialismo__lead-text--compact,
+  .programa-materialismo__body--compact {
     display: block;
   }
 
-  .prog-mat__text {
+  .programa-materialismo__text {
     gap: var(--space-4);
     margin-top: var(--space-5);
   }
 
-  .prog-mat__body--compact {
+  .programa-materialismo__body--compact {
     position: relative;
     padding-left: var(--prog-mat-bullet-indent-xs);
     white-space: pre-line;
   }
 
-  .prog-mat__body--compact::before {
+  .programa-materialismo__body--compact::before {
     content: "•";
     position: absolute;
     top: 0;
@@ -406,19 +406,19 @@
 }
 
 @media (min-width: 768px) {
-  .prog-hero__title--compact,
-  .prog-hero__lead--compact,
-  .prog-mat__title--compact,
-  .prog-mat__lead-text--compact,
-  .prog-mat__body--compact {
+  .programa-hero__title--compact,
+  .programa-hero__lead--compact,
+  .programa-materialismo__title--compact,
+  .programa-materialismo__lead-text--compact,
+  .programa-materialismo__body--compact {
     display: none;
   }
 
-  .prog-hero__title--wide,
-  .prog-hero__lead--wide,
-  .prog-mat__title--wide,
-  .prog-mat__lead-text--wide,
-  .prog-mat__body--wide {
+  .programa-hero__title--wide,
+  .programa-hero__lead--wide,
+  .programa-materialismo__title--wide,
+  .programa-materialismo__lead-text--wide,
+  .programa-materialismo__body--wide {
     display: block;
   }
 }
@@ -426,16 +426,16 @@
 
 /* `sección-puntos` en xs (`2396:2437`): título 41 y CTA «Únete» 107×47. */
 @media (max-width: 767px) {
-  .prog-points {
+  .programa-puntos {
     padding-block: var(--space-6) var(--space-7);
   }
 
-  .prog-points h2 {
+  .programa-puntos h2 {
     font-size: var(--font-size-xs-h1-xl);
     letter-spacing: var(--tracking-display-compact);
   }
 
-  .prog-points .cta {
+  .programa-puntos .cta {
     margin-top: var(--space-5);
   }
 }

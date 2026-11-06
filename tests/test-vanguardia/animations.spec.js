@@ -54,7 +54,7 @@ test.describe('transiciones de hover (nota 4649:2012)', () => {
 
   test('goal-card y article-card: background 0.4s ease', async ({ page }) => {
     await page.goto('/index.html');
-    for (const sel of ['.goal-card', '.article-card']) {
+    for (const sel of ['.tarjeta-objetivo', '.tarjeta-articulo']) {
       const t = await readTransition(page, sel);
       expect(t, `no existe ${sel}`).not.toBeNull();
       expect(t.duration, `${sel} duration`).toContain('0.4s');
@@ -94,7 +94,7 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
 
   test('backdrop rgba(0,0,0,0.25) con fade de 0,3 s', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
 
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
@@ -115,7 +115,7 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
 
   test('panel: opacity 0 → 1 con fade de 0,3 s', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
 
     await expect
       .poll(() =>
@@ -131,7 +131,7 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
 
   test('el backdrop vuelve a transparente al cerrar', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
 
     await page.locator('.dialog__close').click();
@@ -148,7 +148,7 @@ test.describe('modal UIkit en sm (transición global)', () => {
   test('el panel de sm ocupa el 90% del viewport y el CTA queda fijo', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
 
@@ -218,7 +218,7 @@ test.describe('modal UIkit en xs (90% del viewport)', () => {
   test('el panel ocupa el 90% del viewport y el cuerpo scrollea sin mover el CTA', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
     await expect
@@ -348,7 +348,7 @@ test.describe('transición del menú de navegación (sm/xs)', () => {
     expect(overlay.property).toContain('opacity');
     expect(overlay.property).toContain('visibility');
 
-    await page.locator('.site-nav__menu-open').click();
+    await page.locator('.js-menu-open').click();
     await expect(menu).toHaveCSS('visibility', 'visible');
     await expect
       .poll(() =>
@@ -361,8 +361,8 @@ test.describe('transición del menú de navegación (sm/xs)', () => {
     expect(content.property).toContain('opacity');
     expect(content.property).toContain('transform');
 
-    await page.locator('.site-nav__menu-close').click();
-    await expect(page.locator('.site-nav__menu-open')).toHaveAttribute('aria-expanded', 'false');
+    await page.locator('.js-menu-close').click();
+    await expect(page.locator('.js-menu-open')).toHaveAttribute('aria-expanded', 'false');
     await expect(menu).toHaveCSS('visibility', 'hidden', { timeout: 2000 });
   });
 });
@@ -458,7 +458,7 @@ test.describe('carruseles de inicio (nota 4649:2016)', () => {
 
   test('el índice y el dotnav cambian al avanzar', async ({ page }) => {
     await page.goto('/index.html');
-    const grid = page.locator('.goals__grid');
+    const grid = page.locator('.objetivos__grid');
     const controls = page.locator('[data-carousel-controls="goals"]');
 
     await expect(grid.locator('> li').first()).toHaveClass(/is-active/);
@@ -481,7 +481,7 @@ test.describe('carruseles de inicio (nota 4649:2016)', () => {
 
   test('la ventana mantiene 4 tarjetas con 6 objetivos', async ({ page }) => {
     await page.goto('/index.html');
-    const grid = page.locator('.goals__grid');
+    const grid = page.locator('.objetivos__grid');
     const controls = page.locator('[data-carousel-controls="goals"]');
 
     await expect(grid.locator('> li')).toHaveCount(6);
@@ -510,7 +510,7 @@ test.describe('prefers-reduced-motion anula las animaciones', () => {
     await page.goto('/index.html');
 
     const durations = await page.evaluate(() =>
-      ['.btn', '.site-nav__link', '.goal-card'].map(
+      ['.btn', '.site-nav__link', '.tarjeta-objetivo'].map(
         (sel) => parseFloat(getComputedStyle(document.querySelector(sel)).transitionDuration)
       )
     );

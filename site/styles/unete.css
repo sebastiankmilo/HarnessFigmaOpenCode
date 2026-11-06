@@ -2,14 +2,14 @@
  * Spec: specs/pages/unete.md · valores: solo styles/tokens.css
  * Frames: `2335:1229` (1448), `2396:2676` (375, 2026-10-04) y `2408:2315` (768,
  * leído 2026-10-05).
- * El bloque `.join-block` (sección `2396:2712` / `2408:2478`), el nav y el footer
+ * El bloque `.bloque-unete` (sección `2396:2712` / `2408:2478`), el nav y el footer
  * son compartidos y viven en main.css: base = 375, `min-width: 768px` = tablet,
  * `min-width: 1448px` = lg.
  * Sin bloque `768px` propio: lo medido a tablet (padding 64, gap media→texto 32,
  * título 32.4, título→párrafo 16) **coincide con la base** — specs/pages/unete.md §sm.
  */
 
-.join-block--surface {
+.bloque-unete--superficie {
   background: var(--color-surface-page);
 }
 
@@ -17,15 +17,15 @@
  * título→párrafo 8 y bloque de texto 395. La copia del body es la corta de
  * Figma, con «Agradecemos tu interés.» dentro del mismo párrafo. */
 @media (max-width: 767px) {
-  .join-block--surface {
+  .bloque-unete--superficie {
     padding-block: var(--space-6);
   }
 
-  .join-block--surface .media--3-2 {
+  .bloque-unete--superficie .media--3-2 {
     aspect-ratio: var(--join-media-aspect-xs);
   }
 
-  .join-block--surface .join-block__text p {
+  .bloque-unete--superficie .bloque-unete__text p {
     margin-top: var(--space-1);
   }
 }

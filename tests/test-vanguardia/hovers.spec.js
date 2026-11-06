@@ -80,9 +80,9 @@ test.describe('hovers de la capa `hovers` (4518:2148)', () => {
 
   test('la card de La Materia Prima se pone #f0ece6 al hover', async ({ page }) => {
     await page.goto('/index.html');
-    // `.articles .article-card` (inicio.css) tiene la misma especificidad que
-    // `.article-card:hover` y va después: por eso el hover se comprobaba aquí.
-    const card = page.locator('.article-card').nth(1);
+    // `.articulos .tarjeta-articulo` (inicio.css) tiene la misma especificidad que
+    // `.tarjeta-articulo:hover` y va después: por eso el hover se comprobaba aquí.
+    const card = page.locator('.tarjeta-articulo').nth(1);
     await card.scrollIntoViewIfNeeded();
     await card.hover();
     await page.waitForTimeout(500);
@@ -205,18 +205,18 @@ test.describe('enlaces configurables (content/enlaces.json)', () => {
     const id = (String(cfg['video-unete']).match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/) || [])[1];
     test.skip(!id, 'sin `video-unete` configurado en enlaces.json');
 
-    const iframe = page.locator('.join-block__media iframe');
+    const iframe = page.locator('.bloque-unete__media iframe');
     await expect(iframe).toHaveCount(1);
     expect((await iframe.getAttribute('src')).startsWith(
       `https://www.youtube-nocookie.com/embed/${id}?`
     )).toBe(true);
     await expect(iframe).toHaveAttribute('title', 'Vídeo: únete a Vanguardia Colombiana');
     // La imagen de reserva y el play decorativo desaparecen del hueco.
-    await expect(page.locator('.join-block__media .media__img')).toHaveCount(0);
-    await expect(page.locator('.join-block__media .media__play')).toHaveCount(0);
+    await expect(page.locator('.bloque-unete__media .media__img')).toHaveCount(0);
+    await expect(page.locator('.bloque-unete__media .media__play')).toHaveCount(0);
 
     await page.goto('/pt/unete.html');
-    await expect(page.locator('.join-block__media iframe')).toHaveAttribute(
+    await expect(page.locator('.bloque-unete__media iframe')).toHaveAttribute(
       'title',
       'Vídeo: junte-se à Vanguardia Colombiana'
     );
@@ -241,7 +241,7 @@ test.describe('diálogo de objetivos: texto por card', () => {
     await page.goto('/index.html');
     // El diálogo lee `content/es.json` en runtime (window.VCI18n.getData).
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
-    const cards = page.locator('.goal-card');
+    const cards = page.locator('.tarjeta-objetivo');
 
     // Objetivo 1 → `inicio.goals.card-1` (título y body-complete).
     await cards.nth(0).click();

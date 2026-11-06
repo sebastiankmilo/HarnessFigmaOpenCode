@@ -39,7 +39,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('goal-card abre el diálogo', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveAttribute('aria-modal', 'true');
@@ -48,7 +48,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('Escape cierra el diálogo', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('[role="dialog"]')).toBeHidden();
@@ -56,7 +56,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('el backdrop cierra el diálogo (UIkit)', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await page.mouse.click(10, 10);
     await expect(page.locator('[role="dialog"]')).toBeHidden();
@@ -64,7 +64,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('UIkit bloquea el scroll de la página con el diálogo abierto', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.goal-card').first().click();
+    await page.locator('.tarjeta-objetivo').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await expect
       .poll(() => page.evaluate(() => document.scrollingElement.style.overflowY))
@@ -79,7 +79,7 @@ test.describe('diálogo de objetivos', () => {
   test('la card recorta el cuerpo a 3 líneas y el modal conserva el completo', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
-    const card = page.locator('.goal-card').nth(1);
+    const card = page.locator('.tarjeta-objetivo').nth(1);
     await card.scrollIntoViewIfNeeded();
     const body = card.locator('p');
 
@@ -135,7 +135,7 @@ test.describe('accesibilidad de interacción', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/index.html');
     const durations = await page.evaluate(() => {
-      const els = [...document.querySelectorAll('.btn, .goal-card')].slice(0, 5);
+      const els = [...document.querySelectorAll('.btn, .tarjeta-objetivo')].slice(0, 5);
       return els.map((el) => parseFloat(getComputedStyle(el).transitionDuration));
     });
     for (const d of durations) expect(d).toBeLessThan(0.01);
@@ -158,13 +158,13 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
       expect(
         await page.evaluate(() => typeof window.UIkit?.scrollspyNav),
       ).toBe('function');
-      await expect(page.locator('.page-index a')).toHaveCount(total);
-      await expect(page.locator('.page-index a[aria-current="true"]')).toHaveCount(0);
+      await expect(page.locator('.indice a')).toHaveCount(total);
+      await expect(page.locator('.indice a[aria-current="true"]')).toHaveCount(0);
     });
 
     test(`${file}: marca el punto visible y sincroniza aria-current`, async ({ page }) => {
       await page.goto(`/${file}`);
-      const links = page.locator('.page-index a');
+      const links = page.locator('.indice a');
 
       await page.evaluate(() => document.getElementById('point-4').scrollIntoView());
       await expect(links.nth(3)).toHaveClass(/uk-active/);
@@ -175,17 +175,17 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
       await page.evaluate(() => document.getElementById('point-2').scrollIntoView());
       await expect(links.nth(1)).toHaveClass(/uk-active/);
       await expect(links.nth(3)).not.toHaveClass(/uk-active/);
-      await expect(page.locator('.page-index a[aria-current="true"]')).toHaveCount(1);
+      await expect(page.locator('.indice a[aria-current="true"]')).toHaveCount(1);
     });
 
     test(`${file}: el índice permanece visible mientras el texto se mueve`, async ({ page }) => {
       await page.goto(`/${file}`);
       await page.evaluate(() => document.getElementById('point-5').scrollIntoView());
-      const box = await page.locator('.page-index').boundingBox();
+      const box = await page.locator('.indice').boundingBox();
       // sticky: anclado bajo la nav (83) + 32 → 115
       expect(box.y).toBeGreaterThanOrEqual(100);
       expect(box.y).toBeLessThanOrEqual(130);
-      const link = page.locator('.page-index a.uk-active');
+      const link = page.locator('.indice a.uk-active');
       await expect(link).toHaveAttribute('href', '#point-5');
       const lb = await link.boundingBox();
       expect(Math.round(lb.width)).toBe(290);
@@ -193,9 +193,9 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
 
     test(`${file}: el clic salta al punto por debajo de la nav sticky`, async ({ page }) => {
       await page.goto(`/${file}`);
-      await page.locator('.page-index a[href="#point-3"]').click();
+      await page.locator('.indice a[href="#point-3"]').click();
       await expect(page).toHaveURL(/#point-3$/);
-      await expect(page.locator('.page-index a').nth(2)).toHaveAttribute('aria-current', 'true');
+      await expect(page.locator('.indice a').nth(2)).toHaveAttribute('aria-current', 'true');
       await expect(page.locator('header.site-nav')).toHaveClass(/is-reduced/);
       const nav = await page.locator('header.site-nav').boundingBox();
       const title = await page.locator('#point-3 h3').boundingBox();
@@ -210,12 +210,12 @@ test('menú sm/xs: abre y aria-expanded', async ({ page }, testInfo) => {
     'menú solo en sm/xs'
   );
   await page.goto('/index.html');
-  const open = page.locator('.site-nav__menu-open');
+  const open = page.locator('.js-menu-open');
   await expect(open).toHaveAttribute('aria-expanded', 'false');
   await open.click();
   await expect(open).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator('#site-menu')).toBeVisible();
-  await page.locator('.site-nav__menu-close').click();
+  await page.locator('.js-menu-close').click();
   await expect(open).toHaveAttribute('aria-expanded', 'false');
 });
 
@@ -227,7 +227,7 @@ test('fondo de La Materia Prima: recorte horizontal por breakpoint', async ({ pa
   }[testInfo.project.name];
 
   await page.goto('/index.html');
-  const styles = await page.locator('.articles').evaluate((el) => {
+  const styles = await page.locator('.articulos').evaluate((el) => {
     const cs = getComputedStyle(el);
     return { size: cs.backgroundSize, color: cs.backgroundColor };
   });

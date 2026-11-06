@@ -1,6 +1,6 @@
 (function () {
   const dialog = document.querySelector(".dialog");
-  const cards = Array.prototype.slice.call(document.querySelectorAll(".goal-card"));
+  const cards = Array.prototype.slice.call(document.querySelectorAll(".tarjeta-objetivo"));
   const dialogTitle = dialog ? dialog.querySelector(".dialog__title") : null;
   const dialogContent = dialog ? dialog.querySelector(".dialog__content") : null;
 
