@@ -5,6 +5,7 @@
   "scripts": {
     "test": "playwright test --config test-vanguardia/playwright.config.js",
     "test:desktop": "playwright test --config test-vanguardia/playwright.config.js --project=desktop-1448",
+    "test:tablet": "playwright test --config test-vanguardia/playwright.config.js --project=tablet-768",
     "test:mobile": "playwright test --config test-vanguardia/playwright.config.js --project=mobile-375",
     "judge": "playwright test --list --config test-vanguardia/playwright.config.js"
   },

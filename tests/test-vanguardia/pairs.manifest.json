@@ -2,6 +2,7 @@
   "version": 1,
   "tiles": {
     "1448": { "width": 1448, "height": 900 },
+    "768": { "width": 768, "height": 1024 },
     "375": { "width": 375, "height": 812 }
   },
   "policy": { "min_score": 0.9, "max_criticals": 0 },
@@ -21,6 +22,14 @@
       "baseline": "baseline/inicio-375.png",
       "actual": "actual/inicio-375.png",
       "spec": "Figma 375-xs -> frame inicio. Sin spec .md en disco: leer con get_node_info."
+    },
+    {
+      "id": "inicio-768",
+      "kind": "page",
+      "viewport": 768,
+      "baseline": "baseline/inicio-768.png",
+      "actual": "actual/inicio-768.png",
+      "spec": "Figma 1024-sm -> frame inicio (268:3128), 768x4582. Baseline exportada 2026-10-26 (7 hijos cosidos). Spec: Especificaciones/design specs/pages/inicio.md §sm."
     },
     {
       "id": "nav",

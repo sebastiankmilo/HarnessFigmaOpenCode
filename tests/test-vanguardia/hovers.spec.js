@@ -178,64 +178,96 @@ test.describe('enlaces configurables (content/enlaces.json)', () => {
     await expect(page.locator('[data-enlace="aporta"]').first()).toHaveAttribute('href', 'https://ejemplo.test/x');
     await expect(page.locator('[data-enlace="articulo-3"]')).toHaveAttribute('href', 'https://ejemplo.test/x');
   });
-  test('el póster del vídeo apunta a la URL de content/enlaces.json', async ({ page }) => {
-    await page.goto('/index.html');
-    const cfg = await page.evaluate(() => fetch('content/enlaces.json').then((r) => r.json()));
-    test.skip(!cfg.video, 'sin `video` configurado en enlaces.json');
-
-    await expect(page.locator('[data-video]')).toHaveAttribute('href', cfg.video);
-    // La portada se mantiene: es lo que miden los tiles de inicio-1448.
-    await expect(page.locator('.video__player .media__img')).toHaveCount(1);
-    await expect(page.locator('.video__player iframe')).toHaveCount(0);
-  });
-
-  test('al hacer clic se inyecta el iframe de YouTube', async ({ page }) => {
+  test('el vídeo de YouTube está incrustado desde el inicio', async ({ page }) => {
     await page.goto('/index.html');
     const cfg = await page.evaluate(() => fetch('content/enlaces.json').then((r) => r.json()));
     const id = (String(cfg.video).match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/) || [])[1];
     test.skip(!id, 'sin `video` configurado en enlaces.json');
 
-    await page.locator('[data-video]').click();
+    // Sin fachada: el reproductor es el contenido desde el primer render.
     const iframe = page.locator('.video__player iframe');
     await expect(iframe).toHaveCount(1);
-    await expect(iframe).toHaveAttribute(
-      'src',
-      `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`
-    );
+    const src = await iframe.getAttribute('src');
+    expect(src.startsWith(`https://www.youtube-nocookie.com/embed/${id}?`)).toBe(true);
+    // El `t=1s` del enlace original llega al reproductor como `start=1`.
+    expect(src).toContain('start=1');
     await expect(iframe).toHaveAttribute('allowfullscreen');
-    // El reemplazo se hace sobre `.media`: la portada no desaparece del todo
-    // y el iframe la cubre con el mismo 16/9.
-    await expect(page.locator('.video__player .media__img')).toHaveCount(1);
+    await expect(iframe).toHaveAttribute('loading', 'lazy');
+    // Ni portada ni botón de play superpuestos.
+    await expect(page.locator('.video__player .media__img')).toHaveCount(0);
+    await expect(page.locator('.video__play')).toHaveCount(0);
     await expect(page.locator('[data-video]')).toHaveCount(0);
+  });
+
+  test('el vídeo de Únete se incrusta en su hueco y sustituye al play', async ({ page }) => {
+    await page.goto('/unete.html');
+    const cfg = await page.evaluate(() => fetch('content/enlaces.json').then((r) => r.json()));
+    const id = (String(cfg['video-unete']).match(/(?:v=|youtu\.be\/|shorts\/)([A-Za-z0-9_-]{11})/) || [])[1];
+    test.skip(!id, 'sin `video-unete` configurado en enlaces.json');
+
+    const iframe = page.locator('.join-block__media iframe');
+    await expect(iframe).toHaveCount(1);
+    expect((await iframe.getAttribute('src')).startsWith(
+      `https://www.youtube-nocookie.com/embed/${id}?`
+    )).toBe(true);
+    await expect(iframe).toHaveAttribute('title', 'Vídeo: únete a Vanguardia Colombiana');
+    // La imagen de reserva y el play decorativo desaparecen del hueco.
+    await expect(page.locator('.join-block__media .media__img')).toHaveCount(0);
+    await expect(page.locator('.join-block__media .media__play')).toHaveCount(0);
+
+    await page.goto('/pt/unete.html');
+    await expect(page.locator('.join-block__media iframe')).toHaveAttribute(
+      'title',
+      'Vídeo: junte-se à Vanguardia Colombiana'
+    );
+  });
+
+  test('el nombre accesible del reproductor está traducido', async ({ page }) => {
+    await page.goto('/index.html');
+    await expect(page.locator('.video__player iframe')).toHaveAttribute(
+      'title',
+      'Vídeo de Vanguardia Colombiana'
+    );
+    await page.goto('/pt/index.html');
+    await expect(page.locator('.video__player iframe')).toHaveAttribute(
+      'title',
+      'Vídeo da Vanguardia Colombiana'
+    );
   });
 });
 
 test.describe('diálogo de objetivos: texto por card', () => {
-  test('cada card abre su diálogo con el título y los cuerpos de dialog-N', async ({ page }) => {
+  test('cada card abre su diálogo con el título y los cuerpos de body-complete', async ({ page }) => {
     await page.goto('/index.html');
     // El diálogo lee `content/es.json` en runtime (window.VCI18n.getData).
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
     const cards = page.locator('.goal-card');
 
-    // Objetivo 1 → `inicio.dialog` (conserva la key original, sin sufijo).
+    // Objetivo 1 → `inicio.goals.card-1` (título y body-complete).
     await cards.nth(0).click();
-    await expect(page.locator('.dialog')).toHaveClass(/is-open/);
-    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.dialog.title');
+    await expect(page.locator('.dialog')).toHaveClass(/uk-open/);
+    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.goals.card-1.title');
     await expect(page.locator('.dialog__title')).toHaveText(await cards.nth(0).locator('h3').textContent());
     await expect(page.locator('.dialog__body')).toHaveCount(2);
-    await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.dialog.body-1');
+    await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.goals.card-1.body-complete.0');
     // El diálogo ya no repite el texto de la card: usa el desarrollo del JSON.
     expect(await page.locator('.dialog__body').first().textContent()).not.toBe(
       await cards.nth(0).locator('p').textContent()
     );
     await page.keyboard.press('Escape');
-    await expect(page.locator('.dialog')).not.toHaveClass(/is-open/);
+    await expect(page.locator('.dialog')).not.toHaveClass(/uk-open/);
 
-    // Objetivo 3 → `inicio.dialog-3` con tres párrafos.
+    // Objetivo 3 → `inicio.goals.card-3`. El número de párrafos lo manda el
+    // catálogo (`body-complete` es un array): se compara contra el JSON y no
+    // contra un número fijo, que envejece cada vez que se amplía el texto.
+    const card3Bodies = await page.evaluate(
+      () => window.VCI18n.getData().inicio.goals['card-3']['body-complete'].length
+    );
+    expect(card3Bodies).toBeGreaterThanOrEqual(2);
     await cards.nth(2).click();
-    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.dialog-3.title');
-    await expect(page.locator('.dialog__body')).toHaveCount(3);
-    await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.dialog-3.body-1');
+    await expect(page.locator('.dialog__title')).toHaveAttribute('data-i18n', 'inicio.goals.card-3.title');
+    await expect(page.locator('.dialog__body')).toHaveCount(card3Bodies);
+    await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.goals.card-3.body-complete.0');
     await expect(page.locator('.dialog__title')).toHaveText(await cards.nth(2).locator('h3').textContent());
 
     // El panel sigue midiendo 1024×604 de Figma: lo largo se desplaza dentro.
@@ -246,32 +278,109 @@ test.describe('diálogo de objetivos: texto por card', () => {
 });
 
 test.describe('conmutador ES/PT', () => {
-  test('el estado activo se voltea aunque falle la carga del JSON', async ({ page }) => {
-    // Reproduce el caso real del usuario: el fetch de `content/pt.json` no
-    // llega (p. ej. abriendo el HTML con file://). El conmutador debe responder.
-    await page.route('**/content/pt.json', (route) => route.abort());
+  // Hay dos conmutadores (barra de 1448 y overlay de sm): estos casos prueban
+  // el de la barra, que es el visible en el proyecto desktop-1448.
+  //
+  // Cambiar de idioma es NAVEGAR a la URL del otro idioma, no intercambiar
+  // texto en memoria: cada idioma necesita su propia URL para poder indexarse
+  // (canonical + hreflang son distintos por idioma). Por eso el selector son
+  // enlaces y el estado activo se marca en el HTML generado, no por JS.
+  const topLang = (lang) => `header .site-nav__lang [data-lang="${lang}"]`;
+
+  test('las dos opciones son enlaces con hreflang y la activa va marcada', async ({ page }) => {
     await page.goto('/index.html');
 
-    await expect(page.locator('[data-lang="es"]')).toHaveClass(/is-active/);
-    await page.click('[data-lang="pt"]');
+    await expect(page.locator(topLang('es'))).toHaveClass(/is-active/);
+    await expect(page.locator(topLang('es'))).toHaveAttribute('aria-current', 'true');
+    await expect(page.locator(topLang('es'))).toHaveAttribute('hreflang', 'es');
 
-    await expect(page.locator('[data-lang="pt"]')).toHaveClass(/is-active/);
-    await expect(page.locator('[data-lang="es"]')).not.toHaveClass(/is-active/);
-    await expect(page.locator('[data-lang="pt"]')).toHaveCSS('color', 'rgb(48, 37, 15)');
-    await expect(page.locator('[data-lang="es"]')).toHaveCSS('color', 'rgb(158, 147, 130)');
-
-    // Y se puede volver sin quedarse atascado.
-    await page.click('[data-lang="es"]');
-    await expect(page.locator('[data-lang="es"]')).toHaveClass(/is-active/);
-    await expect(page.locator('[data-lang="pt"]')).not.toHaveClass(/is-active/);
+    await expect(page.locator(topLang('pt'))).not.toHaveClass(/is-active/);
+    await expect(page.locator(topLang('pt'))).not.toHaveAttribute('aria-current', 'true');
+    await expect(page.locator(topLang('pt'))).toHaveAttribute('hreflang', 'pt');
+    await expect(page.locator(topLang('pt'))).toHaveAttribute('href', 'pt/index.html');
   });
 
-  test('con el JSON disponible se aplica el locale', async ({ page }) => {
+  test('al apuntar al selector se precarga el catálogo del otro idioma', async ({ page }) => {
+    // El primer cambio de idioma no debe depender de una descarga a mitad de
+    // clic: el catálogo se pide al apuntar (o al enfocar con teclado). Vale
+    // también lo que pida el prerender de la página hermana.
+    const requested = [];
+    page.on('request', (req) => {
+      if (req.url().includes('pt.json')) requested.push(req.url());
+    });
     await page.goto('/index.html');
-    await page.click('[data-lang="pt"]');
+    await page.hover(topLang('pt'));
+    await expect.poll(() => requested.length).toBeGreaterThan(0);
+  });
+
+  test('cambiar a portugués no recarga la página y actualiza la URL', async ({ page }) => {    await page.goto('/index.html');
+    // Marca en memoria: si la página se recargara, desaparecería.
+    await page.evaluate(() => {
+      window.__sinRecarga = true;
+      window.scrollTo(0, 600);
+    });
+    const scrollBefore = await page.evaluate(() => window.scrollY);
+    expect(scrollBefore).toBeGreaterThan(500);
+
+    await page.click(topLang('pt'));
+    await page.waitForURL('**/pt/index.html');
+
+    // Sin recarga: la marca y la posición del scroll sobreviven al cambio.
+    expect(await page.evaluate(() => window.__sinRecarga)).toBe(true);
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThanOrEqual(scrollBefore - 2);
+
     await expect(page.locator('html')).toHaveAttribute('lang', 'pt');
-    await expect(page.locator('[data-lang="pt"]')).toHaveClass(/is-active/);
-    await expect(page.locator('[data-lang="pt"]')).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.locator('[data-lang="es"]')).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator(topLang('pt'))).toHaveClass(/is-active/);
+    await expect(page.locator(topLang('pt'))).toHaveAttribute('aria-current', 'true');
+    await expect(page.locator(topLang('es'))).not.toHaveClass(/is-active/);
+    // Colores del diseño para el idioma activo e inactivo.
+    await expect(page.locator(topLang('pt'))).toHaveCSS('color', 'rgb(48, 37, 15)');
+    await expect(page.locator(topLang('es'))).toHaveCSS('color', 'rgb(158, 147, 130)');
+    // El texto se sustituyó en su sitio, sin pedir la página otra vez.
+    await expect(page.locator('[data-i18n="inicio.goals.title"]')).toHaveText('Nossos objetivos');
+
+    // Volver: el enlace apunta ya a la URL absoluta del español.
+    expect((await page.locator(topLang('es')).getAttribute('href')).endsWith('/index.html')).toBe(true);
+    await page.click(topLang('es'));
+    await page.waitForURL((url) => url.pathname === '/index.html');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+    await expect(page.locator('[data-i18n="inicio.goals.title"]')).toHaveText('Nuestros objetivos');
+    expect(await page.evaluate(() => window.__sinRecarga)).toBe(true);
+  });
+
+  test('si el diccionario falla, el enlace navega a la versión traducida', async ({ page }) => {
+    // Sin catálogo a mano el cambio en sitio no puede completarse: el enlace
+    // debe navegar y aterrizar en el HTML del otro idioma, que ya viene escrito.
+    await page.route('**/content/pt.json', (route) => route.abort());
+    await page.goto('/index.html');
+    await page.evaluate(() => {
+      window.__sinRecarga = true;
+      window.scrollTo(0, 800);
+    });
+    const scrollBefore = await page.evaluate(() => window.scrollY);
+    expect(scrollBefore).toBeGreaterThan(700);
+
+    await page.click(topLang('pt'));
+    await page.waitForURL('**/pt/index.html');
+    await page.waitForLoadState('load');
+
+    // Hubo navegación real: la marca en memoria se perdió.
+    expect(await page.evaluate(() => window.__sinRecarga)).toBeUndefined();
+    // Pero la posición se repone: este es el caso de abrir el sitio con file://.
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThanOrEqual(scrollBefore - 2);
+    await expect(page.locator('[data-i18n="inicio.goals.title"]')).toHaveText('Nossos objetivos');
+  });
+
+  test('el texto portugués no depende del JSON en runtime', async ({ page }) => {
+    // La propiedad que da el SEO: cada idioma llega ya escrito en el HTML.
+    // Aunque falle el fetch del catálogo, /pt/ se lee en portugués.
+    await page.route('**/content/pt.json', (route) => route.abort());
+    await page.goto('/pt/index.html');
+
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pt');
+    await expect(page.locator('[data-i18n="inicio.goals.title"]')).toHaveText('Nossos objetivos');
+    await expect(page.locator('[data-i18n="common.footer.copyright"]')).toHaveText(
+      '© 2026 Vanguardia Colombiana. Todos os direitos reservados.'
+    );
   });
 });

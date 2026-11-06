@@ -139,6 +139,149 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
   });
 });
 
+test.describe('modal UIkit en sm (transición global)', () => {
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(testInfo.project.name !== 'tablet-768', 'transición del modal en tablet');
+  });
+  test.beforeEach(noMotionPref);
+
+  test('el panel de sm ocupa el 90% del viewport y el CTA queda fijo', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
+    await page.locator('.goal-card').first().click();
+    const dialog = page.locator('[role="dialog"]');
+    await expect(dialog).toBeVisible();
+
+    await expect
+      .poll(() =>
+        page.evaluate(() => getComputedStyle(document.querySelector('.dialog')).backgroundColor)
+      )
+      .toBe('rgba(0, 0, 0, 0.25)');
+    await expect
+      .poll(() =>
+        page.evaluate(() => getComputedStyle(document.querySelector('.dialog__panel')).opacity)
+      )
+      .toBe('1');
+
+    const backdrop = await readTransition(page, '.dialog');
+    expect(backdrop.duration).toContain('0.3s');
+    expect(backdrop.property).toBe('background');
+
+    const panel = await readTransition(page, '.dialog__panel');
+    expect(panel.duration).toContain('0.3s');
+    expect(panel.property).toContain('opacity');
+    expect(panel.property).toContain('transform');
+
+    // Decisión 2026-11-03: el panel ocupa el 90% del ancho y del alto del
+    // viewport; el bloque de cuerpo tiene scroll y el CTA queda fijo abajo.
+    const layout = await page.evaluate(() => {
+      const box = (el) => el.getBoundingClientRect();
+      const p = document.querySelector('.dialog__panel');
+      const c = document.querySelector('.dialog__content');
+      const cta = document.querySelector('.dialog__cta');
+      return {
+        panelW: box(p).width,
+        panelH: box(p).height,
+        viewportW: window.innerWidth,
+        viewportH: window.innerHeight,
+        overflowY: getComputedStyle(c).overflowY,
+        ctaTop: box(cta).top,
+      };
+    });
+    expect(Math.round(layout.panelW)).toBe(Math.round(layout.viewportW * 0.9));
+    expect(Math.round(layout.panelH)).toBe(Math.round(layout.viewportH * 0.9));
+    expect(layout.panelW).toBeLessThanOrEqual(layout.viewportW);
+    expect(layout.panelH).toBeLessThanOrEqual(layout.viewportH);
+    expect(layout.overflowY).toBe('auto');
+
+    await page.evaluate(() => {
+      const c = document.querySelector('.dialog__content');
+      c.scrollTop = c.scrollHeight;
+    });
+    const afterScroll = await page.evaluate(() => {
+      const cta = document.querySelector('.dialog__cta');
+      return { ctaTop: cta.getBoundingClientRect().top };
+    });
+    expect(afterScroll.ctaTop).toBe(layout.ctaTop);
+
+    await page.locator('.dialog__close').click();
+    await expect(dialog).toBeHidden({ timeout: 2000 });
+  });
+});
+
+test.describe('modal UIkit en xs (90% del viewport)', () => {
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-375', 'panel del modal en mobile');
+  });
+  test.beforeEach(noMotionPref);
+
+  test('el panel ocupa el 90% del viewport y el cuerpo scrollea sin mover el CTA', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
+    await page.locator('.goal-card').first().click();
+    const dialog = page.locator('[role="dialog"]');
+    await expect(dialog).toBeVisible();
+    await expect
+      .poll(() =>
+        page.evaluate(() => getComputedStyle(document.querySelector('.dialog__panel')).transform)
+      )
+      .toBe('none');
+
+    const layout = await page.evaluate(() => {
+      const box = (el) => el.getBoundingClientRect();
+      const p = document.querySelector('.dialog__panel');
+      const c = document.querySelector('.dialog__content');
+      const cta = document.querySelector('.dialog__cta');
+      const close = document.querySelector('.dialog__close');
+      const overlay = document.querySelector('.dialog');
+      return {
+        panelW: box(p).width,
+        panelH: box(p).height,
+        viewportW: window.innerWidth,
+        viewportH: window.innerHeight,
+        ctaTop: box(cta).top,
+        ctaBottom: box(cta).bottom,
+        ctaH: box(cta).height,
+        closeTop: box(close).top - box(p).top,
+        closeSize: box(close).width,
+        overflowY: getComputedStyle(c).overflowY,
+        scrollH: c.scrollHeight,
+        clientH: c.clientHeight,
+        overlayScrollH: overlay.scrollHeight,
+        overlayClientH: overlay.clientHeight,
+      };
+    });
+
+    expect(Math.round(layout.panelW)).toBe(Math.round(layout.viewportW * 0.9));
+    expect(Math.round(layout.panelH)).toBe(Math.round(layout.viewportH * 0.9));
+    expect(layout.panelW).toBeLessThanOrEqual(layout.viewportW);
+    expect(layout.panelH).toBeLessThanOrEqual(layout.viewportH);
+    expect(Math.round(layout.ctaH)).toBe(54);
+    expect(Math.round(layout.closeSize)).toBe(24);
+    expect(Math.round(layout.closeTop)).toBe(29);
+    expect(layout.ctaBottom).toBeLessThanOrEqual(layout.viewportH);
+    expect(layout.overflowY).toBe('auto');
+    expect(layout.scrollH).toBeGreaterThan(layout.clientH);
+    // El overlay no necesita scroll: el panel está acotado al viewport.
+    expect(layout.overlayScrollH).toBeLessThanOrEqual(layout.overlayClientH);
+
+    await page.evaluate(() => {
+      const c = document.querySelector('.dialog__content');
+      c.scrollTop = c.scrollHeight;
+    });
+    const afterScroll = await page.evaluate(() => {
+      const c = document.querySelector('.dialog__content');
+      const cta = document.querySelector('.dialog__cta');
+      return { scrollTop: c.scrollTop, ctaTop: cta.getBoundingClientRect().top };
+    });
+    expect(afterScroll.scrollTop).toBeGreaterThan(0);
+    expect(afterScroll.ctaTop).toBe(layout.ctaTop);
+
+    await page.locator('.dialog__close').click();
+    await expect(dialog).toBeHidden({ timeout: 2000 });
+  });
+});
+
 test.describe('fades de sección (nota 4649:2018)', () => {
   test.beforeEach(onlyDesktop);
   test.beforeEach(noMotionPref);
@@ -186,6 +329,44 @@ test.describe('fades de sección (nota 4649:2018)', () => {
   });
 });
 
+test.describe('transición del menú de navegación (sm/xs)', () => {
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(
+      !['tablet-768', 'mobile-375'].includes(testInfo.project.name),
+      'overlay visible en sm/xs'
+    );
+  });
+  test.beforeEach(noMotionPref);
+
+  test('el overlay y su contenido se abren y cierran con transición', async ({ page }) => {
+    await page.goto('/index.html');
+    const menu = page.locator('#site-menu');
+
+    await expect(menu).toHaveCSS('visibility', 'hidden');
+    const overlay = await readTransition(page, '.site-nav__menu');
+    expect(overlay.duration).toContain('0.3s');
+    expect(overlay.property).toContain('opacity');
+    expect(overlay.property).toContain('visibility');
+
+    await page.locator('.site-nav__menu-open').click();
+    await expect(menu).toHaveCSS('visibility', 'visible');
+    await expect
+      .poll(() =>
+        page.evaluate(() => getComputedStyle(document.querySelector('#site-menu')).opacity)
+      )
+      .toBe('1');
+
+    const content = await readTransition(page, '.site-nav__menu-content');
+    expect(content.duration).toContain('0.3s');
+    expect(content.property).toContain('opacity');
+    expect(content.property).toContain('transform');
+
+    await page.locator('.site-nav__menu-close').click();
+    await expect(page.locator('.site-nav__menu-open')).toHaveAttribute('aria-expanded', 'false');
+    await expect(menu).toHaveCSS('visibility', 'hidden', { timeout: 2000 });
+  });
+});
+
 test.describe('navegación reducida (frame 4518:1968)', () => {
   test.beforeEach(onlyDesktop);
   test.beforeEach(noMotionPref);
@@ -205,6 +386,69 @@ test.describe('navegación reducida (frame 4518:1968)', () => {
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(nav).not.toHaveClass(/is-reduced/);
     await expect(inner).toHaveCSS('height', '160px', { timeout: 2000 });
+  });
+});
+
+test.describe('navegación reducida en sm (decisión 2026-11-03)', () => {
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(testInfo.project.name !== 'tablet-768', 'estado reducido de tablet');
+  });
+  test.beforeEach(noMotionPref);
+
+  test('la barra pasa de 75 a 56 px y el logo de 48 a 40', async ({ page }) => {
+    await page.goto('/index.html');
+    const nav = page.locator('.site-nav');
+    const inner = page.locator('.site-nav__inner');
+    const logo = page.locator('.site-nav__logo');
+
+    await expect(nav).toHaveCSS('position', 'fixed');
+    await expect(page.locator('body')).toHaveCSS('padding-top', '75px');
+    await expect(inner).toHaveCSS('height', '75px');
+    await expect(logo).toHaveCSS('width', '48px');
+    await expect(nav).not.toHaveClass(/is-reduced/);
+
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await expect(nav).toHaveClass(/is-reduced/);
+    await expect(inner).toHaveCSS('height', '56px', { timeout: 2000 });
+    await expect(logo).toHaveCSS('width', '40px');
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(nav).not.toHaveClass(/is-reduced/);
+    await expect(inner).toHaveCSS('height', '75px', { timeout: 2000 });
+    await expect(logo).toHaveCSS('width', '48px');
+  });
+});
+
+test.describe('navegación reducida en xs (pedido 2026-11-03)', () => {
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-375', 'estado reducido de mobile');
+  });
+  test.beforeEach(noMotionPref);
+
+  test('la barra pasa de 83,38 a 56 px y el logo de 48 a 40', async ({ page }) => {
+    await page.goto('/index.html');
+    const nav = page.locator('.site-nav');
+    const inner = page.locator('.site-nav__inner');
+    const logo = page.locator('.site-nav__logo');
+
+    await expect(nav).toHaveCSS('position', 'fixed');
+    await expect(page.locator('body')).toHaveCSS('padding-top', '83.38px');
+    await expect(inner).toHaveCSS('height', '83.375px');
+    await expect(logo).toHaveCSS('width', '48px');
+    await expect(nav).not.toHaveClass(/is-reduced/);
+    const transition = await readTransition(page, '.site-nav__inner');
+    expect(transition.duration).toContain('0.3s');
+    expect(transition.property).toContain('height');
+
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await expect(nav).toHaveClass(/is-reduced/);
+    await expect(inner).toHaveCSS('height', '56px', { timeout: 2000 });
+    await expect(logo).toHaveCSS('width', '40px');
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(nav).not.toHaveClass(/is-reduced/);
+    await expect(inner).toHaveCSS('height', '83.375px', { timeout: 2000 });
+    await expect(logo).toHaveCSS('width', '48px');
   });
 });
 

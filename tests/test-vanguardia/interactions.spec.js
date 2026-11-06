@@ -42,7 +42,8 @@ test.describe('diálogo de objetivos', () => {
     await page.locator('.goal-card').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
-    await expect(dialog).toHaveAttribute('aria-hidden', 'false');
+    await expect(dialog).toHaveAttribute('aria-modal', 'true');
+    await expect(page.locator('.dialog')).toHaveClass(/uk-open/);
   });
 
   test('Escape cierra el diálogo', async ({ page }) => {
@@ -51,6 +52,69 @@ test.describe('diálogo de objetivos', () => {
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('[role="dialog"]')).toBeHidden();
+  });
+
+  test('el backdrop cierra el diálogo (UIkit)', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.locator('.goal-card').first().click();
+    await expect(page.locator('[role="dialog"]')).toBeVisible();
+    await page.mouse.click(10, 10);
+    await expect(page.locator('[role="dialog"]')).toBeHidden();
+  });
+
+  test('UIkit bloquea el scroll de la página con el diálogo abierto', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.locator('.goal-card').first().click();
+    await expect(page.locator('[role="dialog"]')).toBeVisible();
+    await expect
+      .poll(() => page.evaluate(() => document.scrollingElement.style.overflowY))
+      .toBe('clip');
+    await page.locator('.dialog__close').click();
+    await expect(page.locator('[role="dialog"]')).toBeHidden();
+    await expect
+      .poll(() => page.evaluate(() => document.scrollingElement.style.overflowY))
+      .toBe('');
+  });
+
+  test('la card recorta el cuerpo a 3 líneas y el modal conserva el completo', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
+    const card = page.locator('.goal-card').nth(1);
+    await card.scrollIntoViewIfNeeded();
+    const body = card.locator('p');
+
+    const brevity = await body.evaluate((el) => {
+      const cs = getComputedStyle(el);
+      return {
+        clamp: cs.webkitLineClamp,
+        size: cs.fontSize,
+        line: cs.lineHeight,
+        height: el.getBoundingClientRect().height,
+        scrollHeight: el.scrollHeight,
+        clientHeight: el.clientHeight,
+        text: el.textContent,
+      };
+    });
+    expect(brevity.clamp).toBe('3');
+    expect(brevity.size).toBe('16px');
+    expect(brevity.line).toBe('24px');
+    expect(Math.round(brevity.height)).toBe(72);
+    expect(brevity.scrollHeight).toBeGreaterThan(brevity.clientHeight);
+
+    await card.click();
+    await expect(page.locator('[role="dialog"]')).toBeVisible();
+    const modal = await page.evaluate(() => {
+      const bodies = [...document.querySelectorAll('.dialog__body')];
+      const cs = getComputedStyle(bodies[0]);
+      return {
+        size: cs.fontSize,
+        line: cs.lineHeight,
+        text: bodies.map((b) => b.textContent).join('\n'),
+      };
+    });
+    expect(modal.size).toBe('18px');
+    expect(modal.line).toBe('31px');
+    expect(modal.text.length).toBeGreaterThanOrEqual(brevity.text.length);
   });
 });
 
@@ -140,8 +204,11 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
   }
 });
 
-test('menú móvil: abre y aria-expanded', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'mobile-375', 'menú móvil solo en 375');
+test('menú sm/xs: abre y aria-expanded', async ({ page }, testInfo) => {
+  test.skip(
+    !['tablet-768', 'mobile-375'].includes(testInfo.project.name),
+    'menú solo en sm/xs'
+  );
   await page.goto('/index.html');
   const open = page.locator('.site-nav__menu-open');
   await expect(open).toHaveAttribute('aria-expanded', 'false');
@@ -150,4 +217,81 @@ test('menú móvil: abre y aria-expanded', async ({ page }, testInfo) => {
   await expect(page.locator('#site-menu')).toBeVisible();
   await page.locator('.site-nav__menu-close').click();
   await expect(open).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('fondo de La Materia Prima: recorte horizontal por breakpoint', async ({ page }, testInfo) => {
+  const expected = {
+    'mobile-375': '404.747% 100%',
+    'tablet-768': '188.119% 100%',
+    'desktop-1448': 'cover',
+  }[testInfo.project.name];
+
+  await page.goto('/index.html');
+  const styles = await page.locator('.articles').evaluate((el) => {
+    const cs = getComputedStyle(el);
+    return { size: cs.backgroundSize, color: cs.backgroundColor };
+  });
+
+  expect(styles.size).toBe(expected);
+  expect(styles.color).toBe('rgb(27, 44, 67)');
+});
+
+test.describe('transición entre páginas', () => {
+  test('los enlaces locales se prerenderizan al pasar el cursor', async ({ page }) => {
+    await page.goto('/index.html');
+    const rules = await page.evaluate(() => {
+      const el = document.querySelector('script[type="speculationrules"]');
+      return el ? JSON.parse(el.textContent) : null;
+    });
+    expect(rules).not.toBeNull();
+    expect(rules.prerender[0].eagerness).toBe('moderate');
+    // Solo rutas del propio sitio y sin querystring: nada de externos.
+    expect(rules.prerender[0].where.and[0].href_matches).toBe('/*');
+    expect(JSON.stringify(rules.prerender[0].where)).toContain('not');
+  });
+
+  test('el fundido entre páginas está declarado y respeta reduced motion', async ({ page, request }) => {
+    const css = await (await request.get('/styles/main.css')).text();
+    expect(css).toContain('@view-transition');
+    // El bloque va dentro de `prefers-reduced-motion: no-preference`, así que
+    // con motion reducido la navegación es la de siempre.
+    const guard = css.slice(css.indexOf('@media (prefers-reduced-motion: no-preference)'));
+    expect(guard.slice(0, guard.indexOf('@view-transition'))).not.toBe('');
+    expect(await page.evaluate(() => CSS.supports('view-transition-name: none'))).toBe(true);
+  });
+
+  test('navegar cambia de página y de URL', async ({ page }) => {
+    await page.goto('/index.html');
+    // Se sale por el footer: sus enlaces están visibles en los tres viewports
+    // (los del nav solo desde 1448).
+    await page.locator('.site-footer__links a[href="programa.html"]').click();
+    await page.waitForURL('**/programa.html');
+    await expect(page.locator('h1')).toContainText('principios fundamentales');
+    await expect(page.locator('.site-nav__link.is-current')).toHaveAttribute('href', 'programa.html');
+  });
+
+  // El arnés corre con `reducedMotion: reduce`, así que el fundido está apagado
+  // por defecto; estos dos casos lo encienden y lo apagan a propósito.
+  const recordTransition = async (page, motion) => {
+    await page.emulateMedia({ reducedMotion: motion });
+    await page.addInitScript(() => {
+      window.addEventListener('pageswap', (event) => {
+        sessionStorage.setItem('vt', event.viewTransition ? 'si' : 'no');
+      });
+    });
+    await page.goto('/index.html');
+    await page.evaluate(() => {
+      window.location.href = 'programa.html';
+    });
+    await page.waitForURL('**/programa.html');
+    return page.evaluate(() => sessionStorage.getItem('vt'));
+  };
+
+  test('la navegación crea una view transition entre documentos', async ({ page }) => {
+    expect(await recordTransition(page, 'no-preference')).toBe('si');
+  });
+
+  test('con motion reducido no hay transición', async ({ page }) => {
+    expect(await recordTransition(page, 'reduce')).toBe('no');
+  });
 });
