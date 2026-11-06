@@ -42,5 +42,19 @@ Contenedor de contenido: **720 con padding 24** (ver [`../layout.md`](../layout.
 
 ## Diferencias por breakpoint
 
+## `xs` (375-xs)
+
+Frame `2396:2676` — **375×1510**: nav 83,5; `sección-únete` **739**;
+footer 715. En Figma la sección empieza en y=66 (solapa 3,5 con el nav) y el
+footer en y=781 (solapa 24 con la sección); la implementación no reproduce
+esos solapes.
+
+- **sección-únete** (`2396:2712`): padding 48; vídeo `341,079×216` con icono
+  de reproducción; título 41; body 295; gap media→texto 32 y título→body 8.
+- El body incluye «Agradecemos tu interés.» dentro del mismo párrafo y usa la
+  copia corta de Figma.
+
+## Diferencias por breakpoint
+
 `1024-sm` → `Únete` `2408:2315` (768×1370) · `375-xs` → `Únete`
-`2396:2676` (375×1510). Detalle: **PENDIENTE-FIGMA**.
+`2396:2676` (375×1510).

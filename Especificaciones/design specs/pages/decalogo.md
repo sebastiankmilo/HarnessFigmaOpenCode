@@ -42,5 +42,19 @@ Contenedor de contenido: **720 con padding 24** (ver [`../layout.md`](../layout.
 
 ## Diferencias por breakpoint
 
+## `xs` (375-xs)
+
+Frame `2396:2521` — **375×17372**: nav 83,5; header **1135,46**; puntos
+**15439**; footer 715.
+
+- **Header** (`2396:2523`): imagen 343×193,5 (16:9), título 58,4 (5 líneas) y
+  lead 465, ambos en `#fdfcfa` sobre el rojo `#cc371a`; padding superior 48.
+- **Puntos** (`2396:2543`): título de la sección 32,4; títulos de punto 32,4
+  (3 líneas el 1, 2 y 6); CTA «Únete» 107×47; padding superior 48.
+- El primer punto usa el título completo «1. La forma de organización de las
+  Vanguardias será la siguiente:».
+
+## Diferencias por breakpoint
+
 `1024-sm` → `decálogo` `2408:2098` (768×9088) · `375-xs` → `Decálogo`
-`2396:2521` (375×17372). Detalle: **PENDIENTE-FIGMA**.
+`2396:2521` (375×17372).

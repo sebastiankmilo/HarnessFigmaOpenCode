@@ -39,5 +39,18 @@ Contenedor de contenido: **720 con padding 24** (ver [`../layout.md`](../layout.
 
 ## Diferencias por breakpoint
 
+## `xs` (375-xs)
+
+Frame `2396:2820` — **375×2929**: nav 83,5; `sección-puntos` **2134**;
+footer 715. La sección arranca en y=66 en Figma (solapa con el nav); la
+implementación la deja en flujo.
+
+- Padding `48 / 64`; título 41/45,92; ancho 343.
+- El texto legal son **11 párrafos** (1865 en total) con separación 16 entre
+  párrafos, no un único bloque con saltos de línea.
+- CTA «Inicio» 108×47, separado 32 del bloque legal.
+
+## Diferencias por breakpoint
+
 `1024-sm` → `política-de-privacidad` `2421:1246` (768×1846) · `375-xs` →
-`política de privacidad` `2396:2820` (375×2929). Detalle: **PENDIENTE-FIGMA**.
+`política de privacidad` `2396:2820` (375×2929).

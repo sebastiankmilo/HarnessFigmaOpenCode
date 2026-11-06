@@ -55,5 +55,27 @@ Contenedor de contenido: **720 con padding 24** (ver [`../layout.md`](../layout.
 
 ## Diferencias por breakpoint
 
+## `xs` (375-xs)
+
+Frame `2396:104` — **375×17714**: nav 83,5; header **862,5**; ejes **1111**;
+materialismo **1495**; puntos **13448**; footer 715.
+
+- **Header** (`2396:2399`): imagen 343×193,5 (16:9), título «Nuestro Programa»
+  58,4 (2 líneas) y **solo el primer párrafo** del lead (403); padding 48.
+- **Ejes** (`2396:2416`): 1111; imagen 337×337 **oculta en el render** (el
+  export solo muestra título + intro); título 41, intro 899, gap 24, padding 48.
+- **Materialismo** (`2396:2423`): 1495; dos imágenes 163×163 con gap 18, título
+  41, lead 186 y **tres conclusiones** con viñeta (916); el resto del
+  materialismo histórico no se muestra en xs.
+- **Puntos** (`2396:2435`): 13448; título 41, 9 puntos con títulos 32,4 y CTA
+  «Únete» 107×47.
+
+Implementación: a 375 se usan las copias compactas de `programa.*`,
+`.prog-ejes__body--wide`/`.prog-mat__body--wide` se ocultan y las imágenes de
+ejes se ocultan. La página queda algo más corta que el frame por la adaptación
+del copy de puntos a Colombia (el diseño usa referencias a España).
+
+## Diferencias por breakpoint
+
 `1024-sm` → `programa` `2408:1816` (768×9616) · `375-xs` → `programa`
-`2396:104` (375×17714). El detalle de qué cambia: **PENDIENTE-FIGMA**.
+`2396:104` (375×17714).

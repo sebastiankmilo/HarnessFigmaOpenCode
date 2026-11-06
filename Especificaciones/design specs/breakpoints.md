@@ -38,6 +38,10 @@ herramienta: TalkToFigma (`scan_nodes_by_types, get_document_info, get_node_info
 | Únete | `2408:2315` | 768×1370 |
 | política-de-privacidad | `2421:1246` | 768×1846 |
 | nav | `2424:446` | 768×1024 |
+
+> El `Objetivo-modal` de `sm` mide 720×624 en Figma y el de `xs` 343×1095,
+> pero la implementación usa el **90% del ancho y el 90% del alto del
+> viewport** en ambos (decisión 2026-11-03).
 | components/images | `4486:1975` | 327×184 |
 | components/images | `4486:1978` | 327×216 |
 | components/images | `4486:1983` | 327×245 |

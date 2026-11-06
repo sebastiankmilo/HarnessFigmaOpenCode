@@ -63,8 +63,21 @@ Frame `nav` **`2424:446`** — **768×1024**, relleno `#f0ece6`:
 | Parte | Nodo | Tamaño | Posición relativa |
 | --- | --- | --- | --- |
 | `components/nav` | `2424:973` | 768×1024 | 0,0 |
-| `nav-content` | `2424:974` | 736×709 | x=16, y≈157 |
+| `nav-content` | `2424:974` | 736×709 | x=16, y≈157,5 |
 | `icons/close` | `2424:1003` | 24×24 | x=728 (borde derecho 16), y=24 |
+
+Dentro de `nav-content`:
+
+| Parte | Nodo | Tamaño | Detalle |
+| --- | --- | --- | --- |
+| `logo-dorado` | `4439:3417` | 128×137 | PNG con transparencia `logo-menu.png` (256×275 @2x) |
+| `links` | `2424:977` | 239×256 | 5 enlaces de 32 (16 px Black, tracking 1.92) con 24 entre sí |
+| `buttons` | `2424:993` | 736×44 | «Aporta» `2424:994` 107×44, relleno `#ffcd00`, texto `#30250f` |
+| `platforms` | `2424:996` | 145×32 | 5 iconos de 32 con gap 24; la fila visible mide 256 (los hijos desbordan el frame) |
+| `links` (idioma) | `4672:3475` | 83×32 | `ES` 22 + 16 + `/` 7 + 16 + `PT` 22; el inactivo es `#9e9382` |
+
+Separación vertical: logo → enlaces 64; entre enlaces, botón, plataformas e
+idioma, 48. El contenido queda centrado en el viewport (y≈157,5 en 1024).
 
 ### Instancias en las páginas `sm`
 
@@ -76,14 +89,50 @@ Frame `nav` **`2424:446`** — **768×1024**, relleno `#f0ece6`:
 | Únete | `2424:2055` | 768×75 |
 | política | `2424:2103` | 768×75 |
 
+## `375-xs`
+
+### Barra (variante `size=xs`)
+
+Instancias **375×83,38**, relleno `#fdfcfa`; logo 48 y los 3 iconos móviles
+(`is-mobile`) + hamburguesa. Alto actualizado por el ticket 6 (§2.3).
+
+La barra es `position: fixed` con `body { padding-top: 83,38 }`; al superar
+83,38 de scroll pasa a **56** y el logo de **48 → 40**, con transición de
+0,3 s (mismo patrón que sm/lg; decisión 2026-11-03).
+
+### Menú abierto (overlay)
+
+Frame **`2396:2902`** — **375×812**, relleno `#f0ece6`:
+
+| Parte | Nodo | Tamaño | Detalle |
+| --- | --- | --- | --- |
+| `nav-content` | `2396:3288;38:1048` | 343×609 | x=16, y≈101,5 (centrado) |
+| `logo-color` | `2396:3288;4835:3945` | 96×103 | PNG transparente `logo-menu.png` |
+| `links` | `2396:3288;38:1051` | 212×241 | 5 enlaces de 29 (14,2 Black, tracking 1.704) con 24 entre sí |
+| `buttons` | `2396:3288;38:1065` | 343×44 | «Aporta» `38:1066` 107×44, `#ffcd00` |
+| `platforms` | `2396:3288;38:1061` | 343×32 | 5 iconos de 32 con gap 24, en una fila |
+| `links` (idioma) | `2396:3288;4672:3813` | 82×29 | `ES` / `/` / `PT` 14,2 Black tracking 1.704 |
+| `icons/close` | `2396:3288;38:1068` | 24×24 | x=335 (borde derecho 16), y=24 |
+
+Separación vertical: logo → enlaces 64; entre enlaces, botón, plataformas e
+idioma, 32. El contenido queda centrado en el viewport (y≈101,5 en 812).
+
 ## Medidas y tokens
 
 | Elemento | Valor | Token |
 | --- | --- | --- |
 | Alto barra lg | 160 | `--nav-height-lg` |
-| Alto barra sm / xs | 75 / 83 | `--nav-height-sm` / `--nav-height-xs` |
+| Alto barra sm / xs | 75 / 83,38 | `--nav-height-sm` / `--nav-height-xs` |
+| Alto barra xs / sm reducida | 56 / 56 | `--nav-height-xs-reduced` / `--nav-height-sm-reduced` |
 | Logo lg / sm / xs | 96 / 48 / 48 | `--nav-logo-lg` / `--nav-logo-sm` / `--nav-logo-xs` |
+| Logo xs / sm reducido | 40 / 40 | `--nav-logo-xs-reduced` / `--nav-logo-sm-reduced` |
 | Fondo | `#fdfcfa` | `--color-surface-page` |
+| Fondo del overlay xs / sm | `#f0ece6` | `--color-surface-menu` |
+| Ancho de `nav-content` en xs / sm | 343 / 736 | `--menu-content-width-xs` / `--menu-content-width` |
+| Logo / close del overlay xs | 96 / 24 | `--icon-menu-logo` / `--icon-menu-close` |
+| Logo / close del overlay sm | 128 / 24 | `--icon-menu-logo-sm` / `--icon-menu-close-sm` |
+| Tracking de los textos del overlay xs / sm | 1.704 / 1.92 | `--nav-link-tracking` / `--menu-link-tracking` |
+| Padding vertical del «Aporta» del overlay | 10 | `--menu-btn-padding-y` |
 | Texto de enlaces | `#30250f` | `--color-text-brown` |
 | Gap entre bloques de `right-nav` | 28 | `--nav-gap-blocks` |
 | Botón primario del nav | `#ffcd00` | `--color-button-fill` |
@@ -95,6 +144,17 @@ Frame `nav` **`2424:446`** — **768×1024**, relleno `#f0ece6`:
 `Programa` (`2328:4307`), `Decálogo` (`2334:1005`) y `Únete` (`2335:1229`)
 con transición `DISSOLVE` 0,3 s. El enlace de la página actual apunta a
 `destinationId: null`. El selector `Es / / / PT` **no tiene reacciones**.
+
+La barra es `position: fixed` en los tres breakpoints y `body` reserva su
+altura con `padding-top`. Al superar el alto completo se aplica `.is-reduced`:
+`83,38 → 56` con logo `48 → 40` en xs, `75 → 56` con logo `48 → 40` en sm
+(decisión 2026-11-03, ver
+[`../interactions.md`](../interactions.md) §Navegación reducida) y
+`160 → 83` con logo `96 → 59` en lg (`4518:1968`).
+
+El overlay de menú (`#site-menu`) se abre/cierra con un fade de 0,3 s y un
+desplazamiento de 12 px de su contenido (decisión 2026-11-03, ver
+[`../interactions.md`](../interactions.md) §Menú de navegación (overlay sm/xs)).
 
 ## Accesibilidad
 

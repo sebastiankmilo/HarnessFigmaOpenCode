@@ -79,6 +79,40 @@ diseñador + las transiciones del prototipo (`get_reactions`).
 > su duración y easing son los de `4649:2012` (0,4 s `ease`), no los del
 > prototipo.
 
+### Modal de objetivos (UIkit)
+
+El overlay de `Objetivo-modal` usa el componente **Modal de UIkit**
+(`assets/vendor/uikit/uikit.min.js`, ya vendorizado para Scrollspy Nav):
+`uk-modal` en el contenedor, `uk-modal-dialog` en el panel y
+`uk-modal-close` en el cierre. UIkit gestiona `uk-open`, `Escape`, el clic
+en el backdrop, el foco (trampa y retorno a la card de origen),
+`role="dialog"`/`aria-modal` y el bloqueo del scroll de la página.
+
+El contenido de cada objetivo se rellena antes de `show()` desde
+`content/es.json` (`inicio.goals.card-N`: `title`, `body-small` y
+`body-complete`). La card muestra un **extracto de 3 líneas** del cuerpo
+(`paragraphs/s`, 16/24); el modal el **texto completo** (`paragraphs/base`,
+18/30,96). La estética sigue siendo la del diseño: en `lg`, panel 1024×604
+con cuerpo de 233; en `sm`, panel del **90% del ancho y el 90% del alto del
+viewport** (decisión 2026-11-03; el frame medía 720×624) con título y CTA
+fijos y el cuerpo scrolleable si el texto no cabe; en `xs`, el panel también
+ocupa el **90% del ancho y el 90% del alto del viewport** (el frame medía
+343×1095), con el cuerpo scrollable y título/CTA fijos. El backdrop
+`rgba(0,0,0,0.25)` y la transición de 0,3 s se aplican en los tres
+breakpoints, sobre las clases de estado de UIkit.
+
+### Menú de navegación (overlay sm/xs)
+
+El overlay `#site-menu` se abre y se cierra con un fade de **0,3 s**; el
+contenido (logo, enlaces, Aporta, redes e idioma) entra desde `translateY(12px)`
+con el mismo fade. La `visibility` del overlay se retrasa 0,3 s al cerrar para
+que la animación se vea y después queda oculto; en ese momento se marca
+`inert` + `aria-hidden` para que su contenido no sea enfocable.
+
+No hay una animación definida en Figma para este overlay: es una **decisión de
+implementación (2026-11-03)**, basada en el mismo movimiento de 0,3 s del
+resto del sitio.
+
 ## Navegación reducida
 
 Frame **`4518:1968`** de `1448-lg` — **1448×83**, relleno `#fdfcfa`.
@@ -94,6 +128,25 @@ pantalla: es la misma `size=lg` (1448×**160**) reducida a **83**.
 
 **Comportamiento:** al superar en el scroll el alto de la barra completa
 (160 px), la barra pasa a 83 px. Tamaño completo → reducido: **160 → 83**.
+La barra es `position: fixed` y `body` reserva su alto con `padding-top`.
+
+### `sm` (768) — decisión 2026-11-03
+
+La página `1024-sm` **no trae variante reducida**: solo la barra de 75. Por
+decisión del equipo se aplica el mismo comportamiento que en `lg` con medidas
+propias de tablet:
+
+| Breakpoint | Alto completo | Alto reducido | Logo completo / reducido |
+| --- | --- | --- | --- |
+| `xs` | 83,38 | **56** | 48 → **40** |
+| `sm` | 75 | **56** | 48 → **40** |
+| `lg` | 160 | 83 | 96 → 59 |
+
+El umbral es el alto completo (83,38 en xs, 75 en sm, 160 en lg). En los tres
+la barra es `position: fixed`, `body` reserva su altura en `padding-top` y el
+paso a `.is-reduced` transiciona el alto (y el ancho del logo) en 0,3 s.
+Tokens: `--nav-height-xs-reduced`, `--nav-logo-xs-reduced`,
+`--nav-height-sm-reduced`, `--nav-logo-sm-reduced` y `--nav-height-reduced`.
 
 ## Carruseles de `inicio`
 

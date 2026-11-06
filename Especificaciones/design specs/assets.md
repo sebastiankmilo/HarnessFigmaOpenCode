@@ -28,13 +28,23 @@ del nodo en Figma.
 | `article-2.png` | 644×515 | `I2326:4173;93:130` | 322×257 | @2x | ídem (art. 2) |
 | `article-3.png` | 644×515 | `I2326:4185;93:130` | 322×257 | @2x | ídem (art. 3) |
 | `article-4.png` | 644×515 | `I2326:4197;93:130` | 322×257 | @2x | ídem (art. 4) |
-| `materia-prima-bg.png` | 1448×885 | relleno `IMAGE` (`scaleMode: FILL`) del frame `sección-La-Materia-Prima` `2328:4236` | 1448×887 | 1× | `inicio` › `sección-La-Materia-Prima` (fondo) |
+| `materia-prima-bg.png` | 1448×885 | relleno `IMAGE` (`scaleMode: FILL` en lg; `STRETCH` recortado en xs/sm) del frame `sección-La-Materia-Prima` `2328:4236` | 1448×887 | 1× | `inicio` › `sección-La-Materia-Prima` (fondo) |
 | `join.png` | 1286×850 | `components/images` `4426:1225` (y `4427:1241`) | 643×425 | @2x | `inicio`/`Únete` › `sección-únete` |
 | `programa-header.png` | 876×656 | `components/images` `2328:4501` | 438×328 | @2x | `Programa` › `header` |
 | `programa-ejes.png` | 878×878 | `components/images` `2329:4515` | 439×439 | @2x | `Programa` › `sección-ejes` |
 | `programa-materialismo-1.png` | 408×406 | `components/images` `2329:4519` | 204×203 | @2x | `Programa` › `sección-materialismo` |
 | `programa-materialismo-2.png` | 408×406 | `components/images` `4422:1115` | 204×203 | @2x | ídem |
 | `decalogo-header.png` | 876×700 | `components/images` `2335:1222` | 438×350 | @2x | `Decálogo` › `header` |
+
+> **Logo del header (2026-11-03):** el diseño cambió al oso dorado de contorno;
+> se reexportaron `logo-color.png` (header) y `logo-menu.png` (overlay). El
+> `logo-02.png` del footer no cambia en este ticket.
+>
+> `materia-prima-bg.png` se usa entera con `cover` en `lg`. En `xs`/`sm` el
+> frame (`2392:4053` / `2408:1708`) rellena con `STRETCH` y un
+> `imageTransform` x=0.2470677 / 0.5315786: se muestra la **franja izquierda**
+> estirada al ancho de la sección (`background-size` 404.747% / 188.119%,
+> `background-position: left center`), sobre el sólido `#1b2c43`.
 
 ## B · Iconos (`site/assets/icons`)
 
@@ -61,7 +71,8 @@ componente maestro, la **instancia exacta** queda `PENDIENTE-FIGMA`.
 | `xiao-hong-shu.png` | 128×128 | `icons/xiao-hong-shu` | `27:1984` | — |
 | `logo.png` | 256×256 | `icons/logo` | `27:1675` | maestro 32×32; las instancias del footer miden 128×128 (2×256 ✓) |
 | `logo-02.png` | 256×256 | `icons/logo-02` | `2328:4285` | PENDIENTE-FIGMA (instancia exacta) |
-| `logo-color.png` | 192×206 | grupo `logo-color` del nav lg | `4331:2649` | 96×103 → 2× ✓ verificado |
+| `logo-color.png` | 192×206 | grupo `logo-color` del nav (`I2396:105;4835:4043`, nuevo oso dorado de contorno) | export 8× → 192×206 | 96×103 → 2×; actualizado 2026-11-03 |
+| `logo-menu.png` | 256×275 | grupo `logo-color` del overlay xs (`I2396:3288;4835:3945`, mismo logo) | export 8× → 256×275 | 128×137 → @2x; transparencia; actualizado 2026-11-03 |
 
 ## C · Tipografías (`site/assets/fonts`)
 

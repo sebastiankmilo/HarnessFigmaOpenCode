@@ -50,6 +50,22 @@ Hijos directos, en orden:
 
 Contenedor de contenido: **720 con padding 24** (ver [`../layout.md`](../layout.md) §`sm`).
 
+Nota de fondo: `sección-La-Materia-Prima` usa un fill `IMAGE` **STRETCH** con
+`imageTransform` x=0.5315786 (`2408:1708`); en `xs`, x=0.2470677 (`2392:4053`).
+Se implementa mostrando la franja izquierda del asset estirada
+(`background-size` 188.119% / 404.747%) sobre el sólido `#1b2c43`.
+
+## `xs` (375-xs)
+
+Frame `322:6042` — **375×4819**: `encabezado-contenido` 1021.51,
+`seccion-objetivos` 989, `sección-La-Materia-Prima` 932, `sección-únete`
+788.3, footer 715 y nav 83.38.
+
+Los leads de hero y La Materia Prima usan la **copia corta** de Figma
+(`2392:3975` y `2392:4056`; también en `sm`); el lead largo es de `lg`. La
+card de objetivo usa `body-small` (16/24, 3 líneas) por decisión de contenido,
+por eso la sección puede quedar por debajo del frame original.
+
 ## Diferencias por breakpoint
 
 **PENDIENTE-FIGMA** para `1448-lg`: el equivalente en `375-xs` es el frame

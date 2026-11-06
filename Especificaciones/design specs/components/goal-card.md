@@ -44,6 +44,11 @@ Las tres variantes llevan el mismo botón 123×44 `#003399`.
 | Cuerpo | `--color-text-secondary` | `#333333` |
 | Relleno del CTA | `--color-link-underline` no aplica → `#003399` | **PENDIENTE-FIGMA** (no hay token `--color-goal-cta` en `tokens.css`) |
 
+El **cuerpo de la card** usa `paragraphs/s` (16/24) y se recorta a **3 líneas**
+(72 px = 3 × 24, la caja de `2325:3904`). El **texto completo** se muestra en
+`Objetivo-modal` con `paragraphs/base` (18/30,96): la card es un extracto, el
+modal el desarrollo completo.
+
 ## Comportamiento
 
 `get_reactions`: cada `goal-card` de `seccion-objetivos` abre
