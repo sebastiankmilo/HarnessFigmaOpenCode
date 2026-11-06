@@ -186,7 +186,7 @@ button {
  * `prefers-reduced-motion`, la navegación es la de siempre — no hay nada que
  * desactivar. El fundido se hace sobre la raíz y sin desplazamiento: la barra
  * fija se queda donde está y solo cambia el contenido.
- * `scripts/navigation.js` prerenderiza además los enlaces al pasar el cursor,
+ * `scripts/transiciones.js` prerenderiza además los enlaces al pasar el cursor,
  * así la página nueva ya está lista cuando se hace clic. */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
