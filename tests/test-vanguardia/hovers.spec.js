@@ -185,7 +185,7 @@ test.describe('enlaces configurables (content/enlaces.json)', () => {
     test.skip(!id, 'sin `video` configurado en enlaces.json');
 
     // Sin fachada: el reproductor es el contenido desde el primer render.
-    const iframe = page.locator('.video__player iframe');
+    const iframe = page.locator('.media__iframe');
     await expect(iframe).toHaveCount(1);
     const src = await iframe.getAttribute('src');
     expect(src.startsWith(`https://www.youtube-nocookie.com/embed/${id}?`)).toBe(true);
@@ -194,8 +194,8 @@ test.describe('enlaces configurables (content/enlaces.json)', () => {
     await expect(iframe).toHaveAttribute('allowfullscreen');
     await expect(iframe).toHaveAttribute('loading', 'lazy');
     // Ni portada ni botón de play superpuestos.
-    await expect(page.locator('.video__player .media__img')).toHaveCount(0);
-    await expect(page.locator('.video__play')).toHaveCount(0);
+    await expect(page.locator('.media:has(> .media__iframe) > img')).toHaveCount(0);
+    await expect(page.locator('.media__play')).toHaveCount(0);
     await expect(page.locator('[data-video]')).toHaveCount(0);
   });
 
@@ -224,12 +224,12 @@ test.describe('enlaces configurables (content/enlaces.json)', () => {
 
   test('el nombre accesible del reproductor está traducido', async ({ page }) => {
     await page.goto('/index.html');
-    await expect(page.locator('.video__player iframe')).toHaveAttribute(
+    await expect(page.locator('.media__iframe')).toHaveAttribute(
       'title',
       'Vídeo de Vanguardia Colombiana'
     );
     await page.goto('/pt/index.html');
-    await expect(page.locator('.video__player iframe')).toHaveAttribute(
+    await expect(page.locator('.media__iframe')).toHaveAttribute(
       'title',
       'Vídeo da Vanguardia Colombiana'
     );

@@ -28,9 +28,4 @@
   .join-block--surface .join-block__text p {
     margin-top: var(--space-1);
   }
-
-  .join-block--surface .media__play {
-    width: var(--join-play-size);
-    transform: translate(-50%, -50%);
-  }
 }

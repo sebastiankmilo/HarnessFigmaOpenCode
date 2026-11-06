@@ -46,12 +46,6 @@
   box-shadow: inset 0 0 0 1px var(--color-button-fill);
 }
 
-.btn--outline-dark {
-  background: transparent;
-  color: var(--color-text-primary);
-  box-shadow: inset 0 0 0 1px var(--color-text-secondary);
-}
-
 .btn--s {
   padding: var(--space-1) var(--space-3);
   font-size: var(--font-size-body-s);
@@ -89,24 +83,6 @@
   border: 0;
 }
 
-.media__label {
-  position: absolute;
-  top: var(--media-label-top);
-  left: var(--media-label-left);
-  font-size: var(--font-size-xs-h1-xxl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading);
-  color: var(--color-on-dark);
-}
-
-.media__play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8.5%;
-  transform: translate(-33.33%, -50%);
-}
-
 /* Bloque «Únete» con imagen 3:2 (segunda sección-únete 4426:1111 / 4427:1240) */
 .media--3-2 {
   aspect-ratio: 3 / 2;
@@ -129,12 +105,6 @@
 
 .media--muted {
   background: var(--color-surface-muted);
-}
-
-.media--center .media__label {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /* ══ Bloque «Únete» (sección `2396:2712` / `2408:2478`) ═══════════ */
@@ -212,7 +182,12 @@
 
 /* La barra se ancla al viewport en los tres breakpoints. En xs el alto
  * completo es 83,38 y al hacer scroll baja a 56 (logo 48 → 40), con la
- * misma transición de 0,3 s que sm/lg. */
+ * misma transición de 0,3 s que sm/lg.
+ * `position: fixed` y el `padding-top` de `body` son una pareja a propósito:
+ * con `position: sticky` la barra seguía en el flujo, al aplicar `.is-reduced`
+ * el documento cambiaba de alto, el navegador reajustaba el scroll (scroll
+ * anchoring) y `nav.js` volvía a alternar la clase → bucle infinito de
+ * transición. Fuera del flujo el alto del header ya no toca al documento. */
 .site-nav {
   position: fixed;
   top: 0;
@@ -514,28 +489,9 @@ body {
     display: block;
   }
 
-  .site-nav__platform.is-mobile {
-    display: none;
-  }
-
-  /* El header se ancla al viewport con `position: fixed` y `body` reserva
-   * su altura con `padding-top` (mismo patrón que lg). Con `position: sticky`
-   * la barra seguía en el flujo: al aplicar `.is-reduced` el documento
-   * cambiaba de alto, el navegador reajustaba el scroll (scroll anchoring) y
-   * `nav.js` volvía a alternar la clase → bucle infinito de transición.
-   * Fuera del flujo el alto del header ya no toca al documento.
-   * Estado compacto desde sm: 75 → 56 con logo 48 → 40. Decisión 2026-11-03:
+  /* Estado compacto desde sm: 75 → 56 con logo 48 → 40. Decisión 2026-11-03:
    * Figma no trae variante reducida en `1024-sm` (solo la barra de 75); en
    * xs la barra sigue estática. */
-  .site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 90;
-    background: var(--color-surface-page);
-  }
-
   body {
     padding-top: var(--nav-height-sm);
   }
@@ -588,15 +544,6 @@ body {
     margin-top: var(--space-6);
   }
 
-  .site-nav__menu-buttons .btn--s {
-    padding-block: var(--menu-btn-padding-y);
-    padding-inline: var(--space-3);
-    font-weight: var(--font-weight-black);
-    letter-spacing: var(--menu-link-tracking);
-    background: var(--color-button-fill);
-    color: var(--color-text-brown);
-  }
-
   /* 5 iconos de 32 en una sola fila, con 24 de gap (`2424:996`). */
   .site-nav__menu-platforms {
     flex-wrap: nowrap;
@@ -604,13 +551,10 @@ body {
     margin-top: var(--space-6);
   }
 
+  /* El resto de la anatomía del selector de idioma es la de la regla base;
+   * aquí solo cambia el hueco superior (48 en `sm`, 24 en `xs`). */
   .site-nav__menu-lang {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
     margin-top: var(--space-6);
-    padding-bottom: var(--space-1);
-    color: var(--color-text-brown);
   }
 
   .site-nav__menu-lang .site-nav__lang-btn,
@@ -662,14 +606,6 @@ body {
     display: flex;
     align-items: center;
     gap: var(--space-1);
-  }
-
-  .site-nav__platform.is-desktop {
-    display: block;
-  }
-
-  .site-nav__platform.is-mobile {
-    display: none;
   }
 
   body {
