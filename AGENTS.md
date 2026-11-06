@@ -13,7 +13,20 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
 
 ## Idioma
 - Documentación y comentarios: español.
-- Código, nombres de archivo, clases CSS y rutas: inglés (kebab-case para archivos).
+- Etiquetas y atributos HTML: inglés (son de la plataforma, no se traducen).
+- Clases CSS, nombres de archivo y JS: español, sin abreviaturas. `prog` →
+  `programa`, `decal` → `decalogo`, `mat` → `materialismo`, `privac` →
+  `privacidad`.
+- Se exceptúa el vocabulario de plataforma e industria, que se queda en inglés
+  porque existiría igual en cualquier otro sitio: `hero`, `media`, `grid`,
+  `dialog`, `carousel`, `container`, `btn`, `article`, y los prefijos de
+  categoría `js-` (gancho de comportamiento), `is-`/`has-` (estado) y `u-`
+  (utilidad).
+- La prueba para decidir: un nombre se queda en inglés si existiría igual en
+  cualquier otro sitio del mundo; si solo tiene sentido sabiendo qué dice esta
+  página, va en español.
+- Los `id` de ancla publicados (`#point-N`) no se renombran: son enlaces
+  entrantes.
 
 ## Diseño → código
 - Fuente de verdad visual: `site/styles/tokens.css`. PROHIBIDO hardcodear
@@ -119,7 +132,7 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
 - Navegación entre páginas: el sitio es multipágina a propósito. El fundido de
   entrada/salida lo da `@view-transition { navigation: auto }` en `main.css`
   (dentro de `prefers-reduced-motion: no-preference`) y
-  `scripts/navigation.js` prerenderiza los enlaces locales con
+  `scripts/transiciones.js` prerenderiza los enlaces locales con
   `speculationrules` al pasar el cursor. Nada de eso cambia el HTML servido ni
   el SEO, y sin soporte del navegador la navegación es la de siempre: no se
   añade un router ni se convierte el sitio en una SPA.
