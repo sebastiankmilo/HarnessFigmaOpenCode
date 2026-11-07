@@ -27,11 +27,11 @@
   width: 100%;
 }
 
-.programa-hero h1 {
+.programa-hero__title {
   font-size: var(--font-size-xs-h1-xxl);
 }
 
-.programa-hero p {
+.programa-hero__lead {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -61,11 +61,11 @@
   width: 100%;
 }
 
-.programa-ejes h2 {
+.programa-ejes__title {
   font-size: var(--font-size-xs-h1);
 }
 
-.programa-ejes p {
+.programa-ejes__body {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -96,11 +96,11 @@
   width: 100%;
 }
 
-.programa-materialismo__lead h2 {
+.programa-materialismo__title {
   font-size: var(--font-size-xs-h1);
 }
 
-.programa-materialismo__lead p {
+.programa-materialismo__lead-text {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -134,7 +134,7 @@
   width: 100%;
 }
 
-.programa-puntos h2 {
+.programa-puntos__title {
   font-size: var(--font-size-xs-h1);
 }
 
@@ -183,7 +183,7 @@
     width: auto;
   }
 
-  .programa-hero h1 {
+  .programa-hero__title {
     font-size: var(--font-size-display-hero);
     line-height: var(--line-height-display-hero);
     letter-spacing: var(--tracking-display-hero);
@@ -214,12 +214,12 @@
     width: auto;
   }
 
-  .programa-ejes h2 {
+  .programa-ejes__title {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .programa-ejes p {
+  .programa-ejes__body {
     min-height: var(--ejes-body-height);
   }
 
@@ -242,7 +242,7 @@
     width: auto;
   }
 
-  .programa-materialismo__lead h2 {
+  .programa-materialismo__title {
     font-size: var(--font-size-l-h1-xl);
   }
 
@@ -251,12 +251,12 @@
     margin: var(--space-6) auto 0;
   }
 
-  .programa-materialismo__text p {
+  .programa-materialismo__body {
     position: relative;
     padding-left: var(--materialismo-bullet-indent);
   }
 
-  .programa-materialismo__text p::before {
+  .programa-materialismo__body::before {
     content: "";
     position: absolute;
     top: 0;
@@ -281,7 +281,7 @@
     width: auto;
   }
 
-  .programa-puntos h2 {
+  .programa-puntos__title {
     font-size: var(--font-size-l-h1-xl);
   }
 
@@ -312,7 +312,7 @@
     inset: 0;
   }
 
-  .programa-hero h1 {
+  .programa-hero__title {
     font-size: var(--font-size-display-hero-compact);
     line-height: var(--line-height-display-hero-compact);
     letter-spacing: var(--tracking-display-hero-compact);
@@ -337,7 +337,7 @@
     width: var(--ejes-media-size-xs);
   }
 
-  .programa-ejes h2 {
+  .programa-ejes__title {
     font-size: var(--font-size-xs-h1-xl);
     letter-spacing: var(--tracking-display-compact);
   }
@@ -358,7 +358,7 @@
     grid-column: 1 / -1;
   }
 
-  .programa-materialismo__lead h2 {
+  .programa-materialismo__title {
     font-size: var(--font-size-xs-h1-xl);
     letter-spacing: var(--tracking-display-compact);
   }
@@ -410,7 +410,7 @@
     padding-block: var(--space-6) var(--space-7);
   }
 
-  .programa-puntos h2 {
+  .programa-puntos__title {
     font-size: var(--font-size-xs-h1-xl);
     letter-spacing: var(--tracking-display-compact);
   }

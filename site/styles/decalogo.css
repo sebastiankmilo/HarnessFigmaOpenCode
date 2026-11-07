@@ -28,12 +28,12 @@
 }
 
 /* El título y el lead van en blanco sobre el rojo del header (`2396:2526/2527`). */
-.decalogo-hero h1 {
+.decalogo-hero__title {
   font-size: var(--font-size-l-h1-xxl);
   color: var(--color-surface-page);
 }
 
-.decalogo-hero p {
+.decalogo-hero__lead {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -69,7 +69,7 @@
     gap: var(--space-4);
   }
 
-  .decalogo-hero h1 {
+  .decalogo-hero__title {
     font-size: var(--font-size-xs-h1-xxl);
   }
 }
@@ -84,8 +84,8 @@
     padding-inline: var(--space-5);
   }
 
-  .decalogo-hero h1,
-  .decalogo-hero p {
+  .decalogo-hero__title,
+  .decalogo-hero__lead {
     color: var(--color-surface-page);
   }
 
@@ -104,13 +104,13 @@
     width: auto;
   }
 
-  .decalogo-hero h1 {
+  .decalogo-hero__title {
     font-size: var(--font-size-display-hero);
     line-height: var(--line-height-display-hero);
     letter-spacing: var(--tracking-display-hero);
   }
 
-  .decalogo-hero p {
+  .decalogo-hero__lead {
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
   }
@@ -150,7 +150,7 @@
     inset: 0;
   }
 
-  .decalogo-hero h1 {
+  .decalogo-hero__title {
     font-size: var(--font-size-display-hero-compact);
     line-height: var(--line-height-display-hero-compact);
     letter-spacing: var(--tracking-display-hero-compact);

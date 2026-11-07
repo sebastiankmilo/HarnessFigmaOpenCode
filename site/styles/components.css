@@ -126,13 +126,12 @@
   width: 100%;
 }
 
-.bloque-unete__text h1,
-.bloque-unete__text h2 {
+.bloque-unete__title {
   font-size: var(--font-size-xs-h1-xl); /* 41 — `2392:4119`, `4436:2824` */
   letter-spacing: var(--tracking-display-compact);
 }
 
-.bloque-unete__text p {
+.bloque-unete__body {
   margin-top: var(--space-3);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -140,7 +139,7 @@
 }
 
 /* Cierre «Agradecemos tu interés.»: párrafo aparte (bloque 560×285, unete.md) */
-.bloque-unete__text p + p {
+.bloque-unete__body + .bloque-unete__body {
   margin-top: var(--space-3);
 }
 
@@ -167,13 +166,12 @@
     width: auto;
   }
 
-  .bloque-unete__text h1,
-  .bloque-unete__text h2 {
+  .bloque-unete__title {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .bloque-unete__text p {
+  .bloque-unete__body {
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
   }

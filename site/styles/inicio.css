@@ -30,13 +30,13 @@
   margin-top: var(--space-5); /* hueco media → texto (312.5−280.5 en xs, 465.2−433.2 en sm) */
 }
 
-.hero h1 {
+.hero__title {
   font-size: var(--font-size-display-hero-compact);
   line-height: var(--line-height-display-hero-compact);
   letter-spacing: var(--tracking-display-hero-compact);
 }
 
-.hero p {
+.hero__lead {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -63,12 +63,12 @@
  * evita que el reproductor retrase el primer render. */
 
 /* ── 4 — seccion-objetivos (`2392:3995` / `2408:1650`) ──────────── */
-.section-intro h2 {
+.section-intro__title {
   font-size: var(--font-size-xs-h1-xl); /* 41 (Bebas) — `2392:3997`, `2408:1652` */
   letter-spacing: var(--tracking-display-compact);
 }
 
-.section-intro p {
+.section-intro__lead {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -239,11 +239,11 @@
 /* Sobre la banda navy: título dorado y lead claro (`2392:4055` #ceac57,
    `2392:4056` #fdfcfa) — en xs/sm también; en lg ya lo cubrían las reglas
    propias de la sección. */
-.articulos .section-intro h2 {
+.articulos .section-intro__title {
   color: var(--color-heading-gold);
 }
 
-.articulos .section-intro p {
+.articulos .section-intro__lead {
   color: var(--color-surface-page);
 }
 
@@ -567,13 +567,13 @@
     margin-top: 0; /* en lg la media es absoluta: no hay hueco superior */
   }
 
-  .hero h1 {
+  .hero__title {
     font-size: var(--font-size-display-hero);
     line-height: var(--line-height-display-hero);
     letter-spacing: var(--tracking-display-hero);
   }
 
-  .hero p {
+  .hero__lead {
     margin-top: var(--space-1);
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
@@ -598,12 +598,12 @@
     max-width: var(--section-intro-width);
   }
 
-  .section-intro h2 {
+  .section-intro__title {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .section-intro p {
+  .section-intro__lead {
     margin-top: var(--space-1);
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
@@ -670,7 +670,7 @@
     color: var(--color-surface-page);
   }
 
-  .articulos .section-intro p {
+  .articulos .section-intro__lead {
     margin-top: var(--space-1);
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);

@@ -25,7 +25,7 @@
     aspect-ratio: var(--unete-media-aspect-xs);
   }
 
-  .bloque-unete--superficie .bloque-unete__text p {
+  .bloque-unete--superficie .bloque-unete__body {
     margin-top: var(--space-1);
   }
 }

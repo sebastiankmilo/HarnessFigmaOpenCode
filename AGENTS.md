@@ -128,6 +128,14 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
   sección del diseño.
 - Verificación visual obligatoria a 1448 y 375 (mismo ancho que los frames de
   Figma para comparar 1:1).
+- Selectores: un elemento con identidad propia dentro del bloque lleva su clase
+  (`hero__title`, `programa-ejes__body`) y el CSS lo usa. La descendencia por
+  etiqueta (`X h2`, `X p`) se reserva para los hijos repetidos y anónimos —
+  las 11 viñetas legales, los 19 párrafos de los puntos, los iconos de una
+  barra—, donde añadir una clase a cada uno solo añade ruido.
+  Al convertir un selector de etiqueta en clase hay que comprobar que **todos**
+  los elementos que cubría tienen esa clase: si uno se queda sin ella, pierde
+  el estilo en silencio y solo lo caza la comparación de píxeles.
 - Accesibilidad obligatoria: foco visible, contraste AA, `prefers-reduced-motion`.
 - Navegación entre páginas: el sitio es multipágina a propósito. El fundido de
   entrada/salida lo da `@view-transition { navigation: auto }` en `main.css`

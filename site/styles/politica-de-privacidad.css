@@ -12,7 +12,7 @@
   background: var(--color-surface-page);
 }
 
-.privacidad h1 {
+.privacidad__title {
   font-size: var(--font-size-l-h1-xl);
 }
 
@@ -77,7 +77,7 @@
  * 16 de separación (el texto de Figma usa paragraph spacing) y 32 entre el
  * bloque legal y el CTA. */
 @media (max-width: 767px) {
-  .privacidad h1 {
+  .privacidad__title {
     font-size: var(--font-size-xs-h1-xl);
   }
 
