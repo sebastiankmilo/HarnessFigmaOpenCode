@@ -100,8 +100,20 @@
 /* Anatomía compacta = la de lg (media rectangular a sangre, texto con
  * inset 16): `2392:4001` (xs) y `2408:1656` (sm), foto 343/348×210. */
 .tarjeta-objetivo {
+  position: relative;
   padding: 0 0 var(--space-5);
   background: var(--color-surface-page);
+  cursor: pointer;
+}
+
+/* Disparador del modal: cubre la tarjeta entera, igual que el
+ * `.tarjeta-articulo__link` de las tarjetas de artículo. Es un `<button>` real
+ * cuyo nombre accesible sale del `<h3>` por `aria-labelledby`, de modo que el
+ * `<li>` conserva su rol de list item y el botón responde a Intro y Espacio. */
+.tarjeta-objetivo__disparador {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   cursor: pointer;
 }
 

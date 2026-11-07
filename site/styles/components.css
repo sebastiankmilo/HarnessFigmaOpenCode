@@ -765,14 +765,14 @@ body {
   gap: var(--space-3);
 }
 
-.punto h3 {
+.punto :is(h2, h3) {
   font-size: var(--font-size-xs-h3);
 }
 
 /* En xs los títulos de punto son 32.4/36.288 (3 líneas en el 1, 2 y 6),
  * como en `2396:2640` y `2396:2643`. */
 @media (max-width: 767px) {
-  .punto h3 {
+  .punto :is(h2, h3) {
     font-size: var(--font-size-xs-h1);
     line-height: var(--line-height-heading);
     letter-spacing: var(--tracking-card-display);
@@ -799,7 +799,7 @@ body {
 }
 
 @media (min-width: 1448px) {
-  .punto h3 {
+  .punto :is(h2, h3) {
     font-size: var(--font-size-l-h1);
   }
 
@@ -812,9 +812,7 @@ body {
    * clase `uk-active` que pone UIkit directamente sobre el enlace. Como el
    * enlace es bloque, la raya ocupa el ancho completo del ítem. */
   .indice {
-    display: flex;
-    flex-direction: column;
-    gap: var(--indice-link-gap);
+    display: block;
     /* El índice permanece visible y lo que se mueve es el texto (como el
      * índice lateral de la doc de UIkit): se ancla bajo la nav sticky. */
     position: sticky;
@@ -824,6 +822,13 @@ body {
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);
+  }
+
+  /* La lista es el hijo flex ahora que el índice es un <nav> con un <ol>. */
+  .indice__lista {
+    display: flex;
+    flex-direction: column;
+    gap: var(--indice-link-gap);
   }
 
   .indice li {

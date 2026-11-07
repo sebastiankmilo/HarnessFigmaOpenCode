@@ -79,8 +79,8 @@
   <title data-i18n="index.meta.title">Vanguardia Colombiana</title>
   <link rel="stylesheet" href="styles/tokens.css?v=f0d5b5c9">
   <link rel="stylesheet" href="styles/main.css?v=de1dc3a8">
-  <link rel="stylesheet" href="styles/components.css?v=22c2a7e7">
-  <link rel="stylesheet" href="styles/inicio.css?v=c1f2330a">
+  <link rel="stylesheet" href="styles/components.css?v=2f18c731">
+  <link rel="stylesheet" href="styles/inicio.css?v=ccc5d40a">
   <link rel="stylesheet" href="styles/utilidades.css?v=e2398485">
 </head>
 <body>
@@ -207,47 +207,61 @@
           <p data-i18n="inicio.goals.lead">Los puntos básicos que guían nuestras ideas y nuestro proyecto político son:</p>
         </div>
         <ul class="objetivos__grid" data-carousel="goals">
-          <li class="tarjeta-objetivo is-active" role="button" tabindex="0" aria-label="Ver objetivo: Elevación de los trabajadores colombianos a la condición de clase nacional">
+          <li class="tarjeta-objetivo is-active">
+            <button class="tarjeta-objetivo__disparador" type="button"
+                    aria-labelledby="objetivo-1-titulo"></button>
             <img class="tarjeta-objetivo__avatar" src="assets/img/goal-1.png" alt="">
             <div class="tarjeta-objetivo__text">
-              <h3 data-i18n="inicio.goals.card-1.title">Elevación de los trabajadores colombianos a la condición de clase nacional</h3>
+              <h3 id="objetivo-1-titulo" data-i18n="inicio.goals.card-1.title">Elevación de los trabajadores colombianos a la condición de clase nacional</h3>
               <p data-i18n="inicio.goals.card-1.body-small">Los trabajadores organizados hemos de controlar todas las capas y ramas del poder político; ser dueños y gestores del excedente de producción que nosotros mismos producimos.</p>
             </div>
           </li>
-          <li class="tarjeta-objetivo" role="button" tabindex="0" aria-label="Ver objetivo: La Iberofonía:">
+          <li class="tarjeta-objetivo">
+            <button class="tarjeta-objetivo__disparador" type="button"
+                    aria-labelledby="objetivo-2-titulo"></button>
             <img class="tarjeta-objetivo__avatar" src="assets/img/goal-2.png" alt="">
             <div class="tarjeta-objetivo__text">
-              <h3 data-i18n="inicio.goals.card-2.title">La Iberofonía:</h3>
+              <h3 id="objetivo-2-titulo" data-i18n="inicio.goals.card-2.title">La Iberofonía:</h3>
               <p data-i18n="inicio.goals.card-2.body-small">Una alianza estratégica geopolítica, económica y militar primeramente con los países de lo que fue la Gran Colombia…</p>
             </div>
           </li>
-          <li class="tarjeta-objetivo" role="button" tabindex="0" aria-label="Ver objetivo: Socialismo con características colombianas:">
+          <li class="tarjeta-objetivo">
+            <button class="tarjeta-objetivo__disparador" type="button"
+                    aria-labelledby="objetivo-3-titulo"></button>
             <img class="tarjeta-objetivo__avatar" src="assets/img/goal-3.png" alt="">
             <div class="tarjeta-objetivo__text">
-              <h3 data-i18n="inicio.goals.card-3.title">Socialismo con características colombianas:</h3>
+              <h3 id="objetivo-3-titulo" data-i18n="inicio.goals.card-3.title">Socialismo con características colombianas:</h3>
               <p data-i18n="inicio.goals.card-3.body-small">Se trata de un socialismo con características propias, netamente colombiano, compatible con la idiosincrasia de la inmensa mayoría de nuestro pueblo.</p>
             </div>
           </li>
-          <li class="tarjeta-objetivo" role="button" tabindex="0" aria-label="Ver objetivo: Política Exterior e Iberofonía">
+          <li class="tarjeta-objetivo">
+            <button class="tarjeta-objetivo__disparador" type="button"
+                    aria-labelledby="objetivo-4-titulo"></button>
             <img class="tarjeta-objetivo__avatar" src="assets/img/goal-4.png" alt="">
             <div class="tarjeta-objetivo__text">
-              <h3 data-i18n="inicio.goals.card-4.title">Centralismo democrático</h3>
+              <h3 id="objetivo-4-titulo" data-i18n="inicio.goals.card-4.title">Centralismo democrático</h3>
               <p data-i18n="inicio.goals.card-4.body-small">Nos oponemos radicalmente a cualquiera que pretenda destruir la unidad nacional y a toda forma de fragmentación o balcanización.</p>
             </div>
           </li>
-          <li class="tarjeta-objetivo" role="button" tabindex="0" aria-label="Ver objetivo: Planificación económica pluralista">
+          <li class="tarjeta-objetivo">
+            <button class="tarjeta-objetivo__disparador" type="button"
+                    aria-labelledby="objetivo-5-titulo"></button>
+
             <!-- Reutiliza `goal-3.png` hasta que este objetivo tenga imagen propia. -->
             <img class="tarjeta-objetivo__avatar" src="assets/img/goal-3.png" alt="">
             <div class="tarjeta-objetivo__text">
-              <h3 data-i18n="inicio.goals.card-5.title">Planificación económica pluralista mediante la tecnología cibernética</h3>
+              <h3 id="objetivo-5-titulo" data-i18n="inicio.goals.card-5.title">Planificación económica pluralista mediante la tecnología cibernética</h3>
               <p data-i18n="inicio.goals.card-5.body-small">No tenemos pretensiones totalitarias, pero tampoco creemos en la religión del librecambismo ni en la anarquía de la producción.</p>
             </div>
           </li>
-          <li class="tarjeta-objetivo" role="button" tabindex="0" aria-label="Ver objetivo: Sobre los hombros de gigantes">
+          <li class="tarjeta-objetivo">
+            <button class="tarjeta-objetivo__disparador" type="button"
+                    aria-labelledby="objetivo-6-titulo"></button>
+
             <!-- Reutiliza `goal-4.png` hasta que este objetivo tenga imagen propia. -->
             <img class="tarjeta-objetivo__avatar" src="assets/img/goal-4.png" alt="">
             <div class="tarjeta-objetivo__text">
-              <h3 data-i18n="inicio.goals.card-6.title">Sobre los hombros de gigantes</h3>
+              <h3 id="objetivo-6-titulo" data-i18n="inicio.goals.card-6.title">Sobre los hombros de gigantes</h3>
               <p data-i18n="inicio.goals.card-6.body-small">Por todo lo dicho, el proyecto de Vanguardia Colombiana no es, como diría el marxista peruano José Carlos Mariátegui, “ni calco ni copia, sino creación heroica”.</p>
             </div>
           </li>
@@ -405,6 +419,6 @@ El ejercicio efectivo del poder exige tomar el control predominantemente de la e
   <script src="scripts/transiciones.js?v=166bf227" defer></script>
   <script src="scripts/enlaces.js?v=41cc4786" defer></script>
   <script src="scripts/reveal.js?v=f04c1be3" defer></script>
-  <script src="scripts/inicio.js?v=3cdb0070" defer></script>
+  <script src="scripts/inicio.js?v=899bd77f" defer></script>
 </body>
 </html>

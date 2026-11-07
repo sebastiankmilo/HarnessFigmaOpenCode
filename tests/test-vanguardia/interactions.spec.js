@@ -39,7 +39,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('goal-card abre el diálogo', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveAttribute('aria-modal', 'true');
@@ -48,7 +48,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('Escape cierra el diálogo', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('[role="dialog"]')).toBeHidden();
@@ -56,7 +56,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('el backdrop cierra el diálogo (UIkit)', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await page.mouse.click(10, 10);
     await expect(page.locator('[role="dialog"]')).toBeHidden();
@@ -64,7 +64,7 @@ test.describe('diálogo de objetivos', () => {
 
   test('UIkit bloquea el scroll de la página con el diálogo abierto', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
     await expect
       .poll(() => page.evaluate(() => document.scrollingElement.style.overflowY))
@@ -198,7 +198,7 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
       await expect(page.locator('.indice a').nth(2)).toHaveAttribute('aria-current', 'true');
       await expect(page.locator('header.site-nav')).toHaveClass(/is-reduced/);
       const nav = await page.locator('header.site-nav').boundingBox();
-      const title = await page.locator('#point-3 h3').boundingBox();
+      const title = await page.locator('#point-3 :is(h2, h3)').boundingBox();
       expect(title.y).toBeGreaterThanOrEqual(nav.y + nav.height - 1);
     });
   }

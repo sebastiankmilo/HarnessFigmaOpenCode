@@ -94,7 +94,7 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
 
   test('backdrop rgba(0,0,0,0.25) con fade de 0,3 s', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
 
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
@@ -115,7 +115,7 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
 
   test('panel: opacity 0 → 1 con fade de 0,3 s', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
 
     await expect
       .poll(() =>
@@ -131,7 +131,7 @@ test.describe('modal estilo UIkit (nota 4649:2017)', () => {
 
   test('el backdrop vuelve a transparente al cerrar', async ({ page }) => {
     await page.goto('/index.html');
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
 
     await page.locator('.dialog__close').click();
@@ -148,7 +148,7 @@ test.describe('modal UIkit en sm (transición global)', () => {
   test('el panel de sm ocupa el 90% del viewport y el CTA queda fijo', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
 
@@ -218,7 +218,7 @@ test.describe('modal UIkit en xs (90% del viewport)', () => {
   test('el panel ocupa el 90% del viewport y el cuerpo scrollea sin mover el CTA', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
-    await page.locator('.tarjeta-objetivo').first().click();
+    await page.locator('.tarjeta-objetivo__disparador').first().click();
     const dialog = page.locator('[role="dialog"]');
     await expect(dialog).toBeVisible();
     await expect
