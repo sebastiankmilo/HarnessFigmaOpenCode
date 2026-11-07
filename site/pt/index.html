@@ -81,7 +81,7 @@
   <link rel="stylesheet" href="../styles/main.css?v=de1dc3a8">
   <link rel="stylesheet" href="../styles/components.css?v=2f18c731">
   <link rel="stylesheet" href="../styles/inicio.css?v=ccc5d40a">
-  <link rel="stylesheet" href="../styles/utilidades.css?v=e2398485">
+  <link rel="stylesheet" href="../styles/utilidades.css?v=cfd379ac">
 </head>
 <body>
   <svg class="svg-filters" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -100,7 +100,7 @@
     </filter>
   </svg>
   <header class="site-nav">
-    <nav class="site-nav__inner" aria-label="Principal">
+    <nav class="site-nav__inner" aria-labelledby="nav-principal"><span class="u-visually-hidden" id="nav-principal" data-i18n="common.a11y.principal">Navegação principal</span>
       <a class="site-nav__logo" href="index.html">
         <img src="../assets/icons/logo-color.png" alt="Vanguardia Colombiana">
       </a>
@@ -121,7 +121,7 @@
           <a class="site-nav__platform is-desktop" href="https://x.com/VanguardiaColo" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/x.png" alt="X"></a>
           <a class="site-nav__platform is-desktop" href="https://www.tiktok.com/@lavanguardiacolombiana" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/tik-tok.png" alt="TikTok"></a>
         </div>
-                <div class="site-nav__lang" role="group" aria-label="Idioma">
+                <div class="site-nav__lang" role="group" aria-labelledby="idioma-nav"><span class="u-visually-hidden" id="idioma-nav" data-i18n="common.a11y.idioma">Idioma</span>
                   <!-- @lang:start -->
                   <a class="site-nav__lang-btn" data-lang="es" lang="es" hreflang="es" href="../index.html">ES</a>
                   <span class="site-nav__lang-sep" aria-hidden="true">/</span>
@@ -130,18 +130,19 @@
                 </div>
         <div class="site-nav__toggle">
           <button class="js-menu-open" type="button" aria-expanded="false" aria-controls="site-menu">
-            <img src="../assets/icons/hamburger-two.png" alt="Abrir menú">
+            <span class="u-visually-hidden" data-i18n="common.a11y.abrir-menu">Abrir menu</span>
+            <img src="../assets/icons/hamburger-two.png" alt="">
           </button>
         </div>
       </div>
     </nav>
     <div class="site-nav__menu" id="site-menu" aria-hidden="true">
-      <button class="js-menu-close" type="button" aria-label="Cerrar menú">
+      <button class="js-menu-close" type="button"><span class="u-visually-hidden" data-i18n="common.a11y.cerrar-menu">Fechar menu</span>
         <img src="../assets/icons/close.png" alt="">
       </button>
       <div class="site-nav__menu-content">
         <a href="index.html"><img class="site-nav__menu-logo" src="../assets/icons/logo-menu.png" alt="Vanguardia Colombiana"></a>
-        <nav class="site-nav__menu-links" aria-label="Menú">
+        <nav class="site-nav__menu-links" aria-labelledby="nav-menu"><span class="u-visually-hidden" id="nav-menu" data-i18n="common.a11y.menu">Menu</span>
           <a href="programa.html" data-i18n="common.nav.programa">Programa</a>
           <a href="decalogo.html" data-i18n="common.nav.decalogo">Decálogo</a>
           <a href="unete.html" data-i18n="common.nav.unete">Junte-se</a>
@@ -158,7 +159,7 @@
           <a href="https://x.com/VanguardiaColo" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/x.png" alt="X"></a>
           <a href="https://www.tiktok.com/@lavanguardiacolombiana" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/tik-tok.png" alt="TikTok"></a>
         </div>
-        <div class="site-nav__menu-lang" role="group" aria-label="Idioma">
+        <div class="site-nav__menu-lang" role="group" aria-labelledby="idioma-menu"><span class="u-visually-hidden" id="idioma-menu" data-i18n="common.a11y.idioma">Idioma</span>
           <!-- @lang:start -->
           <a class="site-nav__lang-btn" data-lang="es" lang="es" hreflang="es" href="../index.html">ES</a>
           <span class="site-nav__lang-sep" aria-hidden="true">/</span>
@@ -267,18 +268,18 @@
           </li>
         </ul>
         <div class="carousel__pagination" data-carousel-controls="goals">
-          <button class="carousel__arrow" type="button" data-carousel-prev aria-label="Objetivo anterior">
+          <button class="carousel__arrow" type="button" data-carousel-prev><span class="u-visually-hidden" data-i18n="inicio.goals.prev">Objetivo anterior</span>
             <img src="../assets/icons/prev.png" alt="">
           </button>
           <div class="carousel__dots">
-            <button class="carousel__dot is-active" type="button" data-carousel-dot="0" aria-label="Ir al objetivo 1" aria-current="true"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="1" aria-label="Ir al objetivo 2"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="2" aria-label="Ir al objetivo 3"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="3" aria-label="Ir al objetivo 4"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="4" aria-label="Ir al objetivo 5"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="5" aria-label="Ir al objetivo 6"></button>
+            <button class="carousel__dot is-active" type="button" data-carousel-dot="0" aria-current="true"><span class="u-visually-hidden" data-i18n="inicio.goals.dot-1">Ir para o objetivo 1</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="1"><span class="u-visually-hidden" data-i18n="inicio.goals.dot-2">Ir para o objetivo 2</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="2"><span class="u-visually-hidden" data-i18n="inicio.goals.dot-3">Ir para o objetivo 3</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="3"><span class="u-visually-hidden" data-i18n="inicio.goals.dot-4">Ir para o objetivo 4</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="4"><span class="u-visually-hidden" data-i18n="inicio.goals.dot-5">Ir para o objetivo 5</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="5"><span class="u-visually-hidden" data-i18n="inicio.goals.dot-6">Ir para o objetivo 6</span></button>
           </div>
-          <button class="carousel__arrow" type="button" data-carousel-next aria-label="Objetivo siguiente">
+          <button class="carousel__arrow" type="button" data-carousel-next><span class="u-visually-hidden" data-i18n="inicio.goals.next">Próximo objetivo</span>
             <img src="../assets/icons/next.png" alt="">
           </button>
         </div>
@@ -336,16 +337,16 @@
           </li>
         </ul>
         <div class="carousel__pagination articulos__pagination" data-carousel-controls="articles">
-          <button class="carousel__arrow" type="button" data-carousel-prev aria-label="Artículo anterior">
+          <button class="carousel__arrow" type="button" data-carousel-prev><span class="u-visually-hidden" data-i18n="inicio.articles.prev">Artigo anterior</span>
             <img src="../assets/icons/prev.png" alt="">
           </button>
           <div class="carousel__dots">
-            <button class="carousel__dot is-active" type="button" data-carousel-dot="0" aria-label="Ir al artículo 1" aria-current="true"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="1" aria-label="Ir al artículo 2"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="2" aria-label="Ir al artículo 3"></button>
-            <button class="carousel__dot" type="button" data-carousel-dot="3" aria-label="Ir al artículo 4"></button>
+            <button class="carousel__dot is-active" type="button" data-carousel-dot="0" aria-current="true"><span class="u-visually-hidden" data-i18n="inicio.articles.dot-1">Ir para o artigo 1</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="1"><span class="u-visually-hidden" data-i18n="inicio.articles.dot-2">Ir para o artigo 2</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="2"><span class="u-visually-hidden" data-i18n="inicio.articles.dot-3">Ir para o artigo 3</span></button>
+            <button class="carousel__dot" type="button" data-carousel-dot="3"><span class="u-visually-hidden" data-i18n="inicio.articles.dot-4">Ir para o artigo 4</span></button>
           </div>
-          <button class="carousel__arrow" type="button" data-carousel-next aria-label="Artículo siguiente">
+          <button class="carousel__arrow" type="button" data-carousel-next><span class="u-visually-hidden" data-i18n="inicio.articles.next">Próximo artigo</span>
             <img src="../assets/icons/next.png" alt="">
           </button>
         </div>
@@ -399,7 +400,7 @@ Agradecemos seu interesse.</p>
 
   <div class="uk-modal dialog" id="goal-modal" uk-modal>
     <div class="uk-modal-dialog uk-margin-auto-vertical dialog__panel" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
-      <button class="dialog__close uk-modal-close" type="button" aria-label="Cerrar">
+      <button class="dialog__close uk-modal-close" type="button"><span class="u-visually-hidden" data-i18n="common.a11y.cerrar">Fechar</span>
         <img src="../assets/icons/close.png" alt="">
       </button>
       <h2 class="dialog__title" id="dialog-title" data-i18n="inicio.goals.card-1.title">Elevação dos trabalhadores colombianos à condição de classe nacional</h2>

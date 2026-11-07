@@ -19,6 +19,15 @@
       "aporta": "Contribua",
       "politica-privacidad": "Política de privacidade",
       "copyright": "© 2026 Vanguardia Colombiana. Todos os direitos reservados."
+    },
+    "a11y": {
+      "principal": "Navegação principal",
+      "menu": "Menu",
+      "indice": "Índice de pontos",
+      "idioma": "Idioma",
+      "abrir-menu": "Abrir menu",
+      "cerrar-menu": "Fechar menu",
+      "cerrar": "Fechar"
     }
   },
   "index": {
@@ -94,7 +103,15 @@
           "Nosso projeto político não pode ser “nem decalque nem cópia, mas criação heroica”. Mas esta criação não parte do nada: parte de nossas realidades históricas, culturais, filosóficas e políticas, acumuladas ao longo de um extenso percurso histórico, para dar-lhes uma nova orientação de acordo com nossa realidade concreta, aqui e agora. Por isso não pretendemos reinventar a roda ignorando os avanços daqueles que nos precederam no ofício de pensar, atuar e transformar nossa realidade política, econômica e social. Somente poderemos ver e chegar mais longe se subirmos aos ombros de gigantes.",
           "Não queremos importar modelos alheios nem repetir fórmulas do passado. Queremos construir nosso próprio caminho, tomando da tradição aquilo que conserva força histórica e vigência, mas transformando-o à luz das necessidades concretas da Colômbia atual. Um socialismo colombiano, ibérofono, soberano, organizado e orientado para o futuro; um projeto político capaz de converter nossa realidade nacional no ponto de partida para a construção de uma nova comunidade histórica.\n\nE isso só se pode saber empiricamente, desenvolvendo-o na própria prática, ainda que com princípios retores claros e solidamente definidos."
         ]
-      }
+      },
+      "prev": "Objetivo anterior",
+      "next": "Próximo objetivo",
+      "dot-1": "Ir para o objetivo 1",
+      "dot-2": "Ir para o objetivo 2",
+      "dot-3": "Ir para o objetivo 3",
+      "dot-4": "Ir para o objetivo 4",
+      "dot-5": "Ir para o objetivo 5",
+      "dot-6": "Ir para o objetivo 6"
     },
     "articles": {
       "title": "A Matéria-Prima",
@@ -116,7 +133,13 @@
         "title": "Eleições na Colômbia: entre a fraude e a ilusão democrática",
         "body": "Em 31 de maio, as eleições colombianas deixaram no primeiro turno Abelardo de la Espriella e Iván Cepeda. Tomar partido por..."
       },
-      "cta": "lamateriaprima.org"
+      "cta": "lamateriaprima.org",
+      "prev": "Artigo anterior",
+      "next": "Próximo artigo",
+      "dot-1": "Ir para o artigo 1",
+      "dot-2": "Ir para o artigo 2",
+      "dot-3": "Ir para o artigo 3",
+      "dot-4": "Ir para o artigo 4"
     },
     "join": {
       "title": "Junte-se à Vanguardia Colombiana",
