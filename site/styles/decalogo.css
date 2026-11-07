@@ -7,7 +7,7 @@
 
 /* ── 2 — header (`2396:2523`) ───────────────────────────────────── */
 .decalogo-hero {
-  background: var(--color-decal-hero);
+  background: var(--color-decalogo-hero);
 }
 
 .decalogo-hero__grid {
@@ -121,12 +121,12 @@
 
   .decalogo-puntos__inner {
     flex-direction: row;
-    max-width: var(--points-inner-width);
+    max-width: var(--puntos-inner-width);
     margin-inline: auto;
   }
 
   .decalogo-puntos__body {
-    flex: 1 1 var(--points-body-basis);
+    flex: 1 1 var(--puntos-body-basis);
     width: auto;
   }
 }

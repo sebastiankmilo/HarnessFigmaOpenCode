@@ -210,7 +210,7 @@
 
   .programa-materialismo .media {
     display: block;
-    flex: 0 0 var(--mat-media-basis);
+    flex: 0 0 var(--materialismo-media-basis);
     width: auto;
   }
 
@@ -224,14 +224,14 @@
   }
 
   .programa-materialismo {
-    padding-block: var(--space-mat-top) var(--space-mat-bottom);
+    padding-block: var(--space-materialismo-top) var(--space-materialismo-bottom);
   }
 
   .programa-materialismo__row {
     flex-direction: row;
     align-items: center;
     gap: var(--space-5);
-    max-width: var(--mat-row-width);
+    max-width: var(--materialismo-row-width);
     margin-inline: auto;
   }
 
@@ -247,13 +247,13 @@
   }
 
   .programa-materialismo__text {
-    max-width: var(--mat-text-width);
+    max-width: var(--materialismo-text-width);
     margin: var(--space-6) auto 0;
   }
 
   .programa-materialismo__text p {
     position: relative;
-    padding-left: var(--mat-bullet-indent);
+    padding-left: var(--materialismo-bullet-indent);
   }
 
   .programa-materialismo__text p::before {
@@ -261,23 +261,23 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: var(--icon-mat-bullet);
-    height: var(--icon-mat-bullet);
+    width: var(--icon-materialismo-bullet);
+    height: var(--icon-materialismo-bullet);
     background: url("../assets/icons/star.png") no-repeat center / contain;
   }
 
   .programa-puntos {
-    padding-block: var(--space-points-top) var(--space-8);
+    padding-block: var(--space-puntos-top) var(--space-8);
   }
 
   .programa-puntos__inner {
     flex-direction: row;
-    max-width: var(--points-inner-width);
+    max-width: var(--puntos-inner-width);
     margin-inline: auto;
   }
 
   .programa-puntos__body {
-    flex: 1 1 var(--points-body-basis);
+    flex: 1 1 var(--puntos-body-basis);
     width: auto;
   }
 
@@ -288,7 +288,7 @@
   /* `2331:4699` mide 1225 px: Figma aplica `paragraphSpacing` al salto de
    * párrafo y CSS no puede expresarlo dentro de un mismo <p>. */
   .programa-puntos .punto:nth-child(3) p {
-    min-height: var(--point-body-box-lg);
+    min-height: var(--punto-body-box-lg);
   }
 }
 
@@ -334,7 +334,7 @@
   .programa-ejes__text {
     position: relative;
     z-index: 1;
-    width: var(--prog-ejes-media-size-xs);
+    width: var(--ejes-media-size-xs);
   }
 
   .programa-ejes h2 {
@@ -350,7 +350,7 @@
   .programa-materialismo__row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--prog-mat-media-gap-xs);
+    column-gap: var(--materialismo-media-gap-xs);
     row-gap: var(--space-5);
   }
 
@@ -380,7 +380,7 @@
 
   .programa-materialismo__body--compact {
     position: relative;
-    padding-left: var(--prog-mat-bullet-indent-xs);
+    padding-left: var(--materialismo-bullet-indent-xs);
     white-space: pre-line;
   }
 
@@ -388,7 +388,7 @@
     content: "•";
     position: absolute;
     top: 0;
-    left: var(--prog-mat-bullet-left-xs);
+    left: var(--materialismo-bullet-left-xs);
     color: var(--color-text-secondary);
   }
 }

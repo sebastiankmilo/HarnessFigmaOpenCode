@@ -1,8 +1,9 @@
 /* site/styles/components.css — componentes compartidos entre páginas
  * Spec: Especificaciones/design specs/components/* · valores: solo styles/tokens.css
- * Carga: tokens.css → main.css → components.css → <pagina>.css.
- * Contiene lo que usan 2+ páginas: btn, media (+variantes), join-block,
- * site-nav, site-footer y el bloque de puntos (points/point/page-index/cta).
+ * Carga: tokens.css → main.css → components.css → <pagina>.css
+ * → utilidades.css.
+ * Contiene lo que usan 2+ páginas: btn, media (+variantes), bloque-unete,
+ * site-nav, site-footer y el bloque de puntos (puntos/punto/indice/cta).
  * Cada componente es una sola definición con sus media queries internas
  * (base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = lg):
  * el CSS de página solo aporta el contexto que le es propio.
@@ -157,12 +158,12 @@
   }
 
   .bloque-unete__media {
-    flex: 0 0 var(--join-media-basis);
+    flex: 0 0 var(--unete-media-basis);
     width: auto;
   }
 
   .bloque-unete__text {
-    flex: 0 0 var(--join-text-basis);
+    flex: 0 0 var(--unete-text-basis);
     width: auto;
   }
 
@@ -813,26 +814,26 @@ body {
   .indice {
     display: flex;
     flex-direction: column;
-    gap: var(--index-link-gap);
+    gap: var(--indice-link-gap);
     /* El índice permanece visible y lo que se mueve es el texto (como el
      * índice lateral de la doc de UIkit): se ancla bajo la nav sticky. */
     position: sticky;
     top: calc(var(--nav-height-reduced) + var(--space-5));
     align-self: flex-start;
-    flex: 0 1 var(--index-column-basis);
+    flex: 0 1 var(--indice-column-basis);
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);
   }
 
   .indice li {
-    width: var(--index-link-width);
+    width: var(--indice-link-width);
   }
 
   .indice a {
     display: block;
-    padding-bottom: var(--index-underline-offset);
-    border-bottom: var(--index-underline) solid transparent;
+    padding-bottom: var(--indice-underline-offset);
+    border-bottom: var(--indice-underline) solid transparent;
     transition: all 0.4s ease;
   }
 

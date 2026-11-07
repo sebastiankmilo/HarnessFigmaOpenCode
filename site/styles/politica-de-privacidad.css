@@ -64,7 +64,7 @@
   }
 
   .privacidad__inner {
-    max-width: var(--privac-width);
+    max-width: var(--privacidad-width);
     margin-inline: auto;
   }
 

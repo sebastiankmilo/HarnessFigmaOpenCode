@@ -66,9 +66,10 @@
 }
 
 /* site/styles/main.css — base global (reset, tipografía, layout).
- * Los componentes compartidos (btn, media, join-block, nav, footer,
- * points/page-index/cta) viven en styles/components.css, que se carga
- * después: tokens.css → main.css → components.css → <pagina>.css. */
+ * Los componentes compartidos (btn, media, bloque-unete, nav, footer,
+ * puntos/indice/cta) viven en styles/components.css, que se carga
+ * después: tokens.css → main.css → components.css → <pagina>.css
+ * → utilidades.css (esta última gana a igual especificidad). */
 
 *,
 *::before,

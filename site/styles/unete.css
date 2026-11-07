@@ -22,7 +22,7 @@
   }
 
   .bloque-unete--superficie .media--3-2 {
-    aspect-ratio: var(--join-media-aspect-xs);
+    aspect-ratio: var(--unete-media-aspect-xs);
   }
 
   .bloque-unete--superficie .bloque-unete__text p {

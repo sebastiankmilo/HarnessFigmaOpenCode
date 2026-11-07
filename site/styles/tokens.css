@@ -39,7 +39,7 @@
   --color-footer-bg: #ffd633;          /* fondo del footer en las 5 vistas */
   --color-section-soft: #f0ece6;       /* fondo de la sección «Nuestros objetivos» (inicio) */
   --color-materia-bg: #1b2c43;         /* sólido bajo la imagen de «La Materia Prima» (`2408:1708`, `2392:4053`) */
-  --color-decal-hero: #cc371a;         /* fondo del hero de Decálogo (y160-780) */
+  --color-decalogo-hero: #cc371a;         /* fondo del hero de Decálogo (y160-780) */
   --color-lang-inactive: #9e9382;      /* idioma inactivo (PT) del selector ES/PT */
 
   /* Fondo de «La Materia Prima»: en xs/sm el fill IMAGE es STRETCH con un
@@ -71,8 +71,8 @@
   --ejes-body-height: 419px;     /* alto del párrafo de sección-ejes (`2328:4513`, 674×419) */
   --article-card-height: 525px;  /* alto de `container-and-card` (`2326:4137`, 322×525) */
   --article-card-height-xs: 513px; /* alto de la card de artículo en `375-xs` (`2392:4053` › artículos) */
-  --point-body-box-lg: 1225px;   /* caja del punto 3 de Programa (`2331:4699`, 794×1225) */
-  --mat-bullet-indent: 28px;     /* sangría del párrafo de materialismo bajo la estrella (268→296) */
+  --punto-body-box-lg: 1225px;   /* caja del punto 3 de Programa (`2331:4699`, 794×1225) */
+  --materialismo-bullet-indent: 28px;     /* sangría del párrafo de materialismo bajo la estrella (268→296) */
 
   /* Escala desktop (estilos Figma `l/headings/*`) */
   --font-size-l-h1-xxl: 52px;
@@ -115,14 +115,14 @@
   --space-header: 134.5px;    /* padding vertical del encabezado de inicio (lg, `2325:3824`: 294.5-160) */
   --space-intro-gap-sm: 35px; /* gap entre `section-intro` y la grilla de objetivos (sm, `2408:1650`: 1548−1513; re-medido 2026-10-26) */
   --space-header-cta: 36px;   /* gap entre el texto y los botones del encabezado */
-  --space-points-top: 80px;   /* padding superior de sección-puntos (programa lg, 2154-2074) */
+  --space-puntos-top: 80px;   /* padding superior de sección-puntos (programa lg, 2154-2074) */
   --space-ejes-bottom: 54px;  /* padding inferior de sección-ejes (programa lg, 1309-1255) */
-  --space-mat-top: 80px;      /* padding superior de sección-materialismo (programa lg) */
-  --space-mat-bottom: 76px;   /* padding inferior de sección-materialismo (programa lg) */
-  --prog-ejes-media-size-xs: 337px; /* media de `sección-ejes` en `375-xs` (`2396:2420`, 337×337; oculta en el render) */
-  --prog-mat-media-gap-xs: 18px;    /* gap entre las dos imágenes 163×163 de `sección-materialismo` xs */
-  --prog-mat-bullet-indent-xs: 40px;/* sangría del texto tras la viñeta de materialismo xs */
-  --prog-mat-bullet-left-xs: 24px;  /* posición de la viñeta (`•`) en materialismo xs */
+  --space-materialismo-top: 80px;      /* padding superior de sección-materialismo (programa lg) */
+  --space-materialismo-bottom: 76px;   /* padding inferior de sección-materialismo (programa lg) */
+  --ejes-media-size-xs: 337px; /* media de `sección-ejes` en `375-xs` (`2396:2420`, 337×337; oculta en el render) */
+  --materialismo-media-gap-xs: 18px;    /* gap entre las dos imágenes 163×163 de `sección-materialismo` xs */
+  --materialismo-bullet-indent-xs: 40px;/* sangría del texto tras la viñeta de materialismo xs */
+  --materialismo-bullet-left-xs: 24px;  /* posición de la viñeta (`•`) en materialismo xs */
   --legal-height: 904px;      /* alto del bloque legal (`2335:1546`, 910×904) */
   --nav-height-xs: 83.38px;   /* alto de la barra del nav en las instancias de 375-xs (`2396:2902` §2.3, ticket 6) */
   --nav-height-xs-reduced: 56px; /* estado compacto de xs (misma altura que sm; pedido 2026-11-03) */
@@ -150,10 +150,10 @@
   --btn-tracking-m: 2.16px;   /* letter-spacing del botón size=m (Figma `style.letterSpacing`) */
 
   /* ── Índice de puntos (`enlaces-puntos` / `enlace-punto`) ──────── */
-  --index-link-width: 290px;     /* ancho del enlace (290 dentro del marco de 322) */
-  --index-link-gap: 16px;        /* entre enlaces (76 = 60 + 16, 52 = 36 + 16) */
-  --index-underline: 2px;        /* grosor del subrayado (medido y2228-2229, `#ff4520`) */
-  --index-underline-offset: 10px;/* del texto al subrayado (caja 60 = texto 48 + 10 + 2) */
+  --indice-link-width: 290px;     /* ancho del enlace (290 dentro del marco de 322) */
+  --indice-link-gap: 16px;        /* entre enlaces (76 = 60 + 16, 52 = 36 + 16) */
+  --indice-underline: 2px;        /* grosor del subrayado (medido y2228-2229, `#ff4520`) */
+  --indice-underline-offset: 10px;/* del texto al subrayado (caja 60 = texto 48 + 10 + 2) */
 
   /* ── Objetivo-modal (`2358:932`) ──────────────────────────────── */
   --dialog-panel-height: 604px; /* alto mínimo del panel en `lg` (frame 1024×604) */
@@ -204,7 +204,7 @@
   --icon-dialog-close: 32px;    /* `.dialog__close` (icons/close 32×32) */
   --icon-dialog-close-sm: 24px; /* `.dialog__close` en el modal de tablet (`4441:3498`, 24×24) */
   --icon-dialog-close-xs: 24px; /* `.dialog__close` en el modal de mobile (`2404:3504`, 24×24) */
-  --icon-mat-bullet: 22px;      /* viñeta `::before` de `.programa-materialismo__text` */
+  --icon-materialismo-bullet: 22px;      /* viñeta `::before` de `.programa-materialismo__text` */
 
   /* ── Layout: anchos de contenedor, columnas y cajas ───────────── */
   --container-width: 1448px;    /* `.container` */
@@ -216,21 +216,21 @@
   --video-media-width: 1124px;  /* `.video-inicio__media` de inicio (lg) */
   --section-intro-width: 912px; /* `.section-intro` de inicio (lg) */
   --dialog-panel-width: 1024px; /* `.dialog__panel` (frame `2358:932`) */
-  --join-media-basis: 643px;    /* `.bloque-unete__media` de Únete */
-  --join-text-basis: 644px;     /* `.bloque-unete__text` de Únete */
-  --join-media-aspect-xs: 341.079 / 216; /* media de Únete en `2396:2712` (341,079×216) */
+  --unete-media-basis: 643px;    /* `.bloque-unete__media` de Únete */
+  --unete-text-basis: 644px;     /* `.bloque-unete__text` de Únete */
+  --unete-media-aspect-xs: 341.079 / 216; /* media de Únete en `2396:2712` (341,079×216) */
   --hero-media-basis: 438px;    /* `.decalogo-hero .media` y `.programa-hero .media` */
   --hero-text-basis: 788px;     /* `.decalogo-hero__text` */
-  --points-inner-width: 1148px; /* `.decalogo-puntos__inner` y `.programa-puntos__inner` */
-  --points-body-basis: 794px;   /* cuerpo de los puntos (Decálogo y Programa) */
-  --index-column-basis: 322px;  /* `.indice` (marco de los enlaces de 290) */
+  --puntos-inner-width: 1148px; /* `.decalogo-puntos__inner` y `.programa-puntos__inner` */
+  --puntos-body-basis: 794px;   /* cuerpo de los puntos (Decálogo y Programa) */
+  --indice-column-basis: 322px;  /* `.indice` (marco de los enlaces de 290) */
   --ejes-inner-width: 1145px;   /* `.programa-ejes__inner` */
   --ejes-text-basis: 674px;     /* `.programa-ejes__text` */
   --ejes-media-basis: 439px;    /* `.programa-ejes .media` */
-  --mat-media-basis: 204px;     /* `.programa-materialismo .media` */
-  --mat-row-width: 1147px;      /* `.programa-materialismo__row` */
-  --mat-text-width: 912px;      /* `.programa-materialismo__text` */
-  --privac-width: 910px;        /* `.privacidad__inner` (bloque legal `2335:1546`) */
+  --materialismo-media-basis: 204px;     /* `.programa-materialismo .media` */
+  --materialismo-row-width: 1147px;      /* `.programa-materialismo__row` */
+  --materialismo-text-width: 912px;      /* `.programa-materialismo__text` */
+  --privacidad-width: 910px;        /* `.privacidad__inner` (bloque legal `2335:1546`) */
 
   /* ── Radios ──────────────────────────────────────────────────── */
   /* get_node_info no reporta cornerRadius en nav, goal-card, form,
