@@ -91,6 +91,25 @@ body {
   background: var(--color-surface-page);
 }
 
+/* El header es `position: fixed` y no ocupa sitio en el flujo: el documento
+ * reserva su alto aquí. Vivía en components.css (dentro del bloque del nav),
+ * que es el archivo del componente y no el del layout del documento. */
+body {
+  padding-top: var(--nav-height-xs);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: var(--nav-height-sm);
+  }
+}
+
+@media (min-width: 1448px) {
+  body {
+    padding-top: var(--nav-height-lg);
+  }
+}
+
 h1,
 h2,
 h3,

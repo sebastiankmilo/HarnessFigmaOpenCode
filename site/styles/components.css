@@ -198,10 +198,6 @@
   background: var(--color-surface-page);
 }
 
-body {
-  padding-top: var(--nav-height-xs);
-}
-
 .site-nav__inner {
   display: flex;
   align-items: center;
@@ -493,10 +489,6 @@ body {
   /* Estado compacto desde sm: 75 → 56 con logo 48 → 40. Decisión 2026-11-03:
    * Figma no trae variante reducida en `1024-sm` (solo la barra de 75); en
    * xs la barra sigue estática. */
-  body {
-    padding-top: var(--nav-height-sm);
-  }
-
   .site-nav.is-reduced .site-nav__inner {
     height: var(--nav-height-sm-reduced);
   }
@@ -607,10 +599,6 @@ body {
     display: flex;
     align-items: center;
     gap: var(--space-1);
-  }
-
-  body {
-    padding-top: var(--nav-height-lg);
   }
 
   .site-nav.is-reduced .site-nav__inner {
