@@ -1,6 +1,6 @@
 (function () {
   const dialog = document.querySelector(".dialog");
-  const cards = Array.prototype.slice.call(document.querySelectorAll(".goal-card"));
+  const cards = Array.prototype.slice.call(document.querySelectorAll(".tarjeta-objetivo"));
   const dialogTitle = dialog ? dialog.querySelector(".dialog__title") : null;
   const dialogContent = dialog ? dialog.querySelector(".dialog__content") : null;
 
@@ -84,24 +84,24 @@
     }
   }
 
-  function open(card) {
+  function open(card, trigger) {
     const index = cards.indexOf(card);
     if (index !== -1) fillDialog(card, index);
-    // UIkit usa `target` para devolver el foco al cerrar (y sincronizar
-    // `aria-expanded` si la card lo declara).
-    modal.target = card;
+    // UIkit usa `target` para devolver el foco al cerrar. El disparador es el
+    // <button> de la tarjeta y no el <li>: así el foco vuelve a un control real.
+    modal.target = trigger || card;
     modal.show();
   }
 
+  // El disparador es un <button> real, así que ya emite `click` con Intro y
+  // Espacio: no hay que simular el teclado a mano. El <li> conserva su rol de
+  // list item, y el nombre accesible del botón sale del <h3> vía
+  // `aria-labelledby`, que el build traduce como cualquier otro texto.
   cards.forEach(function (card) {
-    card.addEventListener("click", function () {
-      open(card);
-    });
-    card.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        open(card);
-      }
+    const trigger = card.querySelector(".tarjeta-objetivo__disparador");
+    if (!trigger) return;
+    trigger.addEventListener("click", function () {
+      open(card, trigger);
     });
   });
 })();

@@ -2,10 +2,11 @@
   "porDefecto": "https://lamateriaprima.org/",
   "aporta": "",
   "video": "https://www.youtube.com/watch?v=TNVTuR9BTqk&t=1s",
+  "video-unete": "https://www.youtube.com/watch?v=TNVTuR9BTqk&t=1s",
   "articulos": {
-    "1": "",
-    "2": "",
-    "3": "",
-    "4": ""
+    "1": "https://lamateriaprima.org/esta-cuba-vendiendo-una-nueva-imagen-al-mundo/",
+    "2": "https://lamateriaprima.org/ontologia-del-materialismo-politico/",
+    "3": "https://lamateriaprima.org/de-que-hablamos-cuando-hablamos-del-materialismo-politico/",
+    "4": "https://lamateriaprima.org/elecciones-en-colombia-entre-el-fraude-y-la-ilusion-democratica/"
   }
 }

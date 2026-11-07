@@ -30,24 +30,17 @@
   margin-top: var(--space-5); /* hueco media → texto (312.5−280.5 en xs, 465.2−433.2 en sm) */
 }
 
-.hero h1 {
+.hero__title {
   font-size: var(--font-size-display-hero-compact);
   line-height: var(--line-height-display-hero-compact);
   letter-spacing: var(--tracking-display-hero-compact);
 }
 
-.hero p {
+.hero__lead {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
-}
-
-/* Lead corto en xs/sm (frames `2392:3975` y `2408:1570`) y lead largo en
- * lg (`2325:3793`). El contenido cambia por breakpoint, no solo el tamaño. */
-.hero__lead--wide,
-.section-intro__lead--wide {
-  display: none;
 }
 
 /* xs: botones apilados y alineados a la izquierda (`2392:3976` 359×110) */
@@ -60,52 +53,34 @@
 }
 
 /* ── 3 — bloque de vídeo (`2396:2407` xs, `2408:1585` sm) ────────── */
-.video {
+.video-inicio {
   padding-block: var(--space-6);
   background: var(--color-video-band-compact);
 }
 
-/* Fachada del vídeo: la portada (`video-cover.png`) es ya la captura del
- * reproductor y es lo que mide el baseline, así que se mantiene intacta. El
- * enlace cubre `.media` y solo inyecta el iframe de YouTube al hacer clic
- * (scripts/enlaces.js). A <1448 se usa la variante exportada del diseño
- * (`video-cover-sm.png`, nodo `4436:2545`). */
-.video__player picture {
-  display: contents;
-}
-
-.video__play {
-  position: absolute;
-  inset: 0;
-}
-
-.video__player iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+/* Reproductor de YouTube incrustado: el `.media` hace de marco 16/9 y
+ * `components.css` (`.media__iframe`) lo estira al hueco. `loading="lazy"`
+ * evita que el reproductor retrase el primer render. */
 
 /* ── 4 — seccion-objetivos (`2392:3995` / `2408:1650`) ──────────── */
-.section-intro h2 {
+.section-intro__title {
   font-size: var(--font-size-xs-h1-xl); /* 41 (Bebas) — `2392:3997`, `2408:1652` */
   letter-spacing: var(--tracking-display-compact);
 }
 
-.section-intro p {
+.section-intro__lead {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
 }
 
-.goals {
+.objetivos {
   padding-block: var(--space-6);
   background: var(--color-section-soft); /* `2392:3995` #f0ece6, también en xs/sm */
 }
 
-.goals__grid {
+.objetivos__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
@@ -114,23 +89,35 @@
 }
 
 /* Carrusel (xs): solo la tarjeta activa es visible */
-.goals__grid .goal-card {
+.objetivos__grid .tarjeta-objetivo {
   display: none;
 }
 
-.goals__grid .goal-card.is-active {
+.objetivos__grid .tarjeta-objetivo.is-active {
   display: block;
 }
 
 /* Anatomía compacta = la de lg (media rectangular a sangre, texto con
  * inset 16): `2392:4001` (xs) y `2408:1656` (sm), foto 343/348×210. */
-.goal-card {
+.tarjeta-objetivo {
+  position: relative;
   padding: 0 0 var(--space-5);
   background: var(--color-surface-page);
   cursor: pointer;
 }
 
-.goal-card__avatar {
+/* Disparador del modal: cubre la tarjeta entera, igual que el
+ * `.tarjeta-articulo__link` de las tarjetas de artículo. Es un `<button>` real
+ * cuyo nombre accesible sale del `<h3>` por `aria-labelledby`, de modo que el
+ * `<li>` conserva su rol de list item y el botón responde a Intro y Espacio. */
+.tarjeta-objetivo__disparador {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.tarjeta-objetivo__avatar {
   display: block;
   width: 100%;
   height: auto;
@@ -140,12 +127,12 @@
   object-fit: cover;
 }
 
-.goal-card__text {
+.tarjeta-objetivo__text {
   margin-top: var(--space-3);
   padding-inline: var(--space-3);
 }
 
-.goal-card h3 {
+.tarjeta-objetivo h3 {
   font-size: var(--font-size-xs-h1); /* 32.4 (Bebas) — `I2408:1656;4436:2786` */
   letter-spacing: var(--tracking-card-display);
 }
@@ -153,7 +140,7 @@
 /* Cuerpo corto de la card: `paragraphs/s` (16/24) recortado a 3 líneas
  * (72 px, la caja de cuerpo del componente). El texto completo se lee en
  * el modal, que usa `paragraphs/base` (18/30,96). */
-.goal-card p {
+.tarjeta-objetivo p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -163,12 +150,12 @@
   color: var(--color-text-secondary);
 }
 
-.goals__cta {
+.objetivos__cta {
   margin-top: var(--space-5);
 }
 
 /* ── 5 — sección-La-Materia-Prima (`2392:4053`) ─────────────────── */
-.articles {
+.articulos {
   padding-block: var(--space-6);
   background-color: var(--color-materia-bg);
   /* En xs/sm el fill IMAGE de la sección no es `cover`: es STRETCH con un
@@ -182,12 +169,12 @@
 }
 
 @media (min-width: 768px) and (max-width: 1447px) {
-  .articles {
+  .articulos {
     background-size: var(--materia-bg-scale-sm) 100%;
   }
 }
 
-.articles__grid {
+.articulos__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
@@ -195,62 +182,56 @@
 }
 
 /* Carrusel (xs): solo la tarjeta activa es visible */
-.articles__grid .article-card {
+.articulos__grid .tarjeta-articulo {
   display: none;
 }
 
-.articles__grid .article-card.is-active {
+.articulos__grid .tarjeta-articulo.is-active {
   display: block;
 }
 
-.article-card {
+.tarjeta-articulo {
   position: relative;
   background: var(--color-surface-page); /* `2392:4058` #fdfcfa */
   cursor: pointer;
 }
 
 /* Enlace de la card completa: la cubre sin alterar su layout ni su captura. */
-.article-card__link {
+.tarjeta-articulo__link {
   position: absolute;
   inset: 0;
   z-index: 2;
 }
 
-.article-card__media {
+.tarjeta-articulo__media {
   position: relative;
   aspect-ratio: 5 / 4;
   background: var(--color-media-placeholder);
 }
 
-.article-card__media .media__label {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.article-card__text {
+.tarjeta-articulo__text {
   padding: 0 var(--space-3) var(--space-5);
   margin-top: var(--space-3);
 }
 
-.article-card h3 {
+.tarjeta-articulo h3 {
   font-size: var(--font-size-xs-h1); /* 32.4 (Bebas) — `I2392:4058;93:133` */
   letter-spacing: var(--tracking-card-display);
 }
 
-.article-card p {
+.tarjeta-articulo p {
   margin-top: var(--space-1);
   font-size: var(--font-size-body-s);
   color: var(--color-text-secondary);
 }
 
-.articles__cta {
+.articulos__cta {
   margin-top: var(--space-5);
   background: var(--color-cta-default); /* `2392:4062` #ceac57 — todos los breakpoints */
   color: var(--color-cta-hover);
 }
 
-.articles__cta:hover {
+.articulos__cta:hover {
   background: var(--color-cta-hover);
   color: var(--color-cta-default);
 }
@@ -258,11 +239,11 @@
 /* Sobre la banda navy: título dorado y lead claro (`2392:4055` #ceac57,
    `2392:4056` #fdfcfa) — en xs/sm también; en lg ya lo cubrían las reglas
    propias de la sección. */
-.articles .section-intro h2 {
+.articulos .section-intro__title {
   color: var(--color-heading-gold);
 }
 
-.articles .section-intro p {
+.articulos .section-intro__lead {
   color: var(--color-surface-page);
 }
 
@@ -304,17 +285,12 @@
   background: var(--color-heading-brown);
 }
 
-.articles__pagination .carousel__dot {
+.articulos__pagination .carousel__dot {
   background: var(--color-surface-alt);
 }
 
-.articles__pagination .carousel__dot.is-active {
+.articulos__pagination .carousel__dot.is-active {
   background: var(--color-cta-default);
-}
-
-/* ── 6 — sección-únete (`2392:4114`) ────────────────────────────── */
-.join-block--alt {
-  background: var(--color-surface-alt);
 }
 
 /* ── Objetivo-modal (`2404:3499`) ───────────────────────────────── *
@@ -392,7 +368,7 @@
   margin-top: var(--space-3);
 }
 
-/* El desarrollo de cada objetivo ocupa de 1 a 3 párrafos (`inicio.goals.card-N.body-complete`):
+/* El desarrollo de cada objetivo ocupa de 1 a 3 párrafos (`inicio.objetivos.card-N.body-complete`):
    el contenedor hereda el hueco que dejaba el primer `<p>` suelto y, en `lg`,
    limita su alto al bloque de cuerpo de Figma (`2358:1146`) para que el panel
    siga midiendo 1024×604 con texto largo (el resto se desplaza dentro). */
@@ -479,11 +455,11 @@
 
   /* Medido: media 713.32×402.35 a 27.87 del borde — se implementa al ancho del
      contenedor (720) por no existir token para ese ancho (desviación ~7 px). */
-  .video {
+  .video-inicio {
     padding-block: 0;
   }
 
-  .goals__grid {
+  .objetivos__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
     align-items: stretch;
@@ -492,11 +468,11 @@
 
   /* Ventana de 2 tarjetas: la activa (`.is-active`) y la siguiente (`.is-next`,
      la marca `inicio.js`) — las otras dos siguen `display:none` de la base. */
-  .goals__grid .goal-card.is-next {
+  .objetivos__grid .tarjeta-objetivo.is-next {
     display: block;
   }
 
-  .articles__grid {
+  .articulos__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
     margin-top: var(--space-5);
@@ -505,7 +481,7 @@
   /* Ventana de 2 tarjetas que sigue al carrusel (mismo patrón que goals,
      `is-next` lo marca inicio.js). El diseño `sm` sí dibuja los controles
      de esta sección (flecha + 4 puntos, baseline `268:3128`). */
-  .articles__grid .article-card.is-next {
+  .articulos__grid .tarjeta-articulo.is-next {
     display: block;
   }
 
@@ -515,15 +491,15 @@
     background: var(--color-dot-active);
   }
 
-  .article-card__media {
+  .tarjeta-articulo__media {
     background: none;
   }
 
-  .article-card {
+  .tarjeta-articulo {
     height: var(--article-card-height);
   }
 
-  .article-card h3 {
+  .tarjeta-articulo h3 {
     font-size: var(--font-size-l-h2); /* 32.4 — mismo cuerpo que la base */
   }
 }
@@ -591,13 +567,13 @@
     margin-top: 0; /* en lg la media es absoluta: no hay hueco superior */
   }
 
-  .hero h1 {
+  .hero__title {
     font-size: var(--font-size-display-hero);
     line-height: var(--line-height-display-hero);
     letter-spacing: var(--tracking-display-hero);
   }
 
-  .hero p {
+  .hero__lead {
     margin-top: var(--space-1);
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
@@ -608,12 +584,12 @@
     margin-top: var(--space-5);
   }
 
-  .video {
+  .video-inicio {
     padding-block: 0;
     background: var(--color-video-band); /* lg: `2325:3923` #30250f */
   }
 
-  .video__media {
+  .video-inicio__media {
     max-width: var(--video-media-width);
     margin-inline: auto;
   }
@@ -622,47 +598,47 @@
     max-width: var(--section-intro-width);
   }
 
-  .section-intro h2 {
+  .section-intro__title {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .section-intro p {
+  .section-intro__lead {
     margin-top: var(--space-1);
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
   }
 
-  .goals {
+  .objetivos {
     padding-block: var(--space-7);
     background: var(--color-section-soft);
   }
 
-  .goals__grid {
+  .objetivos__grid {
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-5);
     margin-top: var(--space-6);
   }
 
   /* `lg`: las 4 tarjetas visibles (el índice solo mueve foco y punto activo) */
-  .goals__grid .goal-card,
-  .articles__grid .article-card {
+  .objetivos__grid .tarjeta-objetivo,
+  .articulos__grid .tarjeta-articulo {
     display: block;
   }
 
   /* Ventana de 4: con más objetivos que huecos, `inicio.js` marca fuera a los
      que no caben en la ventana activa. */
-  .goals__grid .goal-card.is-out {
+  .objetivos__grid .tarjeta-objetivo.is-out {
     display: none;
   }
 
   /* Tarjeta 322×615: foto a sangre 322×194 + texto con 24 de lado (2326:3926) */
-  .goal-card {
+  .tarjeta-objetivo {
     padding: 0 0 var(--space-6);
     background: var(--color-surface-page);
   }
 
-  .goal-card__avatar {
+  .tarjeta-objetivo__avatar {
     width: 100%;
     height: auto;
     aspect-ratio: 322 / 194;
@@ -671,20 +647,20 @@
     object-fit: cover;
   }
 
-  .goal-card__text {
+  .tarjeta-objetivo__text {
     margin-top: var(--space-3);
     padding-inline: var(--space-4);
   }
 
-  .goal-card h3 {
+  .tarjeta-objetivo h3 {
     font-size: var(--font-size-l-h1);
   }
 
-  .goals__cta {
+  .objetivos__cta {
     margin-top: var(--space-6);
   }
 
-  .articles {
+  .articulos {
     padding-block: var(--space-7);
     /* `background-color` y no el shorthand `background`: el shorthand
        borraría el `background-image` de la regla base. */
@@ -694,35 +670,35 @@
     color: var(--color-surface-page);
   }
 
-  .articles .section-intro p {
+  .articulos .section-intro__lead {
     margin-top: var(--space-1);
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
     color: var(--color-surface-page);
   }
 
-  .articles .article-card {
+  .articulos .tarjeta-articulo {
     background: var(--color-surface-page);
     color: var(--color-text-primary);
   }
 
 
-  .articles__grid {
+  .articulos__grid {
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-5);
     margin-top: var(--space-6);
   }
 
-  .article-card__text {
+  .tarjeta-articulo__text {
     padding: 0 var(--space-4) var(--space-5);
   }
 
-  .articles__cta {
+  .articulos__cta {
     margin-top: var(--space-6);
   }
 
   /* El diseño de escritorio no dibuja controles en «La Materia Prima» */
-  .articles__pagination {
+  .articulos__pagination {
     display: none;
   }
 
@@ -773,42 +749,29 @@
 
   /* Hover de tarjetas (nota 4649:2012, capa `hovers` `4518:2257 ↔ 4518:2267`):
      par default `#fdfcfa` ↔ hover `#f0ece6`. El selector lleva la sección
-     (0,3,0) porque `inicio.css` declara `.articles .article-card` (0,2,0)
-     más abajo y se lo comería un `.article-card:hover` simple. */
-  .goals .goal-card:hover,
-  .articles .article-card:hover {
+     (0,3,0) porque `inicio.css` declara `.articulos .tarjeta-articulo` (0,2,0)
+     más abajo y se lo comería un `.tarjeta-articulo:hover` simple. */
+  .objetivos .tarjeta-objetivo:hover,
+  .articulos .tarjeta-articulo:hover {
     background: var(--color-card-hover);
   }
 
   /* Slideshow de tarjetas: transición sutil tipo jitter (nota 4649:2016) */
-  .goal-card,
-  .article-card {
+  .tarjeta-objetivo,
+  .tarjeta-articulo {
     transition: opacity 0.35s ease, background 0.4s ease;
-  }
-}
-
-/* `lg`: la copia larga de los leads (la de Figma para 1448). */
-@media (min-width: 1448px) {
-  .hero__lead--compact,
-  .section-intro__lead--compact {
-    display: none;
-  }
-
-  .hero__lead--wide,
-  .section-intro__lead--wide {
-    display: block;
   }
 }
 
 /* `xs`: medidas del frame 375-xs que no aplican a sm/lg. */
 @media (max-width: 767px) {
   /* La card de objetivo tiene un inset superior de 16 (`2392:4001`). */
-  .goal-card {
+  .tarjeta-objetivo {
     padding-top: var(--space-3);
   }
 
   /* La card de artículo mide 513 en `2392:4053`; el texto ya ocupa 208. */
-  .article-card {
+  .tarjeta-articulo {
     min-height: var(--article-card-height-xs);
   }
 }

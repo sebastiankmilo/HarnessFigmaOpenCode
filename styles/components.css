@@ -1,8 +1,9 @@
 /* site/styles/components.css — componentes compartidos entre páginas
  * Spec: Especificaciones/design specs/components/* · valores: solo styles/tokens.css
- * Carga: tokens.css → main.css → components.css → <pagina>.css.
- * Contiene lo que usan 2+ páginas: btn, media (+variantes), join-block,
- * site-nav, site-footer y el bloque de puntos (points/point/page-index/cta).
+ * Carga: tokens.css → main.css → components.css → <pagina>.css
+ * → utilidades.css.
+ * Contiene lo que usan 2+ páginas: btn, media (+variantes), bloque-unete,
+ * site-nav, site-footer y el bloque de puntos (puntos/punto/indice/cta).
  * Cada componente es una sola definición con sus media queries internas
  * (base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = lg):
  * el CSS de página solo aporta el contexto que le es propio.
@@ -46,12 +47,6 @@
   box-shadow: inset 0 0 0 1px var(--color-button-fill);
 }
 
-.btn--outline-dark {
-  background: transparent;
-  color: var(--color-text-primary);
-  box-shadow: inset 0 0 0 1px var(--color-text-secondary);
-}
-
 .btn--s {
   padding: var(--space-1) var(--space-3);
   font-size: var(--font-size-body-s);
@@ -78,22 +73,15 @@
   object-fit: cover;
 }
 
-.media__label {
+/* Reproductor incrustado (YouTube). Lo genera el build desde
+ * `content/enlaces.json` y ocupa el hueco del `.media` que lo contiene, sea el
+ * 16/9 de `inicio` o el 3/2 de `unete`. */
+.media__iframe {
   position: absolute;
-  top: var(--media-label-top);
-  left: var(--media-label-left);
-  font-size: var(--font-size-xs-h1-xxl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading);
-  color: var(--color-on-dark);
-}
-
-.media__play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8.5%;
-  transform: translate(-33.33%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* Bloque «Únete» con imagen 3:2 (segunda sección-únete 4426:1111 / 4427:1240) */
@@ -120,37 +108,30 @@
   background: var(--color-surface-muted);
 }
 
-.media--center .media__label {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 /* ══ Bloque «Únete» (sección `2396:2712` / `2408:2478`) ═══════════ */
 
-.join-block {
+.bloque-unete {
   padding-block: var(--space-7);
 }
 
-.join-block__grid {
+.bloque-unete__grid {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.join-block__media,
-.join-block__text {
+.bloque-unete__media,
+.bloque-unete__text {
   flex: none;
   width: 100%;
 }
 
-.join-block__text h1,
-.join-block__text h2 {
+.bloque-unete__title {
   font-size: var(--font-size-xs-h1-xl); /* 41 — `2392:4119`, `4436:2824` */
   letter-spacing: var(--tracking-display-compact);
 }
 
-.join-block__text p {
+.bloque-unete__body {
   margin-top: var(--space-3);
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
@@ -158,40 +139,39 @@
 }
 
 /* Cierre «Agradecemos tu interés.»: párrafo aparte (bloque 560×285, unete.md) */
-.join-block__text p + p {
+.bloque-unete__body + .bloque-unete__body {
   margin-top: var(--space-3);
 }
 
 /* Únete: 160 nav + 617 + 405 footer = 1182 (`4426:1111`) */
 @media (min-width: 1448px) {
-  .join-block {
+  .bloque-unete {
     padding-block: var(--space-8);
   }
 
-  .join-block__grid {
+  .bloque-unete__grid {
     flex-direction: row;
     gap: var(--space-5);
     align-items: center;
     justify-content: center;
   }
 
-  .join-block__media {
-    flex: 0 0 var(--join-media-basis);
+  .bloque-unete__media {
+    flex: 0 0 var(--unete-media-basis);
     width: auto;
   }
 
-  .join-block__text {
-    flex: 0 0 var(--join-text-basis);
+  .bloque-unete__text {
+    flex: 0 0 var(--unete-text-basis);
     width: auto;
   }
 
-  .join-block__text h1,
-  .join-block__text h2 {
+  .bloque-unete__title {
     font-size: var(--font-size-l-h1-xl);
     letter-spacing: var(--tracking-display);
   }
 
-  .join-block__text p {
+  .bloque-unete__body {
     font-size: var(--font-size-body-base);
     line-height: var(--line-height-lead);
   }
@@ -201,7 +181,12 @@
 
 /* La barra se ancla al viewport en los tres breakpoints. En xs el alto
  * completo es 83,38 y al hacer scroll baja a 56 (logo 48 → 40), con la
- * misma transición de 0,3 s que sm/lg. */
+ * misma transición de 0,3 s que sm/lg.
+ * `position: fixed` y el `padding-top` de `body` son una pareja a propósito:
+ * con `position: sticky` la barra seguía en el flujo, al aplicar `.is-reduced`
+ * el documento cambiaba de alto, el navegador reajustaba el scroll (scroll
+ * anchoring) y `nav.js` volvía a alternar la clase → bucle infinito de
+ * transición. Fuera del flujo el alto del header ya no toca al documento. */
 .site-nav {
   position: fixed;
   top: 0;
@@ -209,10 +194,6 @@
   right: 0;
   z-index: 90;
   background: var(--color-surface-page);
-}
-
-body {
-  padding-top: var(--nav-height-xs);
 }
 
 .site-nav__inner {
@@ -379,7 +360,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.site-nav__menu-close {
+.js-menu-close {
   position: absolute;
   top: var(--space-4);
   right: var(--space-3);
@@ -389,11 +370,11 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.site-nav__menu.is-open .site-nav__menu-close {
+.site-nav__menu.is-open .js-menu-close {
   opacity: 1;
 }
 
-.site-nav__menu-close img {
+.js-menu-close img {
   width: 100%;
   height: 100%;
 }
@@ -503,32 +484,9 @@ body {
     display: block;
   }
 
-  .site-nav__platform.is-mobile {
-    display: none;
-  }
-
-  /* El header se ancla al viewport con `position: fixed` y `body` reserva
-   * su altura con `padding-top` (mismo patrón que lg). Con `position: sticky`
-   * la barra seguía en el flujo: al aplicar `.is-reduced` el documento
-   * cambiaba de alto, el navegador reajustaba el scroll (scroll anchoring) y
-   * `nav.js` volvía a alternar la clase → bucle infinito de transición.
-   * Fuera del flujo el alto del header ya no toca al documento.
-   * Estado compacto desde sm: 75 → 56 con logo 48 → 40. Decisión 2026-11-03:
+  /* Estado compacto desde sm: 75 → 56 con logo 48 → 40. Decisión 2026-11-03:
    * Figma no trae variante reducida en `1024-sm` (solo la barra de 75); en
    * xs la barra sigue estática. */
-  .site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 90;
-    background: var(--color-surface-page);
-  }
-
-  body {
-    padding-top: var(--nav-height-sm);
-  }
-
   .site-nav.is-reduced .site-nav__inner {
     height: var(--nav-height-sm-reduced);
   }
@@ -547,7 +505,7 @@ body {
     background: var(--color-surface-menu);
   }
 
-  .site-nav__menu-close {
+  .js-menu-close {
     top: var(--menu-close-top-sm);
     right: var(--menu-close-right-sm);
     width: var(--icon-menu-close-sm);
@@ -577,15 +535,6 @@ body {
     margin-top: var(--space-6);
   }
 
-  .site-nav__menu-buttons .btn--s {
-    padding-block: var(--menu-btn-padding-y);
-    padding-inline: var(--space-3);
-    font-weight: var(--font-weight-black);
-    letter-spacing: var(--menu-link-tracking);
-    background: var(--color-button-fill);
-    color: var(--color-text-brown);
-  }
-
   /* 5 iconos de 32 en una sola fila, con 24 de gap (`2424:996`). */
   .site-nav__menu-platforms {
     flex-wrap: nowrap;
@@ -593,13 +542,10 @@ body {
     margin-top: var(--space-6);
   }
 
+  /* El resto de la anatomía del selector de idioma es la de la regla base;
+   * aquí solo cambia el hueco superior (48 en `sm`, 24 en `xs`). */
   .site-nav__menu-lang {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
     margin-top: var(--space-6);
-    padding-bottom: var(--space-1);
-    color: var(--color-text-brown);
   }
 
   .site-nav__menu-lang .site-nav__lang-btn,
@@ -651,18 +597,6 @@ body {
     display: flex;
     align-items: center;
     gap: var(--space-1);
-  }
-
-  .site-nav__platform.is-desktop {
-    display: block;
-  }
-
-  .site-nav__platform.is-mobile {
-    display: none;
-  }
-
-  body {
-    padding-top: var(--nav-height-lg);
   }
 
   .site-nav.is-reduced .site-nav__inner {
@@ -805,33 +739,33 @@ body {
 
 /* ══ Bloque de puntos: contenido compartido de programa y decálogo ══ */
 
-.points {
+.puntos {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.point {
+.punto {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.point h3 {
+.punto :is(h2, h3) {
   font-size: var(--font-size-xs-h3);
 }
 
 /* En xs los títulos de punto son 32.4/36.288 (3 líneas en el 1, 2 y 6),
  * como en `2396:2640` y `2396:2643`. */
 @media (max-width: 767px) {
-  .point h3 {
+  .punto :is(h2, h3) {
     font-size: var(--font-size-xs-h1);
     line-height: var(--line-height-heading);
     letter-spacing: var(--tracking-card-display);
   }
 }
 
-.point p {
+.punto p {
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
@@ -840,18 +774,18 @@ body {
 
 /* CTA de cierre de la sección de puntos (programa/decálogo). En
  * política-de-privacidad `.cta` se usa sin este margen: la página lo
- * anula con `.privac .cta`. */
+ * anula con `.privacidad .cta`. */
 .cta {
   margin-top: var(--space-6);
 }
 
 /* El índice lateral no existe en `xs` */
-.page-index {
+.indice {
   display: none;
 }
 
 @media (min-width: 1448px) {
-  .point h3 {
+  .punto :is(h2, h3) {
     font-size: var(--font-size-l-h1);
   }
 
@@ -863,43 +797,48 @@ body {
    * evento `active` de UIkit Scrollspy Nav, para lectores de pantalla) y la
    * clase `uk-active` que pone UIkit directamente sobre el enlace. Como el
    * enlace es bloque, la raya ocupa el ancho completo del ítem. */
-  .page-index {
-    display: flex;
-    flex-direction: column;
-    gap: var(--index-link-gap);
+  .indice {
+    display: block;
     /* El índice permanece visible y lo que se mueve es el texto (como el
      * índice lateral de la doc de UIkit): se ancla bajo la nav sticky. */
     position: sticky;
     top: calc(var(--nav-height-reduced) + var(--space-5));
     align-self: flex-start;
-    flex: 0 1 var(--index-column-basis);
+    flex: 0 1 var(--indice-column-basis);
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-body);
   }
 
-  .page-index li {
-    width: var(--index-link-width);
+  /* La lista es el hijo flex ahora que el índice es un <nav> con un <ol>. */
+  .indice__lista {
+    display: flex;
+    flex-direction: column;
+    gap: var(--indice-link-gap);
   }
 
-  .page-index a {
+  .indice li {
+    width: var(--indice-link-width);
+  }
+
+  .indice a {
     display: block;
-    padding-bottom: var(--index-underline-offset);
-    border-bottom: var(--index-underline) solid transparent;
+    padding-bottom: var(--indice-underline-offset);
+    border-bottom: var(--indice-underline) solid transparent;
     transition: all 0.4s ease;
   }
 
-  .page-index a[aria-current="true"],
-  .page-index a.uk-active {
+  .indice a[aria-current="true"],
+  .indice a.uk-active {
     border-bottom-color: var(--color-hover-accent);
   }
 
-  .page-index a:hover {
+  .indice a:hover {
     border-bottom-color: var(--color-link-underline-hover);
   }
 
   /* Salto a un punto: el header sticky (83 px) no debe tapar el título. */
-  .points .point {
+  .puntos .punto {
     scroll-margin-top: var(--nav-height-reduced);
   }
 }

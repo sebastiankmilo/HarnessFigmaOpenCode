@@ -66,9 +66,10 @@
 }
 
 /* site/styles/main.css — base global (reset, tipografía, layout).
- * Los componentes compartidos (btn, media, join-block, nav, footer,
- * points/page-index/cta) viven en styles/components.css, que se carga
- * después: tokens.css → main.css → components.css → <pagina>.css. */
+ * Los componentes compartidos (btn, media, bloque-unete, nav, footer,
+ * puntos/indice/cta) viven en styles/components.css, que se carga
+ * después: tokens.css → main.css → components.css → <pagina>.css
+ * → utilidades.css (esta última gana a igual especificidad). */
 
 *,
 *::before,
@@ -88,6 +89,25 @@ body {
   line-height: var(--line-height-body);
   color: var(--color-text-primary);
   background: var(--color-surface-page);
+}
+
+/* El header es `position: fixed` y no ocupa sitio en el flujo: el documento
+ * reserva su alto aquí. Vivía en components.css (dentro del bloque del nav),
+ * que es el archivo del componente y no el del layout del documento. */
+body {
+  padding-top: var(--nav-height-xs);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: var(--nav-height-sm);
+  }
+}
+
+@media (min-width: 1448px) {
+  body {
+    padding-top: var(--nav-height-lg);
+  }
 }
 
 h1,
@@ -176,6 +196,42 @@ button {
    Solo se usa en `:hover`, así el estado por defecto no cambia ni un píxel. */
 .svg-filters #vc-red feFlood {
   flood-color: var(--color-hover-accent);
+}
+
+/* ── Transición entre páginas ────────────────────────────────────────
+ * El sitio es multipágina: cada clic del nav es una navegación real. Para que
+ * no se sienta como un salto se usa la View Transitions API de navegación
+ * entre documentos (`@view-transition`): el navegador captura la página
+ * saliente y la entrante y las funde. Sin la API, o con
+ * `prefers-reduced-motion`, la navegación es la de siempre — no hay nada que
+ * desactivar. El fundido se hace sobre la raíz y sin desplazamiento: la barra
+ * fija se queda donde está y solo cambia el contenido.
+ * `scripts/transiciones.js` prerenderiza además los enlaces al pasar el cursor,
+ * así la página nueva ya está lista cuando se hace clic. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: vc-page-out 0.16s ease both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vc-page-in 0.26s ease both;
+  }
+}
+
+@keyframes vc-page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vc-page-in {
+  from {
+    opacity: 0;
+  }
 }
 
 /* Fades de secciones al entrar en viewport (nota 4649:2018; reveal.js):

@@ -19,11 +19,21 @@
       "aporta": "Contribua",
       "politica-privacidad": "Política de privacidade",
       "copyright": "© 2026 Vanguardia Colombiana. Todos os direitos reservados."
+    },
+    "a11y": {
+      "principal": "Navegação principal",
+      "menu": "Menu",
+      "indice": "Índice de pontos",
+      "idioma": "Idioma",
+      "abrir-menu": "Abrir menu",
+      "cerrar-menu": "Fechar menu",
+      "cerrar": "Fechar"
     }
   },
   "index": {
     "meta": {
-      "title": "Vanguardia Colombiana"
+      "title": "Vanguardia Colombiana",
+      "description": "Associação cultural colombiana com vocação política: escola de quadros em materialismo político, com programa, decálogo e formas de filiação."
     }
   },
   "inicio": {
@@ -33,6 +43,9 @@
       "lead-compact": "Somos uma associação cultural com vocação política que busca, desde a práxis e a análise crítica da realidade nacional e internacional, superar o estado de coisas atual em nosso país e melhorar as condições materiais da imensa maioria de nossa sociedade. Os trabalhadores, que somos 90% da população, e se conseguirmos nos pôr de acordo sobre bases fundamentais, poderemos construir uma nação e uma civilização onde prevaleçam o bem comum, a soberania política e a independência econômica.",
       "cta": "Nosso programa",
       "cta-unete": "Junte-se"
+    },
+    "video": {
+      "title": "Vídeo da Vanguardia Colombiana"
     },
     "goals": {
       "title": "Nossos objetivos",
@@ -77,7 +90,8 @@
         "body-complete": [
           "Não temos pretensões totalitárias, mas tampouco acreditamos na religião do livre-câmbio nem na anarquia da produção. Nosso objetivo é uma economia centralmente planejada nos setores estratégicos e descentralizada ali onde a descentralização funcione melhor.",
           "Este princípio encontra fundamento tanto no princípio católico de subsidiariedade como em nossa própria ontologia filosófica materialista: o princípio de Symploké. Que tem sua origem em Platão e postula que nem tudo está conectado com tudo, mas tampouco existe nada absolutamente separado; há coisas que estão conectadas com umas coisas e separadas de outras. A realidade é uma trama de conexões e desconexões, e a organização econômica deve respeitar essa estrutura.\n\nPor isso, é ineficiente pretender centralizar absolutamente tudo, porque é impossível conhecer, administrar e coordenar a partir de um único centro a totalidade dos processos econômicos e políticos. Mas igualmente absurdo seria abandonar à própria sorte aqueles setores que, por sua importância estratégica, requerem coordenação, direção e planejamento central.",
-          "Centralizar o que deve ser centralizado; descentralizar o que deve ser descentralizado. Essa é a chave de um planejamento econômico verdadeiramente racional: nem a burocracia absolutista da economia nem a anarquia do mercado, mas um planejamento pluralista capaz de combinar direção central e autonomia descentralizada segundo a natureza concreta de cada setor.\n\nEssa é, precisamente, uma das chaves do sucesso do modelo econômico chinês, ainda que eles o expressem mediante uma terminologia diferente.",
+          "Por isso, é ineficiente pretender centralizar absolutamente tudo, porque é impossível conhecer, administrar e coordenar a partir de um único centro a totalidade dos processos econômicos e políticos. Mas igualmente absurdo seria abandonar à própria sorte aqueles setores que, por sua importância estratégica, requerem coordenação, direção e planejamento central.",
+          "Centralizar o que deve ser centralizado; descentralizar o que deve ser descentralizado. Essa é a chave de um planejamento econômico verdadeiramente racional: nem a burocracia absolutista da economia nem a anarquia do mercado, mas um planejamento pluralista capaz de combinar direção central e autonomia descentralizada segundo a natureza concreta de cada setor. Essa é, precisamente, uma das chaves do sucesso do modelo econômico chinês, ainda que eles o expressem mediante uma terminologia diferente.",
           "Possibilitar a transmissão de informação comercial, produtiva, fiscal e distributiva mediante a tecnologia de ponta, sempre sob controle do Estado a serviço de sua classe trabalhadora politicamente organizada.",
           "O planejamento econômico tecnocientífico socialista que propugnamos consiste na reorganização racional e democrática da produção mediante o uso de tecnologias da informação, algoritmos de Inteligência Artificial e capacidade de computação em tempo real. Este modelo busca substituir a anarquia do mercado capitalista —que opera mediante a extração de mais-valia e gera crises de superprodução e ineficiência— por um planejamento pluralista capaz de ajustar de forma direta a produção às necessidades coletivas e à demanda social real.",
           "O Cibercom será a ferramenta para a construção tecnocientífica de uma comunidade política pós-capitalista, enquanto o Materialismo Político constituirá a doutrina e a teoria encarregada de organizar esta construção em suas dimensões política, geopolítica, econômica, administrativa e moral."
@@ -88,9 +102,18 @@
         "body-small": "Por tudo o que foi dito, o projeto da Vanguardia Colombiana não é, como diria o marxista peruano José Carlos Mariátegui, “nem decalque nem cópia, mas criação heroica”.",
         "body-complete": [
           "Nosso projeto político não pode ser “nem decalque nem cópia, mas criação heroica”. Mas esta criação não parte do nada: parte de nossas realidades históricas, culturais, filosóficas e políticas, acumuladas ao longo de um extenso percurso histórico, para dar-lhes uma nova orientação de acordo com nossa realidade concreta, aqui e agora. Por isso não pretendemos reinventar a roda ignorando os avanços daqueles que nos precederam no ofício de pensar, atuar e transformar nossa realidade política, econômica e social. Somente poderemos ver e chegar mais longe se subirmos aos ombros de gigantes.",
-          "Não queremos importar modelos alheios nem repetir fórmulas do passado. Queremos construir nosso próprio caminho, tomando da tradição aquilo que conserva força histórica e vigência, mas transformando-o à luz das necessidades concretas da Colômbia atual. Um socialismo colombiano, ibérofono, soberano, organizado e orientado para o futuro; um projeto político capaz de converter nossa realidade nacional no ponto de partida para a construção de uma nova comunidade histórica.\n\nE isso só se pode saber empiricamente, desenvolvendo-o na própria prática, ainda que com princípios retores claros e solidamente definidos."
+          "Não queremos importar modelos alheios nem repetir fórmulas do passado. Queremos construir nosso próprio caminho, tomando da tradição aquilo que conserva força histórica e vigência, mas transformando-o à luz das necessidades concretas da Colômbia atual. Um socialismo colombiano, ibérofono, soberano, organizado e orientado para o futuro; um projeto político capaz de converter nossa realidade nacional no ponto de partida para a construção de uma nova comunidade histórica.",
+          "E isso só se pode saber empiricamente, desenvolvendo-o na própria prática, ainda que com princípios retos claros e solidamente definidos."
         ]
-      }
+      },
+      "prev": "Objetivo anterior",
+      "next": "Próximo objetivo",
+      "dot-1": "Ir para o objetivo 1",
+      "dot-2": "Ir para o objetivo 2",
+      "dot-3": "Ir para o objetivo 3",
+      "dot-4": "Ir para o objetivo 4",
+      "dot-5": "Ir para o objetivo 5",
+      "dot-6": "Ir para o objetivo 6"
     },
     "articles": {
       "title": "A Matéria-Prima",
@@ -112,7 +135,13 @@
         "title": "Eleições na Colômbia: entre a fraude e a ilusão democrática",
         "body": "Em 31 de maio, as eleições colombianas deixaram no primeiro turno Abelardo de la Espriella e Iván Cepeda. Tomar partido por..."
       },
-      "cta": "lamateriaprima.org"
+      "cta": "lamateriaprima.org",
+      "prev": "Artigo anterior",
+      "next": "Próximo artigo",
+      "dot-1": "Ir para o artigo 1",
+      "dot-2": "Ir para o artigo 2",
+      "dot-3": "Ir para o artigo 3",
+      "dot-4": "Ir para o artigo 4"
     },
     "join": {
       "title": "Junte-se à Vanguardia Colombiana",
@@ -121,7 +150,8 @@
   },
   "programa": {
     "meta": {
-      "title": "Programa — Vanguardia Colombiana"
+      "title": "Programa — Vanguardia Colombiana",
+      "description": "Os eixos do programa da Vanguardia Colombiana: disciplina de partido, unidade na ação, Iberofonia, socialismo colombiano e materialismo político."
     },
     "hero": {
       "title": "Nossos princípios fundamentais",
@@ -131,9 +161,7 @@
     },
     "ejes": {
       "title": "Os eixos de nossos princípios",
-      "body": "1. A disciplina de partido\n\nCom disciplina de partido não estamos falando de obediência cega, mas da condição necessária para transformar nossas convicções em força histórica organizada. Um partido com verdadeiro potencial revolucionário não é a mera soma de indivíduos que compartilhem determinadas ideias: deve constituir-se como uma organização consciente, coesa e capaz de agir como uma vontade política comum. Sem disciplina, a organização se dissolve no individualismo; sem organização, as ideias ficam reduzidas a meras opiniões incapazes de transformar a realidade.\n\nA disciplina significa, portanto, subordinar as ambições e preferências particulares às decisões coletivamente adotadas, uma vez esgotada a deliberação interna. Não significa renunciar à crítica nem ao debate: significa compreender que a discussão tem seu lugar dentro da organização e que, uma vez estabelecida uma orientação comum, todos devem contribuir para levá-la adiante. Deste modo, a liberdade de discussão e a unidade de ação não se excluem, mas fazem parte de uma mesma estrutura organizativa.\n\nNão se pode transformar uma nação mediante vontades isoladas, apenas mediante homens e mulheres capazes de antepor os interesses comuns às suas ambições particulares, “unidos pela associação e guiados pelo saber”, com uma estratégia definida coletivamente, sustentada pela constância, o trabalho e o compromisso sério.\n\nA disciplina é o que permite que um conjunto de pessoas se converta em uma força política organizada. Se cada militante age segundo sua vontade particular, a força coletiva se fragmenta; mas se existe disciplina consciente, cada esforço individual se integra em uma estratégia comum. Só assim a soma de vontades se converte em organização; e a organização converte as ideias em poder real.\n\n2. A unidade na ação\n\nA unidade na ação é a consequência prática dessa disciplina: não basta pensar juntos nem compartilhar um programa; é necessário agir juntos em função de objetivos políticos concretos. Um partido que não seja capaz de intervir organizadamente na realidade está condenado a permanecer como mero espectador dos acontecimentos, por mais corretas que possam ser suas ideias.\n\nA unidade na ação significa que, dentro da organização discutimos, mas fora dela agimos como um só. Assim, uma vez definida coletivamente uma orientação política, a organização inteira concentra suas forças em levá-la à prática. Cada militante, cada órgão e cada estrutura deixa de agir como uma vontade independente e passa a fazer parte de uma ação coordenada. Só assim, uma multiplicidade de esforços dispersos pode se converter em uma força capaz de produzir efeitos reais.\n\nA dispersão produz impotência, a coesão produz poder; onde cada qual age por conta própria, o adversário impõe seu rumo. A unidade na ação permite acumular forças, sustentar campanhas, intervir nos conflitos concretos, ganhar influência e converter a organização em um ator político efetivo.\n\nMas essa unidade não consiste em uniformidade; nossa filosofia é pluralista, pelo que uma direção política comum, objetivos definidos e capacidade organizativa para executá-los não negam a pluralidade interna, mas a articulam e a convertem em força. A diversidade de opiniões pode existir dentro da organização; o que não pode existir é uma diversidade permanente de vontades contraditórias quando se pretende alcançar um objetivo comum. Não pretendemos anular a personalidade particular de cada membro, porque isso é impossível; mas um partido que decide coletivamente, se começa a agir de maneira fragmentária, carece, em última instância, de capacidade política real.\n\nPor isso, disciplina e unidade na ação são duas dimensões inseparáveis, mas não idênticas. A disciplina garante a coesão da organização; a unidade na ação transforma essa coesão em intervenção política. A primeira organiza as vontades; a segunda as põe em prática.\n\nSó um partido disciplinado, organizado e consciente de seus objetivos, capaz de deliberar coletivamente e agir de maneira unificada, pode deixar de ser mero objeto espectador da história para se converter em sujeito capaz de disputar e construir o poder real que determine efetivamente o rumo e o destino de nossa nação.",
-      "title-compact": "Os eixos do nosso programa",
-      "intro": "Os eixos sobre os quais desenvolvemos nosso programa são a construção de um Socialismo Netamente Colombiano que nos converta em uma comunidade economicamente independente, de uma Iberofonia que nos permita ser politicamente soberanos ao mesmo tempo que ajudamos a conformar um bloco de nações irmãs de alcance universal, o Cibercomunismo como ferramenta de construção tecnocientífica de uma comunidade política pós-capitalista, e o Materialismo Político como doutrina e teoria que organiza esta construção política, geopolítica, econômica, administrativa e moral.\n\nPor isso, o projeto da Vanguardia Colombiana não é, como diria o marxista peruano José Carlos Mariátegui, «nem calco nem cópia, mas criação heroica» que, evidentemente, não parte do nada, mas de realidades históricas, culturais, filosóficas e políticas de longo percurso às quais entendemos ser necessário dar uma nova orientação adaptada à nossa realidade concreta no aqui e agora."
+      "body": "1. A disciplina de partido\n\nCom disciplina de partido não estamos falando de obediência cega, mas da condição necessária para transformar nossas convicções em força histórica organizada. Um partido com verdadeiro potencial revolucionário não é a mera soma de indivíduos que compartilhem determinadas ideias: deve constituir-se como uma organização consciente, coesa e capaz de agir como uma vontade política comum. Sem disciplina, a organização se dissolve no individualismo; sem organização, as ideias ficam reduzidas a meras opiniões incapazes de transformar a realidade.\n\nA disciplina significa, portanto, subordinar as ambições e preferências particulares às decisões coletivamente adotadas, uma vez esgotada a deliberação interna. Não significa renunciar à crítica nem ao debate: significa compreender que a discussão tem seu lugar dentro da organização e que, uma vez estabelecida uma orientação comum, todos devem contribuir para levá-la adiante. Deste modo, a liberdade de discussão e a unidade de ação não se excluem, mas fazem parte de uma mesma estrutura organizativa.\n\nNão se pode transformar uma nação mediante vontades isoladas, apenas mediante homens e mulheres capazes de antepor os interesses comuns às suas ambições particulares, “unidos pela associação e guiados pelo saber”, com uma estratégia definida coletivamente, sustentada pela constância, o trabalho e o compromisso sério.\n\nA disciplina é o que permite que um conjunto de pessoas se converta em uma força política organizada. Se cada militante age segundo sua vontade particular, a força coletiva se fragmenta; mas se existe disciplina consciente, cada esforço individual se integra em uma estratégia comum. Só assim a soma de vontades se converte em organização; e a organização converte as ideias em poder real.\n\n2. A unidade na ação\n\nA unidade na ação é a consequência prática dessa disciplina: não basta pensar juntos nem compartilhar um programa; é necessário agir juntos em função de objetivos políticos concretos. Um partido que não seja capaz de intervir organizadamente na realidade está condenado a permanecer como mero espectador dos acontecimentos, por mais corretas que possam ser suas ideias.\n\nA unidade na ação significa que, dentro da organização discutimos, mas fora dela agimos como um só. Assim, uma vez definida coletivamente uma orientação política, a organização inteira concentra suas forças em levá-la à prática. Cada militante, cada órgão e cada estrutura deixa de agir como uma vontade independente e passa a fazer parte de uma ação coordenada. Só assim, uma multiplicidade de esforços dispersos pode se converter em uma força capaz de produzir efeitos reais.\n\nA dispersão produz impotência, a coesão produz poder; onde cada qual age por conta própria, o adversário impõe seu rumo. A unidade na ação permite acumular forças, sustentar campanhas, intervir nos conflitos concretos, ganhar influência e converter a organização em um ator político efetivo.\n\nMas essa unidade não consiste em uniformidade; nossa filosofia é pluralista, pelo que uma direção política comum, objetivos definidos e capacidade organizativa para executá-los não negam a pluralidade interna, mas a articulam e a convertem em força. A diversidade de opiniões pode existir dentro da organização; o que não pode existir é uma diversidade permanente de vontades contraditórias quando se pretende alcançar um objetivo comum. Não pretendemos anular a personalidade particular de cada membro, porque isso é impossível; mas um partido que decide coletivamente, se começa a agir de maneira fragmentária, carece, em última instância, de capacidade política real.\n\nPor isso, disciplina e unidade na ação são duas dimensões inseparáveis, mas não idênticas. A disciplina garante a coesão da organização; a unidade na ação transforma essa coesão em intervenção política. A primeira organiza as vontades; a segunda as põe em prática.\n\nSó um partido disciplinado, organizado e consciente de seus objetivos, capaz de deliberar coletivamente e agir de maneira unificada, pode deixar de ser mero objeto espectador da história para se converter em sujeito capaz de disputar e construir o poder real que determine efetivamente o rumo e o destino de nossa nação."
     },
     "mat": {
       "title": "O Materialismo político",
@@ -203,7 +231,8 @@
   },
   "decalogo": {
     "meta": {
-      "title": "Decálogo — Vanguardia Colombiana"
+      "title": "Decálogo — Vanguardia Colombiana",
+      "description": "As dez normas fundamentais e irrenunciáveis das Vanguardas Iberófonas Socialistas: organização, doutrina, soberania e unidade territorial."
     },
     "hero": {
       "title": "Decálogo Político das Vanguardas Ibérofonas Socialistas",
@@ -265,16 +294,21 @@
   },
   "unete": {
     "meta": {
-      "title": "Junte-se — Vanguardia Colombiana"
+      "title": "Junte-se — Vanguardia Colombiana",
+      "description": "Como se filiar à Vanguardia Colombiana: leia o decálogo político, concorde com os princípios fundamentais e escreva para iniciar o processo."
     },
     "hero": {
       "title": "Junte-se à Vanguardia Colombiana",
       "body": "Se você quer se unir à Vanguardia Colombiana, deve ler nosso decálogo político e estar de acordo com nossos princípios fundamentais. Se já o leu, está de acordo com nossos fundamentos e quer fazer parte da Vanguardia Colombiana, escreva para lavanguardiacolombiana@gmail.com para iniciar o processo de afiliação.\n\nAgradecemos seu interesse."
+    },
+    "video": {
+      "title": "Vídeo: junte-se à Vanguardia Colombiana"
     }
   },
   "politica-de-privacidad": {
     "meta": {
-      "title": "Política de privacidade — Vanguardia Colombiana"
+      "title": "Política de privacidade — Vanguardia Colombiana",
+      "description": "Política de privacidade e condições de uso do site da Vanguardia Colombiana: titularidade, dados de contato e condições gerais."
     },
     "title": "Política de privacidade",
     "legal": [

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sebastiankmilo.github.io/HarnessFigmaOpenCode/sitemap.xml
