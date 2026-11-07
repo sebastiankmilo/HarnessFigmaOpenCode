@@ -568,11 +568,16 @@
     object-fit: cover;
   }
 
-  /* El texto se queda con lo que deja la media: en el frame son 792 px
-   * (100 % − 590 = 794, y el token lo recorta a 792). Si la ventana baja de
-   * 1448, la media encoge y el texto hereda ese hueco, sin solaparse. */
+  /* El texto se queda con el hueco que deja la media, medido todo en `vw`
+   * porque la media está posicionada contra `.hero` (a sangre) y el texto
+   * contra `.container`: mezclar las dos bases dejaba el hueco en 6 px. En el
+   * frame da 1448 − 64 − 590 = 794, y el token lo recorta a los 792 del
+   * diseño; por debajo, el hueco se queda en los 32 px del diseño. */
   .hero__text {
-    max-width: min(var(--hero-text-width), calc(100% - min(var(--hero-media-width), 40.75%)));
+    max-width: min(
+      var(--hero-text-width),
+      calc(100vw - 2 * var(--space-5) - min(var(--hero-media-width), 40.75vw))
+    );
     margin-top: 0; /* en lg la media es absoluta: no hay hueco superior */
   }
 
