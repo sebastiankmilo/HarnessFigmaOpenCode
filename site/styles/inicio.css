@@ -21,7 +21,7 @@
 }
 
 /* Por debajo de `lg` la media es el recorte exportado del diseño
-   (`hero-media-compact.png`, nodo `4436:2536`). El `<source>` de index.html
+   (`hero-media-compact.webp`, nodo `4436:2536`). El `<source>` de index.html
    cambia de recorte en el mismo corte que la media query. */
 .hero picture {
   display: contents;
@@ -163,7 +163,7 @@
      recorte horizontal (`imageTransform`). Se muestra la franja izquierda
      estirada al ancho de la sección; en lg el recorte es la imagen completa
      y vuelve a `cover`. */
-  background-image: url("../assets/img/materia-prima-bg.png");
+  background-image: url("../assets/img/materia-prima-bg.webp");
   background-size: var(--materia-bg-scale-xs) 100%;
   background-position: left center;
   background-repeat: no-repeat;
