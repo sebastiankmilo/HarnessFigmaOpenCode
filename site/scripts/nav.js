@@ -75,7 +75,7 @@
   var navRoot = document.querySelector(".site-nav");
   var navInner = document.querySelector(".site-nav__inner");
   var isTablet = window.matchMedia("(min-width: 768px)");
-  var isDesktop = window.matchMedia("(min-width: 1448px)");
+  var isDesktop = window.matchMedia("(min-width: 1280px)");
   var threshold = 0;
 
   function measure() {

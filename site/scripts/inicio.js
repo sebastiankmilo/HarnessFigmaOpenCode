@@ -109,8 +109,8 @@
 /* Carruseles de «Nuestros objetivos» y «La Materia Prima».
  * Contrato: specs/interactions.md — «Carruseles de `inicio`». */
 (function () {
-  var isDesktop = window.matchMedia("(min-width: 1448px)");
-  var isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1447px)");
+  var isDesktop = window.matchMedia("(min-width: 1280px)");
+  var isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1279px)");
   // Huecos de la grilla en `lg` (`grid-template-columns: repeat(4, 1fr)`).
   var VISIBLE_LG = 4;
 

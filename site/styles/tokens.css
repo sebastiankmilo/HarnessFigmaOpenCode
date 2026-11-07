@@ -211,7 +211,7 @@
   --menu-content-width-xs: 343px; /* `.site-nav__menu-content` en xs */
   --menu-content-width: 736px;  /* `.site-nav__menu-content` en sm (`2424:974`, 736×709) */
   --hero-media-width: 590px;    /* `.hero__media` de inicio (lg) */
-  --hero-media-height: 740px;
+  --hero-media-ratio: 590 / 740; /* proporción de la media del héroe (590×740 en el frame) */
   --hero-text-width: 792px;     /* `.hero__text` de inicio (lg) */
   --video-media-width: 1124px;  /* `.video-inicio__media` de inicio (lg) */
   --section-intro-width: 912px; /* `.section-intro` de inicio (lg) */

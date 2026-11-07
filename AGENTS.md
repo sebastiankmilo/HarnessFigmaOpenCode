@@ -126,6 +126,14 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
   equipo el 2026-10-05). **No se asume mobile-first**: la dirección de las media
   queries (mobile-first o desktop-first) se decide según lo que exija cada
   sección del diseño.
+- La media query de escritorio arranca en **1280**, no en 1448: 1448 es el ancho
+  del frame de Figma, pero el ancho de un portátil no. Un 1920×1080 al 150 % de
+  escala de Windows son 1280 px de CSS, un portátil de 1366 son 1366 y un monitor
+  de 1440 son 1440; con el corte en 1448 todas esas pantallas caían al layout de
+  tablet (barra sin enlaces y héroe con la foto a sangre completa). El layout en
+  1448 no cambia ni un píxel: las medidas del frame siguen siendo la referencia y
+  se conservan con `min()` (ver `.hero__media` en `inicio.css`). Lo vigila
+  `tests/test-vanguardia/responsive.spec.js` a 1280, 1366 y 1440.
 - Verificación visual obligatoria a 1448 y 375 (mismo ancho que los frames de
   Figma para comparar 1:1).
 - Selectores: un elemento con identidad propia dentro del bloque lleva su clase

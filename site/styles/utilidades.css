@@ -27,15 +27,15 @@
   }
 }
 
-/* Oculto por debajo de 1448 · visible de 1448 en adelante */
-@media (max-width: 1447px) {
+/* Oculto por debajo de `lg` (1280) · visible desde 1280 */
+@media (max-width: 1279px) {
   .u-hide-below-lg {
     display: none;
   }
 }
 
-/* Visible por debajo de 1448 · oculto de 1448 en adelante */
-@media (min-width: 1448px) {
+/* Visible por debajo de `lg` · oculto desde 1280 */
+@media (min-width: 1280px) {
   .u-hide-above-lg {
     display: none;
   }

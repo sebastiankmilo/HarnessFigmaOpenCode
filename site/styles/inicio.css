@@ -2,7 +2,7 @@
  * Spec: specs/pages/inicio.md · valores: solo styles/tokens.css
  * Frames: `110:2277` (1448), `322:6042` (375, 2026-10-04) y `268:3128` (768,
  * leído 2026-10-05).
- * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = escritorio.
+ * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1280px` = escritorio.
  */
 
 /* ── 2 — encabezado-contenido (`2392:3972` / `2408:1567`) ───────── *
@@ -20,8 +20,9 @@
   object-fit: cover;
 }
 
-/* A <1448 la media es el recorte exportado del diseño
-   (`hero-media-compact.png`, nodo `4436:2536`) */
+/* Por debajo de `lg` la media es el recorte exportado del diseño
+   (`hero-media-compact.png`, nodo `4436:2536`). El `<source>` de index.html
+   cambia de recorte en el mismo corte que la media query. */
 .hero picture {
   display: contents;
 }
@@ -168,7 +169,7 @@
   background-repeat: no-repeat;
 }
 
-@media (min-width: 768px) and (max-width: 1447px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   .articulos {
     background-size: var(--materia-bg-scale-sm) 100%;
   }
@@ -504,11 +505,11 @@
   }
 }
 
-/* ── `sm` (768–1447) — modal de tablet (`4441:3492`) ───────────── *
+/* ── `sm` (768–1279) — modal de tablet (`4441:3492`) ───────────── *
  * Panel fijo 720×624 (como el de `lg`): título y CTA no se mueven; el
  * bloque de cuerpo tiene el alto restante y es el que scrollea si el texto
  * no cabe. El panel nunca crece con el contenido. */
-@media (min-width: 768px) and (max-width: 1447px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   .dialog__panel {
     display: flex;
     flex-direction: column;
@@ -542,8 +543,8 @@
   }
 }
 
-/* ── `lg` (1448) — escritorio ───────────────────────────────────── */
-@media (min-width: 1448px) {
+/* ── `lg` (desde 1280; frame 1448) — escritorio ───────────────────────────────────── */
+@media (min-width: 1280px) {
   .hero {
     position: relative;
     overflow: hidden;
@@ -551,19 +552,27 @@
     background: var(--color-surface-page);
   }
 
-  /* Media derecha 590×740 a sangre (`2325:3824` → `4329:2096`) */
+  /* Media derecha 590×740 a sangre (`2325:3824` → `4329:2096`): 590 es el
+   * 40,75 % del frame de 1448. El ancho se escribe como `min(590, 40,75 %)`
+   * para que en el frame mida exactamente 590 y, por debajo, encoja con la
+   * ventana en vez de comerse el texto. El alto sale del mismo 590:740 con
+   * `aspect-ratio`, así el recorte de la foto no cambia al encoger. */
   .hero__media {
     position: absolute;
     top: 0;
     right: 0;
     display: block;
-    width: var(--hero-media-width);
-    height: var(--hero-media-height);
+    width: min(var(--hero-media-width), 40.75%);
+    aspect-ratio: var(--hero-media-ratio);
+    height: auto;
     object-fit: cover;
   }
 
+  /* El texto se queda con lo que deja la media: en el frame son 792 px
+   * (100 % − 590 = 794, y el token lo recorta a 792). Si la ventana baja de
+   * 1448, la media encoge y el texto hereda ese hueco, sin solaparse. */
   .hero__text {
-    max-width: var(--hero-text-width);
+    max-width: min(var(--hero-text-width), calc(100% - min(var(--hero-media-width), 40.75%)));
     margin-top: 0; /* en lg la media es absoluta: no hay hueco superior */
   }
 

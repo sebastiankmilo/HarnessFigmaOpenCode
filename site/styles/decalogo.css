@@ -2,7 +2,7 @@
  * Spec: specs/pages/decalogo.md · valores: solo styles/tokens.css
  * Frames: `2334:1005` (1448), `2396:2521` (375, 2026-10-04) y `2408:2098` (768,
  * leído 2026-10-05).
- * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = escritorio.
+ * Mobile-first: base = 375 · `min-width: 768px` = tablet · `min-width: 1280px` = escritorio.
  */
 
 /* ── 2 — header (`2396:2523`) ───────────────────────────────────── */
@@ -74,8 +74,8 @@
   }
 }
 
-/* ── `lg` (1448) — escritorio ──────────────────────────────────── */
-@media (min-width: 1448px) {
+/* ── `lg` (desde 1280; frame 1448) — escritorio ──────────────────────────────────── */
+@media (min-width: 1280px) {
   .decalogo-hero__grid {
     flex-direction: row;
     align-items: flex-start;
