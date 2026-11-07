@@ -263,7 +263,7 @@
     left: 0;
     width: var(--icon-materialismo-bullet);
     height: var(--icon-materialismo-bullet);
-    background: url("../assets/icons/star.png") no-repeat center / contain;
+    background: url("../assets/icons/star.webp") no-repeat center / contain;
   }
 
   .programa-puntos {
