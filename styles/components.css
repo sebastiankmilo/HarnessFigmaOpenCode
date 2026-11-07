@@ -5,7 +5,7 @@
  * Contiene lo que usan 2+ páginas: btn, media (+variantes), bloque-unete,
  * site-nav, site-footer y el bloque de puntos (puntos/punto/indice/cta).
  * Cada componente es una sola definición con sus media queries internas
- * (base = 375 · `min-width: 768px` = tablet · `min-width: 1448px` = lg):
+ * (base = 375 · `min-width: 768px` = tablet · `min-width: 1280px` = lg):
  * el CSS de página solo aporta el contexto que le es propio.
  */
 
@@ -144,7 +144,7 @@
 }
 
 /* Únete: 160 nav + 617 + 405 footer = 1182 (`4426:1111`) */
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   .bloque-unete {
     padding-block: var(--space-8);
   }
@@ -156,13 +156,19 @@
     justify-content: center;
   }
 
+  /* Las dos columnas suman 643 + 644 = 1287. En el frame de 1448 sobran 65 px
+   * (de ahí `justify-content: center`), pero por debajo el contenedor ya no
+   * las deja caber: con `flex-shrink` encogen las dos a la vez y la resta se
+   * reparte. En 1448 no se encoge nada, así que el par aprobado no cambia. */
   .bloque-unete__media {
-    flex: 0 0 var(--unete-media-basis);
+    flex: 0 1 var(--unete-media-basis);
+    min-width: 0;
     width: auto;
   }
 
   .bloque-unete__text {
-    flex: 0 0 var(--unete-text-basis);
+    flex: 0 1 var(--unete-text-basis);
+    min-width: 0;
     width: auto;
   }
 
@@ -557,11 +563,11 @@
   }
 }
 
-/* ── `lg` (1448): 160px + navegación-reducida (4518:1968, 83px) ───
+/* ── `lg` (desde 1280; frame 1448): 160px + navegación-reducida (4518:1968, 83px) ───
  * Diseño definitivo (ticket 4, 2026-10-20). Fuente: capa `hovers`
  * (4518:2148), `navegación-reducida` (4518:1968) y notas 4649:2012–2018.
  * Comportamiento en specs/interactions.md. */
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   .site-nav__inner {
     height: var(--nav-height-lg);
     padding-inline: var(--space-5);
@@ -724,7 +730,7 @@
 
 /* `lg`: los enlaces vuelven a una sola línea de 1384 (footer.md) y a la
    métrica con la que los pares 1448 fueron aprobados */
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   .site-footer__links {
     max-width: none;
     font-size: var(--font-size-body-s);
@@ -784,7 +790,7 @@
   display: none;
 }
 
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   .punto :is(h2, h3) {
     font-size: var(--font-size-l-h1);
   }
@@ -847,7 +853,7 @@
  * Transición de enlaces, botones y tarjetas. Los hovers de relleno de los
  * botones amarillos: par `4518:2148` — relleno `#ffcd00 → #ff4520` y
  * rótulo `#30250f → #fdfcfa`. */
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   .btn,
   .site-nav__link,
   .site-nav__buttons .btn,

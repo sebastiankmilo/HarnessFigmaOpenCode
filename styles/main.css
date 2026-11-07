@@ -104,7 +104,7 @@ body {
   }
 }
 
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   body {
     padding-top: var(--nav-height-lg);
   }
@@ -185,7 +185,7 @@ button {
   }
 }
 
-@media (min-width: 1448px) {
+@media (min-width: 1280px) {
   .container {
     padding-inline: var(--space-5);
   }
