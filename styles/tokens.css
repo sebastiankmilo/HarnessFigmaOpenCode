@@ -69,6 +69,9 @@
      `I2408:1656;4436:2786`, `I2392:4058;93:133` (letterSpacing 0.648) */
   --tracking-card-display: 0.648px;
   --ejes-body-height: 419px;     /* alto del párrafo de sección-ejes (`2328:4513`, 674×419) */
+  --goal-card-height: 500px;        /* alto de la card de objetivo en xs/sm */
+  --goal-card-height-lg: 615px;     /* alto en la grilla de `lg` (`2326:3937`, 322×615) */
+  --goal-card-media-height: 210px;  /* media de `size=sm`/`size=xs` (`4436:2782`, 348×210) */
   --article-card-height: 525px;  /* alto de `container-and-card` (`2326:4137`, 322×525) */
   --article-card-height-xs: 513px; /* alto de la card de artículo en `375-xs` (`2392:4053` › artículos) */
   --punto-body-box-lg: 1225px;   /* caja del punto 3 de Programa (`2331:4699`, 794×1225) */

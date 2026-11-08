@@ -95,13 +95,20 @@
 }
 
 .objetivos__grid .tarjeta-objetivo.is-active {
-  display: block;
+  display: flex;
 }
 
 /* Anatomía compacta = la de lg (media rectangular a sangre, texto con
- * inset 16): `2392:4001` (xs) y `2408:1656` (sm), foto 343/348×210. */
+ * inset 16): `2392:4001` (xs) y `2408:1656` (sm), foto 343/348×210.
+ *
+ * El alto lo fija el token y no el contenido: así el cuerpo puede rellenar
+ * hasta el 90 % de la card (`inicio.js` recorta las líneas) sin que la propia
+ * card crezca con el texto. */
 .tarjeta-objetivo {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: var(--goal-card-height);
   padding: 0 0 var(--space-5);
   background: var(--color-surface-page);
   cursor: pointer;
@@ -120,15 +127,22 @@
 
 .tarjeta-objetivo__avatar {
   display: block;
+  flex: 0 0 auto;
   width: 100%;
-  height: auto;
-  aspect-ratio: 322 / 194;
+  height: var(--goal-card-media-height);
   border-radius: 0;
   background: none;
   object-fit: cover;
 }
 
+/* Caja del texto: ocupa lo que deja la media y recorta lo que no cabe, para
+ * que un título largo nunca empuje el cuerpo fuera de la card. */
 .tarjeta-objetivo__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
   margin-top: var(--space-3);
   padding-inline: var(--space-3);
 }
@@ -138,13 +152,15 @@
   letter-spacing: var(--tracking-card-display);
 }
 
-/* Cuerpo corto de la card: `paragraphs/s` (16/24) recortado a 3 líneas
- * (72 px, la caja de cuerpo del componente). El texto completo se lee en
- * el modal, que usa `paragraphs/base` (18/30,96). */
+/* Cuerpo de la card: `paragraphs/s` (16/24) con el texto largo del objetivo
+ * —el mismo del modal, que lo desarrolla con `paragraphs/base` (18/30,96)—.
+ * `--lineas` lo publica `inicio.js` midiendo cuántas líneas enteras caben
+ * hasta el 90 % del alto de la card, de modo que el corte cae siempre en una
+ * línea completa y se marca con «…». Sin JS queda el extracto de tres. */
 .tarjeta-objetivo p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: var(--lineas, 3);
   overflow: hidden;
   margin-top: var(--space-1);
   font-size: var(--font-size-body-s);
@@ -470,7 +486,7 @@
   /* Ventana de 2 tarjetas: la activa (`.is-active`) y la siguiente (`.is-next`,
      la marca `inicio.js`) — las otras dos siguen `display:none` de la base. */
   .objetivos__grid .tarjeta-objetivo.is-next {
-    display: block;
+    display: flex;
   }
 
   .articulos__grid {
@@ -635,7 +651,10 @@
   }
 
   /* `lg`: las 4 tarjetas visibles (el índice solo mueve foco y punto activo) */
-  .objetivos__grid .tarjeta-objetivo,
+  .objetivos__grid .tarjeta-objetivo {
+    display: flex;
+  }
+
   .articulos__grid .tarjeta-articulo {
     display: block;
   }
@@ -648,11 +667,13 @@
 
   /* Tarjeta 322×615: foto a sangre 322×194 + texto con 24 de lado (2326:3926) */
   .tarjeta-objetivo {
+    height: var(--goal-card-height-lg);
     padding: 0 0 var(--space-6);
     background: var(--color-surface-page);
   }
 
   .tarjeta-objetivo__avatar {
+    flex: 0 0 auto;
     width: 100%;
     height: auto;
     aspect-ratio: 322 / 194;
