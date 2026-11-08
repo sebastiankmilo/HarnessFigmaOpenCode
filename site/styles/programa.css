@@ -115,6 +115,10 @@
   font-size: var(--font-size-body-base);
   line-height: var(--line-height-lead);
   color: var(--color-text-secondary);
+  /* Un `<p>` por entrada de `programa.mat.body`, pero la entrada del Polimat y
+   * la de «La implantación política» agrupan varios párrafos separados por
+   * línea en blanco: `pre-line` los respeta en todos los breakpoints. */
+  white-space: pre-line;
 }
 
 /* ── 5 — sección-puntos (`2396:2435`) ───────────────────────────── */
@@ -154,6 +158,14 @@
 @media (min-width: 768px) {
   .programa-hero__grid {
     gap: var(--space-4);
+  }
+
+  /* El diseño (`baseline/programa-1448.png`) trae el lead del héroe como un
+   * bloque de texto continuo, pero el catálogo lo reparte en dos entradas:
+   * en flujo, el salto entre ambos `<p>` no abre párrafo y el texto sigue
+   * como en Figma. */
+  .programa-hero__lead.u-hide-below-md {
+    display: inline;
   }
 
   .programa-ejes .media,
