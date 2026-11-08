@@ -230,7 +230,6 @@
   --materialismo-media-basis: 204px;     /* `.programa-materialismo .media` */
   --materialismo-row-width: 1147px;      /* `.programa-materialismo__row` */
   --materialismo-text-width: 912px;      /* `.programa-materialismo__text` */
-  --privacidad-width: 910px;        /* `.privacidad__inner` (bloque legal `2335:1546`) */
 
   /* ── Radios ──────────────────────────────────────────────────── */
   /* get_node_info no reporta cornerRadius en nav, goal-card, form,

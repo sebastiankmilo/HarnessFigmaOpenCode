@@ -7,9 +7,6 @@
       "materia-prima": "La Materia Prima",
       "aporta": "Aporta"
     },
-    "menu": {
-      "privacidad": "Política de privacidad"
-    },
     "footer": {
       "inicio": "Inicio",
       "programa": "Programa",
@@ -17,7 +14,6 @@
       "unete": "Únete",
       "materia-prima": "La Materia Prima",
       "aporta": "Aporta",
-      "politica-privacidad": "Pólitica de privacidad",
       "copyright": "© 2026 Vanguardia Colombiana. Todos los derechos reservados."
     },
     "a11y": {
@@ -314,26 +310,5 @@
     "video": {
       "title": "Vídeo: únete a Vanguardia Colombiana"
     }
-  },
-  "politica-de-privacidad": {
-    "meta": {
-      "title": "Política de privacidad — Vanguardia Colombiana",
-      "description": "Política de privacidad y condiciones de uso del sitio de Vanguardia Colombiana: titularidad, datos de contacto y condiciones generales."
-    },
-    "title": "Política de privacidad",
-    "legal": [
-      "Esta página web es propiedad de Asociación cultural Vanguardia Española (en  adelante nos referiremos a la Asociación cultural Vanguardia Española  como ‘Vanguardia Española’), asociación sin ánimo de lucro declarada de  utilidad pública con sede social en la calle C/ 15 de agosto, número 11, 3º A - 28026 MADRID (Madrid).",
-      "Condiciones Generales de uso de www.vanguardiaespañola.com",
-      "Estas son las Condiciones Generales que regulan el uso del Sitio Web www.vanguardiaespañola.com (en adelante Sitio Web) que Vanguardia Española pone a su disposición como Usuario.",
-      "La utilización del Sitio Web supone la plena aceptación por el Usuario de  todas las Condiciones Generales de Uso del Sitio Web vigentes en el  momento en el que el Usuario acceda al mismo, por lo que si éste no está de acuerdo con el mismo, no deberá hacer uso del Sitio Web. Vanguardia  Española se reserva el derecho de modificar en cualquier momento las  presentes Condiciones Generales de Uso así como cualesquiera otras  condiciones generales o particulares, reglamentos de uso, instrucciones o avisos que resulten de aplicación. Así mismo, se reserva el derecho de  suspender, interrumpir o dejar de operar el Sitio Web en cualquier  momento.",
-      "El acceso al Sitio Web por parte de los Usuarios tiene carácter libre y  gratuito, no obstante, algunos de los servicios ofrecidos por Vanguardia Española pueden encontrarse sujetos a Condiciones Particulares, en cuyo caso se pondrán a su disposición en todo momento.",
-      "El acceso, navegación y uso del Sitio Web es responsabilidad del Usuario,  por lo que éste se compromete a usar los contenidos de forma diligente,  correcta y lícita.",
-      "Datos de Vanguardia Española:",
-      "Denominación: Vanguardia Española",
-      "Dirección: C/ 15 de agosto, 11, 3º A - 28026 MADRID (Madrid)",
-      "Correo electrónico: contacto@xn--vanguardiaespaola-sxb.com",
-      "CIF/NIF: G-42713784"
-    ],
-    "cta": "Inicio"
   }
 }

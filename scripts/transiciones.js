@@ -33,7 +33,6 @@
           and: [
             { href_matches: "/*" },
             { not: { href_matches: "/*\\?*" } },
-            { not: { href_matches: "/politica-de-privacidad.html" } },
           ],
         },
         eagerness: "moderate",
