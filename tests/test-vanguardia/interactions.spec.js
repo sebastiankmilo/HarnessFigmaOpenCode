@@ -70,30 +70,42 @@ test.describe('diálogo de objetivos', () => {
       .toBe('');
   });
 
-  test('la card recorta el cuerpo a 3 líneas y el modal conserva el completo', async ({ page }) => {
+  test('la card rellena el cuerpo hasta el 90 % y el modal conserva el completo', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForFunction(() => window.VCI18n && !!window.VCI18n.getData());
     const card = page.locator('.tarjeta-objetivo').nth(1);
     await card.scrollIntoViewIfNeeded();
     const body = card.locator('p');
 
-    const brevity = await body.evaluate((el) => {
+    const relleno = await body.evaluate((el) => {
       const cs = getComputedStyle(el);
+      const caja = el.closest('.tarjeta-objetivo').getBoundingClientRect();
       return {
         clamp: cs.webkitLineClamp,
         size: cs.fontSize,
         line: cs.lineHeight,
-        height: el.getBoundingClientRect().height,
+        lineas: el.style.getPropertyValue('--lineas'),
+        corte: ((el.getBoundingClientRect().bottom - caja.top) / caja.height) * 100,
         scrollHeight: el.scrollHeight,
         clientHeight: el.clientHeight,
         text: el.textContent,
       };
     });
-    expect(brevity.clamp).toBe('3');
-    expect(brevity.size).toBe('16px');
-    expect(brevity.line).toBe('24px');
-    expect(Math.round(brevity.height)).toBe(72);
-    expect(brevity.scrollHeight).toBeGreaterThan(brevity.clientHeight);
+    expect(relleno.size).toBe('16px');
+    expect(relleno.line).toBe('24px');
+    // El número de líneas lo mide `inicio.js`: siempre más que el extracto de
+    // tres y con el corte por debajo del 90 % del alto de la card.
+    expect(Number(relleno.lineas)).toBeGreaterThan(3);
+    expect(relleno.clamp).toBe(relleno.lineas);
+    expect(relleno.corte).toBeGreaterThan(80);
+    expect(relleno.corte).toBeLessThanOrEqual(90);
+    expect(relleno.scrollHeight).toBeGreaterThan(relleno.clientHeight);
+
+    // La card enseña el texto largo del objetivo, no el extracto `body-small`.
+    const largo = await page.evaluate(
+      () => window.VCI18n.getData()['inicio'].goals['card-2']['body-complete'][0]
+    );
+    expect(relleno.text.trim()).toBe(largo.trim());
 
     await card.click();
     await expect(page.locator('[role="dialog"]')).toBeVisible();
@@ -108,7 +120,7 @@ test.describe('diálogo de objetivos', () => {
     });
     expect(modal.size).toBe('18px');
     expect(modal.line).toBe('31px');
-    expect(modal.text.length).toBeGreaterThanOrEqual(brevity.text.length);
+    expect(modal.text.length).toBeGreaterThanOrEqual(relleno.text.length);
   });
 });
 

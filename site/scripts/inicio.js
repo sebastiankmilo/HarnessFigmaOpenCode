@@ -14,8 +14,10 @@
     : null;
   if (!modal) return;
 
-  // Un objetivo = un objeto `inicio.goals.card-N`: `title`, `body-small`
-  // (extracto de la card) y `body-complete` (array de párrafos del modal).
+  // Un objetivo = un objeto `inicio.goals.card-N`: `title`, `body-complete`
+  // (párrafos: el primero es el que enseña la card, recortado por líneas, y
+  // todos juntos son el texto del modal) y `body-small` (extracto, solo como
+  // reserva si el catálogo no ha llegado todavía).
   function prefixFor(index) {
     return "inicio.goals.card-" + (index + 1);
   }
@@ -226,4 +228,75 @@
     document.querySelectorAll("[data-carousel]"),
     initCarousel
   );
+})();
+
+/* Relleno del texto de las cards de objetivo.
+ *
+ * La card muestra el texto largo del objetivo (`body-complete`) y lo recorta
+ * donde ya no cabe: se reserva el 10 % inferior del alto de la card y el
+ * cuerpo se queda con las líneas enteras que entran hasta esa línea, con «…»
+ * al final (`-webkit-line-clamp`). El alto de la card lo fija `inicio.css`,
+ * no el contenido, así que medir y recortar no se retroalimentan: se puede
+ * repetir tantas veces como haga falta sin que la card cambie de tamaño. */
+(function () {
+  var grid = document.querySelector(".objetivos__grid");
+  if (!grid) return;
+
+  var cards = Array.prototype.slice.call(
+    grid.querySelectorAll(".tarjeta-objetivo")
+  );
+  if (!cards.length) return;
+
+  // Aire inferior: 10 % del alto de la card, tal como se pidió.
+  var AIRE = 0.1;
+  var pendiente = null;
+
+  function ajustar() {
+    pendiente = null;
+    cards.forEach(function (card) {
+      var cuerpo = card.querySelector("p");
+      if (!cuerpo) return;
+
+      var caja = card.getBoundingClientRect();
+      // Tarjeta oculta por el carrusel: se mide cuando vuelva a verse.
+      if (!caja.height) return;
+
+      var corte = caja.top + caja.height * (1 - AIRE);
+      var arriba = cuerpo.getBoundingClientRect().top;
+      var alto = parseFloat(window.getComputedStyle(cuerpo).lineHeight) || 24;
+      var lineas = Math.max(1, Math.floor((corte - arriba) / alto));
+
+      cuerpo.style.setProperty("--lineas", String(lineas));
+    });
+  }
+
+  // Se agrupa en un frame: `resize` y el observer llegan a ráfagas.
+  function programar() {
+    if (pendiente) window.cancelAnimationFrame(pendiente);
+    pendiente = window.requestAnimationFrame(ajustar);
+  }
+
+  programar();
+
+  // Las medidas dependen de la tipografía real: hasta que DM Sans no carga,
+  // el navegador mide con la de reserva y el corte cae en otro sitio.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(programar);
+  }
+
+  window.addEventListener("resize", programar);
+
+  // El carrusel muestra u oculta tarjetas cambiando clases, y el cambio de
+  // idioma reescribe el texto: las dos cosas mueven la línea de corte. Los
+  // `style` que escribe `ajustar` no están en el filtro, así que no se
+  // realimenta.
+  if (window.MutationObserver) {
+    new MutationObserver(programar).observe(grid, {
+      attributes: true,
+      attributeFilter: ["class"],
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+  }
 })();

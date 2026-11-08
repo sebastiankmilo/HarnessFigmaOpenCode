@@ -63,8 +63,10 @@ Frame `322:6042` — **375×4819**: `encabezado-contenido` 1021.51,
 
 Los leads de hero y La Materia Prima usan la **copia corta** de Figma
 (`2392:3975` y `2392:4056`; también en `sm`); el lead largo es de `lg`. La
-card de objetivo usa `body-small` (16/24, 3 líneas) por decisión de contenido,
-por eso la sección puede quedar por debajo del frame original.
+card de objetivo muestra el texto largo del objetivo (`body-complete`, 16/24)
+y lo recorta a las líneas que caben hasta el 90 % de su alto —decisión de
+contenido del 2026-11-08—, así que la sección puede quedar por debajo o por
+encima del frame original según cuánto ocupe cada título.
 
 ## Diferencias por breakpoint
 

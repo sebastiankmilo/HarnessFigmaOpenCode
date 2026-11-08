@@ -250,8 +250,9 @@ test.describe('diálogo de objetivos: texto por card', () => {
     await expect(page.locator('.dialog__title')).toHaveText(await cards.nth(0).locator('h3').textContent());
     await expect(page.locator('.dialog__body')).toHaveCount(2);
     await expect(page.locator('.dialog__body').first()).toHaveAttribute('data-i18n', 'inicio.goals.card-1.body-complete.0');
-    // El diálogo ya no repite el texto de la card: usa el desarrollo del JSON.
-    expect(await page.locator('.dialog__body').first().textContent()).not.toBe(
+    // Card y diálogo arrancan con el mismo texto largo: la card lo recorta por
+    // líneas y el diálogo lo despliega entero (todos los párrafos).
+    expect(await page.locator('.dialog__body').first().textContent()).toBe(
       await cards.nth(0).locator('p').textContent()
     );
     await page.keyboard.press('Escape');

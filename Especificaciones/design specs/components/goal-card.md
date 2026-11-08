@@ -44,10 +44,19 @@ Las tres variantes llevan el mismo botón 123×44 `#003399`.
 | Cuerpo | `--color-text-secondary` | `#333333` |
 | Relleno del CTA | `--color-link-underline` no aplica → `#003399` | **PENDIENTE-FIGMA** (no hay token `--color-goal-cta` en `tokens.css`) |
 
-El **cuerpo de la card** usa `paragraphs/s` (16/24) y se recorta a **3 líneas**
-(72 px = 3 × 24, la caja de `2325:3904`). El **texto completo** se muestra en
-`Objetivo-modal` con `paragraphs/base` (18/30,96): la card es un extracto, el
-modal el desarrollo completo.
+El **cuerpo de la card** usa `paragraphs/s` (16/24) sobre el texto largo del
+objetivo —el mismo `body-complete` que desarrolla `Objetivo-modal` con
+`paragraphs/base` (18/30,96)— y se recorta donde ya no cabe: se reserva el
+**10 % inferior** del alto de la card y el cuerpo se queda con las líneas
+enteras que entran hasta esa línea, con «…» al final (`-webkit-line-clamp`).
+El número de líneas lo mide `inicio.js` (`--lineas`), porque depende del alto
+de la card y de cuánto ocupe el título.
+
+**Desviación del componente** (decisión de contenido, 2026-11-08): el
+componente recorta a 3 líneas fijas (72 px = 3 × 24, la caja de `2325:3904`) y
+muestra el extracto `body-small`. En la web la card enseña el texto largo, así
+que la caja del componente ya no se cumple y la comparación visual contra
+`baseline/goal-card.png` difiere a propósito.
 
 ## Comportamiento
 
