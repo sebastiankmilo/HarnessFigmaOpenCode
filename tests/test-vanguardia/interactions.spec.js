@@ -142,7 +142,7 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
   });
 
   const PAGES = [
-    ['programa.html', 9],
+    ['programa.html', 8],
     ['decalogo.html', 10],
   ];
 
@@ -174,13 +174,13 @@ test.describe('scrollspy del índice de puntos (UIkit)', () => {
 
     test(`${file}: el índice permanece visible mientras el texto se mueve`, async ({ page }) => {
       await page.goto(`/${file}`);
-      await page.evaluate(() => document.getElementById('point-5').scrollIntoView());
+      await page.evaluate(() => document.getElementById('point-6').scrollIntoView());
       const box = await page.locator('.indice').boundingBox();
       // sticky: anclado bajo la nav (83) + 32 → 115
       expect(box.y).toBeGreaterThanOrEqual(100);
       expect(box.y).toBeLessThanOrEqual(130);
       const link = page.locator('.indice a.uk-active');
-      await expect(link).toHaveAttribute('href', '#point-5');
+      await expect(link).toHaveAttribute('href', '#point-6');
       const lb = await link.boundingBox();
       expect(Math.round(lb.width)).toBe(290);
     });
