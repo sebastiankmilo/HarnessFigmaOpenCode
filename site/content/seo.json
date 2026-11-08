@@ -26,7 +26,6 @@
     { "file": "index.html", "slug": "", "priority": "1.0", "changefreq": "monthly" },
     { "file": "programa.html", "slug": "programa.html", "priority": "0.9", "changefreq": "monthly" },
     { "file": "decalogo.html", "slug": "decalogo.html", "priority": "0.9", "changefreq": "monthly" },
-    { "file": "unete.html", "slug": "unete.html", "priority": "0.8", "changefreq": "yearly" },
-    { "file": "politica-de-privacidad.html", "slug": "politica-de-privacidad.html", "priority": "0.3", "changefreq": "yearly" }
+    { "file": "unete.html", "slug": "unete.html", "priority": "0.8", "changefreq": "yearly" }
   ]
 }

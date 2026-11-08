@@ -528,7 +528,7 @@
   }
 
   /* Enlaces del overlay: DM Sans Black 16 con tracking 1.92 y caja de 32
-   * (texto 24 + 8 de padding). El ancho lo fija «Política de privacidad» (239). */
+   * (texto 24 + 8 de padding). El ancho lo fija la etiqueta más larga (239). */
   .site-nav__menu-links {
     font-size: var(--font-size-body-s);
     font-weight: var(--font-weight-black);
@@ -778,9 +778,7 @@
   white-space: pre-line;
 }
 
-/* CTA de cierre de la sección de puntos (programa/decálogo). En
- * política-de-privacidad `.cta` se usa sin este margen: la página lo
- * anula con `.privacidad .cta`. */
+/* CTA de cierre de la sección de puntos (programa/decálogo). */
 .cta {
   margin-top: var(--space-6);
 }

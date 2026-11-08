@@ -94,14 +94,6 @@
       "baseline": "baseline/unete-1448.png",
       "actual": "actual/unete-1448.png",
       "spec": "Figma 1448-lg -> frame Únete (2335:1229), 1448x1182. Sin spec .md en disco: leer con get_node_info."
-    },
-    {
-      "id": "politica-de-privacidad-1448",
-      "kind": "page",
-      "viewport": 1448,
-      "baseline": "baseline/politica-de-privacidad-1448.png",
-      "actual": "actual/politica-de-privacidad-1448.png",
-      "spec": "Figma 1448-lg -> frame Política de privacidad (2335:1533), 1448x1792. Sin spec .md en disco: leer con get_node_info."
     }
   ]
 }

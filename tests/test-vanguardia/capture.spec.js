@@ -8,7 +8,6 @@ const PAGES = [
   { url: '/programa.html', slug: 'programa' },
   { url: '/decalogo.html', slug: 'decalogo' },
   { url: '/unete.html', slug: 'unete' },
-  { url: '/politica-de-privacidad.html', slug: 'politica-de-privacidad' },
 ];
 
 async function settle(page) {

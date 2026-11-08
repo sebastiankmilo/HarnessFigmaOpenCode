@@ -10,7 +10,7 @@ import { test, expect } from '@playwright/test';
  * escritorio: sin scroll horizontal, con los enlaces del nav a la vista y sin
  * que la foto del héroe tape el texto. */
 
-const PAGINAS = ['index', 'programa', 'decalogo', 'unete', 'politica-de-privacidad'];
+const PAGINAS = ['index', 'programa', 'decalogo', 'unete'];
 const ANCHOS = [1280, 1366, 1440];
 
 // Corre una sola vez (no hace falta repetirlo en los tres proyectos: el ancho

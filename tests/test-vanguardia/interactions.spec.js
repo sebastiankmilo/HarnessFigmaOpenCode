@@ -19,12 +19,6 @@ test.describe('navegación interna (lo que la visión no verifica)', () => {
     });
   }
 
-  test('footer → Política de privacidad', async ({ page }) => {
-    await page.goto('/index.html');
-    await page.locator(`footer a[href="politica-de-privacidad.html"]`).click();
-    await expect(page).toHaveURL(/politica-de-privacidad\.html/);
-  });
-
   test('footer → Programa', async ({ page }) => {
     await page.goto('/index.html');
     await page.locator(`footer a[href="programa.html"]`).click();
