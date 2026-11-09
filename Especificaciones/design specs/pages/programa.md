@@ -66,14 +66,18 @@ materialismo **1495**; puntos **13448**; footer 715.
   export solo muestra título + intro); título 41, intro 899, gap 24, padding 48.
 - **Materialismo** (`2396:2423`): 1495; dos imágenes 163×163 con gap 18, título
   41, lead 186 y **tres conclusiones** con viñeta (916); el resto del
-  materialismo histórico no se muestra en xs.
+  materialismo histórico no se muestra en xs. **Decisión 2026-11-09:** este
+  recorte no se aplica; todas las viewports muestran el mismo texto completo
+  (título, lead largo y los 10 párrafos), así que la sección queda más alta
+  que el frame en xs.
 - **Puntos** (`2396:2435`): 13448; título 41, 9 puntos con títulos 32,4 y CTA
   «Únete» 107×47.
 
-Implementación: a 375 se usan las copias compactas de `programa.*`,
-`.prog-ejes__body--wide`/`.prog-mat__body--wide` se ocultan y las imágenes de
-ejes se ocultan. La página queda algo más corta que el frame por la adaptación
-del copy de puntos a Colombia (el diseño usa referencias a España).
+Implementación: a 375 se usa la copia compacta de `programa.hero.*` y las
+imágenes de ejes se ocultan. En materialismo se retiraron las copias
+compactas (`*-compact`): todas las viewports usan el mismo copy completo.
+La página queda algo más corta que el frame por la adaptación del copy de
+puntos a Colombia (el diseño usa referencias a España).
 
 ## Diferencias por breakpoint
 
