@@ -124,8 +124,6 @@
   --space-materialismo-bottom: 76px;   /* padding inferior de sección-materialismo (programa lg) */
   --ejes-media-size-xs: 337px; /* media de `sección-ejes` en `375-xs` (`2396:2420`, 337×337; oculta en el render) */
   --materialismo-media-gap-xs: 18px;    /* gap entre las dos imágenes 163×163 de `sección-materialismo` xs */
-  --materialismo-bullet-indent-xs: 40px;/* sangría del texto tras la viñeta de materialismo xs */
-  --materialismo-bullet-left-xs: 24px;  /* posición de la viñeta (`•`) en materialismo xs */
   --legal-height: 904px;      /* alto del bloque legal (`2335:1546`, 910×904) */
   --nav-height-xs: 83.38px;   /* alto de la barra del nav en las instancias de 375-xs (`2396:2902` §2.3, ticket 6) */
   --nav-height-xs-reduced: 56px; /* estado compacto de xs (misma altura que sm; pedido 2026-11-03) */

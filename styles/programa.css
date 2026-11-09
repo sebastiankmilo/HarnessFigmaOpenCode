@@ -354,7 +354,9 @@
     letter-spacing: var(--tracking-display-compact);
   }
 
-  /* Materialismo: dos imágenes 163 en fila, lead compacto y solo body-3. */
+  /* Materialismo: dos imágenes 163 en fila. Desde la decisión del 2026-11-09
+   * todas las viewports usan el mismo cuerpo completo (se retiraron las
+   * copias compactas), así que aquí solo queda el ajuste de la lista. */
   .programa-materialismo {
     padding-block: var(--space-6) var(--space-7);
   }
@@ -375,43 +377,9 @@
     letter-spacing: var(--tracking-display-compact);
   }
 
-  /* El cuerpo conserva `--compact`/`--wide` hasta que la lista falsa de
-   * filósofos sea un <dl> real; título y lead se ocultan con `u-hide-*`. */
-  .programa-materialismo__body--wide {
-    display: none;
-  }
-
-  .programa-materialismo__body--compact {
-    display: block;
-  }
-
   .programa-materialismo__text {
     gap: var(--space-4);
     margin-top: var(--space-5);
-  }
-
-  .programa-materialismo__body--compact {
-    position: relative;
-    padding-left: var(--materialismo-bullet-indent-xs);
-    white-space: pre-line;
-  }
-
-  .programa-materialismo__body--compact::before {
-    content: "•";
-    position: absolute;
-    top: 0;
-    left: var(--materialismo-bullet-left-xs);
-    color: var(--color-text-secondary);
-  }
-}
-
-@media (min-width: 768px) {
-  .programa-materialismo__body--compact {
-    display: none;
-  }
-
-  .programa-materialismo__body--wide {
-    display: block;
   }
 }
 
