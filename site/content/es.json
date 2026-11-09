@@ -36,7 +36,6 @@
     "hero": {
       "title": "Vanguardia Colombiana",
       "lead": "Somos una asociación cultural con vocación política que en nuestra fase actual nos consolidamos como una escuela de formación de cuadros en materialismo político: un espacio donde teoría y práctica se articulan mediante la praxis y el análisis crítico de la realidad nacional e internacional, unidos por la asociación y guiados por el saber. Nuestro horizonte es superar el actual estado de impotencia y sometimiento de nuestra nación, y mejorar las condiciones materiales de la inmensa mayoría de nuestra sociedad. Los trabajadores representamos más del 90% de la población; si logramos organizarnos y ponernos de acuerdo sobre bases fundamentales, podremos convertirnos en la clase dirigente que tome las riendas de nuestro país para construir una nación y una civilización donde prevalezcan el bien común, la soberanía política y la independencia económica.",
-      "lead-compact": "Somos una asociación cultural con vocación política que busca desde la praxis y el análisis crítico de la realidad nacional e internacional, superar el estado de cosas actual en nuestro país y mejorar las condiciones materiales de la inmensa mayoría de nuestra sociedad. Los trabajadores, quienes somos el 90% de población, y si logramos ponernos de acuerdo sobre bases fundamentales, podremos construir una nación y una civilización en donde prevalezcan el bien común, la soberanía política y la independencia económica.",
       "cta": "Nuestro programa",
       "cta-unete": "Únete"
     },
@@ -114,7 +113,6 @@
     "articles": {
       "title": "La Materia Prima",
       "lead": "Lee nuestra revista dedicada al análisis de temas actuales, filosóficos y político-económicos desde el materialismo político.",
-      "lead-compact": "Revista dedicada al análisis de temas actuales desde el materialismo político.",
       "card-1": {
         "title": "¿Está Cuba vendiendo una nueva imagen al mundo?",
         "body": "Mientras muchos cubanos hacen filas por alimentos, el nieto de Raúl Castro exhibe un medallón de oro y dice que quisiera que todos vivieran como él…"
@@ -154,9 +152,7 @@
       "lead": [
         "Vanguardia Colombiana, como asociación con vocación de servicio a la sociedad, presenta un programa con un proyecto político definido respecto del Estado en el que se conectan la gestión de la vida cotidiana de los trabajadores por parte de estos mismos trabajadores con una política exterior, una geopolítica y unas relaciones internacionales centralistas, cuya meta sea la insubordinación de Colombia frente al sometimiento de la Patria a intereses extranjeros constantes desde hace dos siglos.",
         "Los ejes sobre los que desarrollamos nuestros programa son en primer lugar la predominancia de los intereses del pueblo trabajador por encima de las ambiciones de la burguesía parasitaria que lleva dos siglos manteniendonos en el subdesarrollo, la impotencia y la barbarie.\n\nY para poder realizar efectivamente esos planes y programas, partimos de los siguientes principios fundamentales:"
-      ],
-      "title-compact": "Nuestro Programa",
-      "lead-compact": "Vanguardia Colombiana, como asociación con vocación de servicio a la sociedad, presenta un programa con un proyecto político definido respecto del Estado en el que se conectan la gestión de la vida cotidiana de los trabajadores por parte de estos mismos trabajadores con una política exterior, una geopolítica y unas relaciones internacionales cuya meta sea la insubordinación de Colombia frente al sometimiento de la Patria a intereses extranjeros constantes desde hace dos siglos."
+      ]
     },
     "ejes": {
       "title": "Los ejes de nuestros principios",

@@ -162,9 +162,10 @@
 
   /* El diseño (`baseline/programa-1448.png`) trae el lead del héroe como un
    * bloque de texto continuo, pero el catálogo lo reparte en dos entradas:
-   * en flujo, el salto entre ambos `<p>` no abre párrafo y el texto sigue
-   * como en Figma. */
-  .programa-hero__lead.u-hide-below-md {
+   * desde `sm` fluyen como un solo bloque, como en Figma; en `xs` quedan como
+   * dos párrafos. Todas las viewports muestran el mismo texto (decisión
+   * 2026-11-09: sin copia compacta). */
+  .programa-hero__lead {
     display: inline;
   }
 

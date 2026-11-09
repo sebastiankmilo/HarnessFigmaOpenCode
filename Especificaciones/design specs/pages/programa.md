@@ -73,9 +73,10 @@ materialismo **1495**; puntos **13448**; footer 715.
 - **Puntos** (`2396:2435`): 13448; título 41, 9 puntos con títulos 32,4 y CTA
   «Únete» 107×47.
 
-Implementación: a 375 se usa la copia compacta de `programa.hero.*` y las
-imágenes de ejes se ocultan. En materialismo se retiraron las copias
-compactas (`*-compact`): todas las viewports usan el mismo copy completo.
+Implementación: a 375 las imágenes de ejes se ocultan. En el héroe y en
+materialismo se retiraron las copias compactas (`*-compact`): todas las
+viewports usan el mismo copy completo. El lead del héroe, repartido en dos
+entradas, fluye como un solo bloque desde `sm` y como dos párrafos en `xs`.
 La página queda algo más corta que el frame por la adaptación del copy de
 puntos a Colombia (el diseño usa referencias a España).
 
