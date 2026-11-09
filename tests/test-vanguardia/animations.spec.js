@@ -329,6 +329,31 @@ test.describe('fades de sección (nota 4649:2018)', () => {
   });
 });
 
+test.describe('fades de sección más altas que el viewport', () => {
+  /* Un `threshold` fraccionario en el IntersectionObserver deja fuera las
+   * secciones que no caben en pantalla: su porcentaje mínimo no llega a ser
+   * visible nunca y se quedan en `opacity: 0` para siempre. En xs
+   * `programa-puntos` mide más de 20 000 px, así que el caso se comprueba
+   * aquí: arranca bajo el primer viewport y tiene que revelarse al llegar. */
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-375', 'el caso se da en la vista móvil');
+  });
+  test.beforeEach(noMotionPref);
+
+  test('programa: los puntos se revelan aunque midan más que la pantalla', async ({ page }) => {
+    await page.goto('/programa.html');
+    const puntos = page.locator('.programa-puntos');
+    await expect(puntos).toHaveClass(/js-reveal/);
+    await puntos.scrollIntoViewIfNeeded();
+    await expect(puntos).toHaveClass(/is-visible/, { timeout: 3000 });
+    await expect
+      .poll(() => puntos.evaluate((el) => getComputedStyle(el).opacity), {
+        message: 'la sección de puntos se queda invisible',
+      })
+      .toBe('1');
+  });
+});
+
 test.describe('transición del menú de navegación (sm/xs)', () => {
   test.beforeEach(async ({}, testInfo) => {
     test.skip(
