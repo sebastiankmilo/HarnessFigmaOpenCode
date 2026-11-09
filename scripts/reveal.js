@@ -24,7 +24,12 @@
         }
       });
     },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
+    // threshold 0: basta con que el borde superior entre en el viewport (el
+    // rootMargin recorta el 10 % inferior). Con una fracción fija (0.05) las
+    // secciones más altas que el viewport no la alcanzan nunca —su 5 % no cabe
+    // en pantalla— y se quedaban con `opacity: 0` para siempre: es lo que le
+    // pasaba a `programa-puntos`, de más de 20 000 px en móvil.
+    { rootMargin: "0px 0px -10% 0px", threshold: 0 }
   );
 
   Array.prototype.forEach.call(targets, function (section) {
