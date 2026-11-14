@@ -13,7 +13,7 @@
 // @lang:start/@lang:end; ambos se reemplazan enteros en cada pasada.
 // Sale con código 1 si falta una clave, si es/pt no tienen las mismas claves,
 // si una página no está declarada en seo.json o si queda un {{…}} sin resolver.
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -41,8 +41,13 @@ import {
 } from './build/pages.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const siteDir = join(root, 'site');
+// Variante de diseño: `--site=site_v_impeccable` construye otra carpeta con el
+// mismo pipeline (copy, pt, SEO, sitemap). Sin argumento se construye `site/`.
+const siteArg = process.argv.slice(2).find((arg) => arg.startsWith('--site='));
+const siteName = siteArg ? siteArg.slice('--site='.length) : 'site';
+const siteDir = join(root, siteName);
 const contentDir = join(siteDir, 'content');
+if (!existsSync(siteDir)) fail(`no existe la carpeta del sitio: ${siteName}`);
 
 // Huecos de vídeo del sitio. `required` marca los que no tienen contenido de
 // reserva: sin URL de YouTube el build falla en vez de publicar el hueco vacío.
