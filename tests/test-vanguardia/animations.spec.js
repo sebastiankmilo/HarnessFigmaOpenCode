@@ -52,15 +52,33 @@ test.describe('transiciones de hover (nota 4649:2012)', () => {
     }
   });
 
-  test('goal-card y article-card: background 0.4s ease', async ({ page }) => {
+  test('article-card: background 0.4s ease', async ({ page }) => {
     await page.goto('/index.html');
-    for (const sel of ['.tarjeta-objetivo', '.tarjeta-articulo']) {
-      const t = await readTransition(page, sel);
-      expect(t, `no existe ${sel}`).not.toBeNull();
-      expect(t.duration, `${sel} duration`).toContain('0.4s');
-      expect(t.timing, `${sel} timing`).toContain('ease');
-      expect(t.property, `${sel} property`).toContain('background');
-    }
+    const t = await readTransition(page, '.tarjeta-articulo');
+    expect(t, 'no existe .tarjeta-articulo').not.toBeNull();
+    expect(t.duration).toContain('0.4s');
+    expect(t.timing).toContain('ease');
+    expect(t.property).toContain('background');
+  });
+
+  test('goal-card: solo crece, el fondo no se tiñe (decisión 2026-11-14)', async ({ page }) => {
+    await page.goto('/index.html');
+    const ficha = page.locator('.objetivos__grid .tarjeta-objetivo.is-active');
+
+    // La transición es del crecimiento; el fondo dejó de animarse.
+    const t = await readTransition(page, '.objetivos__grid .tarjeta-objetivo');
+    expect(t.property).toContain('scale');
+    expect(t.property).not.toContain('background');
+
+    // Y el color no cambia al pasar el cursor.
+    const fondo = () => ficha.evaluate((el) => getComputedStyle(el).backgroundColor);
+    const reposo = await fondo();
+    await ficha.hover();
+    await page.waitForTimeout(600);
+    expect(await fondo()).toBe(reposo);
+    await expect
+      .poll(() => ficha.evaluate((el) => parseFloat(getComputedStyle(el).scale)))
+      .toBeGreaterThan(1);
   });
 });
 
@@ -282,6 +300,700 @@ test.describe('modal UIkit en xs (90% del viewport)', () => {
   });
 });
 
+test.describe('entrada de la portada (inicio)', () => {
+  /* Portada de `site_v_impeccable/` traída al hero de `site/`: titular con
+   * barrido `clip-path`, foto que se asienta y entradilla + botones
+   * escalonados. La nota 4649:2018 pide no animar el above the fold con fades
+   * de scrollspy; esto es otra cosa — una entrada de carga, una sola vez, y
+   * sin desplazar el layout. */
+
+  /* El navegador conserva la unidad de los extremos al interpolar (de
+   * `inset(0 100% 0 0)` sale `inset(0px 0% 0px 0px)`), así que el «sin
+   * recorte» se comprueba por valor —todo cero— y no por cadena exacta. */
+  const sinRecorte = (valor) =>
+    valor === 'none' || /^inset\((0(px|%)?)( 0(px|%)?){0,3}\)$/.test(valor.trim());
+
+  test('los cuatro elementos arrancan con la curva y los tiempos del sistema', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+
+    const leidas = await page.evaluate(() =>
+      ['.hero__title', '.hero__media', '.hero__lead', '.hero__actions'].map((sel) => {
+        const s = getComputedStyle(document.querySelector(sel));
+        return {
+          sel,
+          nombre: s.animationName,
+          duracion: s.animationDuration,
+          curva: s.animationTimingFunction,
+          retardo: s.animationDelay,
+          relleno: s.animationFillMode,
+        };
+      })
+    );
+
+    const [titulo, foto, entradilla, acciones] = leidas;
+
+    expect(titulo.nombre).toBe('tinta');
+    expect(titulo.duracion).toBe('1.05s');
+    expect(titulo.curva).toBe('cubic-bezier(0.16, 1, 0.3, 1)');
+
+    expect(foto.nombre).toBe('asentar');
+    expect(foto.duracion).toBe('1.5s');
+
+    expect(entradilla.nombre).toBe('subir');
+    expect(entradilla.duracion).toBe('0.9s');
+    expect(entradilla.retardo).toBe('0.12s');
+
+    expect(acciones.nombre).toBe('subir');
+    expect(acciones.duracion).toBe('0.9s');
+    expect(acciones.retardo).toBe('0.22s');
+
+    // `both`: nada se queda visible antes ni parpadea después.
+    for (const leida of leidas) expect(leida.relleno).toBe('both');
+  });
+
+  test('a mitad del barrido el titular sigue recortado y la foto sigue crecida', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+
+    // Se congela el tiempo de la animación a los 400 ms de los 1050.
+    const medio = await page.evaluate(() => {
+      const titulo = document.querySelector('.hero__title');
+      const foto = document.querySelector('.hero__media');
+      const animaciones = document.getAnimations();
+      for (const animacion of animaciones) {
+        animacion.pause();
+        if (animacion.effect && animacion.effect.target === titulo) {
+          animacion.currentTime = 400;
+        }
+        if (animacion.effect && animacion.effect.target === foto) {
+          animacion.currentTime = 400;
+        }
+      }
+      return {
+        recorte: getComputedStyle(titulo).clipPath,
+        escala: getComputedStyle(foto).transform,
+      };
+    });
+
+    // A mitad del barrido el titular sigue descubriéndose: `clip-path` ya no
+    // es `none` (hay recorte activo) y la foto todavía está crecida.
+    expect(medio.recorte).toMatch(/^inset\(/);
+    expect(medio.recorte).not.toMatch(/inset\(0(px)?( 0(px)?){0,3}\)/);
+    expect(medio.escala).not.toBe('none');
+  });
+
+  test('al terminar, el titular queda entero y sin transformaciones', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+    await page.waitForTimeout(1800);
+
+    const final = await page.evaluate(() => {
+      const lee = (sel) => getComputedStyle(document.querySelector(sel));
+      return {
+        recorte: lee('.hero__title').clipPath,
+        foto: lee('.hero__media').transform,
+        entradilla: lee('.hero__lead').opacity,
+        acciones: lee('.hero__actions').opacity,
+      };
+    });
+
+    expect(sinRecorte(final.recorte)).toBe(true);
+    // Con `fill-mode: both` la animación sigue aplicada al terminar, así que
+    // la matriz identidad —no `none`— es el estado final.
+    expect(['none', 'matrix(1, 0, 0, 1, 0, 0)']).toContain(final.foto);
+    expect(final.entradilla).toBe('1');
+    expect(final.acciones).toBe('1');
+  });
+
+  test('la foto crecida no abre scroll horizontal en móvil', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-375', 'el sobrante se recorta en xs');
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+
+    // En el pico del `scale(1.05)` la foto se sale 2,5 % por cada lado.
+    const desborde = await page.evaluate(() => {
+      const foto = document.querySelector('.hero__media');
+      for (const animacion of document.getAnimations()) {
+        if (animacion.effect && animacion.effect.target === foto) {
+          animacion.pause();
+          animacion.currentTime = 0;
+        }
+      }
+      return {
+        documento: document.documentElement.scrollWidth,
+        ventana: window.innerWidth,
+        recorte: getComputedStyle(document.querySelector('.hero')).overflowX,
+      };
+    });
+
+    expect(desborde.recorte).toBe('clip');
+    expect(desborde.documento).toBeLessThanOrEqual(desborde.ventana);
+  });
+
+  test('con prefers-reduced-motion la portada nace en su estado final', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/index.html');
+
+    const estado = await page.evaluate(() => {
+      const lee = (sel) => getComputedStyle(document.querySelector(sel));
+      return {
+        duracion: parseFloat(lee('.hero__title').animationDuration),
+        retardo: parseFloat(lee('.hero__lead').animationDelay),
+        recorte: lee('.hero__title').clipPath,
+        entradilla: lee('.hero__lead').opacity,
+        acciones: lee('.hero__actions').opacity,
+      };
+    });
+
+    expect(estado.duracion).toBeLessThan(0.01);
+    expect(estado.retardo).toBe(0);
+    expect(sinRecorte(estado.recorte)).toBe(true);
+    expect(estado.entradilla).toBe('1');
+    expect(estado.acciones).toBe('1');
+  });
+
+  /* Las cuatro animaciones nacen en pausa y se sueltan cuando el documento y
+   * las fuentes están listos: sin eso, los 150–300 ms que tarda el arranque de
+   * esta carpeta (UIkit, catálogo de idioma, carrusel) se comían el principio
+   * del barrido y el titular aparecía de golpe ya descubierto un tercio. */
+  test('el documento deja la entrada en pausa y luego la suelta', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+    await page.waitForFunction(() => document.documentElement.classList.contains('con-entrada'), {
+      timeout: 3000,
+    });
+    expect(
+      await page.evaluate(() => document.documentElement.classList.contains('js-entrada'))
+    ).toBe(true);
+
+    const alSoltar = await page.evaluate(() => ({
+      estado: getComputedStyle(document.querySelector('.hero__title')).animationPlayState,
+      corriendo: document.getAnimations().some((a) => a.playState === 'running'),
+    }));
+    expect(alSoltar.estado).toBe('running');
+    expect(alSoltar.corriendo).toBe(true);
+  });
+
+  test('con la clase de pausa puesta el titular espera recortado del todo', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+    await page.waitForFunction(() => document.documentElement.classList.contains('con-entrada'));
+
+    // Se devuelve al estado de antes de soltar: el titular tiene que estar
+    // entero recortado (nada impreso) y la animación detenida en el primer
+    // cuadro, que es lo que impide que el barrido arranque a medias.
+    const enPausa = await page.evaluate(() => {
+      document.documentElement.classList.remove('con-entrada');
+      const titulo = document.querySelector('.hero__title');
+      for (const animacion of document.getAnimations()) animacion.currentTime = 0;
+      return {
+        estado: getComputedStyle(titulo).animationPlayState,
+        recorte: getComputedStyle(titulo).clipPath,
+      };
+    });
+
+    expect(enPausa.estado).toBe('paused');
+    expect(enPausa.recorte).toMatch(/100%/);
+  });
+});
+
+test.describe('entrada del hero en las páginas interiores', () => {
+  /* Decisión 2026-11-14: Programa y Decálogo estrenan el mismo gesto de la
+   * portada — titular que se imprime, foto que se asienta y entradilla que
+   * sube—, con el mismo reloj y la misma pausa hasta que el documento está
+   * listo. */
+
+  const HEROES = [
+    { ruta: 'programa.html', titulo: '.programa-hero__title', foto: '.programa-hero .media__img', leads: '.programa-hero__lead' },
+    { ruta: 'decalogo.html', titulo: '.decalogo-hero__title', foto: '.decalogo-hero .media__img', leads: '.decalogo-hero__lead' },
+  ];
+
+  test.beforeEach(noMotionPref);
+
+  for (const { ruta, titulo, foto, leads } of HEROES) {
+    test(`${ruta}: titular, foto y entradilla con los tiempos del sistema`, async ({ page }) => {
+      await page.goto(`/${ruta}`);
+
+      const estado = await page.evaluate(
+        ({ titulo, foto, leads }) => {
+          const lee = (sel) => {
+            const el = document.querySelector(sel);
+            if (!el) return null;
+            const s = getComputedStyle(el);
+            return {
+              nombre: s.animationName,
+              duracion: s.animationDuration,
+              retardo: s.animationDelay,
+              curva: s.animationTimingFunction,
+              relleno: s.animationFillMode,
+            };
+          };
+          return {
+            titulo: lee(titulo),
+            foto: lee(foto),
+            lead: lee(leads),
+            raiz: document.documentElement.className,
+          };
+        },
+        { titulo, foto, leads }
+      );
+
+      expect(estado.titulo.nombre).toBe('tinta');
+      expect(estado.titulo.duracion).toBe('1.05s');
+      expect(estado.titulo.curva).toBe('cubic-bezier(0.16, 1, 0.3, 1)');
+
+      expect(estado.foto.nombre).toBe('asentar');
+      expect(estado.foto.duracion).toBe('1.5s');
+
+      expect(estado.lead.nombre).toBe('subir');
+      expect(estado.lead.duracion).toBe('0.9s');
+      expect(estado.lead.retardo).toBe('0.12s');
+
+      for (const pieza of [estado.titulo, estado.foto, estado.lead]) {
+        expect(pieza.relleno).toBe('both');
+      }
+
+      // La cabecera también nace en pausa y se suelta sola.
+      expect(estado.raiz).toContain('js-entrada');
+      await page.waitForFunction(() => document.documentElement.classList.contains('con-entrada'), {
+        timeout: 4000,
+      });
+    });
+  }
+
+  test('el 5 % que crece la foto queda recortado por el marco', async ({ page }) => {
+    for (const { ruta } of HEROES) {
+      await page.goto(`/${ruta}`);
+      const recorte = await page.evaluate((sel) => {
+        const marco = document.querySelector(sel);
+        return getComputedStyle(marco).overflow;
+      }, ruta === 'programa.html' ? '.programa-hero .media' : '.decalogo-hero .media');
+      expect(recorte, `${ruta}: la foto se sale del marco al asentarse`).toBe('hidden');
+    }
+  });
+
+  test('con prefers-reduced-motion la cabecera nace quieta y completa', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const { ruta, titulo, foto } of HEROES) {
+      await page.goto(`/${ruta}`);
+      const estado = await page.evaluate(
+        ({ titulo, foto }) => ({
+          duracion: parseFloat(getComputedStyle(document.querySelector(titulo)).animationDuration),
+          recorte: getComputedStyle(document.querySelector(titulo)).clipPath,
+          foto: getComputedStyle(document.querySelector(foto)).transform,
+        }),
+        { titulo, foto }
+      );
+      expect(estado.duracion).toBeLessThan(0.01);
+      expect(['none', 'inset(0px 0% 0px 0px)']).toContain(estado.recorte);
+      expect(['none', 'matrix(1, 0, 0, 1, 0, 0)']).toContain(estado.foto);
+    }
+  });
+});
+
+test.describe('entrada de la portada sin JavaScript', () => {
+  /* Sin el script de la cabecera no se pone `js-entrada` y el CSS no pausa
+   * nada: el hero tiene que verse entero desde el primer cuadro. */
+  test.use({ javaScriptEnabled: false });
+
+  test('el titular se ve completo y sin recorte', async ({ page }) => {
+    await page.goto('/index.html');
+    const estado = await page.evaluate(() => {
+      const s = getComputedStyle(document.querySelector('.hero__title'));
+      return { recorte: s.clipPath, estado: s.animationPlayState };
+    });
+    expect(['none', 'inset(0px 0% 0px 0px)']).toContain(estado.recorte);
+  });
+});
+
+test.describe('fundido entre páginas y cambio de idioma (View Transitions)', () => {
+  /* Decisión 2026-11-14: el fundido es simétrico y de 0,28 s en las dos capas,
+   * como la variante editorial. Antes eran 0,16 s de salida y 0,26 s de
+   * entrada: la capa que salía ya se había apagado mientras la que entraba
+   * seguía a media opacidad, y en ese hueco se veía el fondo — el parpadeo que
+   * se notaba al navegar. Ahora las dos cruzan el mismo tramo, con las curvas
+   * del navegador (`-ua-view-transition-fade-out/in`) y sin `@keyframes` propios. */
+
+  const DURACION = 280;
+
+  /* Sonda instalada en cada documento: guarda el fundido de las dos capas de
+   * la raíz en cuanto aparece. La transición dura 0,28 s, así que hay que
+   * mirar cuadro a cuadro y no una sola vez al final. */
+  const instalarSonda = () => {
+    window.__capas = {};
+    const paso = () => {
+      for (const animacion of document.getAnimations()) {
+        const seudo = animacion.effect && animacion.effect.pseudoElement;
+        if (!seudo || !seudo.includes('view-transition')) continue;
+        // Solo el fundido: la transición trae además la animación del grupo y
+        // un `mix-blend-mode`, que no son opacidad.
+        if (!animacion.animationName.includes('fade')) continue;
+        window.__capas[seudo] = {
+          nombre: animacion.animationName,
+          duracion: animacion.effect.getTiming().duration,
+        };
+      }
+      requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  };
+
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(testInfo.project.name !== DESKTOP, 'transiciones medidas en 1448');
+  });
+  test.beforeEach(noMotionPref);
+
+  test('navegar entre páginas funde las dos capas a la vez y en 0,28 s', async ({ page }) => {
+    await page.addInitScript(instalarSonda);
+    await page.goto('/index.html');
+    await page.evaluate(() => (window.__capas = {}));
+
+    await page.locator('.site-nav__link').first().click();
+    await page.waitForURL(/programa\.html/);
+    await page.waitForTimeout(300);
+
+    const capas = await page.evaluate(() => window.__capas);
+    expect(capas['::view-transition-old(root)'], 'no hay capa saliente').toBeTruthy();
+    expect(capas['::view-transition-new(root)'], 'no hay capa entrante').toBeTruthy();
+    expect(capas['::view-transition-old(root)'].duracion).toBe(DURACION);
+    expect(capas['::view-transition-new(root)'].duracion).toBe(DURACION);
+    // Mismas curvas del navegador, no `@keyframes` propios: es lo que garantiza
+    // que las dos capas crucen exactamente el mismo tramo.
+    expect(capas['::view-transition-old(root)'].nombre).toBe('-ua-view-transition-fade-out');
+    expect(capas['::view-transition-new(root)'].nombre).toBe('-ua-view-transition-fade-in');
+  });
+
+  test('el cruce no tiene hueco: la suma de las dos capas se queda en 1', async ({ page }) => {
+    /* Lo que hacía que el fundido anterior se sintiera menos limpio no era la
+     * duración sino el reparto: con 0,16 s de salida y 0,26 s de entrada la
+     * suma de opacidades caía a 0,64 y el contenido se destiñe hacia el fondo
+     * y vuelve. Simétrico, suma 1 en todos los cuadros. Se lee del progreso de
+     * las propias animaciones: el navegador no expone el estilo calculado de
+     * los pseudos de la transición. */
+    await page.addInitScript(() => {
+      window.__suma = [];
+      const inicio = performance.now();
+      const paso = () => {
+        let saliente = null;
+        let entrante = null;
+        for (const animacion of document.getAnimations()) {
+          // Las animaciones de la transición aparecen y desaparecen entre
+          // cuadros: leer una ya cancelada lanza y mataría la sonda.
+          try {
+            const seudo = animacion.effect && animacion.effect.pseudoElement;
+            const nombre = animacion.animationName;
+            if (nombre.includes('mix-blend') || nombre.includes('group')) continue;
+            const progreso = animacion.effect.getComputedTiming().progress;
+            if (progreso === null || progreso === undefined) continue;
+            if (seudo === '::view-transition-old(root)') saliente = progreso;
+            if (seudo === '::view-transition-new(root)') entrante = progreso;
+          } catch {
+            continue;
+          }
+        }
+        if (saliente !== null && entrante !== null) {
+          // Salir es 1 − progreso; entrar es el progreso.
+          window.__suma.push(+((1 - saliente) + entrante).toFixed(3));
+        }
+        // La sonda vive desde el arranque del documento y la transición llega
+        // después de `load`: la ventana tiene que cubrir toda la carga.
+        if (performance.now() - inicio < 8000) requestAnimationFrame(paso);
+      };
+      requestAnimationFrame(paso);
+    });
+
+    await page.goto('/index.html');
+    await page.evaluate(() => (window.__suma = []));
+    await page.locator('.site-nav__link').first().click();
+    await page.waitForURL(/programa\.html/);
+    await page.waitForTimeout(500);
+
+    const sumas = await page.evaluate(() => window.__suma);
+    expect(sumas.length, 'no se midió el cruce').toBeGreaterThan(5);
+    // 0,02 de tolerancia: el muestreo cae entre cuadros, no en el cuadro exacto.
+    const minimo = Math.min(...sumas);
+    expect(minimo, `el cruce se abre: suma mínima ${minimo}`).toBeGreaterThanOrEqual(0.98);
+  });
+
+  test('cambiar de idioma usa el mismo fundido', async ({ page }) => {
+    await page.addInitScript(instalarSonda);
+    await page.goto('/index.html');
+    await page.waitForFunction(() => window.VCI18n && window.VCI18n.getData());
+    await page.evaluate(() => (window.__capas = {}));
+
+    await page.locator('.site-nav__lang .site-nav__lang-btn[data-lang="pt"]').click();
+    await page.waitForURL(/\/pt\//);
+    await page.waitForTimeout(300);
+
+    const capas = await page.evaluate(() => window.__capas);
+    expect(capas['::view-transition-old(root)']).toBeTruthy();
+    expect(capas['::view-transition-new(root)']).toBeTruthy();
+    expect(capas['::view-transition-old(root)'].duracion).toBe(DURACION);
+    expect(capas['::view-transition-new(root)'].duracion).toBe(DURACION);
+
+    // Y el idioma cambió de verdad, sin recargar.
+    expect(await page.locator('.site-nav__link').first().textContent()).toBe('Programa');
+  });
+
+  test('cambiar de idioma conserva el párrafo que se estaba leyendo', async ({ page }) => {
+    /* El portugués de Programa mide la mitad que el español, así que anclar el
+     * scroll a un píxel dejaba al lector en otra sección — como si la página
+     * empezara de nuevo. Ahora se ancla al bloque de texto y a la parte de ese
+     * bloque que se estaba leyendo. */
+    await page.goto('/programa.html');
+    await page.waitForFunction(() => window.VCI18n && window.VCI18n.getData());
+    await page.evaluate(() => window.scrollTo({ top: 9000, behavior: 'instant' }));
+    await page.waitForTimeout(400);
+
+    const bloque = () =>
+      page.evaluate(() => {
+        const visible = [...document.querySelectorAll('main [data-i18n]')]
+          .map((el) => ({ clave: el.getAttribute('data-i18n'), caja: el.getBoundingClientRect() }))
+          .filter((x) => x.caja.height > 0 && x.caja.bottom > 0 && x.caja.top < window.innerHeight)
+          .sort((a, b) => a.caja.top - b.caja.top)[0];
+        return {
+          clave: visible ? visible.clave : null,
+          scrollY: Math.round(window.scrollY),
+          alto: document.documentElement.scrollHeight,
+        };
+      });
+
+    const antes = await bloque();
+    expect(antes.clave).toBeTruthy();
+
+    await page.locator('.site-nav__lang .site-nav__lang-btn[data-lang="pt"]').click();
+    await page.waitForURL(/\/pt\//);
+    await page.waitForTimeout(700);
+
+    const despues = await bloque();
+    expect(despues.clave, 'el lector cambió de párrafo al cambiar de idioma').toBe(antes.clave);
+    // Y ya no se puede aterrizar fuera del documento.
+    expect(despues.scrollY).toBeLessThanOrEqual(despues.alto);
+    expect(despues.scrollY).toBeGreaterThan(0);
+  });
+
+  test('la duración sale del token, no de un literal suelto', async ({ page }) => {
+    await page.goto('/index.html');
+    const valor = await page.evaluate(() =>
+      getComputedStyle(document.documentElement).getPropertyValue('--duracion-pagina').trim()
+    );
+    expect(valor).toBe('0.28s');
+  });
+
+  test('con prefers-reduced-motion no hay fundido de página', async ({ page }) => {
+    // Se comprueba por comportamiento y no leyendo la hoja: `@view-transition`
+    // y sus `::view-transition-*(root)` son pseudos especiales que no aparecen
+    // en `cssRules`, así que ahí no hay nada que inspeccionar.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.addInitScript(instalarSonda);
+    await page.goto('/index.html');
+    await page.evaluate(() => (window.__capas = {}));
+
+    await page.locator('.site-nav__link').first().click();
+    await page.waitForURL(/programa\.html/);
+    await page.waitForTimeout(300);
+
+    const capas = await page.evaluate(() => window.__capas);
+    expect(capas, 'con movimiento reducido no debe haber capas de transición').toEqual({});
+  });
+});
+
+test.describe('destape de las placas al entrar en pantalla', () => {
+  /* Decisión 2026-11-14 (opción B): la sección que trae una placa no se funde
+   * — se destapa su placa. Un solo gesto por zona, como en la variante
+   * editorial; y nunca los dos sobre el mismo bloque. */
+
+  test.beforeEach(noMotionPref);
+
+  test('portada: las placas se destapan y sus secciones no se funden', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.waitForTimeout(200);
+
+    const estado = await page.evaluate(() => {
+      const secciones = [...document.querySelectorAll('main > section')];
+      return {
+        placas: document.querySelectorAll('.js-placa').length,
+        // Ninguna placa recortada puede estar ya a la vista: recortarla después
+        // del primer pintado es el parpadeo que se corrigió.
+        recortadasALaVista: [...document.querySelectorAll('.js-placa')].filter(
+          (el) => el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().height > 0
+        ).length,
+        conAmbos: secciones.filter(
+          (s) => s.classList.contains('js-reveal') && s.querySelector('.js-placa')
+        ).length,
+        articulos: document.querySelector('.articulos').classList.contains('js-reveal'),
+        unete: document.querySelector('.bloque-unete').classList.contains('js-reveal'),
+        objetivos: document.querySelector('.objetivos').classList.contains('js-reveal'),
+      };
+    });
+
+    expect(estado.placas, 'las placas bajo el pliegue se destapan').toBeGreaterThan(0);
+    expect(estado.recortadasALaVista, 'nada se recorta sobre el primer viewport').toBe(0);
+    expect(estado.conAmbos, 'una sección no puede fundirse y destaparse a la vez').toBe(0);
+    expect(estado.articulos, 'la sección de artículos se anima por sus placas').toBe(false);
+    expect(estado.unete).toBe(false);
+    // Sin foto grande, «Objetivos» conserva el fundido de la nota 4649:2018.
+    expect(estado.objetivos).toBe(true);
+  });
+
+  test('ninguna página junta los dos gestos en la misma sección', async ({ page }) => {
+    for (const ruta of ['/index.html', '/programa.html', '/decalogo.html', '/unete.html']) {
+      await page.goto(ruta);
+      await page.waitForTimeout(150);
+      const dobles = await page.evaluate(() =>
+        [...document.querySelectorAll('main > section')]
+          .filter((s) => s.classList.contains('js-reveal') && s.querySelector('.js-placa'))
+          .map((s) => s.className)
+      );
+      expect(dobles, `doble gesto en ${ruta}`).toEqual([]);
+    }
+  });
+
+  test('la placa arranca recortada y termina entera al hacer scroll', async ({ page }) => {
+    // Inicio: las placas de los artículos quedan bajo el pliegue en los tres
+    // anchos, así que siempre son de las que se destapan.
+    await page.goto('/index.html');
+
+    const indice = await page.evaluate(() =>
+      [...document.querySelectorAll('.js-placa')].findIndex(
+        (el) => el.getBoundingClientRect().height > 0
+      )
+    );
+    expect(indice, 'esta página tiene que tener al menos una placa visible').toBeGreaterThanOrEqual(0);
+
+    const placa = page.locator('.js-placa').nth(indice);
+    await expect(placa).toHaveCount(1);
+
+    // Antes de entrar: 6 % tapado por arriba, como en la variante editorial.
+    const inicial = await placa.evaluate((el) => getComputedStyle(el).clipPath);
+    expect(inicial).toMatch(/^inset\(/);
+    expect(inicial).not.toMatch(/^inset\(0(px)?( 0(px)?){0,3}\)$/);
+
+    const transicion = await placa.evaluate((el) => {
+      const s = getComputedStyle(el);
+      return { propiedad: s.transitionProperty, duracion: s.transitionDuration };
+    });
+    expect(transicion.propiedad).toContain('clip-path');
+    expect(transicion.duracion).toBe('1s');
+
+    // Salto directo: Programa lleva `scroll-behavior: smooth` y la placa está a
+    // 30 000 px en móvil, así que `scrollIntoView` se queda animando.
+    await placa.evaluate((el) => {
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 200, behavior: 'instant' });
+    });
+    await expect(placa).toHaveClass(/is-visible/);
+    // La transición dura 1 s: al terminar, el recorte es cero.
+    await expect
+      .poll(() => placa.evaluate((el) => getComputedStyle(el).clipPath), {
+        timeout: 2500,
+        message: 'la placa se queda recortada',
+      })
+      .toMatch(/^inset\(0(px)?( 0(px)?){0,3}\)$/);
+  });
+
+  test('la placa que ya está a la vista al cargar no se recorta', async ({ page }) => {
+    /* El parpadeo del hero: este script corre después del primer pintado, así
+     * que recortar una placa que el usuario ya está viendo le cortaba el 6 %
+     * de arriba de golpe y se lo devolvía en 1 s. Ahora las placas que ya
+     * están en pantalla no se tocan. */
+    await page.goto('/programa.html');
+    const placa = page.locator('.programa-hero .media');
+
+    await expect(placa).not.toHaveClass(/js-placa/);
+    const recorte = await placa.evaluate((el) => getComputedStyle(el).clipPath);
+    expect(recorte).toBe('none');
+
+    // Y sigue sin recortarse después de desplazarse.
+    await page.evaluate(() => window.scrollTo(0, 600));
+    await page.waitForTimeout(300);
+    await expect(placa).not.toHaveClass(/js-placa/);
+    expect(await placa.evaluate((el) => getComputedStyle(el).clipPath)).toBe('none');
+  });
+
+  test('con prefers-reduced-motion nada se recorta', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/index.html');
+    await page.waitForTimeout(200);
+
+    const recortes = await page.evaluate(() =>
+      [...document.querySelectorAll('.js-placa')].map((el) => getComputedStyle(el).clipPath)
+    );
+    expect(recortes.length).toBeGreaterThan(0);
+    for (const valor of recortes) expect(valor).toBe('none');
+  });
+
+});
+
+test.describe('destape de las placas sin JavaScript', () => {
+  /* Sin el script no se pone `js-placa` y el CSS no recorta nada: las fotos
+   * se ven enteras desde el primer cuadro. */
+  test.use({ javaScriptEnabled: false });
+
+  test('ninguna placa queda recortada', async ({ page }) => {
+    await page.goto('/programa.html');
+    const estado = await page.evaluate(() => ({
+      clases: document.querySelectorAll('.js-placa').length,
+      recortes: [...document.querySelectorAll('.media')].map(
+        (el) => getComputedStyle(el).clipPath
+      ),
+    }));
+    expect(estado.clases, 'sin JS no se pone la clase').toBe(0);
+    for (const valor of estado.recortes) expect(valor).toBe('none');
+  });
+});
+
+test.describe('carga de las fotos de cabecera', () => {
+  /* Recargar Programa o Decálogo dejaba un bloque gris en el hueco de la foto:
+   * el relleno del `.media` mientras la imagen viajaba. Medido con caché fría
+   * y red lenta, más de tres segundos a la vista. También era el LCP de la
+   * página pidiéndose con `loading="lazy"`. */
+
+  const CABECERAS = [
+    { ruta: 'programa.html', imagen: 'programa-header.webp', placa: '.programa-hero .media' },
+    { ruta: 'decalogo.html', imagen: 'decalogo-header.webp', placa: '.decalogo-hero .media' },
+    { ruta: 'index.html', imagen: 'hero.webp', placa: '.hero' },
+  ];
+
+  for (const { ruta, imagen, placa } of CABECERAS) {
+    test(`${ruta}: precarga la foto del hero y la pide con prioridad`, async ({ page, request }) => {
+      const html = await (await request.get(`/${ruta}`)).text();
+
+      const preloads = [...html.matchAll(/<link rel="preload" as="image"[^>]*>/g)].map((m) => m[0]);
+      expect(preloads.length, `${ruta} sin preload de la foto`).toBeGreaterThan(0);
+      expect(preloads.some((t) => t.includes(imagen))).toBe(true);
+
+      // La imagen del hero no puede ir en diferido ni con prioridad baja.
+      const img = new RegExp(`<img[^>]*${imagen}[^>]*>`).exec(html)[0];
+      expect(img).not.toContain('loading="lazy"');
+      expect(img).toContain('fetchpriority="high"');
+
+      await page.goto(`/${ruta}`);
+    });
+  }
+
+  test('una placa con foto no pinta relleno gris', async ({ page }) => {
+    for (const { ruta, placa } of CABECERAS) {
+      await page.goto(`/${ruta}`);
+      const fondo = await page.evaluate((sel) => {
+        const caja = document.querySelector(sel);
+        return getComputedStyle(caja).backgroundColor;
+      }, placa);
+      // --color-surface-page: el hueco se lee como aire, no como bloque gris.
+      expect(fondo, `${ruta}: la placa pinta relleno`).toBe('rgb(253, 252, 250)');
+    }
+  });
+
+  test('el marco del vídeo conserva su relleno', async ({ page }) => {
+    await page.goto('/unete.html');
+    const fondo = await page.evaluate(() => {
+      const marco = document.querySelector('.media');
+      return marco ? getComputedStyle(marco).backgroundColor : null;
+    });
+    if (fondo) expect(fondo).not.toBe('rgb(253, 252, 250)');
+  });
+});
+
 test.describe('fades de sección (nota 4649:2018)', () => {
   test.beforeEach(onlyDesktop);
   test.beforeEach(noMotionPref);
@@ -292,26 +1004,45 @@ test.describe('fades de sección (nota 4649:2018)', () => {
       await page.goto(url);
       await page.waitForFunction(() => document.querySelectorAll('main > section').length > 0);
 
+      /* Quién lleva `js-reveal` lo decide una regla, no el azar: las secciones
+       * que arrancan por debajo del primer viewport y que no traen placa (la
+       * placa, si la hay, es la que se destapa: ver §destape de las placas). */
       const info = await page.evaluate(() => {
         const sections = [...document.querySelectorAll('main > section')];
-        const revealed = [...document.querySelectorAll('main > section.js-reveal')];
+        const elegibles = sections
+          .filter((s, i) => i > 0 && s.offsetTop >= window.innerHeight)
+          .filter((s) => !s.querySelector('.js-placa'));
+        const reveladas = sections.filter(
+          (s, i) => i > 0 && s.offsetTop >= window.innerHeight && s.classList.contains('js-reveal')
+        );
         return {
           total: sections.length,
-          revealed: revealed.length,
+          elegibles: elegibles.length,
+          reveladas: reveladas.map((s) => s.className),
           firstHasReveal: sections[0].classList.contains('js-reveal'),
-          above: revealed.filter((s) => s.offsetTop < window.innerHeight).map((s) => s.className),
+          above: [...document.querySelectorAll('main > section.js-reveal')]
+            .filter((s) => s.offsetTop < window.innerHeight)
+            .map((s) => s.className),
+          conPlacaYFade: sections
+            .filter((s) => s.classList.contains('js-reveal') && s.querySelector('.js-placa'))
+            .map((s) => s.className),
         };
       });
 
       expect(info.total).toBeGreaterThan(1);
-      expect(info.revealed).toBeGreaterThan(0);
       expect(info.firstHasReveal, 'el hero no se anima (above the fold)').toBe(false);
       expect(info.above, 'ninguna sección visible al cargar lleva js-reveal').toEqual([]);
+      expect(info.conPlacaYFade, 'la placa sustituye al fade, no se suman').toEqual([]);
+      expect(info.reveladas.length, 'se revela exactamente lo elegible').toBe(info.elegibles);
     });
 
     test(`la sección revelada obtiene .is-visible (${url})`, async ({ page }) => {
       await page.goto(url);
       const target = page.locator('main > section.js-reveal').first();
+      // En 1448 Programa no tiene ninguna sección que se funda: sus cuatro
+      // llevan placa o quedan sobre el pliegue. El caso ya lo cubre el test
+      // anterior; aquí solo se comprueba el recorrido cuando lo hay.
+      test.skip((await target.count()) === 0, 'esta página no tiene secciones con fade');
       await target.scrollIntoViewIfNeeded();
       await expect(target).toHaveClass(/is-visible/, { timeout: 3000 });
     });

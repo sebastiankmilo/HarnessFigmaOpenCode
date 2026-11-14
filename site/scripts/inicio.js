@@ -125,6 +125,11 @@
   // Huecos de la grilla en `lg` (`grid-template-columns: repeat(4, 1fr)`).
   var VISIBLE_LG = 4;
 
+  /* Desplazamiento del carrusel: la misma duración y la misma curva que el
+   * carrusel de la variante editorial, para que el gesto sea uno solo. */
+  var DESPLAZAMIENTO = 380;
+  var reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   function initCarousel(grid) {
     var name = grid.getAttribute("data-carousel");
     var controls = document.querySelector('[data-carousel-controls="' + name + '"]');
@@ -137,8 +142,64 @@
     if (!items.length) return;
 
     var index = 0;
+    // Temporizadores por tarjeta: si se pulsa dos veces seguidas, la segunda
+    // animación no puede quedarse a medias por el `setTimeout` de la primera.
+    var pendientes = new Map();
 
-    function render() {
+    function soltar(item) {
+      var pendiente = pendientes.get(item);
+      if (pendiente) window.clearTimeout(pendiente);
+      pendientes.delete(item);
+      item.style.transition = "";
+      item.style.transform = "";
+    }
+
+    /** Desliza las tarjetas de su posición anterior a la nueva (FLIP). */
+    function deslizar(antes, direccion) {
+      var hueco = parseFloat(getComputedStyle(grid).columnGap) || 0;
+
+      items.forEach(function (item) {
+        soltar(item);
+        // Oculta: no hay caja que medir ni nada que animar.
+        if (item.offsetParent === null) return;
+
+        var despues = item.getBoundingClientRect();
+        var previa = antes.get(item);
+        var delta;
+        if (previa) {
+          delta = previa.left - despues.left;
+          if (!delta) return;
+        } else {
+          // Entra desde el lado hacia el que se avanzó: la página «corre» en
+          // el sentido contrario al que se pidió, como una tira de película.
+          delta = (direccion < 0 ? -1 : 1) * (despues.width + hueco);
+        }
+
+        item.style.transition = "none";
+        item.style.transform = "translateX(" + delta + "px)";
+        window.requestAnimationFrame(function () {
+          item.style.transition =
+            "transform " + DESPLAZAMIENTO + "ms cubic-bezier(0.16, 1, 0.3, 1)";
+          item.style.transform = "translateX(0)";
+          pendientes.set(
+            item,
+            window.setTimeout(function () {
+              soltar(item);
+            }, DESPLAZAMIENTO + 60)
+          );
+        });
+      });
+    }
+
+    function render(animar, direccion) {
+      // Estado de partida: solo se mide lo que se estaba viendo.
+      var antes = new Map();
+      if (animar && !reducirMovimiento.matches) {
+        items.forEach(function (item) {
+          if (item.offsetParent === null) return;
+          antes.set(item, item.getBoundingClientRect());
+        });
+      }
       var nextIndex = (index + 1) % items.length;
       items.forEach(function (item, i) {
         item.classList.toggle("is-active", i === index);
@@ -167,16 +228,23 @@
           dot.removeAttribute("aria-current");
         }
       });
+
+      if (antes.size) deslizar(antes, direccion);
     }
 
-    function goTo(newIndex) {
+    function goTo(newIndex, direccion) {
       var focusedItem =
         document.activeElement && items.indexOf(document.activeElement) !== -1
           ? document.activeElement
           : null;
 
+      var anterior = index;
       index = (newIndex + items.length) % items.length;
-      render();
+      // Sin dirección explícita se deduce del salto; con un solo paso el signo
+      // es el del botón, y así el ciclo (5 → 0 y 0 → 5) también se mueve hacia
+      // donde toca en vez de retroceder de golpe.
+      var sentido = direccion !== undefined ? direccion : index >= anterior ? 1 : -1;
+      render(true, sentido);
 
       if (isDesktop.matches) {
         // `lg`: las 4 tarjetas siguen visibles; el foco pasa a la del índice.
@@ -196,13 +264,13 @@
 
     if (prev) {
       prev.addEventListener("click", function () {
-        goTo(index - 1);
+        goTo(index - 1, -1);
       });
     }
 
     if (next) {
       next.addEventListener("click", function () {
-        goTo(index + 1);
+        goTo(index + 1, 1);
       });
     }
 
@@ -215,22 +283,22 @@
     function onKeydown(event) {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        goTo(index - 1);
+        goTo(index - 1, -1);
       } else if (event.key === "ArrowRight") {
         event.preventDefault();
-        goTo(index + 1);
+        goTo(index + 1, 1);
       }
     }
 
     controls.addEventListener("keydown", onKeydown);
     grid.addEventListener("keydown", onKeydown);
 
-    render();
+    render(false, 0);
 
     // Al cruzar un breakpoint hay que rehacer la ventana de tarjetas visibles
     // (y soltar `is-out` si `lg` deja de ser la referencia).
-    isDesktop.addEventListener("change", render);
-    isTablet.addEventListener("change", render);
+    isDesktop.addEventListener("change", function () { render(false, 0); });
+    isTablet.addEventListener("change", function () { render(false, 0); });
   }
 
   Array.prototype.forEach.call(

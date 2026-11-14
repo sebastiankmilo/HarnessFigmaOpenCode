@@ -45,6 +45,81 @@ async function coloresEnHover(page, locator) {
   }, png.toString('base64'));
 }
 
+test.describe('raya del enlace del nav (decisión 2026-11-14)', () => {
+  /* Como en la variante editorial: la raya del color de acento crece desde la
+   * izquierda al pasar el cursor, en 0,5 s y con la curva del sistema. Antes
+   * era transparente y se pintaba de golpe — el `transition: all` del enlace
+   * no llega a los pseudoelementos. */
+
+  const raya = (page, texto) =>
+    page.evaluate((texto) => {
+      const enlace = [...document.querySelectorAll('.site-nav__link')].find(
+        (a) => a.textContent.trim().toLowerCase() === texto
+      );
+      if (!enlace) return null;
+      const s = getComputedStyle(enlace, '::after');
+      return {
+        transform: s.transform,
+        fondo: s.backgroundColor,
+        alto: s.height,
+        propiedad: s.transitionProperty,
+        duracion: s.transitionDuration,
+        curva: s.transitionTimingFunction,
+      };
+    }, texto);
+
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/index.html');
+    await page.evaluate(() => document.fonts.ready);
+  });
+
+  test('en reposo la raya mide cero y ya es del color de acento', async ({ page }) => {
+    for (const texto of ['programa', 'decálogo', 'la materia prima']) {
+      const estado = await raya(page, texto);
+      expect(estado, `no existe el enlace ${texto}`).not.toBeNull();
+      expect(estado.transform, `${texto} en reposo`).toMatch(/^matrix\(0,/);
+      expect(estado.fondo).toBe('rgb(255, 69, 32)');
+      // El grosor es el medido en Figma, no el del sistema editorial.
+      expect(estado.alto).toBe('1.5px');
+    }
+  });
+
+  test('la raya se anima con la curva del sistema, no de golpe', async ({ page }) => {
+    const estado = await raya(page, 'programa');
+    expect(estado.propiedad).toBe('transform');
+    expect(estado.duracion).toBe('0.5s');
+    expect(estado.curva).toBe('cubic-bezier(0.16, 1, 0.3, 1)');
+  });
+
+  test('al pasar el cursor la raya recorre el enlace', async ({ page }) => {
+    await page.locator('.site-nav__link').first().hover();
+    await page.waitForTimeout(120);
+    const medio = await raya(page, 'programa');
+    expect(medio.transform).not.toMatch(/^matrix\(0,/);
+    expect(medio.transform).not.toBe('matrix(1, 0, 0, 1, 0, 0)');
+
+    await page.waitForTimeout(600);
+    const final = await raya(page, 'programa');
+    expect(final.transform).toBe('matrix(1, 0, 0, 1, 0, 0)');
+  });
+
+  test('el enlace de la página actual lleva la raya puesta', async ({ page }) => {
+    await page.goto('/programa.html');
+    const actual = await page.evaluate(() => {
+      const enlace = document.querySelector('.site-nav__link.is-current');
+      if (!enlace) return null;
+      return {
+        texto: enlace.textContent.trim(),
+        transform: getComputedStyle(enlace, '::after').transform,
+      };
+    });
+    expect(actual, 'el enlace de la página actual no está marcado').not.toBeNull();
+    expect(actual.texto).toBe('Programa');
+    expect(actual.transform).toBe('matrix(1, 0, 0, 1, 0, 0)');
+  });
+});
+
 test.describe('hovers de la capa `hovers` (4518:2148)', () => {
   test('los iconos de redes se ponen #ff4520 (nav y footer)', async ({ page }) => {
     await page.goto('/index.html');

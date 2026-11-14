@@ -77,11 +77,55 @@
   </script>
   <!-- @seo:end -->
   <title data-i18n="index.meta.title">Vanguardia Colombiana</title>
-  <link rel="stylesheet" href="../styles/tokens.css?v=50d6dc63">
-  <link rel="stylesheet" href="../styles/main.css?v=81d0c8c3">
-  <link rel="stylesheet" href="../styles/components.css?v=dfe2baf2">
-  <link rel="stylesheet" href="../styles/inicio.css?v=9fda2509">
+  <link rel="stylesheet" href="../styles/tokens.css?v=99053b1b">
+  <link rel="stylesheet" href="../styles/main.css?v=89586928">
+  <link rel="stylesheet" href="../styles/components.css?v=4480a113">
+  <link rel="stylesheet" href="../styles/inicio.css?v=c4808d3c">
   <link rel="stylesheet" href="../styles/utilidades.css?v=ed48ef95">
+  <link rel="preload" href="../assets/fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="../assets/img/hero.webp" fetchpriority="high" media="(min-width: 1280px)">
+  <link rel="preload" as="image" href="../assets/img/hero-media-compact.webp" fetchpriority="high" media="(max-width: 1279px)">
+  <script>
+    /* Entrada de la portada: `.hero` en inicio.css nace en pausa y se suelta
+     * cuando el documento y las fuentes están listos. Vive aquí, y no en un
+     * archivo, porque tiene que ejecutarse antes del primer cuadro y no puede
+     * depender de que llegue una petición: sin la clase `js-entrada` las cuatro
+     * animaciones corren solas, así que sin JS el hero se ve entero desde el
+     * primer cuadro. */
+    (function () {
+      var raiz = document.documentElement;
+      var soltada = false;
+      raiz.classList.add("js-entrada");
+
+      function soltar() {
+        if (soltada) return;
+        soltada = true;
+        // Dos cuadros: el primero pinta el estado inicial (titular recortado,
+        // foto al 105 %), el segundo arranca ya con la clase puesta.
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            raiz.classList.add("con-entrada");
+          });
+        });
+      }
+
+      function alDocumentoListo() {
+        var fuentes = document.fonts && document.fonts.ready;
+        if (fuentes) fuentes.then(soltar, soltar);
+        else soltar();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", alDocumentoListo, { once: true });
+      } else {
+        alDocumentoListo();
+      }
+
+      // Red de seguridad: si `fonts.ready` no resolviera, se suelta igual.
+      setTimeout(soltar, 1200);
+    })();
+  </script>
 </head>
 <body>
   <svg class="svg-filters" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -188,7 +232,7 @@
     <section class="hero">
       <picture>
         <source media="(max-width: 1279px)" srcset="../assets/img/hero-media-compact.webp">
-        <img class="hero__media" src="../assets/img/hero.webp" alt="">
+        <img class="hero__media" src="../assets/img/hero.webp" alt="" fetchpriority="high">
       </picture>
       <div class="container">
         <div class="hero__text">
@@ -256,7 +300,7 @@ O exercício efetivo do poder exige tomar o controle predominantemente da estrut
             <img class="tarjeta-objetivo__avatar" src="../assets/img/objetivos/planeacion.webp" alt="" loading="lazy" decoding="async">
             <div class="tarjeta-objetivo__text">
               <h3 id="objetivo-4-titulo" data-i18n="inicio.goals.card-4.title">Centralismo democrático</h3>
-              <p data-i18n="inicio.goals.card-4.body-complete.0">Opo-nos radicalmente a qualquer um que pretenda destruir a unidade nacional e a toda forma de fragmentação ou balcanização. Defendemos a unidade nacional, embora queiramos reorganizá-la mediante um regime comunal que devolva à sociedade, convertida em comunidade, as funções usurpadas por um Estado situado acima dela. Isso não significa destruir o centralismo, mas a maquinaria burocrática e repressiva do Estado burguês.
+              <p data-i18n="inicio.goals.card-4.body-complete.0">Opomo-nos radicalmente a qualquer um que pretenda destruir a unidade nacional e a toda forma de fragmentação ou balcanização. Defendemos a unidade nacional, embora queiramos reorganizá-la mediante um regime comunal que devolva à sociedade, convertida em comunidade, as funções usurpadas por um Estado situado acima dela. Isso não significa destruir o centralismo, mas a maquinaria burocrática e repressiva do Estado burguês.
 
 Descentralizar não equivale necessariamente a democratizar, nem federalizar a emancipar. O federalismo pode se converter em uma fragmentação do poder que favoreça interesses localistas e pequeno-burgueses. A questão fundamental não é quanto se divide territorialmente o poder, mas quem o exerce, a serviço de quais interesses de classe e sob quais formas de organização política.</p>
             </div>
@@ -404,7 +448,7 @@ Descentralizar não equivale necessariamente a democratizar, nem federalizar a e
           </div>
           <div class="bloque-unete__text">
             <h2 class="bloque-unete__title" data-i18n="inicio.join.title">Junte-se à Vanguardia Colombiana</h2>
-            <p class="bloque-unete__body" data-i18n="inicio.join.body">Se você quer se unir à Vanguardia Colombiana, deve ler nosso decálogo político e estar de acordo com nossos princípios fundamentais. Se já o leu, está de acordo com nossos fundamentos e quer fazer parte da Vanguardia Colombiana, escreva para lavanguardiacolombiana@gmail.com para iniciar o processo de afiliação.
+            <p class="bloque-unete__body" data-i18n="inicio.join.body">Se você quer se unir à Vanguardia Colombiana, deve ler nosso decálogo político e estar de acordo com nossos princípios fundamentais. Se já o leu, está de acordo com nossos fundamentos e quer fazer parte da Vanguardia Colombiana, escreva para <strong>lavanguardiacolombiana@gmail.com</strong> para iniciar o processo de afiliação.
 
 Agradecemos seu interesse.</p>
           </div>
@@ -455,11 +499,11 @@ O exercício efetivo do poder exige tomar o controle predominantemente da estrut
   </div>
 
   <script src="../assets/vendor/uikit/uikit.min.js?v=b05a5986" defer></script>
-  <script src="../scripts/i18n.js?v=7297adf4" defer></script>
+  <script src="../scripts/i18n.js?v=334cacdd" defer></script>
   <script src="../scripts/nav.js?v=77098927"></script>
   <script src="../scripts/transiciones.js?v=a4238def" defer></script>
   <script src="../scripts/enlaces.js?v=41cc4786" defer></script>
-  <script src="../scripts/reveal.js?v=ff17c9e5" defer></script>
-  <script src="../scripts/inicio.js?v=efd21b0e" defer></script>
+  <script src="../scripts/reveal.js?v=e3e47c41" defer></script>
+  <script src="../scripts/inicio.js?v=dc539bb4" defer></script>
 </body>
 </html>

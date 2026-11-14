@@ -66,6 +66,17 @@
   background: var(--color-media-video);
 }
 
+/* Una placa con foto no pinta relleno gris. Los grises de los modificadores
+ * (`--strong`, `--muted`, `--media-placeholder`) son rellenos del wireframe y
+ * solo se veían mientras la foto viajaba: con caché fría y red lenta eran más
+ * de tres segundos de bloque gris en el hero de Programa y Decálogo, y al
+ * recargar se notaba como un parpadeo (medido 2026-11-14). Con el fondo de
+ * página el hueco se lee como aire y la foto entra sin destello.
+ * Los marcos que no llevan foto —los del vídeo— conservan su relleno. */
+.media:has(> .media__img) {
+  background: var(--color-surface-page);
+}
+
 .media__img {
   display: block;
   width: 100%;
@@ -202,6 +213,22 @@
   background: var(--color-surface-page);
 }
 
+/* Cierre de la barra: el filete de 1 px de la variante editorial. Se dibuja
+ * con `::after` y no con `border-bottom` a propósito: un borde sumaría 1 px al
+ * alto de la barra fija, que `body` reserva con `padding-top` exacto
+ * (`--nav-height-xs`, 83,38 en xs), y el contenido quedaría 1 px por debajo.
+ * Absoluto no toca el layout y el alto reducido (56/83) sigue midiendo lo que
+ * dice su token. */
+.site-nav::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-linea-nav);
+  pointer-events: none;
+}
+
 .site-nav__inner {
   display: flex;
   align-items: center;
@@ -255,6 +282,12 @@
   text-transform: uppercase;
 }
 
+/* La raya del enlace lleva el color de acento siempre y lo que se anima es su
+ * ancho: crece desde la izquierda al pasar el cursor, como en la variante
+ * editorial (decisión 2026-11-14). Antes la raya era transparente y se pintaba
+ * de golpe al pasar el ratón: el `transition: all` del enlace no llega a los
+ * pseudoelementos, así que no había animación ninguna. El ancho se conserva
+ * en 1,5 px, que es el medido en Figma (`--nav-underline-lg`). */
 .site-nav__link::after {
   content: "";
   position: absolute;
@@ -262,11 +295,16 @@
   bottom: calc(-1 * var(--nav-underline-offset));
   left: 0;
   height: var(--nav-underline-lg);
-  background: transparent;
+  background: var(--color-hover-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duracion-media) var(--curva-salida);
 }
 
+.site-nav__link:hover::after,
+.site-nav__link:focus-visible::after,
 .site-nav__link.is-current::after {
-  background: var(--color-hover-accent);
+  transform: scaleX(1);
 }
 
 .site-nav__buttons {
@@ -625,11 +663,6 @@
     font-size: var(--font-size-body-xs);
     letter-spacing: var(--nav-link-tracking);
     color: var(--color-text-brown);
-  }
-
-  .site-nav__link:hover::after,
-  .site-nav__link:focus-visible::after {
-    background: var(--color-hover-accent);
   }
 
   /* Botón «Aporta» del nav: relleno #ffcd00, texto #30250f (4518:2089);

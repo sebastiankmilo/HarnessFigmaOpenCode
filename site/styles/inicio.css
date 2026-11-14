@@ -11,6 +11,13 @@
 .hero {
   padding-bottom: var(--space-7);
   background: var(--color-surface-page);
+  /* La foto crece un 5 % al asentarse (entrada de la portada, más abajo) y se
+   * saldría 2,5 % por cada lado: `clip` recorta ese sobrante sin abrir scroll
+   * lateral a 375–767. Se usa `clip` y no `hidden` a propósito: no crea
+   * contenedor de scroll ni cambia el colapso de márgenes, así que el hueco
+   * media → texto (`--space-5`) sigue midiendo lo mismo. En `lg` el `overflow:
+   * hidden` del bloque de escritorio ya cubre el eje vertical. */
+  overflow-x: clip;
 }
 
 .hero__media {
@@ -112,6 +119,19 @@
   padding: 0 0 var(--space-5);
   background: var(--color-surface-page);
   cursor: pointer;
+  /* La ficha se agranda un poco al pasar el cursor (decisión 2026-11-14). Se
+   * anima la propiedad `scale` y no `transform` a propósito: el carrusel
+   * escribe `transform` en línea para desplazar las fichas, y así el hover no
+   * se pelea con el deslizamiento. El fondo no cambia: el recuadro del texto
+   * se teñía al pasar el cursor y el equipo lo quitó. */
+  transition: scale var(--duracion-media) var(--curva-salida);
+}
+
+/* Solo donde hay puntero: en táctil el hover se queda pegado tras el toque. */
+@media (hover: hover) {
+  .objetivos .tarjeta-objetivo:hover {
+    scale: 1.02;
+  }
 }
 
 /* Disparador del modal: cubre la tarjeta entera, igual que el
@@ -782,17 +802,19 @@
     background: var(--color-hover-accent);
   }
 
-  /* Hover de tarjetas (nota 4649:2012, capa `hovers` `4518:2257 ↔ 4518:2267`):
-     par default `#fdfcfa` ↔ hover `#f0ece6`. El selector lleva la sección
-     (0,3,0) porque `inicio.css` declara `.articulos .tarjeta-articulo` (0,2,0)
-     más abajo y se lo comería un `.tarjeta-articulo:hover` simple. */
-  .objetivos .tarjeta-objetivo:hover,
+  /* Hover de las tarjetas de artículo (nota 4649:2012, capa `hovers`
+     `4518:2257 ↔ 4518:2267`): par default `#fdfcfa` ↔ hover `#f0ece6`. El
+     selector lleva la sección (0,3,0) porque `inicio.css` declara
+     `.articulos .tarjeta-articulo` (0,2,0) más abajo y se lo comería un
+     `.tarjeta-articulo:hover` simple.
+     Las fichas de objetivos ya NO cambian de fondo al pasar el cursor
+     (decisión 2026-11-14): el recuadro del texto se teñía y el equipo lo quitó;
+     su hover es el crecimiento, que se declara arriba. */
   .articulos .tarjeta-articulo:hover {
     background: var(--color-card-hover);
   }
 
   /* Slideshow de tarjetas: transición sutil tipo jitter (nota 4649:2016) */
-  .tarjeta-objetivo,
   .tarjeta-articulo {
     transition: opacity 0.35s ease, background 0.4s ease;
   }

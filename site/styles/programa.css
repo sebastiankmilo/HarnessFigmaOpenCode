@@ -18,6 +18,10 @@
 }
 
 .programa-hero .media {
+  /* Recorta el 5 % de más que crece la foto al asentarse
+   * (entrada del hero, ver main.css): sin esto el sobrante se sale del
+   * marco y se ve un borde duro sobre el texto de al lado. */
+  overflow: hidden;
   flex: none;
   width: 100%;
 }
