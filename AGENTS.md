@@ -46,6 +46,11 @@ El diseño vive en Figma. **Nunca modificar el Figma.**
   metadatos se editan en `content/seo.json` (no traducible) o en
   `<pagina>.meta.title` / `<pagina>.meta.description` de cada `*.json`.
   Gemela de la regla de tokens.
+- Formato en línea del copy: `**texto**` se publica como `<strong>` y `*texto*`
+  como `<em>` (lo resuelven el build y `scripts/i18n.js` con la misma regla). El
+  marcador no cruza saltos de línea ni envuelve espacios en los extremos; un
+  asterisco suelto se queda literal. Sirve, por ejemplo, para destacar una frase
+  de un `body-complete` sin meter HTML en el JSON.
 - Cambio de idioma: el selector son **enlaces reales** (con `href` y `hreflang`,
   para que cada idioma tenga URL propia e indexable). `scripts/i18n.js` intercepta
   el clic: sustituye el texto en su sitio y actualiza la URL con `pushState`, así

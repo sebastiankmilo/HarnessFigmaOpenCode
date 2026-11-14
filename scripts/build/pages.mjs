@@ -166,6 +166,27 @@ export function expandLangSwitch(html, { seo, page, locale }) {
   });
 }
 
+/**
+ * Énfasis en línea del copy: `**texto**` → `<strong>` y `*texto*` → `<em>`.
+ *
+ * El resto del texto se escapa, así que un `&` o un `<` del catálogo no rompe
+ * el DOM. La misma regla vive en `site/scripts/i18n.js` (runtime): lo que se ve
+ * al cargar y lo que reescribe un cambio de idioma tienen que decir lo mismo.
+ * El marcador no cruza saltos de línea ni envuelve espacios en los extremos: un
+ * `*` suelto se queda literal.
+ */
+export function renderInline(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(
+      /\*\*([^\s*](?:[^*\n]*[^\s*])?)\*\*|\*([^\s*](?:[^*\n]*[^\s*])?)\*/g,
+      (match, negrita, cursiva) =>
+        negrita !== undefined ? `<strong>${negrita}</strong>` : `<em>${cursiva}</em>`
+    );
+}
+
 /** Sustituye el interior de cada elemento data-i18n por su texto del catálogo. */
 export function injectCopy(html, catalog, file) {
   return html.replace(ELEMENT_RE, (match, tag, pre, key, post) => {
@@ -173,7 +194,7 @@ export function injectCopy(html, catalog, file) {
     if (value === undefined) {
       throw new Error(`${file}: la clave "${key}" no existe en el catálogo de este idioma`);
     }
-    return `<${tag}${pre}data-i18n="${key}"${post}>${value}</${tag}>`;
+    return `<${tag}${pre}data-i18n="${key}"${post}>${renderInline(value)}</${tag}>`;
   });
 }
 
