@@ -27,6 +27,10 @@
   --color-card-hover: #f0ece6;         /* hover de goal-card y container-and-card */
   --color-dot-active: #65543a;         /* punto activo del dotnav */
   --color-dot-inactive-new: #d7d2ca;   /* puntos inactivos del dotnav y bordes suaves */
+  /* Filete inferior de la barra. NO viene del frame de Figma: se toma de la
+     variante editorial (`site_v_impeccable`, `--color-linea`) a pedido del
+     equipo el 2026-11-14, que pidió ese cierre de 1 px. */
+  --color-linea-nav: #d7cdbc;
   --color-surface-menu: #f0ece6;      /* fondo del overlay del nav en sm (`2424:446`) */
   --color-cta-default: #ceac57;        /* fondo default del CTA lamateriaprima.org */
   --color-cta-hover: #1b2c43;          /* fondo hover del CTA / texto default del CTA */
@@ -186,6 +190,23 @@
   --overlay-backdrop: rgba(0, 0, 0, 0.25); /* backdrop del modal (nota 4649:2017) */
   --reveal-offset: 12px;        /* desplazamiento de entrada: `.js-reveal` y panel del modal */
   --focus-outline-offset: 2px;  /* separación del anillo de foco (:focus-visible) */
+
+  /* ── Movimiento: entrada de la portada ────────────────────────── *
+   * Mismos nombres y valores que la variante `site_v_impeccable/`, para que el
+   * vocabulario de animación sea uno solo en las dos carpetas. El frame de
+   * Figma no especifica movimiento: la curva y los tiempos son del sistema,
+   * no del diseño — de ahí que viajen en tokens y no sueltos en el CSS. */
+  --curva-salida: cubic-bezier(0.16, 1, 0.3, 1); /* arranque seco y frenada larga */
+  --duracion-entrada: 1.05s;      /* barrido del titular (`clip-path`) */
+  --duracion-entrada-placa: 1.5s; /* asentamiento de la foto del hero */
+  --duracion-entrada-texto: 0.9s; /* entrada de la entradilla y los botones */
+  --duracion-pagina: 0.28s;       /* fundido entre páginas y cambio de idioma (View Transitions) */
+  --duracion-media: 0.5s;         /* movimiento medio del sistema: raya del enlace del nav */
+  --duracion-placa: 1s;           /* destape de las placas al entrar en pantalla */
+  --recorte-placa: 6%;            /* lo que arranca tapado por arriba en una placa */
+  --desplazamiento-entrada: 14px; /* subida de la entrada de texto */
+  --retardo-entrada-1: 0.12s;     /* la entradilla arranca tras el titular */
+  --retardo-entrada-2: 0.22s;     /* los botones, tras la entradilla */
 
   /* ── Tipografía: etiquetas ────────────────────────────────────── */
   --line-height-tight: 1;       /* etiquetas compactas (selector ES/PT) */

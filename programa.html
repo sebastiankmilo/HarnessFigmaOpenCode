@@ -77,11 +77,55 @@
   </script>
   <!-- @seo:end -->
   <title data-i18n="programa.meta.title">Programa — Vanguardia Colombiana</title>
-  <link rel="stylesheet" href="styles/tokens.css?v=50d6dc63">
-  <link rel="stylesheet" href="styles/main.css?v=81d0c8c3">
-  <link rel="stylesheet" href="styles/components.css?v=dfe2baf2">
-  <link rel="stylesheet" href="styles/programa.css?v=425d26ac">
+  <link rel="stylesheet" href="styles/tokens.css?v=99053b1b">
+  <link rel="stylesheet" href="styles/main.css?v=89586928">
+  <link rel="stylesheet" href="styles/components.css?v=4480a113">
+  <link rel="stylesheet" href="styles/programa.css?v=2587f666">
   <link rel="stylesheet" href="styles/utilidades.css?v=ed48ef95">
+  <link rel="preload" href="assets/fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="assets/img/programa-header.webp" fetchpriority="high">
+  <script>
+    /* Entrada del hero: nace en pausa y se suelta cuando el documento y las
+     * fuentes están listos. Vive aquí, y no en un archivo, porque tiene que
+     * ejecutarse antes del primer cuadro y no puede depender de que llegue una
+     * petición: sin la clase `js-entrada` las animaciones corren solas, así que
+     * sin JS el hero se ve entero desde el primer cuadro.
+     * Mismo bloque que `index.html`: la cabecera de esta página se anima con el
+     * gesto de la portada (decisión 2026-11-14). */
+    (function () {
+      var raiz = document.documentElement;
+      var soltada = false;
+      raiz.classList.add("js-entrada");
+
+      function soltar() {
+        if (soltada) return;
+        soltada = true;
+        // Dos cuadros: el primero pinta el estado inicial (titular recortado,
+        // foto al 105 %), el segundo arranca ya con la clase puesta.
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            raiz.classList.add("con-entrada");
+          });
+        });
+      }
+
+      function alDocumentoListo() {
+        var fuentes = document.fonts && document.fonts.ready;
+        if (fuentes) fuentes.then(soltar, soltar);
+        else soltar();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", alDocumentoListo, { once: true });
+      } else {
+        alDocumentoListo();
+      }
+
+      // Red de seguridad: si `fonts.ready` no resolviera, se suelta igual.
+      setTimeout(soltar, 1200);
+    })();
+  </script>
 </head>
 <body>
   <svg class="svg-filters" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -189,7 +233,7 @@
       <div class="container">
         <div class="programa-hero__grid">
           <div class="media media--4-3 media--strong">
-            <img class="media__img" src="assets/img/programa-header.webp" alt="" loading="lazy" decoding="async">
+            <img class="media__img" src="assets/img/programa-header.webp" alt="" fetchpriority="high" decoding="async">
           </div>
           <div class="programa-hero__text">
             <h1 class="programa-hero__title" data-i18n="programa.hero.title">Nuestros principios fundamentales</h1>
@@ -391,10 +435,6 @@ La disciplina significa, por tanto, subordinar las ambiciones y preferencias par
 
 No se puede transformar una nación mediante voluntades aisladas, solo mediante hombres y mujeres capaces de anteponer los intereses comunes a sus ambiciones particulares, “unidos por la asociación y guiados por el saber”, con una estrategia definida colectivamente, sostenida por la constancia, el trabajo y el compromiso serio.
 
-La disciplina es lo que permite que un conjunto de personas se convierta en una fuerza política organizada. Si cada militante actúa según su voluntad particular, la fuerza colectiva se fragmenta; pero si existe disciplina consciente, cada esfuerzo individual se integra en una estrategia común. Solo así se convierte la suma de voluntades en organización; y la organización convierte las ideas en poder real.
-
-No se puede transformar una nación mediante voluntades aisladas, solo mediante hombres y mujeres capaces de anteponer los intereses comunes a sus ambiciones particulares, “unidos por la asociación y guiados por el saber”, con una estrategia definida colectivamente, sostenida por la constancia, el trabajo y el compromiso serio.
-
 La disciplina es lo que permite que un conjunto de personas se convierta en una fuerza política organizada. Si cada militante actúa según su voluntad particular, la fuerza colectiva se fragmenta; pero si existe disciplina consciente, cada esfuerzo individual se integra en una estrategia común. Solo así se convierte la suma de voluntades en organización; y la organización convierte las ideas en poder real.</p>
             <p class="programa-ejes__body" data-i18n="programa.ejes.body.1">2. La unidad en la acción:
 
@@ -490,11 +530,11 @@ Nuestro materialismo político es solidario del socialismo, pues solo desarrolla
   </footer>
 
   <script src="assets/vendor/uikit/uikit.min.js?v=b05a5986" defer></script>
-  <script src="scripts/i18n.js?v=7297adf4" defer></script>
+  <script src="scripts/i18n.js?v=334cacdd" defer></script>
   <script src="scripts/nav.js?v=77098927"></script>
   <script src="scripts/transiciones.js?v=a4238def" defer></script>
   <script src="scripts/enlaces.js?v=41cc4786" defer></script>
   <script src="scripts/scrollspy.js?v=125fab43" defer></script>
-  <script src="scripts/reveal.js?v=ff17c9e5" defer></script>
+  <script src="scripts/reveal.js?v=e3e47c41" defer></script>
 </body>
 </html>

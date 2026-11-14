@@ -170,15 +170,72 @@
    * Cambia el idioma sin recargar. `url` es la URL canónica del idioma destino;
    * `push` queda en false al responder a Atrás/Adelante, que ya movieron la URL.
    */
+  /**
+   * Punto de lectura: el bloque de texto que ocupa el borde superior del
+   * viewport, y **qué parte de ese bloque se estaba leyendo** (0 = su primera
+   * línea, 1 = su última).
+   *
+   * Se guarda la clave del copy y una proporción, no un píxel: al cambiar de
+   * idioma los textos tienen otro largo —en Programa el portugués mide la mitad
+   * que el español— y el mismo píxel cae en otro párrafo, así que la página
+   * parecía volver a empezar. Solo se mira dentro de `main`: la barra y el pie
+   * tienen su propio `data-i18n` fijo arriba y siempre ganarían.
+   */
+  function captureReadingPoint() {
+    var nodos = document.querySelectorAll("main [data-i18n]");
+    var elegido = null;
+    var altoVentana = window.innerHeight;
+    for (var i = 0; i < nodos.length; i++) {
+      var caja = nodos[i].getBoundingClientRect();
+      // Fuera de juego: oculto (menú, diálogo cerrado), ya pasado por arriba o
+      // todavía por debajo del todo.
+      if (caja.height === 0 || caja.bottom <= 0 || caja.top >= altoVentana) continue;
+      if (!elegido || caja.top < elegido.caja.top) elegido = { nodo: nodos[i], caja: caja };
+    }
+    if (!elegido) return null;
+    var alto = elegido.caja.height || 1;
+    var top = elegido.caja.top;
+    return {
+      clave: elegido.nodo.getAttribute("data-i18n"),
+      etiqueta: elegido.nodo.tagName,
+      // Su borde superior, si se ve, se repone tal cual: es el caso de la
+      // cabecera de la página o de cualquier bloque que empiece en pantalla.
+      top: top,
+      // Si el bloque empezó más arriba, se guarda qué parte se estaba leyendo.
+      razon: top >= 0 ? 0 : Math.min(1, -top / alto),
+    };
+  }
+
+  /** Devuelve la lectura a la misma altura proporcional de ese mismo bloque. */
+  function restoreReadingPoint(punto) {
+    if (!punto) return;
+    var nodos = document.querySelectorAll("main [data-i18n]");
+    for (var i = 0; i < nodos.length; i++) {
+      if (nodos[i].getAttribute("data-i18n") !== punto.clave) continue;
+      if (punto.etiqueta && nodos[i].tagName !== punto.etiqueta) continue;
+      var caja = nodos[i].getBoundingClientRect();
+      if (caja.height === 0) continue;
+      var top = caja.top + window.scrollY;
+      var destino =
+        punto.top >= 0
+          ? top - punto.top
+          : top + caja.height * punto.razon;
+      jumpTo(Math.max(0, destino));
+      return;
+    }
+  }
+
   function switchTo(targetLocale, url, push) {
     if (targetLocale === locale) return Promise.resolve();
+    // Posición de partida, en píxeles: la usa el plan B (navegar al otro
+    // idioma cuando el catálogo no llega), donde no hay DOM que recolocar.
     var anchorY = window.scrollY;
-    // Red de seguridad: si el navegador lleva el scroll muy lejos del sitio
-    // donde estaba (un salto al principio, no el ajuste normal de una o dos
-    // líneas de texto que cambian de alto), se repone. El umbral evita pelearse
-    // con el anclaje de scroll, que es lo que mantiene el contenido quieto.
+    var punto = captureReadingPoint();
+    // Última red de seguridad: si al final el navegador se ha ido muy lejos del
+    // párrafo anclado (por ejemplo porque las fuentes recompusieron el texto
+    // después), se vuelve a anclar.
     var keepScroll = function () {
-      if (Math.abs(window.scrollY - anchorY) > window.innerHeight * 0.5) jumpTo(anchorY);
+      restoreReadingPoint(punto);
     };
     return load(targetLocale)
       .then(function (data) {
@@ -187,6 +244,10 @@
           currentData = data;
           document.documentElement.lang = targetLocale;
           applyTexts(data);
+          // Se fuerza el reflujo y se recoloca antes de que el navegador tome
+          // la instantánea del idioma nuevo: así el cruce no se ve saltar.
+          void document.documentElement.offsetHeight;
+          restoreReadingPoint(punto);
           syncSwitcher();
           if (push && url && window.location.href !== url) {
             window.history.pushState({ locale: targetLocale }, "", url);

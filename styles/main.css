@@ -164,6 +164,10 @@ button {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    /* `animation-delay` también: la entrada de la portada escalona la
+     * entradilla y los botones, y sin esto seguirían invisibles sus 0,12 s y
+     * 0,22 s de espera aunque la animación ya durase cero. */
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
@@ -209,30 +213,143 @@ button {
  * desactivar. El fundido se hace sobre la raíz y sin desplazamiento: la barra
  * fija se queda donde está y solo cambia el contenido.
  * `scripts/transiciones.js` prerenderiza además los enlaces al pasar el cursor,
- * así la página nueva ya está lista cuando se hace clic. */
+ * así la página nueva ya está lista cuando se hace clic.
+ *
+ * El fundido es **simétrico y de 0,28 s** en las dos capas, como la variante
+ * editorial (`site_v_impeccable/styles/base.css`). Antes eran 0,16 s de salida
+ * y 0,26 s de entrada con curvas propias: la capa que salía se apagaba mucho
+ * antes de que la que entraba llegara a opaca, y en medio la suma de las dos
+ * opacidades caía al 64 % — el contenido se destiñe hacia el fondo y vuelve,
+ * ese parpadeo suave que se notaba al navegar. Igualadas las duraciones y con
+ * la misma curva del navegador, las dos cruzan el mismo tramo: la suma se
+ * queda en 1 en todos los cuadros y el cruce no tiene hueco. No se tocan los
+ * `@keyframes` del navegador (`-ua-view-transition-fade-out/in`), que son los
+ * que dan el cruce real; solo se les fija la duración.
+ *
+ * El cambio de idioma de `scripts/i18n.js` usa `document.startViewTransition`,
+ * así que hereda exactamente este mismo fundido. */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
   }
 
-  ::view-transition-old(root) {
-    animation: vc-page-out 0.16s ease both;
-  }
-
+  ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation: vc-page-in 0.26s ease both;
+    animation-duration: var(--duracion-pagina);
   }
 }
 
-@keyframes vc-page-out {
-  to {
-    opacity: 0;
+/* ── Entrada del hero (portada e interiores) ────────────────────────
+ * Un solo gesto de imprenta al cargar: el titular se imprime de izquierda a
+ * derecha, la foto se asienta desde un 5 % más grande y la entradilla y los
+ * botones suben escalonados. Nació en la portada (decisión 2026-11-14, tomada
+ * de la variante editorial) y desde el 2026-11-14 la comparten Programa y
+ * Decálogo, a pedido del equipo: sus cabeceras se sentían ajenas al resto.
+ *
+ * Arranca en pausa (`html.js-entrada`, que pone el script del <head> antes del
+ * primer cuadro) y se suelta con `html.con-entrada` cuando el documento y las
+ * fuentes están listos: esos primeros 150–300 ms se comían el principio del
+ * barrido y el titular aparecía de golpe ya descubierto un tercio.
+ * Sin JS no se pone ninguna de las dos clases y las animaciones corren solas.
+ * Con `prefers-reduced-motion` el bloque de movimiento reducido de arriba deja
+ * todo en su estado final. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__title,
+  .programa-hero__title,
+  .decalogo-hero__title {
+    animation: tinta var(--duracion-entrada) var(--curva-salida) both;
   }
-}
 
-@keyframes vc-page-in {
-  from {
-    opacity: 0;
+  /* La foto se asienta dentro de su marco: el recorte del 5 % lo pone el
+   * `overflow: hidden` del marco de cada hero. */
+  .hero__media,
+  .programa-hero .media__img,
+  .decalogo-hero .media__img {
+    animation: asentar var(--duracion-entrada-placa) var(--curva-salida) both;
+  }
+
+  .hero__lead,
+  .programa-hero__lead,
+  .decalogo-hero__lead {
+    animation: subir var(--duracion-entrada-texto) var(--curva-salida)
+      var(--retardo-entrada-1) both;
+  }
+
+  /* La segunda entradilla de Programa arranca con los botones de la portada. */
+  .programa-hero .programa-hero__lead ~ .programa-hero__lead {
+    animation-delay: var(--retardo-entrada-2);
+  }
+
+  .hero__actions {
+    animation: subir var(--duracion-entrada-texto) var(--curva-salida)
+      var(--retardo-entrada-2) both;
+  }
+
+  /* El titular no se funde: se descubre como una pasada de tinta sobre el
+   * papel, de izquierda a derecha. */
+  @keyframes tinta {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  /* La foto llega un 5 % más grande y se posa en su sitio. */
+  @keyframes asentar {
+    from {
+      transform: scale(1.05);
+    }
+
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes subir {
+    from {
+      opacity: 0;
+      transform: translateY(var(--desplazamiento-entrada));
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  html.js-entrada
+    :is(
+      .hero__title,
+      .hero__media,
+      .hero__lead,
+      .hero__actions,
+      .programa-hero__title,
+      .programa-hero .media__img,
+      .programa-hero__lead,
+      .decalogo-hero__title,
+      .decalogo-hero .media__img,
+      .decalogo-hero__lead
+    ) {
+    animation-play-state: paused;
+  }
+
+  html.con-entrada
+    :is(
+      .hero__title,
+      .hero__media,
+      .hero__lead,
+      .hero__actions,
+      .programa-hero__title,
+      .programa-hero .media__img,
+      .programa-hero__lead,
+      .decalogo-hero__title,
+      .decalogo-hero .media__img,
+      .decalogo-hero__lead
+    ) {
+    animation-play-state: running;
   }
 }
 
@@ -248,6 +365,42 @@ button {
 .js-reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* Fotos que llegan después del primer pintado (caché fría, red lenta): el
+ * hueco espera vacío y la imagen entra con un fundido corto en vez de aparecer
+ * de golpe. La clase la pone `reveal.js` solo cuando la foto falta de verdad;
+ * con la precarga del <head> lo normal es que no llegue a ponerse nunca. */
+@media (prefers-reduced-motion: no-preference) {
+  .media__img,
+  .hero__media {
+    transition: opacity 0.35s ease;
+  }
+
+  .js-esperando {
+    opacity: 0;
+  }
+}
+
+/* Destape de las placas (decisión 2026-11-14, tomada de la variante editorial
+ * `site_v_impeccable`): la foto entra con el 6 % de arriba recortado y se
+ * descubre en 1 s cuando cruza el viewport. Como el borde inferior no se
+ * mueve, la imagen parece salir de abajo sin desplazarse ni cambiar de
+ * opacidad: es un recorte de imprenta, no un fundido.
+ *
+ * No se suman los dos gestos sobre el mismo bloque: `reveal.js` deja fuera del
+ * fundido la sección que trae una placa, así que aquí nunca coinciden.
+ * La clase la pone el mismo script, de modo que sin JS no hay recorte: las
+ * imágenes se ven enteras desde el primer cuadro. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-placa {
+    clip-path: inset(var(--recorte-placa) 0 0 0);
+    transition: clip-path var(--duracion-placa) var(--curva-salida);
+  }
+
+  .js-placa.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* Smooth scroll en Programa/Decálogo (nota 4649:2014): la clase va en <html> */
