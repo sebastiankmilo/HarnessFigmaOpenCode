@@ -191,9 +191,11 @@ button {
   }
 }
 
-/* Filtro SVG que tiñe un glifo con `--color-hover-accent` conservando su
-   alfa (la cadena `filter` de CSS no llega a `#ff4520`: se queda en `#ff3206`).
-   Solo se usa en `:hover`, así el estado por defecto no cambia ni un píxel. */
+/* Filtro SVG que tiñe un glifo oscuro con `--color-hover-accent` conservando
+   su alfa (la cadena `filter` de CSS no llega a `#ff4520`: se queda en
+   `#ff3206`). El logo gris del footer usa `#vc-red-tonal`, que lleva el rojo
+   en su propia matriz y no necesita `feFlood`.
+   Solo se usan en `:hover`, así el estado por defecto no cambia ni un píxel. */
 .svg-filters #vc-red feFlood {
   flood-color: var(--color-hover-accent);
 }

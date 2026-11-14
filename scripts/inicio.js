@@ -32,6 +32,15 @@
     return node && typeof node === "object" ? node : undefined;
   }
 
+  // El copy puede traer `**negrita**` o `*cursiva*`: lo resuelve `i18n.js`, que
+  // es también quien lo repone cuando cambia el idioma con el diálogo abierto.
+  const ponerTexto =
+    window.VCI18n && window.VCI18n.ponerTexto
+      ? window.VCI18n.ponerTexto
+      : function (nodo, texto) {
+          nodo.textContent = texto;
+        };
+
   // El número de párrafos varía por objetivo (de 1 a 3): se ajustan los
   // nodos al catálogo y se reapunta `data-i18n` para que un cambio de idioma
   // con el diálogo abierto los vuelva a traducir.
@@ -51,7 +60,7 @@
     }
     nodes.forEach(function (node, i) {
       node.setAttribute("data-i18n", attrs[i]);
-      node.textContent = texts[i];
+      ponerTexto(node, texts[i]);
     });
   }
 

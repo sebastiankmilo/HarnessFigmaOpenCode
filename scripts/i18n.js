@@ -51,6 +51,38 @@
     return typeof node === "string" ? node : undefined;
   }
 
+  /**
+   * Énfasis en línea del copy: `**texto**` → `<strong>` y `*texto*` → `<em>`.
+   *
+   * Misma regla que el build (`scripts/build/pages.mjs`): el HTML servido ya
+   * trae la etiqueta puesta, y esto la repone cuando el texto se reescribe en
+   * runtime (cambio de idioma, diálogo de objetivos). Se escapa el resto para
+   * que un `&` o un `<` del catálogo no se convierta en markup.
+   */
+  function conEnfasis(texto) {
+    return String(texto)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(
+        /\*\*([^\s*](?:[^*\n]*[^\s*])?)\*\*|\*([^\s*](?:[^*\n]*[^\s*])?)\*/g,
+        function (marcador, negrita, cursiva) {
+          return negrita !== undefined
+            ? "<strong>" + negrita + "</strong>"
+            : "<em>" + cursiva + "</em>";
+        }
+      );
+  }
+
+  /** Pinta un texto del catálogo: plano, o con énfasis si lleva `*`. */
+  function ponerTexto(nodo, valor) {
+    if (String(valor).indexOf("*") === -1) {
+      nodo.textContent = valor;
+    } else {
+      nodo.innerHTML = conEnfasis(valor);
+    }
+  }
+
   function load(targetLocale) {
     if (cache[targetLocale]) return Promise.resolve(cache[targetLocale]);
     return fetch(contentBase + targetLocale + ".json")
@@ -102,7 +134,7 @@
     for (var i = 0; i < nodes.length; i++) {
       var value = lookup(data, nodes[i].getAttribute("data-i18n"));
       // Clave ausente: se conserva el texto actual (el build garantiza paridad).
-      if (value !== undefined) nodes[i].textContent = value;
+      if (value !== undefined) ponerTexto(nodes[i], value);
     }
   }
 
@@ -240,6 +272,10 @@
     getLocale: getLocale,
     getData: getData,
     load: load,
+    // `ponerTexto` lo usan los componentes que pintan texto del catálogo en
+    // runtime (el diálogo de objetivos): así el `**` se resuelve igual que en
+    // el build y que en un cambio de idioma.
+    ponerTexto: ponerTexto,
   };
 
   /**
