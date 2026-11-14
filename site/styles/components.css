@@ -212,8 +212,8 @@
   transition: height 0.3s ease;
 }
 
-/* El asset es 192×206 (96×103 @2x): solo se fija el ancho y la altura
- * conserva la proporción, como lo renderiza Figma (96×103 / 48×51,5). */
+/* `logo-color.svg` es 59×64 (96×103 en el frame lg): solo se fija el ancho
+ * y la altura conserva la proporción, como lo renderiza Figma. */
 .site-nav__logo,
 .site-nav__logo img {
   flex: none;
@@ -663,10 +663,12 @@
   margin-inline: auto;
 }
 
+/* `logo-grises.svg` es 128×135: se conserva su proporción (antes el PNG
+ * cuadrado 256×256 fijaba alto = ancho). */
 .site-footer__logo {
   display: block;
   width: var(--icon-footer-logo);
-  height: var(--icon-footer-logo);
+  height: auto;
   margin: 0;
 }
 
@@ -683,7 +685,7 @@
 .site-footer__platforms img {
   width: var(--icon-footer-platform);
   height: var(--icon-footer-platform);
-  /* PNG de glifos negros: sobre el amarillo del footer van oscuros (baseline) */
+  /* SVG de glifos negros: sobre el amarillo del footer van oscuros (baseline) */
 }
 
 .site-footer__links {
@@ -878,9 +880,15 @@
   /* Iconos de redes y logo del footer: `#30250f → #ff4520`
      (`4518:2184` en el nav, par `4518:2316 ↔ 4518:2363` en el footer) */
   .site-nav__platforms a:hover img,
-  .site-footer__platforms a:hover img,
-  .site-footer__logo-link:hover img {
+  .site-footer__platforms a:hover img {
     filter: url(#vc-red);
+  }
+
+  /* El logo gris del footer tiene medios tonos (#a1a1a1): `#vc-red` solo
+     tiñe lo oscuro y la silueta quedaba medio gris. `#vc-red-tonal` conserva
+     la luminancia y la lleva a rojo, para no perder el sombreado. */
+  .site-footer__logo-link:hover img {
+    filter: url(#vc-red-tonal);
   }
 
   /* Footer links: el par `4518:2316 ↔ 4518:2363` cambia el relleno del texto

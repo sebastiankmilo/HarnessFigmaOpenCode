@@ -40,7 +40,7 @@ function jsonLd(seo, locale, page, copy, url) {
       url: seo.baseUrl,
       logo: {
         '@type': 'ImageObject',
-        url: `${seo.baseUrl}assets/icons/logo-color.webp`,
+        url: `${seo.baseUrl}assets/svg/logo-color.svg`,
       },
       sameAs: seo.socials,
     },

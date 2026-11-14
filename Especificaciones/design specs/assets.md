@@ -74,6 +74,28 @@ componente maestro, la **instancia exacta** queda `PENDIENTE-FIGMA`.
 | `logo-color.png` | 192×206 | grupo `logo-color` del nav (`I2396:105;4835:4043`, nuevo oso dorado de contorno) | export 8× → 192×206 | 96×103 → 2×; actualizado 2026-11-03 |
 | `logo-menu.png` | 256×275 | grupo `logo-color` del overlay xs (`I2396:3288;4835:3945`, mismo logo) | export 8× → 256×275 | 128×137 → @2x; transparencia; actualizado 2026-11-03 |
 
+### B.1 · SVG en uso (2026-11-14)
+
+Los logos y las 5 redes se sirven como SVG desde `site/assets/svg/`; el `<img>`
+se conserva para mantener los tokens de tamaño y el filtro `#vc-red` del hover.
+
+| Archivo | Medida | Origen | Uso |
+| --- | --- | --- | --- |
+| `svg/logo-color.svg` | 59×64 | export `logo-color` | logo del nav y del overlay |
+| `svg/components/logo-grises.svg` | 128×135 | export `logo-grises` | logo del footer |
+| `svg/icons/facebook.svg` | 24×24 | tile 1 del sprite | Facebook |
+| `svg/icons/instagram.svg` | 24×24 | tile 2 del sprite | Instagram |
+| `svg/icons/youtube.svg` | 24×24 | tile 3 del sprite | YouTube |
+| `svg/icons/x.svg` | 24×24 | tile 4 del sprite | X |
+| `svg/icons/tik-tok.svg` | 24×24 | tile 5 del sprite | TikTok |
+
+`svg/platforms, search and toggle.svg` es el sprite de origen: 184×24, cinco
+tiles de 24×24 separados 16 (`x` = 0, 40, 80, 120 y 160). Cada tile se extrae
+con `viewBox="0 0 24 24"` y `<g transform="translate(-x 0)">`, conservando el
+`fill` (`#191919`). El sprite **no** incluye `search`, `close` ni
+`hamburger-two`: esos iconos siguen en WebP.
+
+
 ## C · Tipografías (`site/assets/fonts`)
 
 No salen de Figma: son ficheros vendorizados. `bebas-neue-latin.woff2`,
@@ -87,6 +109,8 @@ citados en cada spec. `tests/` requiere autorización explícita del proyecto.
 
 ## Pendientes
 
-- **SVG**: el plugin solo exporta PNG (`format` fijado por el plugin).
+- **SVG**: el plugin solo exporta PNG (`format` fijado por el plugin); los SVG
+  de logos y redes entraron por export directo (ver §B.1). `search`, `close`,
+  `hamburger-two` y el resto de iconos siguen en PNG/WebP.
 - **Instancia exacta** de `play.png`, `star.png` y `logo-02.png`:
   `PENDIENTE-FIGMA`.
