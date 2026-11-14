@@ -102,8 +102,16 @@ for (const locale of locales.slice(1)) {
 }
 
 // ── Páginas: las declaradas en seo.json y las que sobran en site/ ─────────
+// Los archivos de verificación de buscadores (Google Search Console, Bing,
+// Yandex, Baidu, Pinterest) no son pantallas: se publican en la raíz con su
+// nombre y su contenido exactos, sin copy, sin bloque SEO y fuera del sitemap.
+// Sin esta excepción el build los confundiría con una página no declarada.
+const ARCHIVO_DE_VERIFICACION =
+  /^(?:google[0-9a-f]+|yandex_[0-9a-f]+|baidu_verify_[a-z0-9]+|pinterest-[0-9a-f]+)\.html$/i;
 const declared = seo.pages.map((page) => page.file);
-const present = readdirSync(siteDir).filter((name) => name.endsWith('.html')).sort();
+const present = readdirSync(siteDir)
+  .filter((name) => name.endsWith('.html') && !ARCHIVO_DE_VERIFICACION.test(name))
+  .sort();
 const undeclared = present.filter((file) => !declared.includes(file));
 if (undeclared.length) {
   fail(
